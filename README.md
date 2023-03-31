@@ -4,4 +4,4 @@ batnyam
 
 munkhsuld - leo
 
-batnyam created issue
+batnyam created issue minus
