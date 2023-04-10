@@ -1,4 +1,5 @@
 import Navbar from "@/component/Navbar";
+import Test from "@/component/Test";
 
 export default function Home(): JSX.Element {
   return (
@@ -7,6 +8,7 @@ export default function Home(): JSX.Element {
       <div className="bg-gradient-to-r from-green-400 to-blue-500 text-white h-[35vh] pt-[120px] text-center text-3xl">
         COMING SOON
       </div>
+      <Test />
     </div>
   );
 }
