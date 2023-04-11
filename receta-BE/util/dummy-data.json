@@ -1,3 +1,119 @@
 {
-  "name": "leo"
+  "collecions": [
+    {
+      "name": "Spirits",
+      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fe078cf226251a9af871843b25469061d52d3df4e5e30b056d647b67107780e18%3F&w=1080&q=75"
+    },
+    {
+      "name": "Bitter",
+      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fe3b6422793632973d9236ad362230af93c47ba68188b69b6735fdd0c76c9e2b4%3F&w=1920&q=75"
+    },
+    {
+      "name": "Non-Alcohol",
+      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F3a4c6fb18f0f33c8698ca26528671ab39bf33ede10beb66ae3b864ca85ef0bd3%3F&w=1920&q=75"
+    },
+    {
+      "name": "Sour",
+      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Ftanqueray-basil-smash%3F&w=1920&q=75"
+    },
+    {
+      "name": "Sweet",
+      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Ftanqueray-bramble%3F&w=1920&q=75"
+    }
+  ],
+  "cocktails": [
+    {
+      "name": "Coffee Grenade",
+      "description": "Coffee and pomegranate are two super antioxidant natural ingredients, with a high energizing level. This mocktail is recommended for moments of body recovery after a strong workout.",
+      "category": "Spirits",
+      "ingredients": [
+        {
+          "name": "Pomegrade seed",
+          "amount": "3 Bar spoons"
+        },
+        {
+          "name": "Pineapple juice",
+          "amount": "45 ml"
+        },
+        {
+          "name": "Coffee",
+          "amount": "30"
+        },
+        {
+          "name": "Lemon kefir",
+          "amount": "Top up"
+        },
+        {
+          "name": "Pineapple wedge",
+          "amount": "1"
+        }
+      ],
+      "how_to": [
+        {
+          "Prepare": "Cut the pineapple wedge for garnish and get the pomegranate seeds"
+        },
+        {
+          "Add Ingredients": "Put the pomegranate seeds and the pineapple juice inside the shaker"
+        },
+        {
+          "Muddle": "Gently smash the pome grenade with the muddler"
+        },
+        {
+          "Ice": "Fill your shaker and glass with cubed ice"
+        },
+        {
+          "Add Coffee Brew": "Add your cold brew coffee 1:5"
+        },
+        {
+          "Shake": "Shake hard for 10 sec"
+        },
+        {
+          "Fine Strain": "Using your fine strainer, strain into your glass over the ice."
+        },
+        {
+          "Top with Lemon Kefir": "Top up the glass with lemon kefir"
+        },
+        {
+          "Garnish and serve": "Garnish with the pineapple wedge"
+        }
+      ],
+      "tools": [
+        {
+          "name": "Knife",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F377e02e67f3fffa1ca7a893840ea2b75d45a8ddff80ae7b7d583dc2f1e4b58c6%3F&w=640&q=75"
+        },
+        {
+          "name": "Shaker",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fa7c5b64bfc7e4cfacf551e80375e271f468c5aceb76ee00dec23a7b686caf893%3F&w=640&q=75"
+        },
+        {
+          "name": "Bar Spoon",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F51bf4b236b1956e207b2fb6ed2f92b011f3a8789657182edb240dd91b51b38a1%3F&w=640&q=75"
+        },
+        {
+          "name": "Jigger",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F4a8ba6c37cc6334220710bcc0bb7a919e0d4997b6f0d5c68f9e919a3fa82813f%3F&w=640&q=75"
+        },
+        {
+          "name": "Muddler",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F8a1f934fe1ec36f626c090bb7a7eefbbf48ac03eccaf6a3f12ce534063c9341a%3F&w=640&q=75"
+        },
+        {
+          "name": "Ice Scoop",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fa9e19d8a2187e62a9d6c359a7e55920631c2600a4044b27eacf6146bc3f3f8ee%3F&w=640&q=75"
+        },
+        {
+          "name": "Rocks glass",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F8d8eae25a2a085213cac34c60d2add4eaebf78596b69f9b6d9557c40e293519f%3F&w=640&q=75"
+        },
+        {
+          "name": "Fine Strainer",
+          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F6140d8d46b3971eaeae1c708a65b5db59de240e698eb2a404c23ad4f9ceb8fed%3F&w=640&q=75"
+        }
+      ],
+      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F3a4c6fb18f0f33c8698ca26528671ab39bf33ede10beb66ae3b864ca85ef0bd3%3F&w=1920&q=75",
+      "video": ""
+    },
+    {}
+  ]
 }
