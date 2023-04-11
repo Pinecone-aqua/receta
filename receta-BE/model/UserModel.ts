@@ -10,6 +10,8 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    role: { type: String, required: true }, //admin moderator user , default - user
+
     // password: {
     //   type: String,
     //   required: true,
@@ -18,7 +20,6 @@ const userSchema = new Schema(
     // last_login: String,
     // created_at: Date,
     // updated_at: Date,
-    // role: { type: String, required: true },
   },
   {
     collection: "users",
