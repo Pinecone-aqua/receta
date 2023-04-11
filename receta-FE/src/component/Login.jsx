@@ -5,6 +5,8 @@ export default function Login() {
   const { data: session } = useSession();
   const [showModal, setShowModal] = useState(false);
 
+  console.log(session);
+
   if (session) {
     // axios.post("http://localhost:4000/google-acc", { session });
     return (

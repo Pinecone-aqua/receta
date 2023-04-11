@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/pages/api/auth/[...nextauth].js",
-    "src/component/login.jsx"
+    "./src/component/Login.jsx",
+    "/.tailwind.config.js"
   ],
   "exclude": ["node_modules"]
 }
