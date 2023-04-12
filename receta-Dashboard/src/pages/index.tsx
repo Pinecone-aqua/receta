@@ -1,7 +1,5 @@
-// import { Inter } from "next/font/google";
+import Main from "../components/Main";
 
-// const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
-  return <main className="bg-red-500"></main>;
+export default function Home(): JSX.Element {
+  return <div className=""><Main /></div>;
 }
