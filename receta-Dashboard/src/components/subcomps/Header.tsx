@@ -1,5 +1,9 @@
 // import styles from "../../styles/header.module.css"
 
 export default function Header(): JSX.Element {
-  return <div className="bg-amber-500 w-screen h-24 flex justify-center items-center">receta.</div>
+  return (
+    <div className="bg-amber-500 w-screen h-24 absolute top-0 flex justify-center items-center">
+      receta.
+    </div>
+  );
 }
