@@ -10,6 +10,6 @@ const collectionSchema = new Schema(
   }
 );
 
-const collectionModel = mongoose.model("collections", collectionSchema);
+const collectionModel = mongoose.model("collection", collectionSchema);
 
 export default collectionModel;

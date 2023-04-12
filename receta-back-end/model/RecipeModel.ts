@@ -4,7 +4,7 @@ const recipeSchema = new Schema(
   {
     name: String,
     description: String,
-    category: {
+    category_id: {
       type: [Schema.Types.ObjectId],
       required: true,
       ref: "category",
@@ -12,16 +12,15 @@ const recipeSchema = new Schema(
     ingredients: [
       {
         name: String,
-        amount: Number,
         unit: String,
       },
     ],
-    guide: [{ String, Number }],
+    guide: [{}],
     image_url: String,
     like: { type: Number, required: false },
-    create_account: { type: Schema.Types.ObjectId, ref: "user" },
+    create_account_id: { type: Schema.Types.ObjectId, ref: "user" },
     tools: [{}],
-    collections: { type: [Schema.Types.ObjectId], ref: "collections" },
+    collection_id: { type: [Schema.Types.ObjectId], ref: "collection" },
   },
   {
     collection: "recipe",
