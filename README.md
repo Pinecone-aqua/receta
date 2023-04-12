@@ -1,7 +1,1 @@
-# cocktail
-
-batnyam
-
-munkhsuld - leo
-
-leol - test
+# cocktail recipe
