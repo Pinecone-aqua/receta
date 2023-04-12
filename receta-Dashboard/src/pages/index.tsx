@@ -1,7 +1,14 @@
-// import { Inter } from "next/font/google";
+import Login from "../components/Login";
+import styles from "../styles/main.module.css";
+import Header from "../components/subcomps/Header";
 
-// const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
-  return <main className="bg-red-500"></main>;
+export default function Home(): JSX.Element {
+  return (
+    <div className={styles.main}>
+      <Header />
+      <div className="w-screen h-full bg-black flex justify-center items-center">
+        <Login />
+      </div>
+    </div>
+  );
 }
