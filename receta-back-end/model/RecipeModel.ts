@@ -4,30 +4,29 @@ const recipeSchema = new Schema(
   {
     name: String,
     description: String,
-    category: String,
+    category_id: {
+      type: [Schema.Types.ObjectId],
+      required: true,
+      ref: "category",
+    },
     ingredients: [
       {
         name: String,
-        amount: Number,
         unit: String,
       },
     ],
-    directions: [String],
+    guide: [{}],
     image_url: String,
-    rate: Number,
-    love: Number,
-    read_min: Number,
-    alcohol: Boolean,
-    comments: [String],
-    create_account: { type: Schema.Types.ObjectId, ref: "Users" },
-    created_at: Date,
-    updated_at: Date,
+    like: { type: Number, required: false },
+    create_account_id: { type: Schema.Types.ObjectId, ref: "user" },
+    tools: [{}],
+    collection_id: { type: [Schema.Types.ObjectId], ref: "collection" },
   },
   {
-    collection: "recipes",
+    collection: "recipe",
   }
 );
 
-const recipeModel = mongoose.model("Recipe", recipeSchema);
+const recipeModel = mongoose.model("recipe", recipeSchema);
 
 export default recipeModel;
