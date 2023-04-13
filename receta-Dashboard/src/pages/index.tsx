@@ -1,16 +1,20 @@
+import axios from "axios";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/router";
 
 export default function Home(): JSX.Element {
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function loginHandler(e: any): void {
+  async function loginHandler(e: any) {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const isValid = email === "bat@gmail.com" && password === "123";
-    if (isValid) {
+    const result = await axios.post("http://localhost:4000/admin-login", {
+      email,
+      password,
+    });
+    if (result) {
       console.log("logged in");
       router.push("/dashboard");
     } else {
