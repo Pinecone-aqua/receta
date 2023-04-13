@@ -1,7 +1,5 @@
 import exress, { Request, Response } from "express";
 import "../config/mongoose-config";
-import recipeModel from "../model/RecipeModel";
-import categoryModel from "../model/CaregoryModel";
 import { createRecipe } from "../service/RecipeService";
 
 const recipe_router = exress.Router();

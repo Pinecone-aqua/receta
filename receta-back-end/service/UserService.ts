@@ -7,3 +7,13 @@ export async function createUser(newUser: any) {
     email: newUser.email,
   });
 }
+
+export async function adminLogin(admin: any) {
+  console.log(admin);
+
+  return await userModel.findOne({
+    email: admin.email,
+    password: admin.password,
+    role: "admin",
+  });
+}
