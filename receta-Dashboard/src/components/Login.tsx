@@ -14,7 +14,7 @@ export default function Login(): JSX.Element {
     const isValid = name === "bat" && password === "123";
     if (isValid) {
       console.log("logged in");
-      router.push("/dashboard");
+      router.push("/Layout");
     } else {
       console.log("false");
     }

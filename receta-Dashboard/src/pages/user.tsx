@@ -1,3 +1,5 @@
-export default function user(): JSX.Element {
-  return <div>user</div>;
+import Layout from "./Layout";
+
+export default function User(): JSX.Element {
+  return <Layout>user</Layout>;
 }

@@ -1,3 +1,5 @@
-export default function category(): JSX.Element {
-  return <div>category</div>;
+import Layout from "./Layout";
+
+export default function Category(): JSX.Element {
+  return <Layout>category</Layout>;
 }
