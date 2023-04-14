@@ -3,15 +3,13 @@ import SideBar from "./SideBar";
 
 export default function Layout({ children }: { children: JSX.Element }) {
   return (
-    <>
-      <Navbar />
-      <div className="flex">
+    <div className="flex">
+      <SideBar />
+      <div className="w-full">
         {" "}
-        <SideBar />
-        <main className="rounded-md m-3 w-full dark:bg-[rgb(34,46,60)]">
-          {children}
-        </main>
+        <Navbar />
+        <main className="bg-[#FFFBF1] min-h-[86vh]">{children}</main>
       </div>
-    </>
+    </div>
   );
 }
