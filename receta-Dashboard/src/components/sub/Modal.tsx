@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 // const defCocktail = {
 //   name: "",
@@ -14,13 +14,35 @@ import { useState } from "react";
 
 export default function Modal() {
   const [a, setA] = useState<boolean>(false);
-  // const [cocktail, setCocktail] = useState(defCocktail);
+  const [check, setCheck] = useState<boolean | null>(false);
+  // const [val, setVal] = useState(0);
 
-  function createCocktail(e: React.FormEvent<HTMLFormElement>) {
+  // function handleAdd() {
+  //   setVal(val + 1);
+  // }
+  // console.log(val);
+
+  // function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   console.log(e.target.value);
+  // }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function createCocktail(e: any) {
     e.preventDefault();
-    // console.log(e.target.name.value);
-    // console.log(e.target.description.value);
-    // console.log(e.target.category.value);
+
+    const cocktailData: cocktailType = {
+      name: e.target.name.value,
+      description: e.target.description.value,
+      category: e.target.category.value,
+      ingredients: e.target.ingredients.value,
+      imageUrl: e.target.imageUrl.value,
+      videoUrl: e.target.videoUrl.value,
+      alcohol: e.target.alcohol.value,
+      toolImage: e.target.toolImage.value,
+      toolName: e.target.toolName.value,
+    };
+
+    console.log(cocktailData);
   }
   return (
     <div>
@@ -84,10 +106,7 @@ export default function Modal() {
                               name="ingredients"
                               className="bg-slate-400"
                             />
-                            {/* <button onClick={()=>handleAdd()}>Add</button> */}
-                            {/* {val.map((data, i)=> (
-              return(<input onChange={onChangeHandler})
-            ))} */}
+                            {/* <button onClick={() => handleAdd}>Add</button> */}
                             <br />
                             <br />
                             <label>Photo or image</label>
@@ -110,7 +129,10 @@ export default function Modal() {
                             <br />
                             <label>Alcoholic or nonalcoholic</label> <br />
                             <input
+                              // onChange={checkHandler}
+                              onClick={() => setCheck(!check)}
                               type="checkbox"
+                              value={`${check}`}
                               name="alcohol"
                               className="bg-slate-400"
                             />
@@ -119,7 +141,6 @@ export default function Modal() {
                             <label>Tools</label> <br />
                             <label>Image</label>
                             <input
-                              // onChange={onChangeHandler}
                               type="file"
                               name="toolImage"
                               className="ml-4 bg-slate-400"
@@ -127,7 +148,6 @@ export default function Modal() {
                             <br />
                             <label>Name</label>
                             <input
-                              // onChange={onChangeHandler}
                               type="text"
                               name="toolName"
                               className="ml-4 bg-slate-400"
@@ -136,30 +156,26 @@ export default function Modal() {
                             <br />
                             <label>Like</label>
                             <label>Comment</label>
-                            <button type="submit">Create cocktail</button>
+                            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                              <button
+                                // onClick={() => setA(false)}
+                                type="submit"
+                                className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                              >
+                                Create
+                              </button>
+                              <button
+                                onClick={() => setA(false)}
+                                type="button"
+                                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                              >
+                                Cancel
+                              </button>
+                            </div>
                           </form>
-                          {/* <input type="text" className="border w-[200px]" />
-                          <input type="text" className="border w-[200px]" />
-                          <input type="text" className="border" />
-                          <input type="text" className="border" /> */}
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                    >
-                      Create
-                    </button>
-                    <button
-                      onClick={() => setA(false)}
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    >
-                      Cancel
-                    </button>
                   </div>
                 </div>
               </div>
@@ -169,4 +185,16 @@ export default function Modal() {
       )}
     </div>
   );
+}
+
+interface cocktailType {
+  name: string;
+  description: string;
+  category: string;
+  ingredients: [string];
+  imageUrl: string;
+  videoUrl: string;
+  alcohol: string;
+  toolImage: string;
+  toolName: string;
 }
