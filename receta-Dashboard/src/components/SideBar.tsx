@@ -9,11 +9,14 @@ import UserIcon from "./icons/UserIcon";
 import Settings from "./sub/Settings";
 import SettingIcon from "./icons/SettingIcon";
 import DashIcon from "./icons/DashIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SideBar(): JSX.Element {
-  const [activeBtn, setActiveBtn] = useState<string | any>();
+  const [activeBtn, setActiveBtn] = useState<string | null>();
   console.log(activeBtn);
+  useEffect(() => {
+    if (localStorage.getItem("btn")) setActiveBtn(localStorage.getItem("btn"));
+  }, []);
 
   const router = useRouter();
   return (
@@ -26,14 +29,16 @@ export default function SideBar(): JSX.Element {
           key={index}
           className={
             activeBtn == page.name
-              ? "h-[40px] w-[200px] text-white text-[20px] text-left text-[#000] bg-[#FFFBF1] flex mb-[20px]"
+              ? "h-[40px] w-[200px] text-white text-[20px] text-left text-[#054B68] bg-[#FFFBF1] flex mb-[20px] rounded-l-lg "
               : "h-[40px] w-[200px] text-white  text-[20px] text-left text-[#FFFBF1] flex mb-[20px] "
           }
           onClick={() => {
-            router.push(`../${page.url}`), setActiveBtn(page.name);
+            router.push(`../${page.url}`),
+              setActiveBtn(page.name),
+              localStorage.setItem("btn", page.name);
           }}
         >
-          {page.icon}
+          <span className="mt-[3px]">{page.icon}</span>
           <p className="ms-2">{page.name}</p>
         </button>
       ))}

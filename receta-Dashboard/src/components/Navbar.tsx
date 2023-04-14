@@ -1,4 +1,4 @@
-import { Avatar, Dropdown } from "flowbite-react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { RiArrowDropDownFill } from "react-icons/ri";
@@ -16,7 +16,7 @@ export default function Navbar(): JSX.Element {
       <div className="flex">
         <form className="relative w-[500px] me-4" onSubmit={searchHandler}>
           <input
-            type="week"
+            type="text"
             name="search"
             className="w-full border-b placeholder-white bg-[#86A1AC] text-white text-md"
             placeholder="search"
@@ -25,11 +25,13 @@ export default function Navbar(): JSX.Element {
         </form>
         <div className="relative">
           <button onClick={() => setShow(!show)} className="flex">
-            <img
-              className="rounded-[50%] h-[25px] object-cover w-[25px]"
-              src="https://i.guim.co.uk/img/media/bc12099e16c5e0a7ed7b1e63687dac6dd71ff13b/305_331_2800_1680/master/2800.jpg?width=620&quality=45&dpr=2&s=none"
-              alt="..."
-            />
+            <picture>
+              <img
+                className="rounded-[50%] h-[25px] object-cover w-[25px]"
+                src="https://i.guim.co.uk/img/media/bc12099e16c5e0a7ed7b1e63687dac6dd71ff13b/305_331_2800_1680/master/2800.jpg?width=620&quality=45&dpr=2&s=none"
+                alt="..."
+              />
+            </picture>
             <RiArrowDropDownFill className="w-6 h-6" />
           </button>
           {show && (

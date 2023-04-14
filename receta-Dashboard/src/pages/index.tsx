@@ -10,10 +10,13 @@ export default function Home(): JSX.Element {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const result = await axios.post("http://localhost:4000/admin-login", {
-      email,
-      password,
-    });
+    const result: unknown = await axios.post(
+      "http://localhost:4000/admin-login",
+      {
+        email,
+        password,
+      }
+    );
     if (result) {
       console.log("logged in");
       router.push("/dashboard");
@@ -24,6 +27,7 @@ export default function Home(): JSX.Element {
   return (
     <form
       className="flex flex-col gap-4 w-[500px] mx-auto my-[20%] border p-7 rounded-md shadow "
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={(e) => loginHandler(e)}
     >
       <h1 className="text-center border-b pb-2">RECETA.</h1>
