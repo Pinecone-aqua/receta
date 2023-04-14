@@ -29,7 +29,7 @@ export default function SideBar(): JSX.Element {
           key={index}
           className={
             activeBtn == page.name
-              ? "h-[40px] w-[200px] text-white text-[20px] text-left text-[#054B68] bg-[#FFFBF1] flex mb-[20px] rounded-l-lg "
+              ? "h-[40px] w-[200px] text-[20px] text-left text-[#054B68] bg-[#FFFBF1] flex mb-[20px] rounded-l-lg "
               : "h-[40px] w-[200px] text-white  text-[20px] text-left text-[#FFFBF1] flex mb-[20px] "
           }
           onClick={() => {

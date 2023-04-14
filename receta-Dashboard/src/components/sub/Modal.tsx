@@ -1,7 +1,27 @@
 import { useState } from "react";
 
+// const defCocktail = {
+//   name: "",
+//   // description: "",
+//   category: "",
+//   ingredients: "",
+//   imageUrl: "",
+//   videoUrl: "",
+//   alcohol: null,
+//   toolImage: "",
+//   toolName: "",
+// };
+
 export default function Modal() {
   const [a, setA] = useState<boolean>(false);
+  // const [cocktail, setCocktail] = useState(defCocktail);
+
+  function createCocktail(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // console.log(e.target.name.value);
+    // console.log(e.target.description.value);
+    // console.log(e.target.category.value);
+  }
   return (
     <div>
       <button
@@ -31,10 +51,97 @@ export default function Modal() {
                           Create recipe
                         </h3>
                         <div className="mt-2 ">
-                          <input type="text" className="border w-[200px]" />
+                          <form onSubmit={(e) => createCocktail(e)}>
+                            <br />
+                            <label>Cocktail name</label> <br />
+                            <input
+                              type="text"
+                              name="name"
+                              className="bg-slate-400"
+                            />
+                            <br />
+                            <br />
+                            <label>Description</label> <br />
+                            <textarea
+                              name="description"
+                              className="bg-slate-400"
+                            />
+                            <br />
+                            <br />
+                            <label>Category</label>
+                            <br />
+                            <input
+                              type="text"
+                              name="category"
+                              className="bg-slate-400"
+                            />
+                            <br />
+                            <br />
+                            <label>Ingredients</label>
+                            <br />
+                            <input
+                              type="text"
+                              name="ingredients"
+                              className="bg-slate-400"
+                            />
+                            {/* <button onClick={()=>handleAdd()}>Add</button> */}
+                            {/* {val.map((data, i)=> (
+              return(<input onChange={onChangeHandler})
+            ))} */}
+                            <br />
+                            <br />
+                            <label>Photo or image</label>
+                            <br />
+                            <input
+                              // onChange={onChangeHandler}
+                              type="file"
+                              name="imageUrl"
+                              className="bg-slate-400"
+                            />
+                            <br />
+                            <br />
+                            <label>Tutorial video</label> <br />
+                            <input
+                              type="text"
+                              name="videoUrl"
+                              className="bg-slate-400"
+                            />
+                            <br />
+                            <br />
+                            <label>Alcoholic or nonalcoholic</label> <br />
+                            <input
+                              type="checkbox"
+                              name="alcohol"
+                              className="bg-slate-400"
+                            />
+                            <br />
+                            <br />
+                            <label>Tools</label> <br />
+                            <label>Image</label>
+                            <input
+                              // onChange={onChangeHandler}
+                              type="file"
+                              name="toolImage"
+                              className="ml-4 bg-slate-400"
+                            />
+                            <br />
+                            <label>Name</label>
+                            <input
+                              // onChange={onChangeHandler}
+                              type="text"
+                              name="toolName"
+                              className="ml-4 bg-slate-400"
+                            />
+                            <br />
+                            <br />
+                            <label>Like</label>
+                            <label>Comment</label>
+                            <button type="submit">Create cocktail</button>
+                          </form>
+                          {/* <input type="text" className="border w-[200px]" />
                           <input type="text" className="border w-[200px]" />
                           <input type="text" className="border" />
-                          <input type="text" className="border" />
+                          <input type="text" className="border" /> */}
                         </div>
                       </div>
                     </div>
