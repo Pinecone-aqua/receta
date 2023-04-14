@@ -1,6 +1,7 @@
-import Navbar from "@/component/Navbar";
-import Category from "@/component/sub/Category";
+import Navbar from "../component/Navbar";
+import Category from "../component/sub/Category";
 import { Badge } from "flowbite-react";
+import React from "react";
 
 export default function Home(): JSX.Element {
   return (
