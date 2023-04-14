@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: JSX.Element }) {
       <div className="flex">
         {" "}
         <SideBar />
-        <main className="rounded-md m-3 w-full">
+        <main className="ml-72 mt-16 m-3 w-full">
           {children}
         </main>
       </div>

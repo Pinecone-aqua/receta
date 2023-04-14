@@ -6,7 +6,7 @@ import User from "./sub/User";
 
 export default function SideBar(): JSX.Element {
   return (
-    <div className="w-fit h-[98vh]">
+    <div className="w-fit h-[98vh] mt-12 fixed">
       <Sidebar
         className="dark:bg-[rgb(21,32,43)]"
         aria-label="Sidebar with content separator example"
