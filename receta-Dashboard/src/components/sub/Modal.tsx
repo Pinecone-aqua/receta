@@ -15,16 +15,25 @@ import React, { useState } from "react";
 export default function Modal() {
   const [a, setA] = useState<boolean>(false);
   const [check, setCheck] = useState<boolean | null>(false);
-  // const [val, setVal] = useState(0);
+  const [inputCount, setInputCount] = useState(0);
+  const [inputFields, setInputFields] = useState<JSX.Element[]>([]);
 
-  // function handleAdd() {
-  //   setVal(val + 1);
-  // }
-  // console.log(val);
+  const handleAddInput = () => {
+    const inputField = (
+      <input className="bg-slate-400" key={`input-${inputCount}`} type="text" name={`input-${inputCount}`} />
+    );
 
-  // function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-  //   console.log(e.target.value);
-  // }
+    setInputFields((prevInputFields) => [...prevInputFields, inputField]);
+
+    setInputCount((prevInputCount) => prevInputCount + 1);
+  };
+
+  const handleRemoveInput = (index: number) => {
+
+    setInputFields((prevInputFields) =>
+      prevInputFields.filter((_, i) => i !== index)
+    );
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createCocktail(e: any) {
@@ -106,6 +115,13 @@ export default function Modal() {
                               name="ingredients"
                               className="bg-slate-400"
                             />
+                            {inputFields.map((inputField, index) => (
+        <div key={`input-container-${index}`}>
+          {inputField}
+          <button onClick={() => handleRemoveInput(index)}>Remove</button>
+        </div>
+      ))}
+      <button onClick={handleAddInput}>Add Input</button>
                             {/* <button onClick={() => handleAdd}>Add</button> */}
                             <br />
                             <br />
