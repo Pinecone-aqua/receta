@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 
 // const defCocktail = {
 //   name: "",
@@ -17,11 +17,19 @@ export default function Modal() {
   const [check, setCheck] = useState<boolean | null>(false);
   const [inputCount, setInputCount] = useState(0);
   const [inputFields, setInputFields] = useState<JSX.Element[]>([]);
+  const [ingredient, setIngredient] = useState([]);
 
   const handleAddInput = () => {
     const inputField = (
-      <input className="bg-slate-400" key={`input-${inputCount}`} type="text" name={`input-${inputCount}`} />
+      <input
+        className="bg-slate-400"
+        key={`input-${inputCount}`}
+        type="text"
+        name={`input${inputCount}`}
+        onChange={(e) => setIngredient(ingredient, ...e.target.value)}
+      />
     );
+    console.log(ingredient);
 
     setInputFields((prevInputFields) => [...prevInputFields, inputField]);
 
@@ -29,27 +37,46 @@ export default function Modal() {
   };
 
   const handleRemoveInput = (index: number) => {
-
     setInputFields((prevInputFields) =>
       prevInputFields.filter((_, i) => i !== index)
     );
   };
 
+  // inputFields.map((a) => console.log(a.props));
+
+  // console.log(inputCount);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createCocktail(e: any) {
     e.preventDefault();
+    // console.log(e.target.ingredients.value);
+    console.log(e.target.input2?.value);
 
     const cocktailData: cocktailType = {
       name: e.target.name.value,
       description: e.target.description.value,
       category: e.target.category.value,
-      ingredients: e.target.ingredients.value,
+      ingredients: [
+        e.target.ingredients.value,
+        e.target.input0?.value,
+        e.target.input1?.value,
+        e.target.input2?.value,
+        e.target.input3?.value,
+        e.target.input4?.value,
+        e.target.input5?.value,
+        e.target.input6?.value,
+        e.target.input7?.value,
+        e.target.input8?.value,
+        e.target.input9?.value,
+        e.target.input10?.value,
+      ],
       imageUrl: e.target.imageUrl.value,
       videoUrl: e.target.videoUrl.value,
       alcohol: e.target.alcohol.value,
-      toolImage: e.target.toolImage.value,
       toolName: e.target.toolName.value,
     };
+
+    // toolImage: e.target.toolImage.value,
 
     console.log(cocktailData);
   }
@@ -116,12 +143,16 @@ export default function Modal() {
                               className="bg-slate-400"
                             />
                             {inputFields.map((inputField, index) => (
-        <div key={`input-container-${index}`}>
-          {inputField}
-          <button onClick={() => handleRemoveInput(index)}>Remove</button>
-        </div>
-      ))}
-      <button onClick={handleAddInput}>Add Input</button>
+                              <div key={`input-container-${index}`}>
+                                {inputField}
+                                <button
+                                  onClick={() => handleRemoveInput(index)}
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            ))}
+                            <button onClick={handleAddInput}>Add Input</button>
                             {/* <button onClick={() => handleAdd}>Add</button> */}
                             <br />
                             <br />
@@ -155,18 +186,18 @@ export default function Modal() {
                             <br />
                             <br />
                             <label>Tools</label> <br />
-                            <label>Image</label>
+                            {/* <label>Image</label>
                             <input
                               type="file"
                               name="toolImage"
                               className="ml-4 bg-slate-400"
-                            />
+                            /> */}
                             <br />
-                            <label>Name</label>
+                            {/* <label>Name</label> */}
                             <input
                               type="text"
                               name="toolName"
-                              className="ml-4 bg-slate-400"
+                              className=" bg-slate-400"
                             />
                             <br />
                             <br />
@@ -207,10 +238,11 @@ interface cocktailType {
   name: string;
   description: string;
   category: string;
-  ingredients: [string];
+  ingredients: [];
   imageUrl: string;
   videoUrl: string;
   alcohol: string;
-  toolImage: string;
   toolName: string;
 }
+
+// toolImage: string;
