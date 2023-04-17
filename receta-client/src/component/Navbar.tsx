@@ -21,7 +21,7 @@ export default function Navbar(): JSX.Element {
             <input
               type="text"
               name="search"
-              className="w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-[#267F40] placeholder-white text-white text-md"
+              className="w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-transparent placeholder-white text-white text-md"
               placeholder="search"
             />
             <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />

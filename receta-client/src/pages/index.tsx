@@ -1,5 +1,3 @@
-import Navbar from "../component/Navbar";
-import Category from "../component/sub/Category";
 import { Badge } from "flowbite-react";
 import React from "react";
 import Layout from "@/component/Layout";

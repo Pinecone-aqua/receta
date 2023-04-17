@@ -1,11 +1,20 @@
 import Navbar from "./Navbar";
-import Category from "./sub/Category";
+import SideBar from "./SideBar";
+import Category from "./Category";
 
-export default function Layout(): JSX.Element {
+export default function Layout({
+  children,
+}: {
+  children: JSX.Element;
+}): JSX.Element {
   return (
     <div className="bg-[#267F40]">
       <Navbar />
-      <Category />
+      <div className="flex">
+        <SideBar />
+        <Category />
+      </div>
+      <main>{children}</main>
     </div>
   );
 }

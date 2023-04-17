@@ -10,14 +10,16 @@ export default function Login(): JSX.Element {
     console.log(e.target.email.value);
   }
   return (
-    <div className="min-h-[100vh] w-full relative">
+    <div className="h-[100vh] w-full relative pt-[12%]">
       <div>
-        <img
-          className="absolute right-0 top-[-15%] min-w-[200px] max-w-[50%]"
-          src="../l.png"
-        />
+        <picture>
+          <img
+            className="absolute right-0 top-0 min-w-[200px] max-w-[50%]"
+            src="../l.png"
+          />
+        </picture>
       </div>
-      <div className="m-auto mt-[12%] max-w-[600px] w-[60%] h-[40vh] bg-[#267F40] p-5 shadow shadow-black">
+      <div className="m-auto  max-w-[600px] w-[60%] h-[40vh] bg-[#267F40] p-5 shadow shadow-black">
         <h1
           className="text-[#FFFBF1] text-[32px] font-bold cursor-pointer"
           onClick={() => {
@@ -34,7 +36,7 @@ export default function Login(): JSX.Element {
             <input
               type="text"
               name="email"
-              className="w-full text-white border-white border-b bg-[#267F40] placeholder-white"
+              className="w-full text-white border-white border-b bg-[#267F40] placeholder:italic placeholder:text-white"
               placeholder="email"
             />
           </div>
@@ -42,12 +44,12 @@ export default function Login(): JSX.Element {
             <input
               name="password"
               type="text"
-              className="w-full text-white border-white border-b bg-[#267F40] placeholder-white"
+              className="w-full text-white border-white border-b placeholder:italic bg-[#267F40] placeholder:text-white"
               placeholder="password"
             />
           </div>
           <p className="text-white">register</p>
-          <button className="text-[#FFFBF1] w-full bg-[#124822] p-[8px] rounded-[25px]">
+          <button className="text-[#FFFBF1] cursor-pointer w-full bg-[#124822] p-[8px] rounded-[25px]">
             Нэвтрэх
           </button>
         </form>
