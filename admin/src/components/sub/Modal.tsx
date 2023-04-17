@@ -7,19 +7,18 @@ export default function Modal() {
 
   const tempRef: MutableRefObject<string> = useRef("");
 
-  const handleAddInput = () => {
-    setIngredient([...ingredient, tempRef.current]);
+  const addInputHandler = () => {
+    tempRef.current && setIngredient([...ingredient, tempRef.current]);
   };
 
-  const handleRemoveInput = (index: number) => {
-    console.log(index);
+  const removeInputHandler = (index: number) => {
+    const deleteInput = ingredient.filter((input, i) => index !== i);
+    setIngredient(deleteInput);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createCocktail(e: any) {
     e.preventDefault();
-    // console.log(e.target.ingredients.value);
-    console.log(e.target.input2?.value);
 
     const cocktailData: cocktailType = {
       name: e.target.name.value,
@@ -102,7 +101,7 @@ export default function Modal() {
                                   <p className="w-24 border">{inex}</p>
                                   <button
                                     onClick={() => {
-                                      handleRemoveInput(index);
+                                      removeInputHandler(index);
                                     }}
                                   >
                                     Remove
@@ -119,7 +118,7 @@ export default function Modal() {
                                 console.log(tempRef);
                               }}
                             />
-                            <button onClick={handleAddInput}>Add Input</button>
+                            <button onClick={addInputHandler}>Add Input</button>
                             {/* <button onClick={() => handleAdd}>Add</button> */}
                             <br />
                             <br />
