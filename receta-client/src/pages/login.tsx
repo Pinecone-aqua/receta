@@ -10,16 +10,28 @@ export default function Login(): JSX.Element {
     console.log(e.target.email.value);
   }
   return (
-    <div className="h-[100vh] w-full relative pt-[12%]">
-      <div>
-        <picture>
-          <img
-            className="absolute right-0 top-0 min-w-[200px] max-w-[50%]"
-            src="../l.png"
-          />
-        </picture>
-      </div>
-      <div className="m-auto  max-w-[600px] w-[60%] h-[40vh] bg-[#267F40] p-5 shadow shadow-black">
+    <div className="h-[100vh] relative bg-[url(/background.png)] py-[10%]">
+      <img
+        className="absolute right-0 top-0 min-w-[200px] max-w-[30%]"
+        src="../flower1.png"
+      />
+      <img
+        className="absolute right-0 top-20 min-w-[150px] max-w-[30%]"
+        src="../flower2.png"
+      />
+      <img
+        className="absolute right-0 bottom-0 min-w-[150px] max-w-[30%]"
+        src="../flower3.png"
+      />
+      <img
+        className="absolute left-[5%] bottom-0 min-w-[100px] max-w-[25%]"
+        src="../cocktail1.png"
+      />
+      <img
+        className="absolute left-0 top-0 min-w-[100px] max-w-[25%]"
+        src="../flower4.png"
+      />
+      <div className="mx-auto w-[60%] h-[50vh] bg-[#267F40] p-5 shadow shadow-black ">
         <h1
           className="text-[#FFFBF1] text-[32px] font-bold cursor-pointer"
           onClick={() => {
@@ -28,10 +40,7 @@ export default function Login(): JSX.Element {
         >
           receta.
         </h1>
-        <form
-          className="max-w-[400px] mx-auto mt-[10%]"
-          onSubmit={loginHandler}
-        >
+        <form className="w-[50%] mx-auto mt-[10%]" onSubmit={loginHandler}>
           <div>
             <input
               type="text"
@@ -54,7 +63,7 @@ export default function Login(): JSX.Element {
           </button>
         </form>
       </div>
-      <div className="max-w-[600px] bg-[#124822] m-auto w-[60%] p-[30px]">
+      <div className="w-[60%] bg-[#124822] m-auto p-[30px]">
         <button className="w-[180px] px-5 p-2 bg-white rounded-[25px] justify-around flex mx-auto text-center">
           <p className="text-[#267F40] text-[16px]">sign in google</p>{" "}
           <FcGoogle className="mt-[3px] w-[20px] h-[20px]" />

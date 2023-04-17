@@ -7,11 +7,6 @@ export default function Login() {
   const { data: session } = useSession();
   const [showModal, setShowModal] = useState(false);
 
-  const newUser = session?.user;
-  useEffect(() => {
-    session && axios.post("http://localhost:4000/google-acc", { ...newUser });
-  }, [newUser, session]);
-
   if (session) {
     return (
       <div>

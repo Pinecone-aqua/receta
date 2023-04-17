@@ -1,9 +1,11 @@
+import Link from "next/link";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { RiArrowDropDownFill } from "react-icons/ri";
 
 export default function Navbar(): JSX.Element {
   const [show, setShow] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function searchHandler(e: any): void {
@@ -11,23 +13,22 @@ export default function Navbar(): JSX.Element {
     console.log(e.target.search.value);
   }
   return (
-    <header className="">
-      <div className="text-white  container mx-auto flex justify-between pt-8">
-        <h1 className="text-[#FFFBF1] text-[32px] font-bold cursor-pointer">
-          receta.
-        </h1>
-        <div className="flex">
-          <form className="relative w-[500px] me-4" onSubmit={searchHandler}>
-            <input
-              type="text"
-              name="search"
-              className="w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-transparent placeholder-white text-white text-md"
-              placeholder="search"
-            />
-            <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />
-          </form>
+    <header className="text-[#FFFBF1]  container mx-auto flex justify-between pt-8">
+      <h1 className="text-[32px] font-bold cursor-pointer">receta.</h1>
+      <div className="flex">
+        <form className="relative min-w-[400px] me-4" onSubmit={searchHandler}>
+          <input
+            type="text"
+            name="search"
+            className="appearance-none focus:border-white w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-transparent placeholder-[#FFFBF1] text-md"
+            placeholder="search"
+          />
+
+          <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />
+        </form>
+        {isLogged ? (
           <div className="relative">
-            <button onClick={() => setShow(!show)} className="flex">
+            <button onClick={() => setShow(!show)} className="flex mt-2">
               <picture>
                 <img
                   className="rounded-[50%] h-[25px] object-cover w-[25px]"
@@ -45,7 +46,11 @@ export default function Navbar(): JSX.Element {
               </ul>
             )}
           </div>
-        </div>
+        ) : (
+          <Link href="../login" className="mt-3">
+            login
+          </Link>
+        )}
       </div>
     </header>
   );

@@ -2,7 +2,6 @@ import mongoose, { Schema } from "mongoose";
 
 const collectionSchema = new Schema(
   {
-    image_url: String,
     name: String,
   },
   {
