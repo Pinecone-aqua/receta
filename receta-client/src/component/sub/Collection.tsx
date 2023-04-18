@@ -4,19 +4,24 @@ import React, { useEffect, useState } from "react";
 import { RiArrowDropDownFill } from "react-icons/ri";
 
 export default function Collection(props: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setActiveBtn: any;
   activeBtn: string;
 }): JSX.Element {
   const [data, setData] = useState<CollectionType[]>([]);
   const { setActiveBtn, activeBtn } = props;
 
-  console.log(data);
-
   useEffect(() => {
     axios
-      .get("http://localhost:4000/get-collection")
+      .get("http://localhost:3003/collection/get")
       .then((res) => setData(res.data));
   }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3003/user/allUser")
+  //     .then((res) => console.log(res.data));
+  // }, []);
 
   return (
     <div className="text-white h-[80vh] relative ps-[10%]  pt-[15%] w-full flex gap-5">
@@ -26,15 +31,17 @@ export default function Collection(props: {
           key={index}
           className="cursor-pointer w-full"
         >
-          <img
-            src={`../${collection.name}.png`}
-            className={
-              activeBtn == collection.name
-                ? `max-w-[250px] h-[400px] object-cover z-10 absolute bottom-0 sm:hidden md:block `
-                : `w-[130px] h-[190px] absolute bottom-5`
-            }
-            alt="..."
-          />
+          <picture>
+            <img
+              src={`../${collection.name}.png`}
+              className={
+                activeBtn == collection.name
+                  ? `max-w-[250px] h-[400px] object-cover z-10 absolute bottom-0 sm:hidden md:block `
+                  : `w-[130px] h-[190px] absolute bottom-5`
+              }
+              alt="..."
+            />
+          </picture>
           <p
             className={
               activeBtn == collection.name

@@ -5,7 +5,7 @@ const collectionSchema = new Schema(
     name: String,
   },
   {
-    collection: "collection",
+    collection: "collections",
   }
 );
 

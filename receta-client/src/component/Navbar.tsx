@@ -15,43 +15,44 @@ export default function Navbar(): JSX.Element {
   return (
     <header className="text-[#FFFBF1]  container mx-auto flex justify-between pt-8">
       <h1 className="text-[32px] font-bold cursor-pointer">receta.</h1>
-      <div className="flex">
-        <form className="relative min-w-[400px] me-4" onSubmit={searchHandler}>
-          <input
-            type="text"
-            name="search"
-            className="appearance-none focus:border-white w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-transparent placeholder-[#FFFBF1] text-md"
-            placeholder="search"
-          />
+      <form
+        className="relative min-w-[300px] w-[60%] me-4"
+        onSubmit={searchHandler}
+      >
+        <input
+          type="text"
+          name="search"
+          className="focus:border-white active:ouline-none w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-transparent placeholder-[#FFFBF1] text-md"
+          placeholder="search"
+        />
 
-          <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />
-        </form>
-        {isLogged ? (
-          <div className="relative">
-            <button onClick={() => setShow(!show)} className="flex mt-2">
-              <picture>
-                <img
-                  className="rounded-[50%] h-[25px] object-cover w-[25px]"
-                  src="https://i.guim.co.uk/img/media/bc12099e16c5e0a7ed7b1e63687dac6dd71ff13b/305_331_2800_1680/master/2800.jpg?width=620&quality=45&dpr=2&s=none"
-                  alt="..."
-                />
-              </picture>
-              <RiArrowDropDownFill className="w-6 h-6" />
-            </button>
-            {show && (
-              <ul className="absolute bg-red-400 left-[-20px] w-[50px]">
-                <li>a</li>
-                <li>a</li>
-                <li>a</li>
-              </ul>
-            )}
-          </div>
-        ) : (
-          <Link href="../login" className="mt-3">
-            login
-          </Link>
-        )}
-      </div>
+        <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />
+      </form>
+      {isLogged ? (
+        <div className="relative">
+          <button onClick={() => setShow(!show)} className="flex mt-2">
+            <picture>
+              <img
+                className="rounded-[50%] h-[25px] object-cover w-[25px]"
+                src="https://i.guim.co.uk/img/media/bc12099e16c5e0a7ed7b1e63687dac6dd71ff13b/305_331_2800_1680/master/2800.jpg?width=620&quality=45&dpr=2&s=none"
+                alt="..."
+              />
+            </picture>
+            <RiArrowDropDownFill className="w-6 h-6" />
+          </button>
+          {show && (
+            <ul className="absolute bg-red-400 left-[-20px] w-[50px]">
+              <li>a</li>
+              <li>a</li>
+              <li>a</li>
+            </ul>
+          )}
+        </div>
+      ) : (
+        <Link href="../login" className="mt-3">
+          login
+        </Link>
+      )}
     </header>
   );
 }
