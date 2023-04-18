@@ -1,119 +1,164 @@
-{
-  "collecions": [
-    {
-      "name": "Spirits",
-      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fe078cf226251a9af871843b25469061d52d3df4e5e30b056d647b67107780e18%3F&w=1080&q=75"
-    },
-    {
-      "name": "Bitter",
-      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fe3b6422793632973d9236ad362230af93c47ba68188b69b6735fdd0c76c9e2b4%3F&w=1920&q=75"
-    },
-    {
-      "name": "Non-Alcohol",
-      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F3a4c6fb18f0f33c8698ca26528671ab39bf33ede10beb66ae3b864ca85ef0bd3%3F&w=1920&q=75"
-    },
-    {
-      "name": "Sour",
-      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Ftanqueray-basil-smash%3F&w=1920&q=75"
-    },
-    {
-      "name": "Sweet",
-      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Ftanqueray-bramble%3F&w=1920&q=75"
-    }
-  ],
-  "cocktails": [
-    {
-      "name": "Coffee Grenade",
-      "description": "Coffee and pomegranate are two super antioxidant natural ingredients, with a high energizing level. This mocktail is recommended for moments of body recovery after a strong workout.",
-      "category": "Spirits",
-      "ingredients": [
-        {
-          "name": "Pomegrade seed",
-          "amount": "3 Bar spoons"
-        },
-        {
-          "name": "Pineapple juice",
-          "amount": "45 ml"
-        },
-        {
-          "name": "Coffee",
-          "amount": "30"
-        },
-        {
-          "name": "Lemon kefir",
-          "amount": "Top up"
-        },
-        {
-          "name": "Pineapple wedge",
-          "amount": "1"
-        }
-      ],
-      "how_to": [
-        {
-          "Prepare": "Cut the pineapple wedge for garnish and get the pomegranate seeds"
-        },
-        {
-          "Add Ingredients": "Put the pomegranate seeds and the pineapple juice inside the shaker"
-        },
-        {
-          "Muddle": "Gently smash the pome grenade with the muddler"
-        },
-        {
-          "Ice": "Fill your shaker and glass with cubed ice"
-        },
-        {
-          "Add Coffee Brew": "Add your cold brew coffee 1:5"
-        },
-        {
-          "Shake": "Shake hard for 10 sec"
-        },
-        {
-          "Fine Strain": "Using your fine strainer, strain into your glass over the ice."
-        },
-        {
-          "Top with Lemon Kefir": "Top up the glass with lemon kefir"
-        },
-        {
-          "Garnish and serve": "Garnish with the pineapple wedge"
-        }
-      ],
-      "tools": [
-        {
-          "name": "Knife",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F377e02e67f3fffa1ca7a893840ea2b75d45a8ddff80ae7b7d583dc2f1e4b58c6%3F&w=640&q=75"
-        },
-        {
-          "name": "Shaker",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fa7c5b64bfc7e4cfacf551e80375e271f468c5aceb76ee00dec23a7b686caf893%3F&w=640&q=75"
-        },
-        {
-          "name": "Bar Spoon",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F51bf4b236b1956e207b2fb6ed2f92b011f3a8789657182edb240dd91b51b38a1%3F&w=640&q=75"
-        },
-        {
-          "name": "Jigger",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F4a8ba6c37cc6334220710bcc0bb7a919e0d4997b6f0d5c68f9e919a3fa82813f%3F&w=640&q=75"
-        },
-        {
-          "name": "Muddler",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F8a1f934fe1ec36f626c090bb7a7eefbbf48ac03eccaf6a3f12ce534063c9341a%3F&w=640&q=75"
-        },
-        {
-          "name": "Ice Scoop",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Fa9e19d8a2187e62a9d6c359a7e55920631c2600a4044b27eacf6146bc3f3f8ee%3F&w=640&q=75"
-        },
-        {
-          "name": "Rocks glass",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F8d8eae25a2a085213cac34c60d2add4eaebf78596b69f9b6d9557c40e293519f%3F&w=640&q=75"
-        },
-        {
-          "name": "Fine Strainer",
-          "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F6140d8d46b3971eaeae1c708a65b5db59de240e698eb2a404c23ad4f9ceb8fed%3F&w=640&q=75"
-        }
-      ],
-      "image": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F3a4c6fb18f0f33c8698ca26528671ab39bf33ede10beb66ae3b864ca85ef0bd3%3F&w=1920&q=75",
-      "video": ""
-    },
-    {}
-  ]
-}
+[
+  {
+    "name": "The Grapefruit Julep Cocktail",
+    "description": "Gin, grapefruit juice, sugar syrup, and mint leaves. A twist on the classic cocktail for a more refreshing taste.",
+    "category": "sweet",
+    "ingredients": [
+      "6 Mint leaves",
+      "50 ml Pink Grapefruit Juice",
+      "20 ml Sugar syrup",
+      "50 ml Gin",
+      "1 Slice Grapefruit",
+      "1 Mint sprig"
+    ],
+    "instruction": [
+      {
+        "Prepare": "Cut your grapefruit for squeezing and garnish and pick your mint leaves and sprig"
+      },
+      {
+        "Add Ingredients": "Clap the mint leaves in your hand to wake up the flavors and put them in the bottom of your mixing glass. Add the rest of the ingredients"
+      },
+      {
+        "Crushed Ice": "Fill your glass 3/4 full with crushed ice"
+      },
+      {
+        "Stir": "Using your bar spoon, stir all the ingredients together really well"
+      },
+      {
+        "More Ice": "Fill up your glass with more crushed ice"
+      },
+      {
+        "Garnish and serve": "Garnish with your grapefruit slice and fresh mint sprig and serve."
+      }
+    ],
+    "imageUrl": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F879714df025cb01634c23b26722d26c79ab330ec977e91f4a440d069f1dd6feb%3F&w=1920&q=75",
+    "videoUrl": "https://www.youtube.com/embed/Z2i6Q86e8wI",
+    "alcohol": true,
+    "toolName": [
+      "Fruit Zester",
+      "Knife",
+      "Coupe Glass",
+      "Ice Scoop",
+      "Mixing Glass",
+      "Jigger",
+      "Bar Spoon",
+      "Julep Strainer"
+    ]
+  },
+  {
+    "name": "The Dark and Stormy Cocktail",
+    "description": "Created by Gosling's Black Seal rum on the Caribbean island of Bermuda, where they mixed it with fiery Ginger Beer and fresh lime, creating a classic enjoyed WorldWide (especially during Halloween) ",
+    "category": "easy-to-make",
+    "ingredients": [
+      "50 ml Dark Rum",
+      "150 ml Ginger Beer (non alc)",
+      "2 Lime wedge"
+    ],
+    "instruction": [
+      {
+        "Prepare": "Cut your lime wedges ready for garnish"
+      },
+      {
+        "Ice": "Fill your highball glass with ice"
+      },
+      {
+        "Add ingredients": "Pour your rum and ginger beer over the ice"
+      },
+      {
+        "Squeeze lime": "Squeeze in both the limes and drop them into your drink"
+      },
+      {
+        "Stir and serve": "Using your barspoon, stir all the ingredients together well"
+      }
+    ],
+    "imageUrl": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Ff794e83804ca90ec2a566ae7320fa608caf8fcb74192d8940b6caf44c7336e3a%3F&w=1920&q=75",
+    "videoUrl": "https://www.youtube.com/embed/FT43iTg0RYQ",
+    "alcohol": true,
+    "toolName": [
+      "Knife",
+      "Highball glass",
+      "Ice Scoop",
+      "Jigger",
+      "Bar Spoon"
+    ]
+  },
+  {
+    "name": "The White Ukrainian Cocktail",
+    "description": "Yes, we changed the title. To raise awareness that we all are standing with the Ukrainian people at these times. Please make this drink and enjoy the taste, but also remember to send your best thoughts to Ukraine.",
+    "category": "strong",
+    "ingredients": [
+      "60 mlVodka",
+      "30 ml Coffee Liqueur",
+      "30 ml Single cream"
+    ],
+    "instruction": [
+      {
+        "Ice": "Fill your rocks glass with cubed ice"
+      },
+      {
+        "Add ingredients": "Pour in your vodka and coffee liquor"
+      },
+      {
+        "Stir": "Stir the ingredients together with your bar spoon"
+      },
+      {
+        "More ice": "Add a couple more cubes of ice"
+      },
+      {
+        "Cream": "Slowly pour your cream on the ice for a layered effect"
+      }
+    ],
+    "imageUrl": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F6ce18628cba21e13579a29634e9cff2d3f1f804a7c0fe8de4f46b5c1fc4c7f7f%3F&w=1920&q=75",
+    "videoUrl": "https://www.youtube.com/embed/u1s_aMeLxDk",
+    "alcohol": true,
+    "toolName": [
+      "Ice Scoop",
+      "Rocks glass",
+      "Jigger",
+      "Bar Spoon"
+    ]
+  },
+  {
+    "name": "The Nuclear Daiquiri Cocktail",
+    "description": "Created by Gregor de Gruyther in 2005 in London, this twisted overproof Daiquiri is really quite hard hitting with strong herbal overtones. ",
+    "category": "special",
+    "ingredients": [
+      "30 ml Overproof Rum",
+      "20 ml Herbal Liqueur",
+      "10 ml Rum Liqueur",
+      "30 ml Lime Juice",
+      "1 Lime wedge"
+    ],
+    "instruction": [
+      {
+        "Prepare": "Cut your lime wedge ready for garnish and juicing"
+      },
+      {
+        "Ice": "Fill both your shaker and martini glass with cubed ice"
+      },
+      {
+        "Add ingredients": "Pour all 4 ingredients into your shaker"
+      },
+      {
+        "Shake": "Close the shaker and shake hard for 7 seconds"
+      },
+      {
+        "Empty and Strain": "Empty the ice in your martini glass back into the ice bucket. Take off the small top off the shaker and strain out the mix into your chilled glass."
+      },
+      {
+        "Garnish and serve": "Garnish with your fresh lime wedge"
+      }
+    ],
+    "imageUrl": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F8371309b8d3da878f8ab2608e36c48503badf3c98598a96e876b85e0b406465b%3F&w=1920&q=75",
+    "videoUrl": "https://www.youtube.com/embed/H0AYqQ50Qro",
+    "alcohol": true,
+    "toolName": [
+      "Knife",
+      "Ice Scoop",
+      "Martini glass",
+      "Shaker",
+      "Jigger",
+      "Mexican Elbow Juicer"
+    ]
+  }
+]
