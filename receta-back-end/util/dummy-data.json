@@ -2,7 +2,7 @@
   {
     "name": "The Grapefruit Julep Cocktail",
     "description": "Gin, grapefruit juice, sugar syrup, and mint leaves. A twist on the classic cocktail for a more refreshing taste.",
-    "category": "sweet",
+    "collection": "sweet",
     "ingredients": [
       "6 Mint leaves",
       "50 ml Pink Grapefruit Juice",
@@ -48,7 +48,8 @@
   {
     "name": "The Dark and Stormy Cocktail",
     "description": "Created by Gosling's Black Seal rum on the Caribbean island of Bermuda, where they mixed it with fiery Ginger Beer and fresh lime, creating a classic enjoyed WorldWide (especially during Halloween) ",
-    "category": "easy-to-make",
+    "collection": "difficulty",
+    "category": "easy",
     "ingredients": [
       "50 ml Dark Rum",
       "150 ml Ginger Beer (non alc)",
@@ -74,23 +75,13 @@
     "imageUrl": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2Ff794e83804ca90ec2a566ae7320fa608caf8fcb74192d8940b6caf44c7336e3a%3F&w=1920&q=75",
     "videoUrl": "https://www.youtube.com/embed/FT43iTg0RYQ",
     "alcohol": true,
-    "toolName": [
-      "Knife",
-      "Highball glass",
-      "Ice Scoop",
-      "Jigger",
-      "Bar Spoon"
-    ]
+    "toolName": ["Knife", "Highball glass", "Ice Scoop", "Jigger", "Bar Spoon"]
   },
   {
     "name": "The White Ukrainian Cocktail",
     "description": "Yes, we changed the title. To raise awareness that we all are standing with the Ukrainian people at these times. Please make this drink and enjoy the taste, but also remember to send your best thoughts to Ukraine.",
     "category": "strong",
-    "ingredients": [
-      "60 mlVodka",
-      "30 ml Coffee Liqueur",
-      "30 ml Single cream"
-    ],
+    "ingredients": ["60 mlVodka", "30 ml Coffee Liqueur", "30 ml Single cream"],
     "instruction": [
       {
         "Ice": "Fill your rocks glass with cubed ice"
@@ -111,12 +102,7 @@
     "imageUrl": "https://cocktailclub.com/_next/image?url=https%3A%2F%2Fcocktailclub.fra1.digitaloceanspaces.com%2F6ce18628cba21e13579a29634e9cff2d3f1f804a7c0fe8de4f46b5c1fc4c7f7f%3F&w=1920&q=75",
     "videoUrl": "https://www.youtube.com/embed/u1s_aMeLxDk",
     "alcohol": true,
-    "toolName": [
-      "Ice Scoop",
-      "Rocks glass",
-      "Jigger",
-      "Bar Spoon"
-    ]
+    "toolName": ["Ice Scoop", "Rocks glass", "Jigger", "Bar Spoon"]
   },
   {
     "name": "The Nuclear Daiquiri Cocktail",
