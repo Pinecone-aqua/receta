@@ -13,7 +13,7 @@ export default function Collection(props: {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3003/collection/get")
+      .get("http://localhost:3003/collections/get")
       .then((res) => setData(res.data));
   }, []);
 
@@ -24,20 +24,20 @@ export default function Collection(props: {
   // }, []);
 
   return (
-    <div className="text-white h-[80vh] relative ps-[10%]  pt-[15%] w-full flex gap-5">
+    <div className="text-white h-[80vh] relative ps-[10%]  pt-[15%] w-full flex gap-12">
       {data.map((collection, index) => (
         <div
           onClick={() => setActiveBtn(collection.name)}
           key={index}
-          className="cursor-pointer w-full"
+          className="w-full"
         >
           <picture>
             <img
               src={`../${collection.name}.png`}
               className={
                 activeBtn == collection.name
-                  ? `max-w-[250px] h-[400px] object-cover z-10 absolute bottom-0 sm:hidden md:block `
-                  : `w-[130px] h-[190px] absolute bottom-5`
+                  ? `max-w-[250px] h-[400px] object-cover z-10 absolute bottom-0 sm:hidden md:block cursor-pointer `
+                  : `w-[130px] h-[190px] absolute bottom-5 cursor-pointer `
               }
               alt="..."
             />
@@ -46,7 +46,7 @@ export default function Collection(props: {
             className={
               activeBtn == collection.name
                 ? `z-0 absolute text-3xl top-[40%] left-[25%] font-bold text-[150px] text-[#FFFBF1]`
-                : "absolute bottom-0 text-[#124822] ms-[30px]"
+                : "absolute bottom-0 text-[#124822] ms-[30px] cursor-pointer "
             }
           >
             {collection.name}

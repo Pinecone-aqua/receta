@@ -11,12 +11,6 @@ export class CategoriesController {
 
   @Post('create')
   create(@Body() body: any) {
-    console.log('body: ', body);
-
-    try {
-      return this.categoriesService.create(body);
-    } catch (err) {
-      return err;
-    }
+    return this.categoriesService.create(body);
   }
 }

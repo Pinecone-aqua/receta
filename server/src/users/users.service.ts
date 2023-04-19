@@ -13,4 +13,8 @@ export class UserService {
   createUser(user: any) {
     return this.userModel.create(user);
   }
+
+  // loginUser(user: string) {
+  //   return this.userModel.findOne({  });
+  // }
 }

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CollectionService } from './collection.service';
+import { CollectionService } from './collections.service';
 
-@Controller('collection')
+@Controller('collections')
 export class CollectionController {
   constructor(private readonly collectionService: CollectionService) {}
 
