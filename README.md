@@ -1,3 +1,3 @@
 # cocktail recipe
 
-<img width="993" alt="Screenshot 2023-04-19 at 19 18 10" src="https://user-images.githubusercontent.com/109960140/233059151-6060399e-c9ec-4a6d-85bd-053db281e9fe.png">
+<img width="876" alt="Screenshot 2023-04-19 at 20 23 03" src="https://user-images.githubusercontent.com/109960140/233073615-913969f0-084a-4428-95fd-7570971f5336.png">
