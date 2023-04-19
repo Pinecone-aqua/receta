@@ -21,8 +21,8 @@ export default function Navbar(): JSX.Element {
       >
         <input
           type="text"
-          name="search"
-          className="focus:border-white active:ouline-none w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-transparent placeholder-[#FFFBF1] text-md"
+          className="focus:outline-0 bg-transparent w-full p-2 placeholder:text-white border-b-[1px]"
+          aria-invalid="false"
           placeholder="search"
         />
 

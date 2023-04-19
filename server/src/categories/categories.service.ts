@@ -12,7 +12,7 @@ export class CategoriesService {
     return this.categoriesModel.find();
   }
 
-  create(user: any) {
-    return this.categoriesModel.create(user);
+  create(category: any) {
+    return this.categoriesModel.create(category);
   }
 }
