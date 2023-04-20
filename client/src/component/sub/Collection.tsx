@@ -17,12 +17,6 @@ export default function Collection(props: {
       .then((res) => setData(res.data));
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3003/user/allUser")
-  //     .then((res) => console.log(res.data));
-  // }, []);
-
   return (
     <div className="text-white h-[80vh] relative ps-[10%]  pt-[15%] w-full flex gap-12">
       {data.map((collection, index) => (

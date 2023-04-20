@@ -19,7 +19,9 @@ export default function Navbar(): JSX.Element {
     <header className="text-[#FFFBF1]  container mx-auto flex justify-between pt-8">
       <h1
         className="text-[32px] font-bold cursor-pointer"
-        onClick={() => router.push("../")}
+        onClick={() => {
+          router.push("../");
+        }}
       >
         receta.
       </h1>

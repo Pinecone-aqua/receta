@@ -17,9 +17,9 @@ export default function Recipes(): JSX.Element {
     <div className="py-[10px]">
       {" "}
       <div className="flex flex-wrap gap-[5%] place-content-center w-[90%] mx-auto px-[30px]">
-        {recipes?.map((recipe, index) => {
-          return <RecipeCard recipe={recipe} key={index} />;
-        })}
+        {recipes?.map((recipe, index) => (
+          <RecipeCard recipe={recipe} key={index} />
+        ))}
       </div>
       <div className="place-content-center flex">
         <div className="text-white cursor-pointer">

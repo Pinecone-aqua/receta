@@ -1,5 +1,4 @@
 import Navbar from "@/component/Navbar";
-import SideBar from "@/component/sub/SideBar";
 import { RecipesType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
@@ -35,14 +34,13 @@ export default function Recipe(props: { recipes: RecipesType[] }): JSX.Element {
             <h2 className="text-center text-2xl">{recipes[0].name}</h2>
             <p>{recipes[0].description}</p>
           </div>
-          <div className="w-[50%]"></div>
         </div>
       </div>
       <div className="w-full">
         <iframe
           className="w-[100%] h-[60vh] aspect-video "
           src={recipes[0].video_url}
-        ></iframe>
+        />
       </div>
     </div>
   );
@@ -56,7 +54,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       id: id._id,
     },
   }));
-  console.log("paths", paths);
 
   return {
     paths,
@@ -64,10 +61,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 interface RecipeProps {
-  data: RecipesType | null;
+  recipes: RecipesType | null;
 }
 
-export const getStaticProps: GetStaticProps<any> = async ({
+export const getStaticProps: GetStaticProps<RecipeProps> = async ({
   params,
 }: GetStaticPropsContext) => {
   const res = await axios.get(
