@@ -62,58 +62,84 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
           <Offcanvas.Title>Recipe</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <form className="w-full h-full flex-col justify-center" onSubmit={(e) => createCocktail(e)}>
-            <label className="block w-full">Cocktail name
-            <input type="text" name="name" className="bg-slate-400 w-52 rounded" />
+          <form
+            className="w-full h-full flex-col justify-center"
+            onSubmit={(e) => createCocktail(e)}
+          >
+            <label className="block w-full flex justify-between mb-[20px] w-3/5 justify-between">
+              Cocktail name
+              <input
+                type="text"
+                name="name"
+                className="bg-slate-400 w-52 rounded"
+              />
             </label>
-            <label className="block">Description
-            <textarea name="description" className="resize  bg-slate-400  w-52 rounded" />
+            <label className="block flex gap-4 mb-[20px] w-3/5 justify-between">
+              Description
+              <textarea
+                name="description"
+                className="resize  bg-slate-400  w-52 rounded"
+              />
             </label>
-            <label className="block">Collection
-            <select className="border" name="collection">
-              {collections.map((collection, index) => (
-                <option key={index}>{collection.name}</option>
-              ))}
-            </select>
+            <label className="block flex gap-4 mb-[20px] w-3/5 justify-between">
+              Collection
+              <select className="border" name="collection">
+                {collections.map((collection, index) => (
+                  <option key={index}>{collection.name}</option>
+                ))}
+              </select>
             </label>
-            <label className="block">Category
-            <select name="category" id="">
-              <option value="">a</option>
-            </select>
+            <label className="block flex gap-4 mb-[20px] w-3/5 justify-between">
+              Category
+              <select name="category" id="">
+                <option value="">a</option>
+              </select>
             </label>
-            <label className="block">Ingredients
-            <div className="flex flex-col gap-2">
-              {ingredient.map((inex, index) => (
-                <div key={`input-container-${index}`} className="flex ">
-                  <p className="w-24 border">{inex}</p>
-                  <button
-                    onClick={() => {
-                      removeInputHandler(index);
-                    }}
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
-            </div>
-            <input
-              type="text"
-              name="ingredients"
-              className="bg-slate-400 w-52 rounded"
-              onChange={(e) => {
-                tempRef.current = e.target.value;
-                console.log(tempRef);
-              }}
-            />
+            <label className="block flex gap-4 mb-[20px] w-3/5 justify-between">
+              Ingredients
+              <div className="flex flex-col gap-2">
+                {ingredient.map((inex, index) => (
+                  <div key={`input-container-${index}`} className="flex ">
+                    <p className="w-24 border">{inex}</p>
+                    <button
+                      onClick={() => {
+                        removeInputHandler(index);
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <input
+                type="text"
+                name="ingredients"
+                className="bg-slate-400 w-52 rounded"
+                onChange={(e) => {
+                  tempRef.current = e.target.value;
+                  console.log(tempRef);
+                }}
+              />
             </label>
             <button onClick={addInputHandler}>Add ingredient</button>
-            <label className="block">Photo or image
-              <input type="file" name="imageUrl" className="bg-slate-400 w-52 rounded" />
+            <label className="block flex gap-4 mb-[20px] w-3/5 justify-between">
+              Photo or image
+              <input
+                type="file"
+                name="imageUrl"
+                className="bg-slate-400 w-52 rounded"
+              />
             </label>
-            <label className="block">Tutorial video
-              <input type="text" name="videoUrl" className="bg-slate-400 w-52 rounded" />
+            <label className="block flex gap-4 mb-[20px] w-3/5 justify-between">
+              Tutorial video
+              <input
+                type="text"
+                name="videoUrl"
+                className="bg-slate-400 w-52 rounded"
+              />
             </label>
-            <label>Alcoholic or nonalcoholic
+            <label className="block  flex gap-4 mb-[20px] w-3/5 justify-between">
+              Alcoholic or nonalcoholic
               <input
                 onClick={() => setCheck(!check)}
                 type="checkbox"
@@ -147,10 +173,7 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
             />
             <button onClick={addToolHandler}>Add tool</button> */}
             <div className="flex justify-center gap-3 h-[40px]">
-              <Button
-                onClick={() => setShow(false)}
-                type="button"
-              >
+              <Button onClick={() => setShow(false)} type="button">
                 Cancel
               </Button>
               <button

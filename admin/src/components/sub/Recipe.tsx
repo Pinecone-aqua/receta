@@ -11,6 +11,7 @@ export default function Recipe(): JSX.Element {
       .get("http://localhost:3003/collection/get")
       .then((res) => setCollections(res.data));
   }, []);
+
   console.log(collections);
   return (
     <div>
