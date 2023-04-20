@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { RiArrowDropDownFill } from "react-icons/ri";
@@ -8,8 +7,6 @@ export default function Navbar(): JSX.Element {
   const [show, setShow] = useState<boolean>(false);
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
-  const router = useRouter();
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function searchHandler(e: any): void {
     e.preventDefault();
@@ -17,22 +14,18 @@ export default function Navbar(): JSX.Element {
   }
   return (
     <header className="text-[#FFFBF1]  container mx-auto flex justify-between pt-8">
-      <h1
-        className="text-[32px] font-bold cursor-pointer"
-        onClick={() => router.push("../")}
-      >
-        receta.
-      </h1>
+      <h1 className="text-[32px] font-bold cursor-pointer">receta.</h1>
       <form
         className="relative min-w-[300px] w-[60%] me-4"
         onSubmit={searchHandler}
       >
         <input
           type="text"
-          className="focus:outline-none bg-transparent w-full p-2 placeholder:text-white border-b-[1px]"
-          aria-invalid="false"
+          name="search"
+          className="focus:border-white active:ouline-none w-full border-white border-s-0 border-l-0 border-t-0 border-r-0 border-b-1 bg-transparent placeholder-[#FFFBF1] text-md"
           placeholder="search"
         />
+
         <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />
       </form>
       {isLogged ? (
