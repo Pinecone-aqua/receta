@@ -1,6 +1,11 @@
 export interface CollectionType {
   name: string;
 }
+export interface ToolsType {
+  _id: string;
+  image_url: string | undefined;
+  name: string;
+}
 
 export interface CocktailType {
   name: string;
@@ -13,6 +18,7 @@ export interface CocktailType {
   videoUrl: string;
   alcohol: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tools: any;
 }
 
 export interface CategoryType {

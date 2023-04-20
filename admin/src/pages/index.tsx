@@ -1,6 +1,8 @@
 import axios from "axios";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/router";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
 
 export default function Home(): JSX.Element {
   const router = useRouter();

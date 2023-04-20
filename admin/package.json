@@ -22,6 +22,7 @@
     "flowbite-react": "^0.4.3",
     "next": "13.2.4",
     "next-auth": "^4.21.1",
+    "primereact": "^9.3.0",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "18.2.0",
