@@ -1,26 +1,54 @@
-import { useState } from "react";
-
-// const defCocktail = {
-//   name: "",
-//   // description: "",
-//   category: "",
-//   ingredients: "",
-//   imageUrl: "",
-//   videoUrl: "",
-//   alcohol: null,
-//   toolImage: "",
-//   toolName: "",
-// };
+import React, { MutableRefObject, useRef, useState } from "react";
 
 export default function Modal() {
   const [a, setA] = useState<boolean>(false);
-  // const [cocktail, setCocktail] = useState(defCocktail);
+  const [check, setCheck] = useState<boolean | null>(false);
+  const [ingredient, setIngredient] = useState<string[]>([]);
+  const [tools, setTools] = useState<string[]>([]);
 
-  function createCocktail(e: React.FormEvent<HTMLFormElement>) {
+  const tempRef: MutableRefObject<string> = useRef("");
+  const tempRefTool: MutableRefObject<string> = useRef("");
+
+  //-----
+
+  const addInputHandler = () => {
+    tempRef.current && setIngredient([...ingredient, tempRef.current]);
+  };
+  
+  const removeInputHandler = (index: number) => {
+    const deleteInput = ingredient.filter((input, i) => index !== i);
+    setIngredient(deleteInput);
+  };
+
+  //----
+
+  const addToolHandler = () => {
+    tempRefTool.current && setTools([...tools, tempRefTool.current]);
+  };
+
+  const removeToolHandler = (index: number) => {
+    const deleteInput = tools.filter((input, i) => index !== i);
+    setTools(deleteInput);
+  };
+  
+  //-----
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function createCocktail(e: any) {
     e.preventDefault();
-    // console.log(e.target.name.value);
-    // console.log(e.target.description.value);
-    // console.log(e.target.category.value);
+
+    const cocktailData: cocktailType = {
+      name: e.target.name.value,
+      description: e.target.description.value,
+      category: e.target.category.value,
+      ingredients: ingredient,
+      imageUrl: e.target.imageUrl.value,
+      videoUrl: e.target.videoUrl.value,
+      alcohol: e.target.alcohol.value,
+      toolName: tools,
+    };
+    console.log(cocktailData);
+
   }
   return (
     <div>
@@ -79,21 +107,38 @@ export default function Modal() {
                             <br />
                             <label>Ingredients</label>
                             <br />
+                            <div className="flex flex-col gap-2">
+                              {ingredient.map((inex, index) => (
+                                <div
+                                  key={`input-container-${index}`}
+                                  className="flex "
+                                >
+                                  <p className="w-24 border">{inex}</p>
+                                  <button
+                                    onClick={() => {
+                                      removeInputHandler(index);
+                                    }}
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
                             <input
                               type="text"
                               name="ingredients"
                               className="bg-slate-400"
+                              onChange={(e) => {
+                                tempRef.current = e.target.value;
+                                console.log(tempRef);
+                              }}
                             />
-                            {/* <button onClick={()=>handleAdd()}>Add</button> */}
-                            {/* {val.map((data, i)=> (
-              return(<input onChange={onChangeHandler})
-            ))} */}
+                            <button onClick={addInputHandler}>Add ingredient</button>
                             <br />
                             <br />
                             <label>Photo or image</label>
                             <br />
                             <input
-                              // onChange={onChangeHandler}
                               type="file"
                               name="imageUrl"
                               className="bg-slate-400"
@@ -110,56 +155,67 @@ export default function Modal() {
                             <br />
                             <label>Alcoholic or nonalcoholic</label> <br />
                             <input
+                              // onChange={checkHandler}
+                              onClick={() => setCheck(!check)}
                               type="checkbox"
+                              value={`${check}`}
                               name="alcohol"
                               className="bg-slate-400"
                             />
                             <br />
                             <br />
                             <label>Tools</label> <br />
-                            <label>Image</label>
+                            <div className="flex flex-col gap-2">
+                              {tools.map((one, index) => (
+                                <div
+                                  key={`input-container-${one}`}
+                                  className="flex "
+                                >
+                                  <p className="w-24 border">{one}</p>
+                                  <button
+                                    onClick={() => {
+                                      removeToolHandler(index);
+                                    }}
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
                             <input
-                              // onChange={onChangeHandler}
-                              type="file"
-                              name="toolImage"
-                              className="ml-4 bg-slate-400"
-                            />
-                            <br />
-                            <label>Name</label>
-                            <input
-                              // onChange={onChangeHandler}
                               type="text"
-                              name="toolName"
-                              className="ml-4 bg-slate-400"
+                              name="ingredients"
+                              className="bg-slate-400"
+                              onChange={(e) => {
+                                tempRefTool.current = e.target.value;
+                                console.log(tempRefTool);
+                              }}
                             />
+                            <button onClick={addToolHandler}>Add tool</button>
                             <br />
                             <br />
-                            <label>Like</label>
-                            <label>Comment</label>
-                            <button type="submit">Create cocktail</button>
+                            {/* <label>Like</label>
+                            <label>Comment</label> */}
+                            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                              <button
+
+                                type="submit"
+                                className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                              >
+                                Create
+                              </button>
+                              <button
+                                onClick={() => setA(false)}
+                                type="button"
+                                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                              >
+                                Cancel
+                              </button>
+                            </div>
                           </form>
-                          {/* <input type="text" className="border w-[200px]" />
-                          <input type="text" className="border w-[200px]" />
-                          <input type="text" className="border" />
-                          <input type="text" className="border" /> */}
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                    >
-                      Create
-                    </button>
-                    <button
-                      onClick={() => setA(false)}
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    >
-                      Cancel
-                    </button>
                   </div>
                 </div>
               </div>
@@ -170,3 +226,18 @@ export default function Modal() {
     </div>
   );
 }
+
+interface cocktailType {
+  name: string;
+  description: string;
+  category: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ingredients: any;
+  imageUrl: string;
+  videoUrl: string;
+  alcohol: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  toolName: any;
+}
+
+// toolImage: string;
