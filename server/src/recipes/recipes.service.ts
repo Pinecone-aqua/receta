@@ -19,7 +19,6 @@ export class RecipesService {
   allRecipe() {
     try {
       return this.recipeModel.find();
-      // .populate('tools_id');
     } catch (err) {
       return err;
     }
@@ -37,7 +36,6 @@ export class RecipesService {
   allId() {
     try {
       return this.recipeModel.find().select({ _id: 1 });
-      // .populate('tools_id');
     } catch (err) {
       return err;
     }
