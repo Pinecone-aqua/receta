@@ -1,16 +1,9 @@
-import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Login(): JSX.Element {
   const router = useRouter();
-
-  // useEffect(() => {
-  //   axios
-  //     .post("http://localhost:3003/users/get")
-  //     .then((res) => setData(res.data));
-  // }, []);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function loginHandler(e: any): void {
     e.preventDefault();
