@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ModalCateg from "./CategCanvas";
 import ModalRecipe from "./ModalRecipe";
+import CategCanvas from "./CategCanvas";
+import ModalTools from "./ModalTools";
 
 export default function Recipe(): JSX.Element {
   const [collections, setCollections] = useState([]);
@@ -14,7 +15,8 @@ export default function Recipe(): JSX.Element {
   return (
     <div>
       <ModalRecipe collections={collections} />
-      <ModalCateg collections={collections} />
+      <CategCanvas collections={collections} />
+      <ModalTools />
     </div>
   );
 }

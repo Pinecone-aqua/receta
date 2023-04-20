@@ -14,3 +14,8 @@ export interface CocktailType {
   alcohol: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }
+
+export interface CategoryType {
+  collection: string;
+  category: string;
+}

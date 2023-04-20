@@ -1,4 +1,4 @@
-import { CocktailType, CollectionType } from "@/src/types/Types";
+import { CollectionType, CocktailType } from "@/src/types/types";
 import React, { MutableRefObject, useRef, useState } from "react";
 
 import Button from "react-bootstrap/Button";
@@ -9,13 +9,11 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
   const [show, setShow] = useState(false);
   const [check, setCheck] = useState<boolean | null>(false);
   const [ingredient, setIngredient] = useState<string[]>([]);
-  // const [tools, setTools] = useState<string[]>([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const tempRef: MutableRefObject<string> = useRef("");
-  // const tempRefTool: MutableRefObject<string> = useRef("");
 
   //-----
 
@@ -29,17 +27,6 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
   };
 
   //----
-
-  // const addToolHandler = () => {
-  //   tempRefTool.current && setTools([...tools, tempRefTool.current]);
-  // };
-
-  // const removeToolHandler = (index: number) => {
-  //   const deleteInput = tools.filter((input, i) => index !== i);
-  //   setTools(deleteInput);
-  // };
-
-  //-----
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createCocktail(e: any) {
@@ -59,8 +46,6 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
     console.log(cocktailData);
   }
 
-  //not br
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -77,28 +62,26 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
           <Offcanvas.Title>Recipe</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <form onSubmit={(e) => createCocktail(e)}>
-            <br />
-            <label>Cocktail name</label> <br />
-            <input type="text" name="name" className="bg-slate-400" />
-            <br />
-            <br />
-            <label>Description</label> <br />
-            <textarea name="description" className="resize  bg-slate-400" />
-            <br />
+          <form className="w-full h-full flex-col justify-center" onSubmit={(e) => createCocktail(e)}>
+            <label className="block w-full">Cocktail name
+            <input type="text" name="name" className="bg-slate-400 w-52 rounded" />
+            </label>
+            <label className="block">Description
+            <textarea name="description" className="resize  bg-slate-400  w-52 rounded" />
+            </label>
+            <label className="block">Collection
             <select className="border" name="collection">
               {collections.map((collection, index) => (
                 <option key={index}>{collection.name}</option>
               ))}
             </select>
-            <br />
-            <label>Category</label>
+            </label>
+            <label className="block">Category
             <select name="category" id="">
               <option value="">a</option>
             </select>
-            <br />
-            <label>Ingredients</label>
-            <br />
+            </label>
+            <label className="block">Ingredients
             <div className="flex flex-col gap-2">
               {ingredient.map((inex, index) => (
                 <div key={`input-container-${index}`} className="flex ">
@@ -116,34 +99,29 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
             <input
               type="text"
               name="ingredients"
-              className="bg-slate-400"
+              className="bg-slate-400 w-52 rounded"
               onChange={(e) => {
                 tempRef.current = e.target.value;
                 console.log(tempRef);
               }}
             />
+            </label>
             <button onClick={addInputHandler}>Add ingredient</button>
-            <br />
-            <br />
-            <label>Photo or image</label>
-            <br />
-            <input type="file" name="imageUrl" className="bg-slate-400" />
-            <br />
-            <br />
-            <label>Tutorial video</label> <br />
-            <input type="text" name="videoUrl" className="bg-slate-400" />
-            <br />
-            <br />
-            <label>Alcoholic or nonalcoholic</label> <br />
-            <input
-              onClick={() => setCheck(!check)}
-              type="checkbox"
-              value={`${check}`}
-              name="alcohol"
-              className="bg-slate-400"
-            />
-            <br />
-            <br />
+            <label className="block">Photo or image
+              <input type="file" name="imageUrl" className="bg-slate-400 w-52 rounded" />
+            </label>
+            <label className="block">Tutorial video
+              <input type="text" name="videoUrl" className="bg-slate-400 w-52 rounded" />
+            </label>
+            <label>Alcoholic or nonalcoholic
+              <input
+                onClick={() => setCheck(!check)}
+                type="checkbox"
+                value={`${check}`}
+                name="alcohol"
+                className="bg-slate-400 w-52 rounded"
+              />
+            </label>
             {/* <div className="flex flex-col gap-2">
               {tools.map((one, index) => (
                 <div key={`input-container-${one}`} className="flex ">
@@ -168,16 +146,13 @@ export default function ModalRecipe(props: { collections: CollectionType[] }) {
               }}
             />
             <button onClick={addToolHandler}>Add tool</button> */}
-            <br />
-            <br />
             <div className="flex justify-center gap-3 h-[40px]">
-              <button
+              <Button
                 onClick={() => setShow(false)}
                 type="button"
-                className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
                 Cancel
-              </button>
+              </Button>
               <button
                 type="submit"
                 className="inline-flex justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
