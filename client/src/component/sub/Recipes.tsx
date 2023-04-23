@@ -12,7 +12,6 @@ export default function Recipes(): JSX.Element {
       .then((res) => setRecipes(res.data));
   }, []);
 
-  console.log(recipes);
   return (
     <div className="py-[10px]">
       {" "}

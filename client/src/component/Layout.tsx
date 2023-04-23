@@ -2,14 +2,17 @@ import Navbar from "./Navbar";
 import SideBar from "./sub/SideBar";
 import Collection from "./sub/Collection";
 import Footer from "./Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Layout({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const [activeBtn, setActiveBtn] = useState<string>("difficulty");
+  const [activeBtn, setActiveBtn] = useState<string | null>();
+  useEffect(() => {
+    setActiveBtn(localStorage.getItem("currentPage"));
+  }, []);
 
   function bgHandler() {
     if (activeBtn == "difficulty") {
