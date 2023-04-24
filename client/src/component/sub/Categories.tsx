@@ -6,26 +6,36 @@ export default function Categories(props: {
   categories: CategoriesType[];
 }): JSX.Element {
   const { categories } = props;
-  const [collection, setCollection] = useState<string | null>();
+  const [category, setCategory] = useState<CategoriesType[]>([]);
 
   useEffect(() => {
-    setCollection(localStorage.getItem("currentPage"));
-  }, []);
+    if (localStorage.getItem("currentPage")) {
+      setCategory(
+        categories.filter(
+          (category: CategoriesType) =>
+            category.collection_id.name == localStorage.getItem("currentPage")
+        )
+      );
+    } else {
+      setCategory(
+        categories.filter(
+          (category: CategoriesType) =>
+            category.collection_id.name == "difficulty"
+        )
+      );
+    }
+  }, [categories]);
 
-  console.log(collection);
   return (
     <>
       <div className="p-[30px] place-content-center flex gap-5 flex-wrap">
-        {categories.map(
-          (category: CategoriesType, index) =>
-            category.collection_id.name == collection && (
-              <CategoryBtn
-                key={index}
-                category={category.name}
-                class={`inactive`}
-              />
-            )
-        )}
+        {category.map((category: CategoriesType, index) => (
+          <CategoryBtn
+            key={index}
+            category={category.name}
+            class={`inactive`}
+          />
+        ))}
       </div>
     </>
   );

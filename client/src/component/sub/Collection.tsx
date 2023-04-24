@@ -2,12 +2,11 @@ import { CollectionType } from "@/util/Types";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { RiArrowDropDownFill } from "react-icons/ri";
-import { Cookies } from "react-cookie";
 
 export default function Collection(props: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setActiveBtn: any;
-  activeBtn: any;
+  activeBtn: string | null;
 }): JSX.Element {
   const [data, setData] = useState<CollectionType[]>([]);
   const { setActiveBtn, activeBtn } = props;
@@ -24,7 +23,7 @@ export default function Collection(props: {
         <div
           onClick={() => {
             setActiveBtn(collection.name),
-              localStorage.setItem("currentPage", collection.name);
+              localStorage.setItem("currentCollection", collection.name);
           }}
           key={index}
           className="w-full"

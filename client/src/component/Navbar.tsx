@@ -14,6 +14,7 @@ export default function Navbar(): JSX.Element {
   function searchHandler(e: any): void {
     e.preventDefault();
     console.log(e.target.search.value);
+    setIsLogged(false);
   }
   return (
     <header className="text-[#FFFBF1]  container mx-auto flex justify-between pt-8">
