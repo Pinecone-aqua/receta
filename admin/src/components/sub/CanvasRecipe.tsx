@@ -75,34 +75,41 @@ export default function CanvasRecipe(props: {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <form
-            className="w-full h-full flex-col justify-center"
+            className="w-full h-full flex-col justify-center items-center pl-[50px]"
             onSubmit={(e) => createCocktail(e)}
           >
-            <label className="block w-full">
+            <div className="w-3/4 flex justify-between mb-[20px]">
+            <label className="">
               Cocktail name
+            </label>
               <input
                 type="text"
                 name="name"
                 className="bg-slate-400 w-52 rounded"
               />
-            </label>
+            </div>
+            <div className="w-3/4 flex justify-between mb-[20px]">
             <label className="block">
               Description
+            </label>
               <textarea
                 name="description"
                 className="resize  bg-slate-400  w-52 rounded"
               />
-            </label>
+            </div>
+            <div className="w-3/4 flex justify-between mb-[20px]">
             <label className="block">
               Collection
+            </label>
               <select className="border" name="collection">
                 {collections.map((collection, index) => (
                   <option key={index}>{collection.name}</option>
                 ))}
               </select>
-            </label>
+            </div>
             <label className="block">
               Tools
+            </label>
               <div className="flex flex-wrap gap-1">
                 {tools.map((tool, index) => (
                   <div
@@ -119,20 +126,22 @@ export default function CanvasRecipe(props: {
                   </div>
                 ))}
               </div>
-            </label>
+            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
             <label className="block">
               Category
+            </label>
               <select name="category" id="">
                 <option value="">a</option>
               </select>
-            </label>
+            </div>
             <label className="block">
               Ingredients
-              <div className="flex flex-col gap-2">
+            </label>
+              <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {ingredient.map((inex, index) => (
-                  <div key={`input-container-${index}`} className="flex ">
-                    <p className="w-24 border">{inex}</p>
-                    <button
+                  <div key={`input-container-${index}`} className="h-full flex items-center">
+                    <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
+                    <button className="px-[10px] bg-red-500" 
                       onClick={() => {
                         removeInputHandler(index);
                       }}
@@ -145,32 +154,37 @@ export default function CanvasRecipe(props: {
               <input
                 type="text"
                 name="ingredients"
-                className="bg-slate-400 w-52 rounded"
+                className="bg-slate-400 w-52"
                 onChange={(e) => {
                   tempRef.current = e.target.value;
                   console.log(tempRef);
                 }}
               />
-            </label>
-            <button onClick={addInputHandler}>Add ingredient</button>
+            <button className="px-[10px] bg-green-400" onClick={addInputHandler}>Add ingredient</button>
+            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
             <label className="block">
               Photo or image
+            </label>
               <input
                 type="file"
                 name="imageUrl"
                 className="bg-slate-400 w-52 rounded"
               />
-            </label>
+            </div>
+            <div className="w-3/4 flex justify-between  mb-[20px]">
             <label className="block">
               Tutorial video
+            </label>
               <input
                 type="text"
                 name="videoUrl"
                 className="bg-slate-400 w-52 rounded"
               />
-            </label>
+            </div>
+            <div className="w-3/4 flex justify-between  mb-[20px]">
             <label>
               Alcoholic or nonalcoholic
+            </label>
               <input
                 onClick={() => setCheck(!check)}
                 type="checkbox"
@@ -178,7 +192,7 @@ export default function CanvasRecipe(props: {
                 name="alcohol"
                 className="bg-slate-400 w-52 rounded"
               />
-            </label>
+            </div>
             <div className="flex justify-center gap-3 h-[40px]">
               <Button onClick={() => setShow(false)} type="button">
                 Cancel

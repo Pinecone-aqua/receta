@@ -28,9 +28,11 @@ export default function Recipe(): JSX.Element {
   console.log("categories", categories);
   return (
     <div>
-      <CanvasRecipe collections={collections} tools={tools} />
-      <CanvasCateg collections={collections} />
-      <CanvasTools />
+      <div className="flex gap-3 ml-[10px]">
+        <CanvasRecipe collections={collections} tools={tools} />
+        <CanvasCateg collections={collections} />
+        <CanvasTools />
+      </div>
     </div>
   );
 }
