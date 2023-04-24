@@ -14,3 +14,8 @@ export interface RecipesType {
   tools_id: string[];
   alcohol: boolean;
 }
+
+export interface CategoriesType {
+  name: string;
+  collection_id: { name: string };
+}

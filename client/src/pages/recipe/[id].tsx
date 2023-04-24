@@ -2,10 +2,10 @@ import Navbar from "@/component/Navbar";
 import { RecipesType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import { AspectRatio } from "@chakra-ui/react";
 
-export default function Recipe(props: { recipes: RecipesType[] }): JSX.Element {
-  const recipes: RecipesType[] = props.recipes;
-  console.log(recipes);
+export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
+  const recipes: RecipesType = props.recipes;
 
   return (
     <div className="bg-[#1E1E1E]">
@@ -16,7 +16,7 @@ export default function Recipe(props: { recipes: RecipesType[] }): JSX.Element {
           <picture className="w-[50%] ">
             <img
               className="w-full rounded-l-lg"
-              src={`${recipes[0].image_url}`}
+              src={`${recipes.image_url}`}
               alt=""
             />
           </picture>
@@ -31,17 +31,14 @@ export default function Recipe(props: { recipes: RecipesType[] }): JSX.Element {
         <div className="bg-[#FFFBF1] min-h-[30vh] rounded-b-lg mb-[5%]">
           <div className="w-[50%]">
             {" "}
-            <h2 className="text-center text-2xl">{recipes[0].name}</h2>
-            <p>{recipes[0].description}</p>
+            <h2 className="text-center text-2xl">{recipes.name}</h2>
+            <p>{recipes.description}</p>
           </div>
         </div>
       </div>
-      <div className="w-full">
-        <iframe
-          className="w-[100%] h-[60vh] aspect-video "
-          src={recipes[0].video_url}
-        />
-      </div>
+      <AspectRatio maxW="w-full" ratio={2}>
+        <iframe src={recipes.video_url} allowFullScreen />
+      </AspectRatio>
     </div>
   );
 }

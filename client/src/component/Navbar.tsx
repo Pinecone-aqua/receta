@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { RiArrowDropDownFill } from "react-icons/ri";
+import { InputSwitch } from "primereact/InputSwitch";
 
 export default function Navbar(): JSX.Element {
   const [show, setShow] = useState<boolean>(false);
@@ -14,7 +15,9 @@ export default function Navbar(): JSX.Element {
   function searchHandler(e: any): void {
     e.preventDefault();
     console.log(e.target.search.value);
+    setIsLogged(false);
   }
+
   return (
     <header className="text-[#FFFBF1]  container mx-auto flex justify-between pt-8">
       <h1

@@ -1,15 +1,13 @@
 import Navbar from "./Navbar";
-import SideBar from "./sub/SideBar";
-import Collection from "./sub/Collection";
 import Footer from "./Footer";
-import { useState } from "react";
+import RecipeProvider, { useProduct } from "@/context/ProductContext";
 
 export default function Layout({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const [activeBtn, setActiveBtn] = useState<string>("difficulty");
+  const { activeBtn } = useProduct();
 
   function bgHandler() {
     if (activeBtn == "difficulty") {
@@ -25,14 +23,8 @@ export default function Layout({
   return (
     <div className={bgHandler()}>
       <Navbar />
-      <div className="flex container mx-auto min-h-[85vh]">
-        <SideBar />
-        <Collection setActiveBtn={setActiveBtn} activeBtn={activeBtn} />
-      </div>
-      <main className="bg-[#1E1E1E] border border-[1px] border-[#05445F]">
-        {children}
-        <Footer />
-      </main>
+      <main>{children}</main>
+      <Footer />
     </div>
   );
 }

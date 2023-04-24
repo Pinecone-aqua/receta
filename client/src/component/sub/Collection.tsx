@@ -1,15 +1,12 @@
+import { useProduct } from "@/context/ProductContext";
 import { CollectionType } from "@/util/Types";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { RiArrowDropDownFill } from "react-icons/ri";
 
-export default function Collection(props: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setActiveBtn: any;
-  activeBtn: string;
-}): JSX.Element {
+export default function Collection(): JSX.Element {
   const [data, setData] = useState<CollectionType[]>([]);
-  const { setActiveBtn, activeBtn } = props;
+  const { setActiveBtn, activeBtn } = useProduct();
 
   useEffect(() => {
     axios
@@ -21,7 +18,10 @@ export default function Collection(props: {
     <div className="text-white h-[80vh] relative ps-[10%]  pt-[15%] w-full flex gap-12">
       {data.map((collection, index) => (
         <div
-          onClick={() => setActiveBtn(collection.name)}
+          onClick={() => {
+            setActiveBtn(collection.name),
+              localStorage.setItem("currentCollection", collection.name);
+          }}
           key={index}
           className="w-full"
         >

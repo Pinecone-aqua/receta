@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CollectionService } from './collections.service';
 
 @Controller('collections')
@@ -12,8 +12,6 @@ export class CollectionController {
 
   @Post('create')
   create(@Body() body: any) {
-    console.log('body: ', body);
-
     return this.collectionService.createCollection(body);
   }
 }

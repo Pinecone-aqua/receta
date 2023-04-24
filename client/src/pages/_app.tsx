@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
+import ProductProvider from "@/context/ProductContext";
 
 export default function App({
   Component,
@@ -8,7 +9,9 @@ export default function App({
 }: AppProps): JSX.Element {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <ProductProvider>
+        <Component {...pageProps} />
+      </ProductProvider>
     </SessionProvider>
   );
 }

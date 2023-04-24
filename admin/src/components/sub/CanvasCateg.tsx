@@ -1,4 +1,5 @@
 import { CollectionType } from "@/src/types/types";
+import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -16,7 +17,8 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
       collection: e.target.collection.value,
       name: e.target.name.value,
     };
-    console.log(category);
+
+    axios.post("http://localhost:3003/categories/create", { ...category });
   }
 
   return (
@@ -44,17 +46,24 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
                 ))}
               </select>
             </label>
-            <label className="mt-[5px]">
+            <label>
               Category name
               <input className="border" type="text" name="name" />
             </label>
             <div className="flex justify-between mt-[10px] mb-[10px]">
-            <Button className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]" type="button" onClick={() => setShow(false)}>
+              <Button
+                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
+                type="button"
+                onClick={() => setShow(false)}
+              >
                 Cancel
-            </Button>
-            <button className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]" type="submit">
-              Create
-            </button>
+              </Button>
+              <button
+                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
+                type="submit"
+              >
+                Create
+              </button>
             </div>
           </form>
         </Offcanvas.Body>
