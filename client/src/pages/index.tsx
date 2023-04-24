@@ -9,23 +9,23 @@ import { CategoriesType } from "@/util/Types";
 import Categories from "@/component/sub/Categories";
 import SideBar from "@/component/sub/SideBar";
 import Collection from "@/component/sub/Collection";
-import { useRecipe } from "@/context/RecipeContext";
+import { useProduct } from "@/context/ProductContext";
 
 export default function Home(props: {
   categories: CategoriesType[];
 }): JSX.Element {
   const { categories } = props;
-  const { activeBtn, setActiveBtn } = useRecipe();
+  const { activeBtn, setActiveBtn } = useProduct();
 
   return (
     <Layout>
       <>
         <div className={`flex container mx-auto min-h-[85vh] bg-currentColor`}>
           <SideBar />
-          <Collection setActiveBtn={setActiveBtn} activeBtn={activeBtn} />
+          <Collection />
         </div>
         <div className="bg-[#1E1E1E] border border-[#05445F]">
-          <Categories categories={categories} />
+          <Categories />
           <Recipes />
           <Membership />
           <Popular />

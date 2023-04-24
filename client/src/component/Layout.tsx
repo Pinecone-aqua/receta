@@ -1,13 +1,13 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import RecipeProvider, { useRecipe } from "@/context/RecipeContext";
+import RecipeProvider, { useProduct } from "@/context/ProductContext";
 
 export default function Layout({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const { activeBtn } = useRecipe();
+  const { activeBtn } = useProduct();
 
   function bgHandler() {
     if (activeBtn == "difficulty") {
@@ -20,14 +20,11 @@ export default function Layout({
       return "bg-[#1E1E1E] scroll-smooth duration-1000";
     }
   }
-
   return (
-    <RecipeProvider>
-      <div className={bgHandler()}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </div>
-    </RecipeProvider>
+    <div className={bgHandler()}>
+      <Navbar />
+      <main>{children}</main>
+      <Footer />
+    </div>
   );
 }

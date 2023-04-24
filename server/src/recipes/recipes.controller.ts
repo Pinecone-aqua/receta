@@ -5,13 +5,13 @@ import { RecipesService } from './recipes.service';
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
-  @Get('get')
-  find() {
-    return this.recipesService.allRecipe();
-  }
+  // @Get('get')
+  // find() {
+  //   return this.recipesService.allRecipe();
+  // }
 
   @Get('get')
-  findRecipe(@Query() id: string) {
+  findRecipe(@Query('id') id: string) {
     console.log(id);
 
     return this.recipesService.findRecipe(id);
@@ -25,6 +25,16 @@ export class RecipesController {
   @Get('get-card')
   findCard() {
     return this.recipesService.cardRecipe();
+  }
+
+  @Get('filter')
+  filter(@Query('name') name: string) {
+    return this.recipesService.filterRecipe(name);
+  }
+
+  @Get('filter-category')
+  filterCategory(@Query('name') name: string) {
+    return this.recipesService.filterCateRecipe(name);
   }
 
   @Post('create')

@@ -1,10 +1,9 @@
 import RecipeCard from "./RecipeCard";
 import { BsArrowDownShort } from "react-icons/bs";
-import { useRecipe } from "@/context/RecipeContext";
+import { useProduct } from "@/context/ProductContext";
 
 export default function Recipes(): JSX.Element {
-  const { recipes } = useRecipe();
-  console.log(recipes);
+  const { recipes } = useProduct();
 
   return (
     <div className="py-[10px]">

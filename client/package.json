@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.5.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@types/node": "18.15.11",
     "@types/react": "18.0.32",
     "@types/react-dom": "18.0.11",
@@ -18,8 +21,10 @@
     "firebase": "^9.19.1",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.3",
+    "framer-motion": "^10.12.4",
     "next": "13.2.4",
     "next-auth": "^4.21.1",
+    "primereact": "^9.3.0",
     "react": "18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Category } from 'src/schemas/category.schema';
-import { Recipe } from 'src/schemas/recipe.schema';
-import { Tool } from 'src/schemas/tools.schema';
-import { Collection } from 'src/schemas/collection.schema';
+import { Category } from 'src/categories/category.schema';
+import { Recipe } from 'src/recipes/recipe.schema';
+import { Tool } from 'src/tools/tools.schema';
+import { Collection } from 'src/collections/collection.schema';
 import { CreateRecipesDto } from './recipes.create.dto';
 
 @Injectable()
@@ -24,10 +24,9 @@ export class RecipesService {
     }
   }
 
-  findRecipe(id: string) {
+  async findRecipe(id: string) {
     try {
-      return this.recipeModel.findOne({ _id: id });
-      // .populate('tools_id');
+      return await this.recipeModel.findOne({ _id: id });
     } catch (err) {
       return err;
     }
@@ -45,6 +44,26 @@ export class RecipesService {
     try {
       return this.recipeModel
         .find()
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  filterRecipe(name: string) {
+    try {
+      return this.recipeModel
+        .find({ collection_id: name })
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  filterCateRecipe(name: string) {
+    try {
+      return this.recipeModel
+        .find({ 'categories_id.name': { $in: [name] } })
         .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
     } catch (err) {
       return err;
