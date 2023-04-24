@@ -6,6 +6,8 @@ import {
 } from "@/src/types/types";
 import axios from "axios";
 import React, { MutableRefObject, useRef, useState } from "react";
+// import { Toast } from "primereact/toast";
+// import { FileUpload } from "primereact/fileupload";
 
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -237,6 +239,16 @@ export default function CanvasRecipe(props: {
                 name="imageUrl"
                 className="bg-slate-400 w-52"
               />
+              {/* <FileUpload
+                mode="basic"
+                name="demo[]"
+                url="/api/upload"
+                accept="image/*"
+                maxFileSize={1000000}
+                onUpload={onUpload}
+                auto
+                chooseLabel="Browse"
+              /> */}
             </div>
             <div className="w-3/4 flex justify-between  mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Tutorial video</label>
