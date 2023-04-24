@@ -44,13 +44,18 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
                 ))}
               </select>
             </label>
-            <label>
+            <label className="mt-[5px]">
               Category name
               <input className="border" type="text" name="name" />
             </label>
-            <button className="w-2/6 bg-green-500 rounded-md text-white px-[15px] py-[5px]">
-              create
+            <div className="flex justify-between mt-[10px] mb-[10px]">
+            <Button className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]" type="button" onClick={() => setShow(false)}>
+                Cancel
+            </Button>
+            <button className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]" type="submit">
+              Create
             </button>
+            </div>
           </form>
         </Offcanvas.Body>
       </Offcanvas>
