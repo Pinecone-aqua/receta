@@ -6,6 +6,13 @@ export default function CanvasTools() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+
+export default function CanvasTools() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createCateHandler(e: any) {

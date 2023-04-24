@@ -253,27 +253,17 @@ export default function CanvasRecipe(props: {
                 name="imageUrl"
                 className="bg-slate-400 w-52"
               />
-              {/* <FileUpload
-                mode="basic"
-                name="demo[]"
-                url="/api/upload"
-                accept="image/*"
-                maxFileSize={1000000}
-                onUpload={onUpload}
-                auto
-                chooseLabel="Browse"
-              /> */}
-            </div>
-            <div className="w-3/4 flex justify-between  mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Tutorial video</label>
+            </label>
+            <label className="block">
+              Tutorial video
               <input
                 type="text"
                 name="videoUrl"
                 className="bg-slate-400 w-52 rounded"
               />
-            </div>
-            <div className="w-3/4 flex justify-between  mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label>Alcoholic or nonalcoholic</label>
+            </label>
+            <label>
+              Alcoholic or nonalcoholic
               <input
                 onClick={() => setCheck(!check)}
                 type="checkbox"
