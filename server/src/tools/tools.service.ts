@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Tool } from 'src/schemas/tools.schema';
+import { Tool } from 'src/tools/tools.schema';
 
 @Injectable()
 export class ToolsService {

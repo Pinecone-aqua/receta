@@ -1,15 +1,12 @@
+import { useProduct } from "@/context/ProductContext";
 import { CollectionType } from "@/util/Types";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { RiArrowDropDownFill } from "react-icons/ri";
 
-export default function Collection(props: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setActiveBtn: any;
-  activeBtn: string | null;
-}): JSX.Element {
+export default function Collection(): JSX.Element {
   const [data, setData] = useState<CollectionType[]>([]);
-  const { setActiveBtn, activeBtn } = props;
+  const { setActiveBtn, activeBtn } = useProduct();
 
   useEffect(() => {
     axios

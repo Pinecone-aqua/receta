@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { Category } from './category.schema';
-import { Collection } from './collection.schema';
-import { Tool } from './tools.schema';
+import { Category } from '../categories/category.schema';
+import { Collection } from '../collections/collection.schema';
+import { Tool } from '../tools/tools.schema';
 
 @Schema()
 export class Recipe {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Tool, ToolSchema } from 'src/schemas/tools.schema';
+import { Tool, ToolSchema } from 'src/tools/tools.schema';
 import { ToolsController } from './tools.controller';
 import { ToolsService } from './tools.service';
 @Module({
