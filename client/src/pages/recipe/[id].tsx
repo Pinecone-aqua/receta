@@ -5,7 +5,6 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 
 export default function Recipe(props: { recipes: RecipesType[] }): JSX.Element {
   const recipes: RecipesType[] = props.recipes;
-  console.log(recipes);
 
   return (
     <div className="bg-[#1E1E1E]">

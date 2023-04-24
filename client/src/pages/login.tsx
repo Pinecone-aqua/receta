@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Login(): JSX.Element {

@@ -1,18 +1,13 @@
 import Navbar from "./Navbar";
-import SideBar from "./sub/SideBar";
-import Collection from "./sub/Collection";
 import Footer from "./Footer";
-import { useEffect, useState } from "react";
+import RecipeProvider, { useRecipe } from "@/context/RecipeContext";
 
 export default function Layout({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const [activeBtn, setActiveBtn] = useState<string | null>();
-  useEffect(() => {
-    setActiveBtn(localStorage.getItem("currentPage"));
-  }, []);
+  const { activeBtn } = useRecipe();
 
   function bgHandler() {
     if (activeBtn == "difficulty") {
@@ -25,17 +20,14 @@ export default function Layout({
       return "bg-[#1E1E1E] scroll-smooth duration-1000";
     }
   }
+
   return (
-    <div className={bgHandler()}>
-      <Navbar />
-      <div className="flex container mx-auto min-h-[85vh]">
-        <SideBar />
-        <Collection setActiveBtn={setActiveBtn} activeBtn={activeBtn} />
-      </div>
-      <main className="bg-[#1E1E1E] border border-[1px] border-[#05445F]">
-        {children}
+    <RecipeProvider>
+      <div className={bgHandler()}>
+        <Navbar />
+        <main>{children}</main>
         <Footer />
-      </main>
-    </div>
+      </div>
+    </RecipeProvider>
   );
 }

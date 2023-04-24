@@ -1,16 +1,10 @@
 import RecipeCard from "./RecipeCard";
 import { BsArrowDownShort } from "react-icons/bs";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { RecipesType } from "@/util/Types";
+import { useRecipe } from "@/context/RecipeContext";
 
 export default function Recipes(): JSX.Element {
-  const [recipes, setRecipes] = useState<RecipesType[] | null>();
-  useEffect(() => {
-    axios
-      .get("http://localhost:3003/recipes/get")
-      .then((res) => setRecipes(res.data));
-  }, []);
+  const { recipes } = useRecipe();
+  console.log(recipes);
 
   return (
     <div className="py-[10px]">

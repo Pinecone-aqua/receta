@@ -2,7 +2,7 @@ import { BsArrowRightShort } from "react-icons/bs";
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className="flex place-content-center text-center p-[100px] text-white ">
+    <footer className="flex place-content-center bg-[#1e1e1e] text-center p-[100px] text-white ">
       <div>
         <h2 className="text-[32px] font-bold cursor-pointer pb-[40px]">
           receta.
@@ -11,7 +11,7 @@ export default function Footer(): JSX.Element {
         <div className="relative mb-3">
           <input
             type="email"
-            className="peer border border-[1px]  min-h-[auto] min-w-[400px] rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+            className="peer border  min-h-[auto] min-w-[400px] rounded bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
           />
           <BsArrowRightShort className="absolute top-[4px] right-0 w-[30px] h-[30px]" />
           <label
