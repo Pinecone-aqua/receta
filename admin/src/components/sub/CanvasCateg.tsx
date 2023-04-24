@@ -46,7 +46,7 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
                 ))}
               </select>
             </label>
-            <label className="mt-[5px]">
+            <label>
               Category name
               <input className="border" type="text" name="name" />
             </label>
