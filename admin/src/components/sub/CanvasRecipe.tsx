@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import {
   CollectionType,
   CocktailType,
@@ -7,8 +6,7 @@ import {
 } from "@/src/types/types";
 import axios from "axios";
 import React, { MutableRefObject, useRef, useState } from "react";
-// import { Toast } from "primereact/toast";
-// import { FileUpload } from "primereact/fileupload";
+
 
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -40,6 +38,8 @@ export default function CanvasRecipe(props: {
     tempRefHow.current && setHow([...how, tempRefHow.current]);
   };
 
+  //----
+
   const removeInputHandler = (index: number) => {
     const deleteInput = ingredient.filter((input, i) => index !== i);
     setIngredient(deleteInput);
@@ -60,9 +60,6 @@ export default function CanvasRecipe(props: {
   }
   console.log(selectTools);
 
-  // const toast = useRef<React.MutableRefObject<null>>(null);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createCocktail(e: any) {
     e.preventDefault();
 
@@ -72,7 +69,7 @@ export default function CanvasRecipe(props: {
       category: e.target.category.value,
       collection: e.target.collection.value,
       ingredients: ingredient,
-      howTo: how,
+      how_to: how,
       image_url: e.target.imageUrl.value,
       video_url: e.target.videoUrl.value,
       alcohol: e.target.alcohol.value,
@@ -83,7 +80,7 @@ export default function CanvasRecipe(props: {
       .post("http://localhost:3003/recipes/create", {
         cocktailData,
       })
-      .then((res) => console.log(res));
+      .then((res) => console.log(res, "recipe sent"));
   }
 
   return (
@@ -241,16 +238,6 @@ export default function CanvasRecipe(props: {
                 name="imageUrl"
                 className="bg-slate-400 w-52"
               />
-              {/* <FileUpload
-                mode="basic"
-                name="demo[]"
-                url="/api/upload"
-                accept="image/*"
-                maxFileSize={1000000}
-                onUpload={onUpload}
-                auto
-                chooseLabel="Browse"
-              /> */}
             </div>
             <div className="w-3/4 flex justify-between  mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Tutorial video</label>

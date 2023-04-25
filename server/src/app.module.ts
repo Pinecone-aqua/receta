@@ -17,6 +17,12 @@ import { UserModule } from './users/users.module';
     ToolsModule,
     MongooseModule.forRoot(
       'mongodb+srv://munkhsuld:Zxcvb%400801@cluster0.di9aqtq.mongodb.net/receta?retryWrites=true&w=majority',
+      // MulterModule.register({
+      //   dest: './uploads',
+      // }),
+      // SharedModule,
+      // AuthModule,
+      // ProductModule,
     ),
   ],
   controllers: [AppController],

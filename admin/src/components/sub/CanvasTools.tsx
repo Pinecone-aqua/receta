@@ -11,7 +11,7 @@ export default function CanvasTools() {
   function createCateHandler(e: any) {
     e.preventDefault();
     const category = {
-      collection: e.target.collection.value,
+      collection: e.target.image.value,
       name: e.target.name.value,
     };
     console.log(category);

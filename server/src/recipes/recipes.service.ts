@@ -73,6 +73,8 @@ export class RecipesService {
         })
         .select({ name: 1 });
 
+      console.log(recipe);
+
       return this.recipeModel.create({
         name: recipe.name,
         description: recipe.description,

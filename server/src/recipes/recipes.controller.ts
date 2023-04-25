@@ -29,6 +29,30 @@ export class RecipesController {
 
   @Post('create')
   create(@Body() body: any) {
-    return this.recipesService.createRecipe(body);
+    // @UseInterceptors(FileInterceptor('image', {
+    //   storage: diskStorage
+    // }))
+    // UploadedFile(@Res() resizeBy, @UploadedFile() file) {
+    //   return
+    // }
+    // uploadFileAndPassValidation(
+    // @UploadedFile(
+    //     new ParseFilePipe({
+    //       validators: [
+
+    //       ]
+    //     })
+    //   )
+    //   file: Express.Multer.File,
+
+    // )
+    try {
+      const cocktailData = body.cocktailData;
+      const img_url = cocktailData.image_url;
+      console.log(img_url);
+      return this.recipesService.createRecipe(body);
+    } catch (e) {
+      return e.message;
+    }
   }
 }
