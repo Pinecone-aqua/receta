@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Input, Divider } from "@chakra-ui/react";
 import { FiX } from "react-icons/fi";
@@ -14,15 +14,7 @@ export default function Login(): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function loginHandler(e: any): void {
     e.preventDefault();
-
-    const user: UsersType = {
-      email: e.target.email.value,
-      password: e.target.password.value,
-    };
-
-    axios.post("http://localhost:3003/users/login", user).then((res) => {
-      setUser(res.data), router.push("../");
-    });
+    console.log(e.target.email.value);
   }
   return (
     //
