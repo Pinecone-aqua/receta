@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import { pages } from "../components/SideBar";
+import Recipe from "../components/sub/Recipe";
 
 export default function Pages(): JSX.Element {
   const router = useRouter();
@@ -9,10 +10,9 @@ export default function Pages(): JSX.Element {
   return (
     <Layout>
       <div>
+        {/* <Recipe /> */}
         {pages.map((page: PageType, index) => (
-          <div key={index}>
-            {query === page.name.toLocaleLowerCase() && page.comp}
-          </div>
+          <div key={index}>{query == page.name.toLowerCase() && page.comp}</div>
         ))}
       </div>
     </Layout>
