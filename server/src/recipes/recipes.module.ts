@@ -1,14 +1,16 @@
-import { Module } from "@nestjs/common";
-import { MongooseModule } from "@nestjs/mongoose";
-import { Collection } from "mongoose";
-import { Category, CategorySchema } from "src/categories/category.schema";
-import { CloudinaryModule } from "src/cloudinary/cloudinary.module";
-import { CollectionSchema } from "src/collections/collection.schema";
-import { Tool, ToolSchema } from "src/tools/tools.schema";
-import { Recipe, RecipeSchema } from "./recipe.schema";
 
-import { RecipesController } from "./recipes.controller";
-import { RecipesService } from "./recipes.service";
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Category, CategorySchema } from 'src/categories/category.schema';
+import {
+  Collection,
+  CollectionSchema,
+} from 'src/collections/collection.schema';
+import { Recipe, RecipeSchema } from 'src/recipes/recipe.schema';
+import { Tool, ToolSchema } from 'src/tools/tools.schema';
+import { RecipesController } from './recipes.controller';
+import { RecipesService } from './recipes.service';
+
 
 @Module({
   imports: [

@@ -25,6 +25,7 @@ export class RecipesController {
 
   @Get("get")
   findRecipe(@Query("id") id: string) {
+
     console.log(id);
 
     return this.recipesService.findRecipe(id);
@@ -71,5 +72,6 @@ export class RecipesController {
     } catch (e) {
       return e.message;
     }
+
   }
 }
