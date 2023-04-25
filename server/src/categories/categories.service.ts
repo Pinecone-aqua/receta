@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { Category } from "src/categories/category.schema";
 import { Collection } from "src/collections/collection.schema";
 import { CreateCategoriesDto } from "./categories.create.dto";
+import { Category } from "./category.schema";
 
 @Injectable()
 export class CategoriesService {
@@ -24,6 +24,7 @@ export class CategoriesService {
       return await this.categoriesModel.find({
         collection_name: name,
       });
+      return this.categoriesModel.find();
     } catch (err) {
       return err;
     }

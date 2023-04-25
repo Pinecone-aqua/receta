@@ -16,8 +16,6 @@ export class CategoriesController {
 
   @Post("create")
   create(@Body() body: any) {
-    console.log(body);
-
     return this.categoriesService.create(body);
   }
 }

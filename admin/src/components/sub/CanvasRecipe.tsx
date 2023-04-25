@@ -1,8 +1,11 @@
-import { CollectionType, CocktailType, ToolsType } from "@/src/types/types";
-import React, { MutableRefObject, useRef, useState } from "react";
-// import { Toast } from "primereact/toast";
-// import { FileUpload } from "primereact/fileupload";
-
+import {
+  CollectionType,
+  CocktailType,
+  ToolsType,
+  CategoryType,
+} from "@/src/types/types";
+import axios from "axios";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
@@ -19,13 +22,11 @@ export default function CanvasRecipe(props: {
   const [ingredient, setIngredient] = useState<string[]>([]);
   const [selectTools, setSelectTools] = useState<string[]>([]);
   const [how, setHow] = useState<string[]>([]);
-  const [how, setHow] = useState<string[]>([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const tempRef: MutableRefObject<string> = useRef("");
-  const tempRefHow: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
 
   const addInputHandler = () => {
@@ -41,10 +42,7 @@ export default function CanvasRecipe(props: {
     const deleteInput = ingredient.filter((input, i) => index !== i);
     setIngredient(deleteInput);
   };
-  const removeInputHandlerHow = (index: number) => {
-    const deleteInputHow = how.filter((input, i) => index !== i);
-    setHow(deleteInputHow);
-  };
+
   const removeInputHandlerHow = (index: number) => {
     const deleteInputHow = how.filter((input, i) => index !== i);
     setHow(deleteInputHow);
@@ -117,16 +115,13 @@ export default function CanvasRecipe(props: {
           >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
-            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="">Cocktail name</label>
               <input
                 type="text"
                 name="name"
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
-            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Description</label>
+
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Description</label>
               <textarea
@@ -142,25 +137,7 @@ export default function CanvasRecipe(props: {
                 ))}
               </select>
             </div>
-            <label className="block">Tools</label>
-            <div className="flex flex-wrap gap-1 w-3/4 mt-[25px]">
-              {tools.map((tool, index) => (
-                <div
-                  className={
-                    selectTools.includes(tool._id)
-                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
-                      : "w-[170px] py-[10px] border flex flex-col items-center"
-                  }
-                  key={index}
-                  onClick={() => addToolHandler(tool._id)}
-                >
-                  <p className="">{tool.name}</p>
-                  <img className="w-[80px]" src={tool.image_url} />
-                </div>
-              ))}
-            </div>
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Category</label>
+
             <label className="block">Tools</label>
             <div className="flex flex-wrap gap-1 w-3/4 mt-[25px]">
               {tools.map((tool, index) => (
@@ -181,9 +158,6 @@ export default function CanvasRecipe(props: {
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Category</label>
               <select name="category" id="">
-                {categories.map((category, index) => (
-                  <option key={index}>{category.name}</option>
-                ))}
                 {categories.map((category, index) => (
                   <option key={index}>{category.name}</option>
                 ))}
@@ -228,7 +202,6 @@ export default function CanvasRecipe(props: {
               <input
                 type="file"
                 name="imageUrl"
-                className="bg-slate-400 w-52"
                 className="bg-slate-400 w-52"
               />
             </div>
