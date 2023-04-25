@@ -36,7 +36,7 @@ export default function Recipe(): JSX.Element {
     </picture>
   );
 
-  const allowExpansion = (recipes) => recipes.length > 0;
+  const allowExpansion = (recipes: string | any[]) => recipes.length > 0;
 
   return (
     <div className="flex gap-3 ml-[10px]">
@@ -44,18 +44,22 @@ export default function Recipe(): JSX.Element {
         <TabView className="w-full">
           <TabPanel header="Recipes">
             <CanvasRecipe collections={collections} tools={tools} />
-            <DataTable value={recipes} tableStyle={{ minWidth: "20rem" }}>
-              <Column expander={allowExpansion} style={{ width: "5rem" }} />
+            <DataTable
+              className="w-full"
+              value={recipes}
+              tableStyle={{ minWidth: "50rem" }}
+            >
+              {/* <Column expander={allowExpansion} style={{ width: "5rem" }} /> */}
               <Column field="name" header="Name" />
               (<Column header="Image" body={imageBodyTemplate} />)
               <Column field="description" header="Description" />
               <Column field="collection_id" header="Collection" />
             </DataTable>
           </TabPanel>
-          <TabPanel header="Categories">
+          <TabPanel header="Categories" className="w-full">
             <CanvasCateg collections={collections} />
           </TabPanel>
-          <TabPanel header="Tools">
+          <TabPanel header="Tools" className="w-full">
             <CanvasTools />
             <DataTable value={tools} tableStyle={{ minWidth: "20rem" }}>
               <Column field="name" header="Name" />
