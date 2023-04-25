@@ -1,20 +1,15 @@
-// import axios from "axios";
-import { CategoriesType, RecipesType } from "@/util/Types";
+import {
+  CategoriesType,
+  PropType,
+  RecipesType,
+  ProductContextType,
+} from "@/util/Types";
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-interface PropType {
-  children: React.ReactNode;
-}
-
-interface ContextType {
-  recipes: RecipesType[] | null;
-  categories: CategoriesType[];
-  activeBtn: string | null;
-  setActiveBtn: React.Dispatch<React.SetStateAction<string | null>>;
-  setRecipes: React.Dispatch<React.SetStateAction<RecipesType[]>>;
-}
-const productContext = createContext<ContextType>({} as ContextType);
+const productContext = createContext<ProductContextType>(
+  {} as ProductContextType
+);
 //custom hook
 export const useProduct = () => useContext(productContext);
 
