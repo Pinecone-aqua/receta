@@ -1,5 +1,12 @@
-import { PropType, UserContextType, UsersType } from "@/util/Types";
-import React, { createContext, useContext, useState } from "react";
+import {
+  CategoriesType,
+  RecipesType,
+  PropType,
+  UserContextType,
+  UsersType,
+} from "@/util/Types";
+import axios from "axios";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const userContext = createContext<UserContextType>({} as UserContextType);
 //custom hook

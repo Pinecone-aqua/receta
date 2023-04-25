@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
-import {} from "react-icons/ri";
 import { useUser } from "@/context/UserContext";
-import { Avatar, Menu, MenuButton, MenuList } from "@chakra-ui/react";
+import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 
 export default function Navbar(): JSX.Element {
   const router = useRouter();
@@ -37,6 +36,7 @@ export default function Navbar(): JSX.Element {
         />
         <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px] text-currentColor" />
       </form>
+
       {user ? (
         <Menu>
           <MenuButton>
