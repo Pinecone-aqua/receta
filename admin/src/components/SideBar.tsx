@@ -66,7 +66,7 @@ export const pages: PageType[] = [
     icon: <ProdIcon />,
   },
   {
-    url: "../category",
+    url: "../moderator",
     comp: <Moderator />,
     name: "Moderator",
     icon: <ModeIcon />,

@@ -18,7 +18,7 @@ export default function Recipe(): JSX.Element {
       .then((res) => setCollections(res.data));
 
     axios
-      .get("http://localhost:3003/recipes/get")
+      .get("http://localhost:3003/recipes/all")
       .then((res) => setRecipes(res.data));
 
     axios
@@ -37,34 +37,37 @@ export default function Recipe(): JSX.Element {
   );
 
   const allowExpansion = (recipes: string | any[]) => recipes.length > 0;
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
     <div className="flex gap-3 ml-[10px]">
       <div className="flex gap-3 ml-[10px] mt-[20px]">
-        <TabView className="w-full">
+        <TabView
+          activeIndex={activeIndex}
+          onTabChange={(e) => setActiveIndex(e.index)}
+        >
           <TabPanel header="Recipes">
             <CanvasRecipe collections={collections} tools={tools} />
-            <DataTable
-              className="w-full"
-              value={recipes}
-              tableStyle={{ minWidth: "50rem" }}
-            >
-              {/* <Column expander={allowExpansion} style={{ width: "5rem" }} /> */}
-              <Column field="name" header="Name" />
-              (<Column header="Image" body={imageBodyTemplate} />)
-              <Column field="description" header="Description" />
-              <Column field="collection_id" header="Collection" />
+            <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
+              <Column field="name" header="Name"></Column>
+              {/* (<Column header="Image" body={() => imageBodyTemplate} />) */}
+              <Column field="category" header="Category"></Column>
+              <Column field="quantity" header="Quantity"></Column>
             </DataTable>
           </TabPanel>
-          <TabPanel header="Categories" className="w-full">
+          <TabPanel header="Categories">
             <CanvasCateg collections={collections} />
           </TabPanel>
-          <TabPanel header="Tools" className="w-full">
+          <TabPanel header="Tools">
             <CanvasTools />
-            <DataTable value={tools} tableStyle={{ minWidth: "20rem" }}>
+            <DataTable
+              value={tools}
+              tableStyle={{ minWidth: "20rem" }}
+              className="w-full"
+            >
               <Column field="name" header="Name" />
-              (<Column header="Image" body={imageBodyTemplate} />)
-              {/* <Column field="quantity" header="Quantity" /> */}
+              {/* (<Column header="Image" body={imageBodyTemplate} />) */}
+              <Column field="quantity" header="Quantity" />
             </DataTable>
           </TabPanel>
         </TabView>
@@ -72,3 +75,5 @@ export default function Recipe(): JSX.Element {
     </div>
   );
 }
+
+<TabView className="w-full"></TabView>;

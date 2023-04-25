@@ -12,7 +12,6 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 export default function CanvasRecipe(props: {
   collections: CollectionType[];
   tools: ToolsType[];
-  categories: CategoryType[];
 }) {
   const { collections } = props;
   const { tools } = props;
@@ -33,7 +32,7 @@ export default function CanvasRecipe(props: {
   const addInputHandler = () => {
     tempRef.current && setIngredient([...ingredient, tempRef.current]);
     if (inputRef.current) {
-      inputRef.current.value = '';
+      inputRef.current.value = "";
     }
   };
 
@@ -48,7 +47,6 @@ export default function CanvasRecipe(props: {
   const removeInputHandler = (index: number) => {
     const deleteInput = ingredient.filter((input, i) => index !== i);
     setIngredient(deleteInput);
-
   };
 
   // const removeInputHandlerHow = (index: number) => {
@@ -139,7 +137,11 @@ export default function CanvasRecipe(props: {
             </div>
             <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Collection</label>
-              <select className="border" name="collection">
+              <select
+                className="border"
+                name="collection"
+                onChange={(e) => filterCate(e.target.value)}
+              >
                 {collections.map((collection, index) => (
                   <option key={index}>{collection.name}</option>
                 ))}
@@ -179,19 +181,20 @@ export default function CanvasRecipe(props: {
                   className="h-full flex items-center"
                 >
                   <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                  <button
+                  <input
+                    value="Remove"
                     className="px-[10px] bg-red-500"
                     onClick={() => {
                       removeInputHandler(index);
                     }}
-                  >
-                    Remove
-                  </button>
+                    type="button"
+                  />
                 </div>
               ))}
             </div>
+
             <input
-            id="adding"
+              id="adding"
               type="text"
               ref={inputRef}
               name="ingredients"
@@ -201,13 +204,11 @@ export default function CanvasRecipe(props: {
                 console.log(tempRef);
               }}
             />
-            <button
+            <input
+              value="Add ingredient"
               className="px-[10px] bg-green-400"
               onClick={addInputHandler}
-
-            >
-              Add ingredient
-            </button>
+            />
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
