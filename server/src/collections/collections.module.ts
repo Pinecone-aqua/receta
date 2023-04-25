@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { Module } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
 import {
   Collection,
   CollectionSchema,
-} from 'src/collections/collection.schema';
-import { CollectionController } from './collections.controller';
-import { CollectionService } from './collections.service';
+} from "src/collections/collection.schema";
+import { CollectionController } from "./collections.controller";
+import { CollectionService } from "./collections.service";
 @Module({
   imports: [
     MongooseModule.forFeature([

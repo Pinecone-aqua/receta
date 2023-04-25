@@ -15,11 +15,10 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 export default function CanvasRecipe(props: {
   collections: CollectionType[];
   tools: ToolsType[];
-  categories: CategoryType[];
 }) {
   const { collections } = props;
   const { tools } = props;
-  const { categories } = props;
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [show, setShow] = useState(false);
   const [check, setCheck] = useState<boolean | null>(false);
   const [ingredient, setIngredient] = useState<string[]>([]);
@@ -50,8 +49,7 @@ export default function CanvasRecipe(props: {
     setHow(deleteInputHow);
   };
 
-  //----
-
+  //add tool handler
   function addToolHandler(id: string) {
     if (selectTools.includes(id)) {
       setSelectTools(selectTools.filter((tool) => tool !== id));
@@ -59,7 +57,18 @@ export default function CanvasRecipe(props: {
       setSelectTools([...selectTools, id]);
     }
   }
-  console.log(selectTools);
+
+  //filter categories
+  function filterCate(name: string) {
+    axios
+      .get(`http://localhost:3003/categories/filter?name=${name}`)
+      .then((res) => setCategories(res.data));
+  }
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3003/categories/filter?name=difficulty`)
+      .then((res) => setCategories(res.data));
+  }, []);
 
   function createCocktail(e: any) {
     e.preventDefault();
@@ -71,16 +80,17 @@ export default function CanvasRecipe(props: {
       collection: e.target.collection.value,
       ingredients: ingredient,
       how_to: how,
-      image_url: e.target.imageUrl.value,
       video_url: e.target.videoUrl.value,
       alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-    console.log(cocktailData);
+
+    const data = new FormData();
+    data.append("file", e.target.imageUrl.files[0]);
+    data.append("newRecipe", JSON.stringify(cocktailData));
+
     axios
-      .post("http://localhost:3003/recipes/create", {
-        cocktailData,
-      })
+      .post("http://localhost:3003/recipes/create", data)
       .then((res) => console.log(res, "recipe sent"));
   }
 
@@ -121,7 +131,11 @@ export default function CanvasRecipe(props: {
             </div>
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Collection</label>
-              <select className="border" name="collection">
+              <select
+                className="border"
+                name="collection"
+                onChange={(e) => filterCate(e.target.value)}
+              >
                 {collections.map((collection, index) => (
                   <option key={index}>{collection.name}</option>
                 ))}
@@ -161,16 +175,16 @@ export default function CanvasRecipe(props: {
                   className=" bg-slate-400 h-[25px] w-52"
                   onChange={(e) => {
                     tempRef.current = e.target.value;
-                    console.log(tempRef);
                   }}
                 />
-                <button
+                <input
+                  type="button"
                   className="px-[10px] bg-green-400 h-[25px]"
                   onClick={addInputHandler}
-                >
-                  Add ingredient
-                </button>
-                <div className="flex flex-col gap-2 pt-[20px] pb-[20px] block">
+                  value="Add ingredient"
+                />
+
+                <div className="flex flex-col gap-2 pt-[20px] pb-[20px] ">
                   {ingredient.map((inex, index) => (
                     <div
                       key={`input-container-${index}`}
@@ -179,14 +193,14 @@ export default function CanvasRecipe(props: {
                       <p className="w-[200px] h-[25px] m-0 bg-gray-400">
                         {inex}
                       </p>
-                      <button
+                      <input
+                        type="button"
                         className="px-[10px] h-[25px] bg-red-500"
                         onClick={() => {
                           removeInputHandler(index);
                         }}
-                      >
-                        Remove
-                      </button>
+                        value="Remove"
+                      />
                     </div>
                   ))}
                 </div>
@@ -201,32 +215,32 @@ export default function CanvasRecipe(props: {
                   className=" bg-slate-400 h-[25px] w-52"
                   onChange={(e) => {
                     tempRefHow.current = e.target.value;
-                    console.log(tempRefHow);
                   }}
                 />
-                <button
+                <input
+                  type="button"
                   className="px-[10px] bg-green-400 h-[25px]"
                   onClick={addInputHandlerHow}
-                >
-                  Add instruction
-                </button>
-                <div className="flex flex-col gap-2 pt-[20px] pb-[20px] block">
+                  value="Add instruction"
+                />
+
+                <div className="flex flex-col gap-2 pt-[20px] pb-[20px] ">
                   {how.map((inst, index) => (
                     <div
                       key={`input-container-${index}`}
                       className="h-full flex items-center"
                     >
-                      <p className="w-[200px] h-[25px] h-auto m-0 bg-gray-400">
+                      <p className="w-[200px] h-[25px]  m-0 bg-gray-400">
                         {index + 1}. {inst}
                       </p>
-                      <button
+                      <input
+                        value="Remove"
                         className="px-[10px] h-[25px] bg-red-500"
                         onClick={() => {
                           removeInputHandlerHow(index);
                         }}
-                      >
-                        Remove
-                      </button>
+                        type="button"
+                      />
                     </div>
                   ))}
                 </div>
@@ -269,9 +283,12 @@ export default function CanvasRecipe(props: {
               />
             </div>
             <div className="flex justify-center gap-3 h-[40px]">
-              <Button onClick={() => setShow(false)} type="button">
-                Cancel
-              </Button>
+              <input
+                onClick={() => setShow(false)}
+                type="button"
+                value="Cancel"
+              />
+
               <button
                 type="submit"
                 className="inline-flex justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"

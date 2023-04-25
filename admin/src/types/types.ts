@@ -14,7 +14,6 @@ export interface CocktailType {
   collection: string;
   ingredients: any;
   how_to: any;
-  image_url: string;
   video_url: string;
   alcohol: string;
   tools: any;
