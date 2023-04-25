@@ -1,3 +1,4 @@
+
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Category, CategorySchema } from 'src/categories/category.schema';
@@ -10,6 +11,7 @@ import { Tool, ToolSchema } from 'src/tools/tools.schema';
 import { RecipesController } from './recipes.controller';
 import { RecipesService } from './recipes.service';
 
+
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Recipe.name, schema: RecipeSchema }]),
@@ -20,6 +22,7 @@ import { RecipesService } from './recipes.service';
       { name: Category.name, schema: CategorySchema },
     ]),
     MongooseModule.forFeature([{ name: Tool.name, schema: ToolSchema }]),
+    CloudinaryModule,
   ],
   controllers: [RecipesController],
   providers: [RecipesService],

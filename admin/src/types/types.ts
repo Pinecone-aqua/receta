@@ -13,8 +13,7 @@ export interface CocktailType {
   category: string;
   collection: string;
   ingredients: any;
-  howTo: any;
-  image_url: string;
+  how_to: any;
   video_url: string;
   alcohol: string;
   tools: any;

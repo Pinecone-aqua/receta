@@ -1,4 +1,6 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+
 
 @Schema()
 export class Collection {

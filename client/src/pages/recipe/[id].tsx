@@ -9,7 +9,6 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
 
   return (
     <div className="bg-[#1E1E1E]">
-      {" "}
       <Navbar />
       <div className="container mx-auto mt-[50px] shadow shadow-drop-md">
         <div className="flex">

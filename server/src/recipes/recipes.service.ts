@@ -1,3 +1,4 @@
+
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -7,13 +8,14 @@ import { Tool } from 'src/tools/tools.schema';
 import { Collection } from 'src/collections/collection.schema';
 import { CreateRecipesDto } from './recipes.create.dto';
 
+
 @Injectable()
 export class RecipesService {
   constructor(
     @InjectModel(Recipe.name) private recipeModel: Model<Recipe>,
     @InjectModel(Collection.name) private collectionsModel: Model<Collection>,
     @InjectModel(Category.name) private categoriesModel: Model<Category>,
-    @InjectModel(Tool.name) private toolsModel: Model<Tool>,
+    @InjectModel(Tool.name) private toolsModel: Model<Tool>
   ) {}
 
   allRecipe() {
@@ -24,8 +26,29 @@ export class RecipesService {
     }
   }
 
+  filterRecipe(name: string) {
+    try {
+      return this.recipeModel
+        .find({ collection_id: name })
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  filterCateRecipe(name: string) {
+    try {
+      return this.recipeModel
+        .find({ categories_id: { $in: [name] } })
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
+    } catch (err) {
+      return err;
+    }
+  }
+
   async findRecipe(id: string) {
     try {
+
       return await this.recipeModel.findOne({ _id: id });
     } catch (err) {
       return err;
@@ -91,6 +114,8 @@ export class RecipesService {
           name: recipe.tools,
         })
         .select({ name: 1 });
+
+      console.log(recipe);
 
       return this.recipeModel.create({
         name: recipe.name,

@@ -11,7 +11,7 @@ export default function CanvasTools() {
   function createCateHandler(e: any) {
     e.preventDefault();
     const category = {
-      collection: e.target.collection.value,
+      collection: e.target.image.value,
       name: e.target.name.value,
     };
     console.log(category);
@@ -34,7 +34,6 @@ export default function CanvasTools() {
         </Offcanvas.Header>
         <Offcanvas.Body className="place-content-center flex">
           <form className="flex flex-col" onSubmit={createCateHandler}>
-            
             <label>
               Tool name
               <input className="border" type="text" name="name" />
@@ -45,12 +44,19 @@ export default function CanvasTools() {
             </label>
 
             <div className="flex justify-between mt-[10px] mb-[10px]">
-            <Button className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]" type="button" onClick={() => setShow(false)}>
+              <Button
+                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
+                type="button"
+                onClick={() => setShow(false)}
+              >
                 Cancel
-            </Button>
-            <button className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]" type="submit">
-              Create
-            </button>
+              </Button>
+              <button
+                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
+                type="submit"
+              >
+                Create
+              </button>
             </div>
           </form>
         </Offcanvas.Body>

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import {
   CollectionType,
   CocktailType,
@@ -6,10 +5,7 @@ import {
   CategoryType,
 } from "@/src/types/types";
 import axios from "axios";
-import React, { MutableRefObject, useRef, useState } from "react";
-// import { Toast } from "primereact/toast";
-// import { FileUpload } from "primereact/fileupload";
-
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
@@ -20,7 +16,7 @@ export default function CanvasRecipe(props: {
 }) {
   const { collections } = props;
   const { tools } = props;
-  const { categories } = props;
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [show, setShow] = useState(false);
   const [check, setCheck] = useState<boolean | null>(false);
   const [ingredient, setIngredient] = useState<string[]>([]);
@@ -40,17 +36,19 @@ export default function CanvasRecipe(props: {
     tempRefHow.current && setHow([...how, tempRefHow.current]);
   };
 
+  //----
+
   const removeInputHandler = (index: number) => {
     const deleteInput = ingredient.filter((input, i) => index !== i);
     setIngredient(deleteInput);
   };
+
   const removeInputHandlerHow = (index: number) => {
     const deleteInputHow = how.filter((input, i) => index !== i);
     setHow(deleteInputHow);
   };
 
-  //----
-
+  //add tool handler
   function addToolHandler(id: string) {
     if (selectTools.includes(id)) {
       setSelectTools(selectTools.filter((tool) => tool !== id));
@@ -58,11 +56,19 @@ export default function CanvasRecipe(props: {
       setSelectTools([...selectTools, id]);
     }
   }
-  console.log(selectTools);
 
-  // const toast = useRef<React.MutableRefObject<null>>(null);
+  //filter categories
+  function filterCate(name: string) {
+    axios
+      .get(`http://localhost:3003/categories/filter?name=${name}`)
+      .then((res) => setCategories(res.data));
+  }
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3003/categories/filter?name=difficulty`)
+      .then((res) => setCategories(res.data));
+  }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function createCocktail(e: any) {
     e.preventDefault();
 
@@ -72,18 +78,19 @@ export default function CanvasRecipe(props: {
       category: e.target.category.value,
       collection: e.target.collection.value,
       ingredients: ingredient,
-      howTo: how,
-      image_url: e.target.imageUrl.value,
+      how_to: how,
       video_url: e.target.videoUrl.value,
       alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-    console.log(cocktailData);
+
+    const data = new FormData();
+    data.append("file", e.target.imageUrl.files[0]);
+    data.append("newRecipe", JSON.stringify(cocktailData));
+
     axios
-      .post("http://localhost:3003/recipes/create", {
-        cocktailData,
-      })
-      .then((res) => console.log(res));
+      .post("http://localhost:3003/recipes/create", data)
+      .then((res) => console.log(res, "recipe sent"));
   }
 
   return (
@@ -114,6 +121,7 @@ export default function CanvasRecipe(props: {
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
+
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Description</label>
               <textarea
@@ -121,7 +129,7 @@ export default function CanvasRecipe(props: {
                 className="resize  bg-slate-400  w-52 rounded"
               />
             </div>
-            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Collection</label>
               <select className="border" name="collection">
                 {collections.map((collection, index) => (
@@ -129,6 +137,7 @@ export default function CanvasRecipe(props: {
                 ))}
               </select>
             </div>
+
             <label className="block">Tools</label>
             <div className="flex flex-wrap gap-1 w-3/4 mt-[25px]">
               {tools.map((tool, index) => (
@@ -154,105 +163,49 @@ export default function CanvasRecipe(props: {
                 ))}
               </select>
             </div>
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Ingredients</label>
-              <div>
-                <input
-                  type="text"
-                  name="ingredients"
-                  className=" bg-slate-400 h-[25px] w-52"
-                  onChange={(e) => {
-                    tempRef.current = e.target.value;
-                    console.log(tempRef);
-                  }}
-                />
-                <button
-                  className="px-[10px] bg-green-400 h-[25px]"
-                  onClick={addInputHandler}
+            <label className="block">Ingredients</label>
+            <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
+              {ingredient.map((inex, index) => (
+                <div
+                  key={`input-container-${index}`}
+                  className="h-full flex items-center"
                 >
-                  Add ingredient
-                </button>
-                <div className="flex flex-col gap-2 pt-[20px] pb-[20px] block">
-                  {ingredient.map((inex, index) => (
-                    <div
-                      key={`input-container-${index}`}
-                      className="h-full flex items-center"
-                    >
-                      <p className="w-[200px] h-[25px] m-0 bg-gray-400">
-                        {inex}
-                      </p>
-                      <button
-                        className="px-[10px] h-[25px] bg-red-500"
-                        onClick={() => {
-                          removeInputHandler(index);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
+                  <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
+                  <button
+                    className="px-[10px] bg-red-500"
+                    onClick={() => {
+                      removeInputHandler(index);
+                    }}
+                  >
+                    Remove
+                  </button>
                 </div>
-              </div>
+              ))}
             </div>
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Instruction</label>
-              <div>
-                <input
-                  type="text"
-                  name="how_to"
-                  className=" bg-slate-400 h-[25px] w-52"
-                  onChange={(e) => {
-                    tempRefHow.current = e.target.value;
-                    console.log(tempRefHow);
-                  }}
-                />
-                <button
-                  className="px-[10px] bg-green-400 h-[25px]"
-                  onClick={addInputHandlerHow}
-                >
-                  Add instruction
-                </button>
-                <div className="flex flex-col gap-2 pt-[20px] pb-[20px] block">
-                  {how.map((inst, index) => (
-                    <div
-                      key={`input-container-${index}`}
-                      className="h-full flex items-center"
-                    >
-                      <p className="w-[200px] h-[25px] h-auto m-0 bg-gray-400">
-                        {index + 1}. {inst}
-                      </p>
-                      <button
-                        className="px-[10px] h-[25px] bg-red-500"
-                        onClick={() => {
-                          removeInputHandlerHow(index);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+            <input
+              type="text"
+              name="ingredients"
+              className="bg-slate-400 w-52"
+              onChange={(e) => {
+                tempRef.current = e.target.value;
+                console.log(tempRef);
+              }}
+            />
+            <button
+              className="px-[10px] bg-green-400"
+              onClick={addInputHandler}
+            >
+              Add ingredient
+            </button>
+            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
                 type="file"
                 name="imageUrl"
                 className="bg-slate-400 w-52"
               />
-              {/* <FileUpload
-                mode="basic"
-                name="demo[]"
-                url="/api/upload"
-                accept="image/*"
-                maxFileSize={1000000}
-                onUpload={onUpload}
-                auto
-                chooseLabel="Browse"
-              /> */}
             </div>
-            <div className="w-3/4 flex justify-between  mb-[20px] border-b-[1px] border-black pb-[20px]">
+            <div className="w-3/4 flex justify-between  mb-[20px]">
               <label className="block">Tutorial video</label>
               <input
                 type="text"
@@ -260,7 +213,7 @@ export default function CanvasRecipe(props: {
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
-            <div className="w-3/4 flex justify-between  mb-[20px] border-b-[1px] border-black pb-[20px]">
+            <div className="w-3/4 flex justify-between  mb-[20px]">
               <label>Alcoholic or nonalcoholic</label>
               <input
                 onClick={() => setCheck(!check)}
@@ -271,9 +224,12 @@ export default function CanvasRecipe(props: {
               />
             </div>
             <div className="flex justify-center gap-3 h-[40px]">
-              <Button onClick={() => setShow(false)} type="button">
-                Cancel
-              </Button>
+              <input
+                onClick={() => setShow(false)}
+                type="button"
+                value="Cancel"
+              />
+
               <button
                 type="submit"
                 className="inline-flex justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"

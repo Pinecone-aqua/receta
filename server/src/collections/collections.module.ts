@@ -1,3 +1,4 @@
+
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import {
@@ -6,6 +7,7 @@ import {
 } from 'src/collections/collection.schema';
 import { CollectionController } from './collections.controller';
 import { CollectionService } from './collections.service';
+
 @Module({
   imports: [
     MongooseModule.forFeature([
