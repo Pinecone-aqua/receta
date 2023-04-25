@@ -1,21 +1,18 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import { RiArrowDropDownFill } from "react-icons/ri";
-import { InputSwitch } from "primereact/InputSwitch";
+import {} from "react-icons/ri";
+import { useUser } from "@/context/UserContext";
+import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 
 export default function Navbar(): JSX.Element {
-  const [show, setShow] = useState<boolean>(false);
-  const [isLogged, setIsLogged] = useState<boolean>(false);
-
   const router = useRouter();
+  const { user, setUser } = useUser();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function searchHandler(e: any): void {
     e.preventDefault();
     console.log(e.target.search.value);
-    setIsLogged(false);
   }
 
   return (
@@ -40,26 +37,22 @@ export default function Navbar(): JSX.Element {
         />
         <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />
       </form>
-      {isLogged ? (
-        <div className="relative">
-          <button onClick={() => setShow(!show)} className="flex mt-2">
-            <picture>
-              <img
-                className="rounded-[50%] h-[25px] object-cover w-[25px]"
-                src="https://i.guim.co.uk/img/media/bc12099e16c5e0a7ed7b1e63687dac6dd71ff13b/305_331_2800_1680/master/2800.jpg?width=620&quality=45&dpr=2&s=none"
-                alt="..."
-              />
-            </picture>
-            <RiArrowDropDownFill className="w-6 h-6" />
-          </button>
-          {show && (
-            <ul className="absolute bg-red-400 left-[-20px] w-[50px]">
-              <li>a</li>
-              <li>a</li>
-              <li>a</li>
-            </ul>
-          )}
-        </div>
+      {user ? (
+        <Menu>
+          <MenuButton>
+            <Avatar size="sm" name={user.email} />
+          </MenuButton>
+          <MenuList>
+            <p className="text-black">settings</p>
+            <p className="text-black">account</p>
+            <p
+              className="text-black cursor-pinter"
+              onClick={() => setUser(undefined)}
+            >
+              log out
+            </p>
+          </MenuList>
+        </Menu>
       ) : (
         <Link href="../login" className="mt-3">
           login

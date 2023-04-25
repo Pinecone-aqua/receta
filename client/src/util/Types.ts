@@ -19,3 +19,26 @@ export interface CategoriesType {
   name: string;
   collection_id: { name: string };
 }
+
+export interface UsersType {
+  email: string;
+  password: string;
+  name?: string;
+}
+
+export interface ProductContextType {
+  recipes: RecipesType[] | null;
+  categories: CategoriesType[];
+  activeBtn: string | null;
+  setActiveBtn: React.Dispatch<React.SetStateAction<string | null>>;
+  setRecipes: React.Dispatch<React.SetStateAction<RecipesType[]>>;
+}
+
+export interface UserContextType {
+  user: UsersType | null | undefined;
+  setUser: React.Dispatch<React.SetStateAction<UsersType | null | undefined>>;
+}
+
+export interface PropType {
+  children: React.ReactNode;
+}
