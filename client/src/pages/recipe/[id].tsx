@@ -102,9 +102,8 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
             </div>
           </div>
         </div>
-        {/* <div className="bg-[#FFFBF1] min-h-[30vh] mb-[5%]"></div> */}
       </div>
-      {/* <AspectRatio maxW="w-full" ratio={2}>
+      {/*<AspectRatio maxW="w-full" ratio={2}>
         <iframe src={recipes.video_url} allowFullScreen />
       </AspectRatio> */}
     </div>
