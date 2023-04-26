@@ -3,19 +3,24 @@ import { useEffect, useState } from "react";
 import CanvasRecipe from "./CanvasRecipe";
 import CanvasCateg from "./CanvasCateg";
 import CanvasTools from "./CanvasTools";
-import { TabView } from "primereact/tabview";
-import { TabPanel } from "primereact/tabview";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+// import { Column } from "primereact/column";
 
 export default function Recipe(): JSX.Element {
   const [collections, setCollections] = useState([]);
   const [tools, setTools] = useState([]);
   const [recipes, setRecipes] = useState([]);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:3003/collections/get")
       .then((res) => setCollections(res.data));
+
+    axios
+      .get("http://localhost:3003/categories/get")
+      .then((res) => setCategories(res.data));
 
     axios
       .get("http://localhost:3003/recipes/all")
@@ -25,55 +30,70 @@ export default function Recipe(): JSX.Element {
       .get("http://localhost:3003/tools/get")
       .then((res) => setTools(res.data));
   }, []);
+  // console.log("col", collections);
+  // console.log("tool", tools);
+  // console.log("res", recipes);
+  // console.log("cat", categories);
 
-  const imageBodyTemplate = (products: any) => (
-    <picture>
-      <img
-        src={`${products.image_url}`}
-        alt={products.image_url}
-        className="w-[80px] shadow border-round"
-      />
-    </picture>
+  const imageBodyTemplate = (tools: { image_url: string }) => (
+    <img src={`${tools.image_url}`} className="w-[100px] shadow border-round" />
   );
 
-  const allowExpansion = (recipes: string | any[]) => recipes.length > 0;
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const imageBodyRecipe = (recipes: { image_url: string }) => (
+    <img
+      src={`${recipes.image_url}`}
+      className="w-[100px] shadow border-round"
+    />
+  );
 
   return (
     <div className="flex gap-3 ml-[10px]">
       <div className="flex gap-3 ml-[10px] mt-[20px]">
-        <TabView
-          activeIndex={activeIndex}
-          onTabChange={(e) => setActiveIndex(e.index)}
-        >
-          <TabPanel header="Recipes">
-            <CanvasRecipe collections={collections} tools={tools} />
-            <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
-              <Column field="name" header="Name"></Column>
-              {/* (<Column header="Image" body={() => imageBodyTemplate} />) */}
-              <Column field="category" header="Category"></Column>
-              <Column field="quantity" header="Quantity"></Column>
-            </DataTable>
-          </TabPanel>
-          <TabPanel header="Categories">
-            <CanvasCateg collections={collections} />
-          </TabPanel>
-          <TabPanel header="Tools">
-            <CanvasTools />
-            <DataTable
-              value={tools}
-              tableStyle={{ minWidth: "20rem" }}
-              className="w-full"
-            >
-              <Column field="name" header="Name" />
-              {/* (<Column header="Image" body={imageBodyTemplate} />) */}
-              <Column field="quantity" header="Quantity" />
-            </DataTable>
-          </TabPanel>
-        </TabView>
+        <Tabs>
+          <TabList>
+            <Tab>Recipes</Tab>
+            <Tab>Categories</Tab>
+            <Tab>Tools</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <CanvasRecipe collections={collections} tools={tools} />
+              <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
+                <Column field="name" header="Name" />
+                <Column field="collection_id" header="Collection" />
+                <Column field="categories_id.name" header="Categories" />
+                <Column field="alcohol" header="Alcoholic" />
+                <Column
+                  field="image_url"
+                  header="Image"
+                  body={imageBodyRecipe}
+                />
+              </DataTable>
+            </TabPanel>
+            <TabPanel>
+              <CanvasCateg collections={collections} />
+              <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
+                <Column field="name" header="Name" />
+                <Column field="collection_name" header="Collection" />
+                <Column field="_id" header="ID" />
+              </DataTable>
+            </TabPanel>
+            <TabPanel>
+              <CanvasTools />
+              <DataTable value={tools} tableStyle={{ minWidth: "50rem" }}>
+                <Column field="name" header="Name" />
+                <Column
+                  field="image_url"
+                  header="Collection"
+                  body={imageBodyTemplate}
+                />
+                <Column field="_id" header="ID" />
+              </DataTable>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </div>
     </div>
   );
 }
-
-<TabView className="w-full"></TabView>;

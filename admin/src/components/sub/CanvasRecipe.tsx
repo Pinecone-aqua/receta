@@ -37,15 +37,12 @@ export default function CanvasRecipe(props: {
     }
   };
 
-  console.log(ingredient);
-
   const addInputHandlerHow = () => {
     tempRefHow.current && setHow([...how, tempRefHow.current]);
     if (inputRefIns.current) {
       inputRefIns.current.value = "";
     }
   };
-  console.log(how);
 
   //----
 
@@ -54,10 +51,10 @@ export default function CanvasRecipe(props: {
     setIngredient(deleteInput);
   };
 
-  // const removeInputHandlerHow = (index: number) => {
-  //   const deleteInputHow = how.filter((input, i) => index !== i);
-  //   setHow(deleteInputHow);
-  // };
+  const removeInputHandlerHow = (index: number) => {
+    const deleteInputHow = how.filter((input, i) => index !== i);
+    setHow(deleteInputHow);
+  };
 
   //add tool handler
   function addToolHandler(id: string) {
@@ -179,7 +176,6 @@ export default function CanvasRecipe(props: {
               </select>
             </div>
 
-
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Ingredients</label>
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
@@ -257,7 +253,6 @@ export default function CanvasRecipe(props: {
                 type="button"
               />
             </div>
-
 
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
