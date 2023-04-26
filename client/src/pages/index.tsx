@@ -16,9 +16,8 @@ export default function Home(): JSX.Element {
           <Recipes />
           <OurStory />
           <Membership />
+          <Popular />
         </div>
-        <NeedHelp />
-        <Popular />
       </>
     </Layout>
   );
