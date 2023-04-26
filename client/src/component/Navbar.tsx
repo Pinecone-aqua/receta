@@ -19,7 +19,7 @@ export default function Navbar(): JSX.Element {
   }
 
   return (
-    <header className="text-[#FFFBF1]  container mx-auto flex justify-between pt-8">
+    <header className="text-currentColor  container mx-auto flex justify-between p-8">
       <h1
         className="text-[32px] font-bold cursor-pointer"
         onClick={() => {
@@ -34,7 +34,7 @@ export default function Navbar(): JSX.Element {
       >
         <input
           type="text"
-          className="focus:outline-none bg-transparent w-full p-2 placeholder:text-white border-b-[1px]"
+          className="focus:outline-none bg-transparent w-full p-2 placeholder:text-currentColor border-b-[1px]"
           aria-invalid="false"
           placeholder="search"
         />

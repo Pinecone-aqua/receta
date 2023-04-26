@@ -8,9 +8,12 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
   const recipes: RecipesType = props.recipes;
 
   return (
-    <div className="bg-[#1E1E1E]">
-      <Navbar />
-      <div className="container mx-auto mt-[50px] shadow shadow-drop-md">
+    <div className="">
+      <div className="recipe-page">
+        <Navbar />
+      </div>
+      <div className="a">jvigfb</div>
+      {/* <div className="container mx-auto mt-[50px] shadow shadow-drop-md">
         <div className="flex">
           <picture className="w-[50%] ">
             <img
@@ -34,10 +37,10 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
             <p>{recipes.description}</p>
           </div>
         </div>
-      </div>
-      <AspectRatio maxW="w-full" ratio={2}>
+      </div> */}
+      {/* <AspectRatio maxW="w-full" ratio={2}>
         <iframe src={recipes.video_url} allowFullScreen />
-      </AspectRatio>
+      </AspectRatio> */}
     </div>
   );
 }

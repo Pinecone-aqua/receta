@@ -15,7 +15,7 @@ export default function Collection(): JSX.Element {
   }, []);
 
   return (
-    <div className="text-white h-[80vh] relative ps-[10%]  pt-[15%] w-full flex gap-12">
+    <div className=" h-[80vh] relative ps-[10%]  pt-[15%] w-full flex gap-12">
       {data.map((collection, index) => (
         <div
           onClick={() => {
@@ -30,7 +30,7 @@ export default function Collection(): JSX.Element {
               src={`../${collection.name}.png`}
               className={
                 activeBtn == collection.name
-                  ? `max-w-[250px] h-[400px] object-cover z-10 absolute bottom-0 sm:hidden md:block cursor-pointer `
+                  ? `w-[350px] z-10 absolute bottom-0 sm:hidden md:block cursor-pointer `
                   : `w-[130px] h-[190px] absolute bottom-5 cursor-pointer `
               }
               alt="..."
@@ -39,7 +39,7 @@ export default function Collection(): JSX.Element {
           <p
             className={
               activeBtn == collection.name
-                ? `z-0 absolute text-3xl top-[40%] left-[25%] font-bold text-[150px] text-[#FFFBF1]`
+                ? `z-0 absolute text-3xl top-[40%] left-[25%] font-bold text-[150px] text-currentColor`
                 : "absolute bottom-0 text-[#124822] ms-[30px] cursor-pointer "
             }
           >
