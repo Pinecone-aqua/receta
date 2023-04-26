@@ -179,6 +179,7 @@ export default function CanvasRecipe(props: {
               </select>
             </div>
 
+
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Ingredients</label>
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
@@ -256,6 +257,7 @@ export default function CanvasRecipe(props: {
                 type="button"
               />
             </div>
+
 
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
