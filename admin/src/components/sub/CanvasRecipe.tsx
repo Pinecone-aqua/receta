@@ -27,26 +27,34 @@ export default function CanvasRecipe(props: {
   const handleShow = () => setShow(true);
 
   const tempRef: MutableRefObject<string> = useRef("");
-  const tempRefHow: MutableRefObject<string> = useRef("");
+  // const tempRefHow: MutableRefObject<string> = useRef("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const addInputHandler = () => {
     tempRef.current && setIngredient([...ingredient, tempRef.current]);
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
   };
-  const addInputHandlerHow = () => {
-    tempRefHow.current && setHow([...how, tempRefHow.current]);
-  };
+
+  console.log(ingredient);
+
+  // const addInputHandlerHow = () => {
+  //   tempRefHow.current && setHow([...how, tempRefHow.current]);
+  // };
 
   //----
 
   const removeInputHandler = (index: number) => {
     const deleteInput = ingredient.filter((input, i) => index !== i);
     setIngredient(deleteInput);
+
   };
 
-  const removeInputHandlerHow = (index: number) => {
-    const deleteInputHow = how.filter((input, i) => index !== i);
-    setHow(deleteInputHow);
-  };
+  // const removeInputHandlerHow = (index: number) => {
+  //   const deleteInputHow = how.filter((input, i) => index !== i);
+  //   setHow(deleteInputHow);
+  // };
 
   //add tool handler
   function addToolHandler(id: string) {
@@ -183,7 +191,9 @@ export default function CanvasRecipe(props: {
               ))}
             </div>
             <input
+            id="adding"
               type="text"
+              ref={inputRef}
               name="ingredients"
               className="bg-slate-400 w-52"
               onChange={(e) => {
@@ -194,6 +204,7 @@ export default function CanvasRecipe(props: {
             <button
               className="px-[10px] bg-green-400"
               onClick={addInputHandler}
+
             >
               Add ingredient
             </button>
