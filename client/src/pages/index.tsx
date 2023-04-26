@@ -9,14 +9,8 @@ import { CategoriesType } from "@/util/Types";
 import Categories from "@/component/sub/Categories";
 import SideBar from "@/component/sub/SideBar";
 import Collection from "@/component/sub/Collection";
-import { useProduct } from "@/context/ProductContext";
 
-export default function Home(props: {
-  categories: CategoriesType[];
-}): JSX.Element {
-  const { categories } = props;
-  const { activeBtn, setActiveBtn } = useProduct();
-
+export default function Home(): JSX.Element {
   return (
     <Layout>
       <>
@@ -28,7 +22,12 @@ export default function Home(props: {
           <Categories />
           <Recipes />
           <Membership />
+
           <Popular />
+        </div>
+        <div className="bg-[url(/help.png)] bg-cover h-[400px]">
+          <h5>a</h5>
+          <button>a</button>
         </div>
       </>
     </Layout>
