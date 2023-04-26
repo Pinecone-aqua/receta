@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Input, Divider } from "@chakra-ui/react";
 import { FiX } from "react-icons/fi";
