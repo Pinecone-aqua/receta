@@ -26,21 +26,26 @@ export default function CanvasRecipe(props: {
   const handleShow = () => setShow(true);
 
   const tempRef: MutableRefObject<string> = useRef("");
-  // const tempRefHow: MutableRefObject<string> = useRef("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const tempRefHow: MutableRefObject<string> = useRef("");
+  const inputRefIng = useRef<HTMLInputElement>(null);
+  const inputRefIns = useRef<HTMLInputElement>(null);
 
   const addInputHandler = () => {
     tempRef.current && setIngredient([...ingredient, tempRef.current]);
-    if (inputRef.current) {
-      inputRef.current.value = "";
+    if (inputRefIng.current) {
+      inputRefIng.current.value = "";
     }
   };
 
   console.log(ingredient);
 
-  // const addInputHandlerHow = () => {
-  //   tempRefHow.current && setHow([...how, tempRefHow.current]);
-  // };
+  const addInputHandlerHow = () => {
+    tempRefHow.current && setHow([...how, tempRefHow.current]);
+    if (inputRefIns.current) {
+      inputRefIns.current.value = "";
+    }
+  };
+  console.log(how);
 
   //----
 
@@ -173,42 +178,85 @@ export default function CanvasRecipe(props: {
                 ))}
               </select>
             </div>
-            <label className="block">Ingredients</label>
-            <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
-              {ingredient.map((inex, index) => (
-                <div
-                  key={`input-container-${index}`}
-                  className="h-full flex items-center"
-                >
-                  <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                  <input
-                    value="Remove"
-                    className="px-[10px] bg-red-500"
-                    onClick={() => {
-                      removeInputHandler(index);
-                    }}
-                    type="button"
-                  />
-                </div>
-              ))}
+
+            <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+              <label className="block">Ingredients</label>
+              <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
+                {ingredient.map((inex, index) => (
+                  <div
+                    key={`input-container-${index}`}
+                    className="h-full flex items-center"
+                  >
+                    <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
+                    <input
+                      value="Remove"
+                      className="px-[10px] bg-red-500"
+                      onClick={() => {
+                        removeInputHandler(index);
+                      }}
+                      type="button"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <input
+                id="adding"
+                type="text"
+                ref={inputRefIng}
+                name="ingredients"
+                className="bg-slate-400 w-52"
+                onChange={(e) => {
+                  tempRef.current = e.target.value;
+                }}
+              />
+              <input
+                value="Add ingredient"
+                className="px-[10px] bg-green-400"
+                onClick={addInputHandler}
+                type="button"
+              />
             </div>
 
-            <input
-              id="adding"
-              type="text"
-              ref={inputRef}
-              name="ingredients"
-              className="bg-slate-400 w-52"
-              onChange={(e) => {
-                tempRef.current = e.target.value;
-                console.log(tempRef);
-              }}
-            />
-            <input
-              value="Add ingredient"
-              className="px-[10px] bg-green-400"
-              onClick={addInputHandler}
-            />
+            <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+              <label className="block">Instructions</label>
+              <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
+                {how.map((inex, index) => (
+                  <div
+                    key={`input-container-${index}`}
+                    className="h-full flex items-center"
+                  >
+                    <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
+                    <input
+                      value="Remove"
+                      className="px-[10px] bg-red-500"
+                      onClick={() => {
+                        removeInputHandlerHow(index);
+                      }}
+                      type="button"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <input
+                id="adding"
+                type="text"
+                ref={inputRefIns}
+                name="instructions"
+                className="bg-slate-400 w-52"
+                onChange={(e) => {
+                  tempRefHow.current = e.target.value;
+                }}
+              />
+              <input
+                value="Add instructions"
+                className="px-[10px] bg-green-400"
+                onClick={addInputHandlerHow}
+                type="button"
+              />
+            </div>
+
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
