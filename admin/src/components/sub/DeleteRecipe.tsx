@@ -18,6 +18,7 @@ export default function DeleteRecipe(prop: { recipe: CocktailType; }) {
 
   function deleteOne() {
     console.log("ok");
+    
   }
 
   // console.log("recipe", recipe._id);
