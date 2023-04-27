@@ -6,10 +6,10 @@ export default function RecipeCard(props: {
 }): JSX.Element {
   const { recipe } = props;
   const router = useRouter();
-
+  console.log(recipe);
   return (
     <div
-      className="min-w-[180px] w-[17%] mb-10 max-h-[340px] bg-white cursor-pointer"
+      className="min-w-[180px] w-[17%] max-h-[340px] bg-white cursor-pointer"
       onClick={() => {
         router.push(`/recipe/${recipe._id}`);
       }}
@@ -21,12 +21,10 @@ export default function RecipeCard(props: {
           alt="image"
         />
       </picture>
-      <div className="flex gap-2 place-content-center">
-        {recipe.categories_id.map((rec: RecipesType, index: number) => (
-          <p key={index}>{rec.name}</p>
-        ))}
+      <div className="flex-col text-black text-center">
+        <p className="text-xs text-red-500 font-medium mt-2">Gin</p>
+        <p className="font-bold">{recipe.name}</p>
       </div>
-      <p className="text-center">{recipe.name}</p>
     </div>
   );
 }

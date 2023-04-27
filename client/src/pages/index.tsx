@@ -9,6 +9,7 @@ import { CategoriesType } from "@/util/Types";
 import Categories from "@/component/sub/Categories";
 import SideBar from "@/component/sub/SideBar";
 import Collection from "@/component/sub/Collection";
+import OurStory from "@/component/sub/OurStory";
 
 export default function Home(): JSX.Element {
   return (
@@ -21,8 +22,8 @@ export default function Home(): JSX.Element {
         <div className="bg-[#1E1E1E] border border-[#05445F]">
           <Categories />
           <Recipes />
+          <OurStory />
           <Membership />
-
           <Popular />
         </div>
         <div className="bg-[url(/help.png)] bg-cover h-[400px]">
