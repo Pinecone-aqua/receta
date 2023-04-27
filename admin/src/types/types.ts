@@ -10,6 +10,7 @@ export interface ToolsType {
 }
 
 export interface CocktailType {
+  _id: string;
   name: string;
   description: string;
   categories_id: any[];
