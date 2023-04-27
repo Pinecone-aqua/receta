@@ -26,9 +26,8 @@ export default function Login(): JSX.Element {
   return (
     //
     <div className="flex">
-      <div className="md:w-[50%] bg-[url(/login.jpg)] h-[100vh] bg-cover sm:w-[30%] relative" />
-
-      <div className="bg-[#1E1E1E] sm:w-[70%] p-[30px] md:w-[50%] w-[100%]">
+      <div className="md:w-[50%] sm:w-[30%] bg-cover bg-[url(/login.jpg)] h-[100vh] max-w-[600px]" />
+      <div className="bg-[#1E1E1E] sm:w-[70%] p-[30px] w-[100%]">
         <FiX
           className="right-10 top-11 text-[#267F40] absolute w-[25px] h-[25px] cursor-pointer"
           onClick={() => {
@@ -44,7 +43,7 @@ export default function Login(): JSX.Element {
           receta.
         </h1>
         <form
-          className="md:w-[60%] sm:w-[70%] mx-auto mt-[10%] flex flex-col gap-5"
+          className="md:w-[60%] min-w-[300px] max-w-[500px] sm:w-[70%] mx-auto mt-[10%] flex flex-col gap-5"
           onSubmit={(e) => loginHandler(e)}
         >
           <Input
@@ -82,7 +81,7 @@ export default function Login(): JSX.Element {
           </div>
         </form>
 
-        <span className="cursor-pointer min-w-[170px] w-[60%] px-5 p-2 bg-white rounded-[25px] flex mx-auto gap-2 place-content-center mt-5">
+        <span className="cursor-pointer min-w-[170px] max-w-[500px] w-[60%] px-5 p-2 bg-white rounded-[25px] flex mx-auto gap-2 place-content-center mt-5">
           <p className="text-[#267F40] text-[16px]">sign in google</p>
           <FcGoogle className="mt-[3px] w-[20px] h-[20px]" />
         </span>
