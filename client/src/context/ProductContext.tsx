@@ -18,7 +18,6 @@ export default function ProductProvider({ children }: PropType) {
   const [activePage, setActivePage] = useState<string | null>("Main");
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
   const [categories, setCategories] = useState<CategoriesType[]>([]);
-  // const [currentColor, setCurrentColor] = useState<string | null>("#124822");
 
   useEffect(() => {
     setActivePage(localStorage.getItem("page"));

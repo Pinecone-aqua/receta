@@ -17,9 +17,15 @@ export default function SideBarLine() {
           y2="660"
           gradientUnits="userSpaceOnUse"
         >
+<<<<<<< HEAD
           <stop stopColor="currentColor" stopOpacity="0" />
           <stop offset="0.413846" stopColor="currentColor" />
           <stop offset="0.931158" stopColor="currentColor" stopOpacity="0" />
+=======
+          <stop stopColor="#FFFBF1" stopOpacity="0" />
+          <stop offset="0.413846" stopColor="#FFFBF1" />
+          <stop offset="0.931158" stopColor="#FFFBF1" stopOpacity="0" />
+>>>>>>> 85f4d59 (added currentcolor)
         </linearGradient>
       </defs>
     </svg>
