@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import RecipeProvider, { useProduct } from "@/context/ProductContext";
+import Head from "next/head";
 
 export default function Layout({
   children,
@@ -21,10 +22,15 @@ export default function Layout({
     }
   }
   return (
-    <div className={bgHandler()}>
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
+    <div>
+      <Head>
+        <title key="title">RECETA.</title>
+      </Head>
+      <div className={bgHandler()}>
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+      </div>
     </div>
   );
 }
