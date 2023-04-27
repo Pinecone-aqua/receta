@@ -12,7 +12,7 @@ export default function Recipes(): JSX.Element {
           <RecipeCard recipe={recipe} key={index} />
         ))}
       </div>
-      <div className="place-content-center flex">
+      <div className="place-content-center flex mt-10">
         <div className="text-white cursor-pointer">
           <BsArrowDownShort className="animate-bounce mx-auto w-[45px] h-[45px] border rounded-[50%]" />
           <p className="text-[12px]">Цааш үзэх</p>
