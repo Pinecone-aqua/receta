@@ -39,7 +39,7 @@ export default function Collection(): JSX.Element {
           <p
             className={
               activeBtn == collection.name
-                ? `z-0 absolute text-3xl top-[40%] left-[25%] font-bold text-[150px] text-currentColor`
+                ? `z-0 absolute text-3xl top-[40%] left-[30%] font-bold text-[150px] text-currentColor`
                 : "absolute bottom-0 text-[#124822] ms-[30px] cursor-pointer "
             }
           >
