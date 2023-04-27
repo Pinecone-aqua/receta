@@ -3,13 +3,15 @@ import { useRouter } from "next/router";
 
 export default function RecipeCard(props: {
   recipe: RecipesType;
+  bgColor: string;
+  textColor: string;
 }): JSX.Element {
-  const { recipe } = props;
+  const { recipe, bgColor, textColor } = props;
   const router = useRouter();
-  console.log(recipe);
+
   return (
     <div
-      className="min-w-[180px] w-[17%] max-h-[340px] bg-white cursor-pointer"
+      className={`min-w-[180px] w-[17%] max-h-[340px] bg-[${bgColor}] cursor-pointer`}
       onClick={() => {
         router.push(`/recipe/${recipe._id}`);
       }}
@@ -23,7 +25,7 @@ export default function RecipeCard(props: {
       </picture>
       <div className="flex-col text-black text-center">
         <p className="text-xs text-red-500 font-medium mt-2">Gin</p>
-        <p className="font-bold">{recipe.name}</p>
+        <p className={`font-bold text-[${textColor}]`}>{recipe.name}</p>
       </div>
     </div>
   );
