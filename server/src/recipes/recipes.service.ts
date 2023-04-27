@@ -70,8 +70,12 @@ export class RecipesService {
     }
   }
 
-  async remove(id: string) {
-    this.recipeModel.deleteOne({ _id: id });
+  async remove(recipe: any) {
+    try {
+      return await this.recipeModel.deleteOne({ _id: recipe.id });
+    } catch (err) {
+      return err;
+    }
   }
 
   async createRecipe(recipe: CreateRecipesDto) {

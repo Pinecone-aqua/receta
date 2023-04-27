@@ -74,7 +74,7 @@ export class RecipesController {
   }
 
   @Delete("delete")
-  remove(@Query("id") id: string) {
-    return this.recipesService.remove(id);
+  remove(@Query() recipe: string) {
+    return this.recipesService.remove(recipe);
   }
 }
