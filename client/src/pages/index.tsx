@@ -17,7 +17,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout>
       <>
-        <div className={`flex container mx-auto min-h-[85vh] bg-currentColor`}>
+        <div className={`flex ps-[5%] mx-auto min-h-[85vh] bg-currentColor`}>
           <SideBar />
           <Collection />
         </div>
