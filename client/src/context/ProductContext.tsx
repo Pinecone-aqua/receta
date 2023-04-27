@@ -17,10 +17,16 @@ export default function ProductProvider({ children }: PropType) {
   const [activeBtn, setActiveBtn] = useState<string | null>("difficulty");
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
   const [categories, setCategories] = useState<CategoriesType[]>([]);
+  const [activePage, setActivePage] = useState<string | null>("main");
 
   useEffect(() => {
-    if (localStorage.getItem("currentCollection"))
+    if (localStorage.getItem("currentCollection")) {
       setActiveBtn(localStorage.getItem("currentCollection"));
+    }
+
+    if (localStorage.getItem("page")) {
+      setActivePage(localStorage.getItem("page"));
+    }
   }, []);
 
   useEffect(() => {
@@ -35,7 +41,15 @@ export default function ProductProvider({ children }: PropType) {
 
   return (
     <productContext.Provider
-      value={{ recipes, activeBtn, setActiveBtn, categories, setRecipes }}
+      value={{
+        recipes,
+        activeBtn,
+        setActiveBtn,
+        categories,
+        setRecipes,
+        setActivePage,
+        activePage,
+      }}
     >
       {children}
     </productContext.Provider>

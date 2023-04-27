@@ -6,9 +6,8 @@ export default function Recipes(): JSX.Element {
   const { recipes } = useProduct();
 
   return (
-    <div className="py-[10px]">
-      {" "}
-      <div className="flex flex-wrap gap-[5%] place-content-center w-[90%] mx-auto px-[30px]">
+    <div>
+      <div className="flex py-[10px] flex-wrap gap-[5%] place-content-center w-[90%] mx-auto px-[30px]">
         {recipes?.map((recipe, index) => (
           <RecipeCard recipe={recipe} key={index} />
         ))}

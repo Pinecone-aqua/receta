@@ -2,13 +2,15 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import RecipeProvider, { useProduct } from "@/context/ProductContext";
 import Head from "next/head";
+import SideBar, { Pages } from "./sub/SideBar";
+import { Skeleton } from "primereact/skeleton";
 
 export default function Layout({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element {
-  const { activeBtn } = useProduct();
+  const { activeBtn, activePage } = useProduct();
 
   function bgHandler() {
     if (activeBtn == "difficulty") {
@@ -28,7 +30,15 @@ export default function Layout({
       </Head>
       <div className={bgHandler()}>
         <Navbar />
-        <main>{children}</main>
+        <main className="">
+          <div
+            className={`flex container mx-auto min-h-[85vh] bg-currentColor`}
+          >
+            <SideBar />
+            {Pages.map((page) => activePage === page.name && page.subPage)}
+          </div>
+          {children}
+        </main>
         <Footer />
       </div>
     </div>

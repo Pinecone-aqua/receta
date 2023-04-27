@@ -30,7 +30,9 @@ export interface ProductContextType {
   recipes: RecipesType[] | null;
   categories: CategoriesType[];
   activeBtn: string | null;
+  activePage: string | null;
   setActiveBtn: React.Dispatch<React.SetStateAction<string | null>>;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
   setRecipes: React.Dispatch<React.SetStateAction<RecipesType[]>>;
 }
 
