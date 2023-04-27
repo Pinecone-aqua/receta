@@ -8,8 +8,6 @@ import Arrow from "../../../public/Arrow";
 export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
   const recipes: RecipesType = props.recipes;
 
-  console.log(recipes);
-
   return (
     <div className="">
       <div className="recipe-page text-[#FFFBF1]">
@@ -103,7 +101,7 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
           </div>
         </div>
       </div>
-      {/*<AspectRatio maxW="w-full" ratio={2}>
+      {/* <AspectRatio maxW="w-full" ratio={2}>
         <iframe src={recipes.video_url} allowFullScreen />
       </AspectRatio> */}
     </div>
