@@ -9,22 +9,28 @@ export interface ToolsType {
   name: string;
 }
 
-// export interface RecipeType {
-//   name(arg0: string, name: any): unknown;
-//   _id: ReactNode;
-// }
-
 export interface CocktailType {
-  
   name: string;
   description: string;
-  category: string;
-  collection: string;
-  ingredients: any;
-  how_to: any;
+  categories_id: any[];
+  collection_id: string;
+  ingredients: string[];
+  how_to: string[];
+  image_url: string;
   video_url: string;
   alcohol: string;
-  tools: any;
+  tools: string[];
+}
+export interface CreateCocktailType {
+  name: string;
+  description: string;
+  categories: string;
+  collection: string;
+  ingredients: string[];
+  how_to: string[];
+  video_url: string;
+  alcohol: string;
+  tools: string[];
 }
 
 export interface CategoryType {

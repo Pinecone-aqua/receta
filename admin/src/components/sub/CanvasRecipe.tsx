@@ -1,8 +1,8 @@
 import {
   CollectionType,
-  CocktailType,
   ToolsType,
   CategoryType,
+  CreateCocktailType,
 } from "@/src/types/types";
 import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
@@ -80,10 +80,10 @@ export default function CanvasRecipe(props: {
   function createCocktail(e: any) {
     e.preventDefault();
 
-    const cocktailData: CocktailType = {
+    const cocktailData: CreateCocktailType = {
       name: e.target.name.value,
       description: e.target.description.value,
-      category: e.target.category.value,
+      categories: e.target.category.value,
       collection: e.target.collection.value,
       ingredients: ingredient,
       how_to: how,
@@ -91,7 +91,6 @@ export default function CanvasRecipe(props: {
       alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-
     const data = new FormData();
     data.append("file", e.target.imageUrl.files[0]);
     data.append("newRecipe", JSON.stringify(cocktailData));

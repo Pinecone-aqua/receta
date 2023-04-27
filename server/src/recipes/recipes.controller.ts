@@ -73,8 +73,8 @@ export class RecipesController {
     }
   }
 
-  @Delete(":id")
-  remove(@Param("id") id: string) {
+  @Delete("delete")
+  remove(@Query("id") id: string) {
     return this.recipesService.remove(id);
   }
 }
