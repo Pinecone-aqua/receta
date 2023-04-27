@@ -18,7 +18,7 @@ export default function Navbar(): JSX.Element {
   return (
     <header className="text-currentColor  container mx-auto flex justify-between p-8">
       <h1
-        className="text-[32px] font-bold cursor-pointer"
+        className="text-[32px] text-white font-bold cursor-pointer"
         onClick={() => {
           router.push("../");
         }}
@@ -54,7 +54,7 @@ export default function Navbar(): JSX.Element {
           </MenuList>
         </Menu>
       ) : (
-        <Link href="../login" className="mt-3">
+        <Link href="../login" className="mt-3 text-white">
           login
         </Link>
       )}
