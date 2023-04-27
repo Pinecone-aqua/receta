@@ -35,7 +35,7 @@ export default function Navbar(): JSX.Element {
           aria-invalid="false"
           placeholder="search"
         />
-        <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px]" />
+        <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px] text-white" />
       </form>
       {user ? (
         <Menu>
