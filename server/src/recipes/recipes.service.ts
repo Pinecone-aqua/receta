@@ -9,9 +9,6 @@ import { CreateRecipesDto } from "./recipes.create.dto";
 
 @Injectable()
 export class RecipesService {
-  remove(id: string) {
-    throw new Error("Method not implemented.");
-  }
   constructor(
     @InjectModel(Recipe.name) private recipeModel: Model<Recipe>,
     @InjectModel(Collection.name) private collectionsModel: Model<Collection>,
@@ -73,7 +70,6 @@ export class RecipesService {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   async remove(id: number) {
     this.recipeModel.delete(filter);
   }
