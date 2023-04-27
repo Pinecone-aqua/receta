@@ -75,7 +75,7 @@ export default function Login(): JSX.Element {
           >
             Нэвтрэх
           </button>
-          <div className="relative w-full h-[20px] ">
+          <div className="relative w-full h-[20px]">
             <Divider orientation="horizontal" className="absolute top-5 " />
             <span className="absolute mx-auto ms-[41%] top-0 text-white bg-[#1e1e1e] p-2">
               эсвэл
