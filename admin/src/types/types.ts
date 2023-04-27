@@ -1,3 +1,5 @@
+// import { ReactNode } from "react";
+
 export interface CollectionType {
   name: string;
 }
@@ -7,7 +9,13 @@ export interface ToolsType {
   name: string;
 }
 
+// export interface RecipeType {
+//   name(arg0: string, name: any): unknown;
+//   _id: ReactNode;
+// }
+
 export interface CocktailType {
+  
   name: string;
   description: string;
   category: string;

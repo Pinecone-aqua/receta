@@ -103,7 +103,7 @@ export default function CanvasRecipe(props: {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
         create recipe
       </Button>
 

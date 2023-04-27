@@ -23,7 +23,7 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
         Create category
       </Button>
 
