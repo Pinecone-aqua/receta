@@ -2,8 +2,8 @@ export default function MenuThreeDot() {
   return (
     <div>
       <svg
-        width="88"
-        height="296"
+        width="6"
+        height="18"
         viewBox="0 0 88 296"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

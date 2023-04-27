@@ -6,7 +6,18 @@ import CanvasTools from "./CanvasTools";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-// import { Column } from "primereact/column";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from '@chakra-ui/react'
+import DeleteRecipe from "./DeleteRecipe";
+import EditRecipe from "./EditRecipe";
+// import MenuThreeDot from "../icons/MenuThreeDot";
 
 export default function Recipe(): JSX.Element {
   const [collections, setCollections] = useState([]);
@@ -33,18 +44,19 @@ export default function Recipe(): JSX.Element {
   // console.log("col", collections);
   // console.log("tool", tools);
   // console.log("res", recipes);
-  // console.log("cat", categories);
+  console.log("res", recipes);
 
   const imageBodyTemplate = (tools: { image_url: string }) => (
     <img src={`${tools.image_url}`} className="w-[100px] shadow border-round" />
   );
 
-  const imageBodyRecipe = (recipes: { image_url: string }) => (
-    <img
-      src={`${recipes.image_url}`}
-      className="w-[100px] shadow border-round"
-    />
-  );
+  // const imageBodyRecipe = (recipes: { image_url: string }) => (
+  //   <img
+  //     src={`${recipes.image_url}`}
+  //     className="w-[100px] shadow border-round"
+  //   />
+  // );
+
 
   return (
     <div className="flex gap-3 ml-[10px]">
@@ -59,7 +71,38 @@ export default function Recipe(): JSX.Element {
           <TabPanels>
             <TabPanel>
               <CanvasRecipe collections={collections} tools={tools} />
-              <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
+
+              <TableContainer>
+                <Table size='lg'>
+                  <Thead>
+                    <Tr>
+                      <Th>Name</Th>
+                      <Th>Collection</Th>
+                      <Th>ID</Th>
+                      <Th>Image</Th>
+                      <Th>Options</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                      {recipes.map((recipe, index) => (
+                        <Tr key={index}>
+                          <Td>{recipe.name}</Td>
+                          <Td>{recipe.collection_id}</Td>
+                          <Td>{recipe._id}</Td>
+                          <img width="100px" src={recipe.image_url} />
+                          <Td>
+                            <DeleteRecipe onClick={console.log(recipe._id)} recipe={recipe} />
+                            <EditRecipe />
+                          </Td>
+                        </Tr>
+                      ))}
+                     
+                    
+                  </Tbody>
+                </Table>
+              </TableContainer>
+
+              {/* <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
                 <Column field="name" header="Name" />
                 <Column field="collection_id" header="Collection" />
                 <Column field="categories_id.name" header="Categories" />
@@ -69,7 +112,8 @@ export default function Recipe(): JSX.Element {
                   header="Image"
                   body={imageBodyRecipe}
                 />
-              </DataTable>
+                
+              </DataTable> */}
             </TabPanel>
             <TabPanel>
               <CanvasCateg collections={collections} />
