@@ -88,9 +88,9 @@ export default function OurStory() {
           </button>
         </div>
         <div className="flex">
-          <div className="border border-s-0 border-t-0 border-[gray] h-[250px] w-[10%]"></div>
-          <div className="border border-s-0 border-t-0 border-[gray] h-[250px] w-[72%]"></div>
-          <div className="border border-s-0 border-e-0 border-[gray] border-t-0 h-[250px] w-[18%]"></div>
+          <div className="border border-s-0 border-t-0 border-[#054B68] h-[250px] w-[10%]"></div>
+          <div className="border border-s-0 border-t-0 border-[#054B68] h-[250px] w-[72%]"></div>
+          <div className="border border-s-0 border-e-0 border-[#054B68] border-t-0 h-[250px] w-[18%]"></div>
         </div>
       </div>
       <div className="journal relative">
