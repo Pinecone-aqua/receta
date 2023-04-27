@@ -3,17 +3,9 @@ import { useEffect, useState } from "react";
 import CanvasRecipe from "./CanvasRecipe";
 import CanvasCateg from "./CanvasCateg";
 import CanvasTools from "./CanvasTools";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  useDisclosure,
-  Button,
-} from "@chakra-ui/react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { TabPanel } from "primereact/tabview";
 import {
   Table,
   Thead,
@@ -23,9 +15,6 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
-import DeleteRecipe from "./DeleteRecipe";
-import EditRecipe from "./EditRecipe";
-import { CocktailType } from "@/src/types/types";
 
 export default function Recipe(): JSX.Element {
   const [showDel, setShowDel] = useState<boolean>(true);
@@ -51,9 +40,15 @@ export default function Recipe(): JSX.Element {
       .then((res) => setTools(res.data));
   }, []);
 
-  const imageBodyTemplate = (tools: { image_url: string }) => (
-    <img src={`${tools.image_url}`} className="w-[100px] shadow border-round" />
-  );
+  // const imageBodyTemplate = (products: any) => (
+  //   <picture>
+  //     <img
+  //       src={`${products.image_url}`}
+  //       alt={products.image_url}
+  //       className="w-[80px] shadow border-round"
+  //     />
+  //   </picture>
+  // );
 
   return (
     <div className="flex gap-3 ml-[10px]">
@@ -75,8 +70,8 @@ export default function Recipe(): JSX.Element {
                     <Tr>
                       <Th>Name</Th>
                       <Th>Collection</Th>
+                      <Th>ID</Th>
                       <Th>Image</Th>
-                      <Th>Category</Th>
                       <Th>Options</Th>
                     </Tr>
                   </Thead>
@@ -85,28 +80,13 @@ export default function Recipe(): JSX.Element {
                       <Tr key={index}>
                         <Td>{recipe.name}</Td>
                         <Td>{recipe.collection_id}</Td>
+                        <Td>{recipe._id}</Td>
+                        <img width="100px" src={recipe.image_url} />
                         <Td>
-                          <img className="w-[100px]" src={recipe.image_url} />
-                        </Td>
-                        {recipe.categories_id.map((cate, index) => (
-                          <Td key={index}>{cate.name}</Td>
-                        ))}
-                        <Td>
-                          <Button
-                            onClick={() => {
-                              setShowDel(!showDel);
-                              return (
-                                <DeleteRecipe
-                                  recipe={recipe}
-                                  showDel={showDel}
-                                />
-                              );
-                            }}
-                            className="ml-[10px]"
-                          >
-                            Delete
-                          </Button>
-
+                          <DeleteRecipe
+                            onClick={console.log(recipe._id)}
+                            recipe={recipe}
+                          />
                           <EditRecipe />
                         </Td>
                       </Tr>
@@ -114,6 +94,19 @@ export default function Recipe(): JSX.Element {
                   </Tbody>
                 </Table>
               </TableContainer>
+
+              {/* <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
+                <Column field="name" header="Name" />
+                <Column field="collection_id" header="Collection" />
+                <Column field="categories_id.name" header="Categories" />
+                <Column field="alcohol" header="Alcoholic" />
+                <Column
+                  field="image_url"
+                  header="Image"
+                  body={imageBodyRecipe}
+                />
+                
+              </DataTable> */}
             </TabPanel>
             <TabPanel>
               <CanvasCateg collections={collections} />
