@@ -10,6 +10,7 @@ export default function Layout({
   children: JSX.Element;
 }): JSX.Element {
   const { activeBtn, activePage } = useProduct();
+  console.log("test");
 
   function bgHandler() {
     if (activeBtn == "difficulty") {
