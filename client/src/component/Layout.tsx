@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useProduct } from "@/context/ProductContext";
 import Head from "next/head";
-import { ReactNode } from "react";
+import SideBar, { Pages } from "./SideBar";
 
 export default function Layout({
   children,

@@ -28,11 +28,11 @@ function Image({ sub }: { sub: any }) {
             alt="A London skyscraper"
           />
         </div>
-        <motion.h2 style={{ y }} className={`text-currentColor h2`}>
+        <motion.h2 style={{ y }} className={` h2`}>
           {`${sub.title}`}
         </motion.h2>
-        <p className={`w-[50%] ${sub.textClass}`}>{sub.text}</p>
-        <button className="absolute bottom-[150px] flex">
+        <p className={`w-[50%] text-white ${sub.textClass}`}>{sub.text}</p>
+        <button className="absolute bottom-[150px] flex text-white">
           read more
           <BsArrowRightShort className="mt-[2px] w-[20px] h-[20px]" />
         </button>
