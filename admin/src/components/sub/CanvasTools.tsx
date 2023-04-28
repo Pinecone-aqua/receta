@@ -27,18 +27,18 @@ export default function CanvasTools() {
         show={show}
         onHide={handleClose}
         placement="top"
-        className="w-2/5 mx-auto rounded-md mt-[5%]"
+        className="w-1/4 mx-auto rounded-md mt-[5%]"
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Create tool</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="place-content-center flex">
           <form className="flex flex-col" onSubmit={createCateHandler}>
-            <label>
+            <label className="flex flex-col gap-2 mb-[20px]">
               Tool name
               <input className="border" type="text" name="name" />
             </label>
-            <label className="mt-[5px]">
+            <label className="flex flex-col gap-2 mb-[20px]">
               Tool image
               <input className="border" type="file" name="image" />
             </label>

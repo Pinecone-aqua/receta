@@ -46,10 +46,6 @@ export default function Recipe(): JSX.Element {
       .then((res) => setTools(res.data));
   }, []);
 
-  console.log("tools",tools);
-  console.log("res",recipes);
-  console.log("cat",categories);
-
   const toast = useRef<null | any>(null);
 
   const confirm2 = (recipe: CocktailType) => {
@@ -66,7 +62,7 @@ export default function Recipe(): JSX.Element {
             <i
               className="pi pi-exclamation-triangle"
               style={{ fontSize: "3rem" }}
-             />
+            />
             <div className="font-bold text-xl my-3">
               Та {recipe.name}-г устгахдаа итгэлтэй байна уу?
             </div>
@@ -137,7 +133,13 @@ export default function Recipe(): JSX.Element {
                         <Td className="p-0 flex justify-center" width="200px">
                           <img width="100px" src={recipe.image_url} />
                         </Td>
-                        <Td>{recipe.alcohol}</Td>
+                        <Td>
+                          {recipe.alcohol ? (
+                            <div>alcoholic</div>
+                          ) : (
+                            <div>non alcoholic</div>
+                          )}
+                        </Td>
                         {/* <Td className="p-2 word-wrap">b</Td> */}
                         {/* <Td className="h-[40px] w-[150px] p-2 break-words">{recipe.description}</Td> */}
                         {/* <Td className="p-2">b</Td> */}
@@ -152,7 +154,7 @@ export default function Recipe(): JSX.Element {
                               }}
                               label="Delete"
                               className="p-button-danger p-button-outlined"
-                             />
+                            />
                           </div>
                         </Td>
                       </Tr>
@@ -163,28 +165,28 @@ export default function Recipe(): JSX.Element {
             </TabPanel>
             <TabPanel>
               <TabPanel>
-              <CanvasCateg collections={collections} />
-              <TableContainer>
-                <Table size="lg">
-                  <Thead>
-                    <Tr>
-                      <Th>Name</Th>
-                      <Th>Collection</Th>
-                      <Th>ID</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                  {categories.map((categ, index) => (
-                      <Tr key={index}>
-                        <Td>{categ.name}</Td>
-                        <Td>{categ.collection_name}</Td>
-                        <Td>{categ._id}</Td>
+                <CanvasCateg collections={collections} />
+                <TableContainer>
+                  <Table size="lg">
+                    <Thead>
+                      <Tr>
+                        <Th>Name</Th>
+                        <Th>Collection</Th>
+                        <Th>ID</Th>
                       </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-              {/* <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
+                    </Thead>
+                    <Tbody>
+                      {categories.map((categ, index) => (
+                        <Tr key={index}>
+                          <Td>{categ.name}</Td>
+                          <Td>{categ.collection_name}</Td>
+                          <Td>{categ._id}</Td>
+                        </Tr>
+                      ))}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+                {/* <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
                 <Column field="name" header="Name" />
                 <Column field="collection_name" header="Collection" />
                 <Column field="_id" header="ID" />
@@ -203,10 +205,15 @@ export default function Recipe(): JSX.Element {
                     </Tr>
                   </Thead>
                   <Tbody>
-                  {tools.map((tool, index) => (
+                    {tools.map((tool, index) => (
                       <Tr key={index}>
                         <Td>{tool.name}</Td>
-                        <Td><img className="w-[150px] drop-shadow-2xl" src={tool.image_url} /></Td>
+                        <Td>
+                          <img
+                            className="w-[150px] drop-shadow-2xl"
+                            src={tool.image_url}
+                          />
+                        </Td>
                         <Td>{tool._id}</Td>
                       </Tr>
                     ))}
