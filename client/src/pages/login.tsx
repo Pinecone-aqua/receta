@@ -43,7 +43,7 @@ export default function Login(): JSX.Element {
           receta.
         </h1>
         <form
-          className="md:w-[60%] min-w-[300px] max-w-[500px] sm:w-[70%] mx-auto mt-[10%] flex flex-col gap-5"
+          className=" w-[500px] mx-auto mt-[10%] flex flex-col gap-5"
           onSubmit={(e) => loginHandler(e)}
         >
           <Input

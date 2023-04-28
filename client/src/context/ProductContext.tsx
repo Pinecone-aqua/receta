@@ -15,21 +15,14 @@ export const useProduct = () => useContext(productContext);
 
 export default function ProductProvider({ children }: PropType) {
   const [activeBtn, setActiveBtn] = useState<string | null>("difficulty");
+  const [activePage, setActivePage] = useState<string | null>("Main");
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
   const [categories, setCategories] = useState<CategoriesType[]>([]);
-  const [currentColor, setCurrentColor] = useState<string | null>("#124822");
+  // const [currentColor, setCurrentColor] = useState<string | null>("#124822");
 
   useEffect(() => {
-    if (activeBtn === "difficulty") {
-      setCurrentColor("#124822");
-    } else if (activeBtn === "strong") {
-      setCurrentColor("#790C0C");
-    } else if (activeBtn === "sweet") {
-      setCurrentColor("#B63122");
-    } else {
-      setCurrentColor("#054B68");
-    }
-  }, [activeBtn]);
+    setActivePage(localStorage.getItem("page"));
+  }, []);
 
   useEffect(() => {
     axios
@@ -47,9 +40,11 @@ export default function ProductProvider({ children }: PropType) {
         recipes,
         activeBtn,
         setActiveBtn,
-        currentColor,
+        // currentColor,
         categories,
         setRecipes,
+        setActivePage,
+        activePage,
       }}
     >
       {children}

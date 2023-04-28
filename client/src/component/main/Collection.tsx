@@ -6,8 +6,7 @@ import { RiArrowDropDownFill } from "react-icons/ri";
 
 export default function Collection(): JSX.Element {
   const [data, setData] = useState<CollectionType[]>([]);
-  // const currentColor = localStorage.getItem("currentColor");
-  const { setActiveBtn, currentColor, activeBtn } = useProduct();
+  const { setActiveBtn, activeBtn } = useProduct();
 
   useEffect(() => {
     axios
@@ -39,8 +38,8 @@ export default function Collection(): JSX.Element {
             <p
               className={
                 activeBtn == collection.name
-                  ? `z-0 absolute text-3xl top-[40%] left-[25%] font-bold text-[150px] text-${currentColor}`
-                  : `text-${currentColor} cursor-pointer text-center`
+                  ? `z-0 absolute text-3xl top-[40%] left-[25%] font-bold text-[150px] text-currentColor`
+                  : `text-currentColor cursor-pointer text-center`
               }
             >
               {collection.name}

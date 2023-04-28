@@ -7,10 +7,12 @@ import Arrow from "../../../public/Arrow";
 
 export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
   const recipes: RecipesType = props.recipes;
+
   console.log(recipes);
+
   return (
     <div className="">
-      <div className="recipe-page">
+      <div className="recipe-page text-[#FFFBF1]">
         <Navbar />
       </div>
       <div className="">
@@ -36,16 +38,14 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
               </div>
               <div className="text-[24px]">
                 <div className="font-bold mt-[160px]">Prepare</div>
-                {recipes.how_to.map((single: any, index: number) => {
-                  return (
-                    <div
-                      className="leading-8 mt-5 mb-[3rem] font-medium"
-                      key={index}
-                    >
-                      {index + 1}. {single}
-                    </div>
-                  );
-                })}
+                {recipes.how_to.map((single: any, index: number) => (
+                  <div
+                    className="leading-8 mt-5 mb-[3rem] font-medium"
+                    key={index}
+                  >
+                    {index + 1}. {single}
+                  </div>
+                ))}
               </div>
             </div>
             <div className="h-[100px]">
@@ -53,16 +53,21 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
                 <TabList>
                   <Tab
                     _selected={{
-                      bg: "#323232",
-                      border: "none !important",
+                      bg: "#1e1e1e !important",
                     }}
-                    style={{ borderBottom: "1px solid white" }}
+                    style={{
+                      background: "#323232",
+                    }}
                   >
                     <div className="p-1">Ingredients</div>
                   </Tab>
                   <Tab
-                    _selected={{ bg: "#323232", border: "none !important" }}
-                    style={{ borderBottom: "1px solid white" }}
+                    _selected={{
+                      bg: "#1e1e1e !important",
+                    }}
+                    style={{
+                      background: "#323232",
+                    }}
                   >
                     Tools
                   </Tab>
@@ -74,13 +79,11 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
                     overflowY="auto"
                   >
                     {recipes.ingredients.map(
-                      (ingredient: any, index: number) => {
-                        return (
-                          <p className="text-[18px] leading-9" key={index}>
-                            {ingredient}
-                          </p>
-                        );
-                      }
+                      (ingredient: any, index: number) => (
+                        <p className="text-[18px] leading-9" key={index}>
+                          {ingredient}
+                        </p>
+                      )
                     )}
                   </TabPanel>
                   <TabPanel
@@ -88,13 +91,11 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
                     paddingLeft={100}
                     overflowY="auto"
                   >
-                    {recipes.tools_id.map((tool: any, index: number) => {
-                      return (
-                        <p className="text-[18px] leading-9" key={index}>
-                          {tool.name}
-                        </p>
-                      );
-                    })}
+                    {recipes.tools_id.map((tool: any, index: number) => (
+                      <p className="text-[18px] leading-9" key={index}>
+                        {tool.name}
+                      </p>
+                    ))}
                   </TabPanel>
                 </TabPanels>
               </Tabs>
