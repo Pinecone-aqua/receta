@@ -7,7 +7,7 @@ import Arrow from "../../../public/Arrow";
 
 export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
   const recipes: RecipesType = props.recipes;
-
+  console.log(recipes);
   return (
     <div className="">
       <div className="recipe-page text-[#FFFBF1]">

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
 import { useUser } from "@/context/UserContext";
-import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Avatar, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 
 export default function Navbar(): JSX.Element {
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function Navbar(): JSX.Element {
   return (
     <header className="text-currentColor container mx-auto flex justify-between p-8">
       <h1
-        className="text-[32px] text-white font-bold cursor-pointer"
+        className="text-[32px] font-bold cursor-pointer"
         onClick={() => {
           router.push("../");
         }}
