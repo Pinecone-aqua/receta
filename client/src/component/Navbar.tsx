@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
-import {} from "react-icons/ri";
 import { useUser } from "@/context/UserContext";
-import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Avatar, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 
 export default function Navbar(): JSX.Element {
   const router = useRouter();
@@ -16,9 +15,9 @@ export default function Navbar(): JSX.Element {
   }
 
   return (
-    <header className="text-currentColor  container mx-auto flex justify-between p-8">
+    <header className="text-currentColor container mx-auto flex justify-between p-8">
       <h1
-        className="text-[32px] text-white font-bold cursor-pointer"
+        className="text-[32px] font-bold cursor-pointer"
         onClick={() => {
           router.push("../");
         }}
@@ -35,8 +34,9 @@ export default function Navbar(): JSX.Element {
           aria-invalid="false"
           placeholder="search"
         />
-        <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px] text-white" />
+        <CiSearch className="absolute right-0 top-2 w-[25px] h-[25px] text-currentColor" />
       </form>
+
       {user ? (
         <Menu>
           <MenuButton>
@@ -54,7 +54,7 @@ export default function Navbar(): JSX.Element {
           </MenuList>
         </Menu>
       ) : (
-        <Link href="../login" className="mt-3 text-white">
+        <Link href="../login" className="mt-3 text-currentColor">
           login
         </Link>
       )}

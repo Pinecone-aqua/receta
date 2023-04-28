@@ -7,7 +7,7 @@ export default function Popular(): JSX.Element {
         Popular and easy to learn cocktails
       </h2>
       {/* <div className="container mx-auto flex justify-between"></div> */}
-      <Recipes bgColor="#1E1E1E" textColor="#FFFBF1" />
+      <Recipes />
     </div>
   );
 }
