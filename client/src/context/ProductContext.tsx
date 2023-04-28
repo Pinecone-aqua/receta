@@ -22,6 +22,8 @@ export default function ProductProvider({ children }: PropType) {
   useEffect(() => {
     if (localStorage.getItem("currentCollection"))
       setActiveBtn(localStorage.getItem("currentCollection"));
+    if (localStorage.getItem("currentPage"))
+      setActivePage(localStorage.getItem("page"));
   }, []);
 
   useEffect(() => {
@@ -36,7 +38,15 @@ export default function ProductProvider({ children }: PropType) {
 
   return (
     <productContext.Provider
-      value={{ recipes, activeBtn,activePage,setActivePage setActiveBtn, categories, setRecipes }}
+      value={{
+        recipes,
+        activeBtn,
+        activePage,
+        setActivePage,
+        setActiveBtn,
+        categories,
+        setRecipes,
+      }}
     >
       {children}
     </productContext.Provider>
