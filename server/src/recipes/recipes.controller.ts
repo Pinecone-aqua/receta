@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Query,
   UploadedFile,
@@ -69,5 +71,10 @@ export class RecipesController {
     } catch (e) {
       return e.message;
     }
+  }
+
+  @Delete("delete")
+  remove(@Query() recipe: string) {
+    return this.recipesService.remove(recipe);
   }
 }

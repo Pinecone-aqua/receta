@@ -23,7 +23,7 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
         Create category
       </Button>
 
@@ -31,14 +31,14 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
         show={show}
         onHide={handleClose}
         placement="top"
-        className="w-2/5 mx-auto rounded-md mt-[5%]"
+        className="w-1/5 mx-auto rounded-md mt-[5%]"
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Category</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="place-content-center flex">
-          <form className="flex flex-col" onSubmit={createCateHandler}>
-            <label>
+          <form className="flex flex-col w-3/4" onSubmit={createCateHandler}>
+            <label className="flex justify-between mb-[40px] mt-[10px]">
               Collection
               <select className="border" name="collection">
                 {collections.map((collection, index) => (
@@ -46,20 +46,20 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
                 ))}
               </select>
             </label>
-            <label>
+            <label className="flex flex-col gap-2 mb-[40px]">
               Category name
               <input className="border" type="text" name="name" />
             </label>
-            <div className="flex justify-between mt-[10px] mb-[10px]">
+            <div className="flex justify-between mb-[10px]">
               <Button
-                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
+                className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
                 type="button"
                 onClick={() => setShow(false)}
               >
                 Cancel
               </Button>
               <button
-                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
+                className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
                 type="submit"
               >
                 Create

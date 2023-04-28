@@ -1,4 +1,3 @@
-
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose from "mongoose";
 import { Category } from "../categories/category.schema";
@@ -20,12 +19,11 @@ export class Recipe {
   @Prop()
   video_url: string;
 
-  @Prop({ type: mongoose.Types.ObjectId, ref: 'Collection' })
+  @Prop({ type: mongoose.Types.ObjectId, ref: "Collection" })
   collection_id: Collection;
-  @Prop({ type: mongoose.Types.ObjectId, ref: 'Category' })
+  @Prop({ type: mongoose.Types.ObjectId, ref: "Category" })
   categories_id: Category[];
-  @Prop({ type: mongoose.Types.ObjectId, ref: 'Tool' })
-
+  @Prop({ type: mongoose.Types.ObjectId, ref: "Tool" })
   tools_id: Tool[];
   @Prop()
   alcohol: boolean;

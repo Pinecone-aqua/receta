@@ -70,6 +70,14 @@ export class RecipesService {
     }
   }
 
+  async remove(recipe: any) {
+    try {
+      return await this.recipeModel.deleteOne({ _id: recipe.id });
+    } catch (err) {
+      return err;
+    }
+  }
+
   async createRecipe(recipe: CreateRecipesDto) {
     try {
       //collection find name
@@ -88,11 +96,9 @@ export class RecipesService {
 
       const tool = await this.toolsModel
         .find({
-          name: recipe.tools,
+          _id: recipe.tools,
         })
         .select({ name: 1 });
-
-      console.log(recipe);
 
       return this.recipeModel.create({
         name: recipe.name,

@@ -1,21 +1,41 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CanvasRecipe from "./CanvasRecipe";
 import CanvasCateg from "./CanvasCateg";
 import CanvasTools from "./CanvasTools";
-import { TabView } from "primereact/tabview";
-import { TabPanel } from "primereact/tabview";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+} from "@chakra-ui/react";
+import { CocktailType, ToolsType, CategoryType } from "@/src/types/types";
+import { Toast } from "primereact/toast";
+import { ConfirmPopup } from "primereact/confirmpopup";
+import { Button } from "primereact/button";
 
 export default function Recipe(): JSX.Element {
   const [collections, setCollections] = useState([]);
-  const [tools, setTools] = useState([]);
-  const [recipes, setRecipes] = useState([]);
+  const [tools, setTools] = useState<ToolsType[]>([]);
+  const [recipes, setRecipes] = useState<CocktailType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:3003/collections/get")
       .then((res) => setCollections(res.data));
+
+    axios
+      .get("http://localhost:3003/categories/get")
+      .then((res) => setCategories(res.data));
 
     axios
       .get("http://localhost:3003/recipes/all")
@@ -26,54 +46,193 @@ export default function Recipe(): JSX.Element {
       .then((res) => setTools(res.data));
   }, []);
 
-  const imageBodyTemplate = (products: any) => (
-    <picture>
-      <img
-        src={`${products.image_url}`}
-        alt={products.image_url}
-        className="w-[80px] shadow border-round"
-      />
-    </picture>
-  );
+  const toast = useRef<null | any>(null);
 
-  const allowExpansion = (recipes: string | any[]) => recipes.length > 0;
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const confirm2 = (recipe: CocktailType) => {
+    toast.current.show({
+      severity: "info",
+      sticky: true,
+
+      content: (
+        <div
+          className="flex flex-column align-items-center "
+          style={{ flex: "1" }}
+        >
+          <div className="text-center">
+            <i
+              className="pi pi-exclamation-triangle"
+              style={{ fontSize: "3rem" }}
+            />
+            <div className="font-bold text-xl my-3">
+              Та {recipe.name}-г устгахдаа итгэлтэй байна уу?
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              onClick={() => {
+                axios
+                  .delete(
+                    `http://localhost:3003/recipes/delete?id=${recipe._id}`
+                  )
+                  .then(
+                    (res) =>
+                      res.statusText == "ok" &&
+                      toast.current.show({
+                        severity: "success",
+                      })
+                  );
+                toast.current.clear();
+              }}
+              type="button"
+              label="Confirm"
+              className="p-button-success w-6rem"
+            />
+            <Button
+              onClick={() => toast.current.clear()}
+              type="button"
+              label="Cancel"
+              className="p-button-warning w-6rem"
+            />
+          </div>
+        </div>
+      ),
+    });
+  };
 
   return (
-    <div className="flex gap-3 ml-[10px]">
-      <div className="flex gap-3 ml-[10px] mt-[20px]">
-        <TabView
-          activeIndex={activeIndex}
-          onTabChange={(e) => setActiveIndex(e.index)}
-        >
-          <TabPanel header="Recipes">
-            <CanvasRecipe collections={collections} tools={tools} />
-            <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
-              <Column field="name" header="Name"></Column>
-              {/* (<Column header="Image" body={() => imageBodyTemplate} />) */}
-              <Column field="category" header="Category"></Column>
-              <Column field="quantity" header="Quantity"></Column>
-            </DataTable>
-          </TabPanel>
-          <TabPanel header="Categories">
-            <CanvasCateg collections={collections} />
-          </TabPanel>
-          <TabPanel header="Tools">
-            <CanvasTools />
-            <DataTable
-              value={tools}
-              tableStyle={{ minWidth: "20rem" }}
-              className="w-full"
-            >
-              <Column field="name" header="Name" />
-              {/* (<Column header="Image" body={imageBodyTemplate} />) */}
-              <Column field="quantity" header="Quantity" />
-            </DataTable>
-          </TabPanel>
-        </TabView>
+    <div className="w-full flex justify-center gap-3 ml-[10px]">
+      <div className="w-3/5 ml-[10px] mt-[20px]">
+        <Tabs>
+          <TabList>
+            <Tab>Recipes</Tab>
+            <Tab>Categories</Tab>
+            <Tab>Tools</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <CanvasRecipe collections={collections} tools={tools} />
+              <TableContainer>
+                <Table size="lg">
+                  <Thead>
+                    <Tr>
+                      <Th className="">Name</Th>
+                      <Th className="">Collection</Th>
+                      <Th className="">Image</Th>
+                      <Th className="">Alcoholic</Th>
+                      {/* <Th className="">Description</Th>
+                      <Th className="">How to make</Th> */}
+                      <Th className="">Options</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {recipes.map((recipe, index) => (
+                      <Tr className="" key={index}>
+                        <Td>{recipe.name}</Td>
+                        <Td>{recipe.collection_id}</Td>
+                        <Td className="p-0 flex justify-center" width="200px">
+                          <img width="100px" src={recipe.image_url} />
+                        </Td>
+                        <Td>
+                          {recipe.alcohol ? (
+                            <div>alcoholic</div>
+                          ) : (
+                            <div>non alcoholic</div>
+                          )}
+                        </Td>
+                        {/* <Td className="p-2 word-wrap">b</Td> */}
+                        {/* <Td className="h-[40px] w-[150px] p-2 break-words">{recipe.description}</Td> */}
+                        {/* <Td className="p-2">b</Td> */}
+                        {/* <Td>{recipe.how_to}</Td> */}
+                        <Td>
+                          <Toast ref={toast} />
+                          <ConfirmPopup />
+                          <div className="">
+                            <Button
+                              onClick={() => {
+                                confirm2(recipe);
+                              }}
+                              label="Delete"
+                              className="p-button-danger p-button-outlined"
+                            />
+                          </div>
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+            </TabPanel>
+            <TabPanel>
+              <TabPanel>
+                <CanvasCateg collections={collections} />
+                <TableContainer>
+                  <Table size="lg">
+                    <Thead>
+                      <Tr>
+                        <Th>Name</Th>
+                        <Th>Collection</Th>
+                        <Th>ID</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {categories.map((categ, index) => (
+                        <Tr key={index}>
+                          <Td>{categ.name}</Td>
+                          <Td>{categ.collection_name}</Td>
+                          <Td>{categ._id}</Td>
+                        </Tr>
+                      ))}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+                {/* <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
+                <Column field="name" header="Name" />
+                <Column field="collection_name" header="Collection" />
+                <Column field="_id" header="ID" />
+              </DataTable> */}
+              </TabPanel>
+            </TabPanel>
+            <TabPanel>
+              <CanvasTools />
+              <TableContainer>
+                <Table size="lg">
+                  <Thead>
+                    <Tr>
+                      <Th>Name</Th>
+                      <Th>Collection</Th>
+                      <Th>ID</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {tools.map((tool, index) => (
+                      <Tr key={index}>
+                        <Td>{tool.name}</Td>
+                        <Td>
+                          <img
+                            className="w-[150px] drop-shadow-2xl"
+                            src={tool.image_url}
+                          />
+                        </Td>
+                        <Td>{tool._id}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+              {/* <DataTable value={tools} tableStyle={{ minWidth: "50rem" }}>
+                <Column field="name" header="Name" />
+                <Column
+                  field="image_url"
+                  header="Collection"
+                  body={imageBodyTemplate}
+                />
+                <Column field="_id" header="ID" />
+              </DataTable> */}
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </div>
     </div>
   );
 }
-
-<TabView className="w-full"></TabView>;

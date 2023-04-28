@@ -1,8 +1,8 @@
 import {
   CollectionType,
-  CocktailType,
   ToolsType,
-  CategoryType,
+  CreateCategoryType,
+  CreateCocktailType,
 } from "@/src/types/types";
 import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
@@ -15,7 +15,7 @@ export default function CanvasRecipe(props: {
 }) {
   const { collections } = props;
   const { tools } = props;
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [categories, setCategories] = useState<CreateCategoryType[]>([]);
   const [show, setShow] = useState(false);
   const [check, setCheck] = useState<boolean | null>(false);
   const [ingredient, setIngredient] = useState<string[]>([]);
@@ -37,15 +37,12 @@ export default function CanvasRecipe(props: {
     }
   };
 
-  console.log(ingredient);
-
   const addInputHandlerHow = () => {
     tempRefHow.current && setHow([...how, tempRefHow.current]);
     if (inputRefIns.current) {
       inputRefIns.current.value = "";
     }
   };
-  console.log(how);
 
   //----
 
@@ -54,10 +51,10 @@ export default function CanvasRecipe(props: {
     setIngredient(deleteInput);
   };
 
-  // const removeInputHandlerHow = (index: number) => {
-  //   const deleteInputHow = how.filter((input, i) => index !== i);
-  //   setHow(deleteInputHow);
-  // };
+  const removeInputHandlerHow = (index: number) => {
+    const deleteInputHow = how.filter((input, i) => index !== i);
+    setHow(deleteInputHow);
+  };
 
   //add tool handler
   function addToolHandler(id: string) {
@@ -83,10 +80,10 @@ export default function CanvasRecipe(props: {
   function createCocktail(e: any) {
     e.preventDefault();
 
-    const cocktailData: CocktailType = {
+    const cocktailData: CreateCocktailType = {
       name: e.target.name.value,
       description: e.target.description.value,
-      category: e.target.category.value,
+      categories: e.target.category.value,
       collection: e.target.collection.value,
       ingredients: ingredient,
       how_to: how,
@@ -94,7 +91,6 @@ export default function CanvasRecipe(props: {
       alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-
     const data = new FormData();
     data.append("file", e.target.imageUrl.files[0]);
     data.append("newRecipe", JSON.stringify(cocktailData));
@@ -106,7 +102,7 @@ export default function CanvasRecipe(props: {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
         create recipe
       </Button>
 
@@ -178,7 +174,6 @@ export default function CanvasRecipe(props: {
                 ))}
               </select>
             </div>
-
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Ingredients</label>
@@ -257,7 +252,6 @@ export default function CanvasRecipe(props: {
                 type="button"
               />
             </div>
-
 
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>

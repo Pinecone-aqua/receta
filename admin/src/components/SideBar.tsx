@@ -20,7 +20,7 @@ export default function SideBar(): JSX.Element {
 
   const router = useRouter();
   return (
-    <div className="h-[100vh] bg-[#054B68] ps-[50px]">
+    <div className="h-[100vh] bg-[#054B68] ps-[50px] fixed">
       <h1 className="text-[#FFFBF1] text-[32px] font-bold mb-[100px] mt-[50px]">
         receta.
       </h1>
