@@ -6,6 +6,7 @@ export default function RecipeCard(props: {
 }): JSX.Element {
   const { recipe } = props;
   const router = useRouter();
+  console.log(recipe);
 
   return (
     <div
@@ -22,7 +23,9 @@ export default function RecipeCard(props: {
         />
       </picture>
       <div className="flex-col text-black text-center">
-        <p className="text-xs text-red-500 font-medium mt-2">Gin</p>
+        <p className="text-xs text-red-500 font-medium mt-2">
+          {recipe.categories_id.map((cate: any) => cate.name)}
+        </p>
         <p className={`font-bold text-currentColor`}>{recipe.name}</p>
       </div>
     </div>
