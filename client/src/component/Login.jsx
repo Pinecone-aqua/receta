@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Login() {
   const { data: session } = useSession();
+  console.log("bye");
   const [showModal, setShowModal] = useState(false);
 
   if (session) {
