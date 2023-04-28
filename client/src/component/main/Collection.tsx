@@ -20,6 +20,7 @@ export default function Collection(): JSX.Element {
         <div
           onClick={() => {
             setActiveBtn(collection.name);
+            localStorage.setItem("currentCollection", collection.name);
           }}
           key={index}
           className="w-[25%] flex justify-center items-end"
