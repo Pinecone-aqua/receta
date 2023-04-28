@@ -1,7 +1,7 @@
 import {
   CollectionType,
   ToolsType,
-  CategoryType,
+  CreateCategoryType,
   CreateCocktailType,
 } from "@/src/types/types";
 import axios from "axios";
@@ -15,7 +15,7 @@ export default function CanvasRecipe(props: {
 }) {
   const { collections } = props;
   const { tools } = props;
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [categories, setCategories] = useState<CreateCategoryType[]>([]);
   const [show, setShow] = useState(false);
   const [check, setCheck] = useState<boolean | null>(false);
   const [ingredient, setIngredient] = useState<string[]>([]);
