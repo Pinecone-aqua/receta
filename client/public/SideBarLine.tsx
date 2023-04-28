@@ -20,7 +20,6 @@ export default function SideBarLine() {
           <stop stopColor="currentColor" stopOpacity="0" />
           <stop offset="0.413846" stopColor="currentColor" />
           <stop offset="0.931158" stopColor="currentColor" stopOpacity="0" />
-<
         </linearGradient>
       </defs>
     </svg>

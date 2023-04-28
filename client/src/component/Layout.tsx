@@ -31,10 +31,7 @@ export default function Layout({
       </Head>
       <div className={bgHandler()}>
         <Navbar />
-        <div className={`flex ps-[5%] mx-auto min-h-[85vh] bg-currentColor`}>
-          <SideBar />
-          {Pages.map((page) => page.name == activePage && page.subPage)}
-        </div>
+
         <div className={`flex ps-[5%] mx-auto min-h-[85vh] bg-currentColor`}>
           <SideBar />
           {Pages.map((page) => page.name == activePage && page.subPage)}
