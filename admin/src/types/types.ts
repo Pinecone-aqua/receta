@@ -5,7 +5,7 @@ export interface CollectionType {
 }
 export interface ToolsType {
   _id: string;
-  image_url: string | undefined;
+  image_url: string;
   name: string;
 }
 
@@ -19,7 +19,7 @@ export interface CocktailType {
   how_to: string[];
   image_url: string;
   video_url: string;
-  alcohol: string;
+  alcohol: boolean;
   tools: string[];
 }
 export interface CreateCocktailType {
@@ -34,7 +34,13 @@ export interface CreateCocktailType {
   tools: string[];
 }
 
-export interface CategoryType {
+export interface CreateCategoryType {
   collection: string;
+  name: string;
+}
+
+export interface CategoryType {
+  collection_name: string;
+  _id: string;
   name: string;
 }

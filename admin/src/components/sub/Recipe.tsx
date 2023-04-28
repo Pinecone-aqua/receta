@@ -3,8 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import CanvasRecipe from "./CanvasRecipe";
 import CanvasCateg from "./CanvasCateg";
 import CanvasTools from "./CanvasTools";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
 import {
   Table,
   Thead,
@@ -17,17 +15,18 @@ import {
   TabList,
   Tab,
   TabPanels,
+  TabPanel,
 } from "@chakra-ui/react";
-import { CocktailType } from "@/src/types/types";
+import { CocktailType, ToolsType, CategoryType } from "@/src/types/types";
 import { Toast } from "primereact/toast";
 import { ConfirmPopup } from "primereact/confirmpopup";
 import { Button } from "primereact/button";
 
 export default function Recipe(): JSX.Element {
   const [collections, setCollections] = useState([]);
-  const [tools, setTools] = useState([]);
+  const [tools, setTools] = useState<ToolsType[]>([]);
   const [recipes, setRecipes] = useState<CocktailType[]>([]);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
 
   useEffect(() => {
     axios
@@ -47,6 +46,10 @@ export default function Recipe(): JSX.Element {
       .then((res) => setTools(res.data));
   }, []);
 
+  console.log("tools",tools);
+  console.log("res",recipes);
+  console.log("cat",categories);
+
   const toast = useRef<null | any>(null);
 
   const confirm2 = (recipe: CocktailType) => {
@@ -56,16 +59,16 @@ export default function Recipe(): JSX.Element {
 
       content: (
         <div
-          className="flex flex-column align-items-center"
+          className="flex flex-column align-items-center "
           style={{ flex: "1" }}
         >
           <div className="text-center">
             <i
               className="pi pi-exclamation-triangle"
               style={{ fontSize: "3rem" }}
-            ></i>
+             />
             <div className="font-bold text-xl my-3">
-              Та {recipe.name}-г устгахдаа итгэлтэй байна у?
+              Та {recipe.name}-г устгахдаа итгэлтэй байна уу?
             </div>
           </div>
           <div className="flex gap-2">
@@ -101,8 +104,8 @@ export default function Recipe(): JSX.Element {
   };
 
   return (
-    <div className="flex gap-3 ml-[10px]">
-      <div className="flex gap-3 ml-[10px] mt-[20px]">
+    <div className="w-full flex justify-center gap-3 ml-[10px]">
+      <div className="w-3/5 ml-[10px] mt-[20px]">
         <Tabs>
           <TabList>
             <Tab>Recipes</Tab>
@@ -111,26 +114,34 @@ export default function Recipe(): JSX.Element {
           </TabList>
 
           <TabPanels>
-            <TabPanels>
+            <TabPanel>
               <CanvasRecipe collections={collections} tools={tools} />
               <TableContainer>
                 <Table size="lg">
                   <Thead>
                     <Tr>
-                      <Th>Name</Th>
-                      <Th>Collection</Th>
-                      <Th>Image</Th>
-                      <Th>Options</Th>
+                      <Th className="">Name</Th>
+                      <Th className="">Collection</Th>
+                      <Th className="">Image</Th>
+                      <Th className="">Alcoholic</Th>
+                      {/* <Th className="">Description</Th>
+                      <Th className="">How to make</Th> */}
+                      <Th className="">Options</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
                     {recipes.map((recipe, index) => (
-                      <Tr key={index}>
+                      <Tr className="" key={index}>
                         <Td>{recipe.name}</Td>
                         <Td>{recipe.collection_id}</Td>
-                        <Td>
+                        <Td className="p-0 flex justify-center" width="200px">
                           <img width="100px" src={recipe.image_url} />
                         </Td>
+                        <Td>{recipe.alcohol}</Td>
+                        {/* <Td className="p-2 word-wrap">b</Td> */}
+                        {/* <Td className="h-[40px] w-[150px] p-2 break-words">{recipe.description}</Td> */}
+                        {/* <Td className="p-2">b</Td> */}
+                        {/* <Td>{recipe.how_to}</Td> */}
                         <Td>
                           <Toast ref={toast} />
                           <ConfirmPopup />
@@ -141,7 +152,7 @@ export default function Recipe(): JSX.Element {
                               }}
                               label="Delete"
                               className="p-button-danger p-button-outlined"
-                            ></Button>
+                             />
                           </div>
                         </Td>
                       </Tr>
@@ -149,40 +160,69 @@ export default function Recipe(): JSX.Element {
                   </Tbody>
                 </Table>
               </TableContainer>
-
-              {/* <DataTable value={recipes} tableStyle={{ minWidth: "50rem" }}>
-                <Column field="name" header="Name" />
-                <Column field="collection_id" header="Collection" />
-                <Column field="categories_id.name" header="Categories" />
-                <Column field="alcohol" header="Alcoholic" />
-                <Column
-                  field="image_url"
-                  header="Image"
-                  body={imageBodyRecipe}
-                />
-                
-              </DataTable> */}
-            </TabPanels>
-            <TabPanels>
+            </TabPanel>
+            <TabPanel>
+              <TabPanel>
               <CanvasCateg collections={collections} />
-              <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
+              <TableContainer>
+                <Table size="lg">
+                  <Thead>
+                    <Tr>
+                      <Th>Name</Th>
+                      <Th>Collection</Th>
+                      <Th>ID</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                  {categories.map((categ, index) => (
+                      <Tr key={index}>
+                        <Td>{categ.name}</Td>
+                        <Td>{categ.collection_name}</Td>
+                        <Td>{categ._id}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+              {/* <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
                 <Column field="name" header="Name" />
                 <Column field="collection_name" header="Collection" />
                 <Column field="_id" header="ID" />
-              </DataTable>
-            </TabPanels>
-            <TabPanels>
+              </DataTable> */}
+              </TabPanel>
+            </TabPanel>
+            <TabPanel>
               <CanvasTools />
-              <DataTable value={tools} tableStyle={{ minWidth: "50rem" }}>
+              <TableContainer>
+                <Table size="lg">
+                  <Thead>
+                    <Tr>
+                      <Th>Name</Th>
+                      <Th>Collection</Th>
+                      <Th>ID</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                  {tools.map((tool, index) => (
+                      <Tr key={index}>
+                        <Td>{tool.name}</Td>
+                        <Td><img className="w-[150px] drop-shadow-2xl" src={tool.image_url} /></Td>
+                        <Td>{tool._id}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+              {/* <DataTable value={tools} tableStyle={{ minWidth: "50rem" }}>
                 <Column field="name" header="Name" />
-                {/* <Column
+                <Column
                   field="image_url"
                   header="Collection"
                   body={imageBodyTemplate}
-                /> */}
+                />
                 <Column field="_id" header="ID" />
-              </DataTable>
-            </TabPanels>
+              </DataTable> */}
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </div>
