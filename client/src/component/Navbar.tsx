@@ -3,10 +3,13 @@ import { useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
 import { useUser } from "@/context/UserContext";
 import { Avatar, Menu, MenuButton, MenuList } from "@chakra-ui/react";
+import Cookies from "js-cookie";
 
 export default function Navbar(): JSX.Element {
   const router = useRouter();
   const { user, setUser } = useUser();
+
+  console.log(user);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function searchHandler(e: any): void {
@@ -15,7 +18,7 @@ export default function Navbar(): JSX.Element {
   }
 
   return (
-    <header className="text-currentColor container mx-auto flex justify-between p-8">
+    <header className="text-currentColor container mx-auto flex justify-between py-8">
       <h1
         className="text-[32px] font-bold cursor-pointer"
         onClick={() => {
@@ -40,14 +43,27 @@ export default function Navbar(): JSX.Element {
       {user ? (
         <Menu>
           <MenuButton>
-            <Avatar size="sm" name={user.email} />
+            <img
+              className="w-[35px] h-[35px] rounded-[25px]"
+              src={user.picture}
+              alt=""
+            />
           </MenuButton>
-          <MenuList>
-            <p className="text-black">settings</p>
-            <p className="text-black">account</p>
+          <MenuList className="flex flex-col gap-3">
+            <p className="text-[16px] text-black border-b-[1px]">
+              hello! {user.name}
+            </p>
+            <p className="text-black cursor-pointer hover:text-red-400">
+              settings
+            </p>
+            <p className="text-black cursor-pointer hover:text-red-400">
+              account
+            </p>
             <p
-              className="text-black cursor-pinter"
-              onClick={() => setUser(undefined)}
+              className="text-black cursor-pointer hover:text-red-400"
+              onClick={() => {
+                setUser(undefined), Cookies.remove("token");
+              }}
             >
               log out
             </p>
@@ -60,12 +76,4 @@ export default function Navbar(): JSX.Element {
       )}
     </header>
   );
-}
-
-{
-  /* <ul className="list-none flex  justify-between container mx-auto p-1">
-        <li>receta.</li>
-        <li>search</li>
-        <Link href="../login">login</Link>
-      </ul> */
 }

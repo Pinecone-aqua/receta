@@ -2,7 +2,7 @@ import { Card } from "flowbite-react";
 
 export default function Membership(): JSX.Element {
   return (
-    <div className="max-w-sm m-40">
+    <div className="max-w-sm m-40 motion-div">
       <Card>
         <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
           Standard plan

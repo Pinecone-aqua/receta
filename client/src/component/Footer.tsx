@@ -2,8 +2,8 @@ import { BsArrowRightShort } from "react-icons/bs";
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className="flex place-content-center bg-[#1e1e1e] text-center p-[100px] text-white ">
-      <div>
+    <footer className="flex place-content-center bg-[#1e1e1e] text-center p-[80px] text-white">
+      <div className="motion-div">
         <h2 className="text-[32px] font-bold cursor-pointer pb-[40px]">
           receta.
         </h2>

@@ -6,8 +6,6 @@ export default function RecipeCard(props: {
 }): JSX.Element {
   const { recipe } = props;
   const router = useRouter();
-  console.log(recipe);
-
   return (
     <div
       className={`min-w-[180px] max-w-[200px]  bg-[#FFFBF1] text-[#1E1E1E]  cursor-pointer`}

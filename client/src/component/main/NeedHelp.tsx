@@ -1,6 +1,6 @@
 export default function NeedHelp() {
   return (
-    <div className="bg-[url(/help.png)] bg-cover bg-center h-[500px] bg-[#124822]">
+    <div className=" bg-[url(/help.png)] bg-cover bg-center h-[500px] bg-[#124822]">
       <div className="pt-[10%] pl-[20%]">
         <p className="text-[46px] font-bold mb-5 text-center">
           Need help getting started?

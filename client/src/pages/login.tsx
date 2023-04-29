@@ -4,17 +4,21 @@ import { FcGoogle } from "react-icons/fc";
 import { Input, Divider } from "@chakra-ui/react";
 import { FiX } from "react-icons/fi";
 import axios from "axios";
-import { UsersType } from "@/util/Types";
 import { useUser } from "@/context/UserContext";
 
 export default function Login(): JSX.Element {
   const router = useRouter();
-  const { setUser } = useUser();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function loginHandler(e: any): void {
     e.preventDefault();
     console.log(e.target.email.value);
+  }
+
+  function googleLoginHandler() {
+    axios.get("http://localhost:3003/google-login").then((res) => {
+      router.push(res.data);
+    });
   }
   return (
     //
@@ -75,7 +79,10 @@ export default function Login(): JSX.Element {
           </div>
         </form>
 
-        <span className="cursor-pointer min-w-[170px] max-w-[500px] w-[60%] px-5 p-2 bg-white rounded-[25px] flex mx-auto gap-2 place-content-center mt-5">
+        <span
+          onClick={googleLoginHandler}
+          className="cursor-pointer min-w-[170px] max-w-[500px] w-[60%] px-5 p-2 bg-white rounded-[25px] flex mx-auto gap-2 place-content-center mt-5"
+        >
           <p className="text-[#267F40] text-[16px]">sign in google</p>
           <FcGoogle className="mt-[3px] w-[20px] h-[20px]" />
         </span>

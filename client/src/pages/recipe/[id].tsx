@@ -5,10 +5,10 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Arrow from "../../../public/Arrow";
 
-export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
-  const recipes: RecipesType = props.recipes;
+export default function Recipe(props: { recipe: RecipesType }): JSX.Element {
+  const recipe: RecipesType = props.recipe;
 
-  console.log(recipes);
+  console.log(recipe);
 
   return (
     <div className="">
@@ -18,10 +18,10 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
       <div className="flex">
         <div className="w-[45%] ">
           <div>
-            <img className="w-full" src={`${recipes.image_url}`} alt="image" />
+            <img className="w-full" src={`${recipe.image_url}`} alt="image" />
           </div>
           <div className="py-5 px-5 text-center border border-b-black">
-            <h2 className="text-4xl font-bold">{recipes.name}</h2>
+            <h2 className="text-4xl font-bold">{recipe.name}</h2>
             <p className="text-red-500 text-3xl font-medium">Gin</p>
           </div>
         </div>
@@ -33,7 +33,7 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
             </div>
             <div className="text-[24px]">
               <div className="font-bold mt-[160px]">Prepare</div>
-              {recipes.how_to.map((single: any, index: number) => (
+              {recipe.how_to.map((single: any, index: number) => (
                 <div
                   className="leading-8 mt-5 mb-[3rem] font-medium"
                   key={index}
@@ -69,14 +69,14 @@ export default function Recipe(props: { recipes: RecipesType }): JSX.Element {
               </TabList>
               <TabPanels>
                 <TabPanel paddingTop="60px" paddingLeft={100} overflowY="auto">
-                  {recipes.ingredients.map((ingredient: any, index: number) => (
+                  {recipe.ingredients.map((ingredient: any, index: number) => (
                     <p className="text-[18px] leading-9" key={index}>
                       {ingredient}
                     </p>
                   ))}
                 </TabPanel>
                 <TabPanel paddingTop="60px" paddingLeft={100} overflowY="auto">
-                  {recipes.tools_id.map((tool: any, index: number) => (
+                  {recipe.tools_id.map((tool: any, index: number) => (
                     <p className="text-[18px] leading-9" key={index}>
                       {tool.name}
                     </p>
@@ -109,7 +109,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 interface RecipeProps {
-  recipes: RecipesType | null;
+  recipe: RecipesType | null;
 }
 
 export const getStaticProps: GetStaticProps<RecipeProps> = async ({
@@ -118,11 +118,11 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({
   const res = await axios.get(
     `http://localhost:3003/recipes/get?id=${params?.id}`
   );
-  const recipes = await res.data;
+  const recipe = await res.data;
 
   return {
     props: {
-      recipes: recipes,
+      recipe: recipe,
     },
   };
 };

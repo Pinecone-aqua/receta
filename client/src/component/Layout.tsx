@@ -10,17 +10,16 @@ export default function Layout({
   children: JSX.Element;
 }): JSX.Element {
   const { activeBtn, activePage } = useProduct();
-  console.log("test");
 
   function bgHandler() {
     if (activeBtn == "difficulty") {
-      return "bg-[#267F40] text-white scroll-smooth duration-1000";
+      return "bg-[#267F40] text-white duration-1000";
     } else if (activeBtn == "strong") {
-      return "bg-[#D0384C] text-white scroll-smooth duration-1000";
+      return "bg-[#D0384C] text-white duration-1000";
     } else if (activeBtn == "sweet") {
-      return "bg-[#FFFBF1] scroll-smooth duration-1000 text-black";
+      return "bg-[#FFFBF1] duration-1000 text-black";
     } else {
-      return "bg-[#86A1AC] text-white scroll-smooth duration-1000";
+      return "bg-[#86A1AC] text-white  duration-1000";
     }
   }
 
@@ -30,14 +29,20 @@ export default function Layout({
         <title key="title">RECETA.</title>
       </Head>
       <div className={bgHandler()}>
-        <Navbar />
+        <div className="motion-container y mandatory-scroll-snapping ">
+          <div className="motion-div">
+            <Navbar />
+            <div
+              className={`flex ps-[5%] mx-auto min-h-[85vh] bg-currentColor`}
+            >
+              <SideBar />
+              {Pages.map((page) => page.name == activePage && page.subPage)}
+            </div>
+          </div>
 
-        <div className={`flex ps-[5%] mx-auto min-h-[85vh] bg-currentColor`}>
-          <SideBar />
-          {Pages.map((page) => page.name == activePage && page.subPage)}
+          <main>{children}</main>
+          <Footer />
         </div>
-        <main>{children}</main>
-        <Footer />
       </div>
     </div>
   );
