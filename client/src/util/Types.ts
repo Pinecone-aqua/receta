@@ -24,6 +24,7 @@ export interface UsersType {
   email: string;
   password: string;
   name?: string;
+  picture: string;
 }
 
 export interface ProductContextType {

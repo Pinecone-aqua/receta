@@ -22,9 +22,12 @@ export default function ProductProvider({ children }: PropType) {
   useEffect(() => {
     if (localStorage.getItem("currentCollection"))
       setActiveBtn(localStorage.getItem("currentCollection"));
-    if (localStorage.getItem("currentPage"))
-      setActivePage(localStorage.getItem("page"));
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("page"))
+      setActivePage(localStorage.getItem("page"));
+  }, [activePage]);
 
   useEffect(() => {
     axios

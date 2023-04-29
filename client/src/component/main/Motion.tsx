@@ -9,7 +9,7 @@ import {
 import { BsArrowRightShort } from "react-icons/bs";
 
 function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 2], [-distance, distance]);
+  return useTransform(value, [0, 3], [-distance, distance]);
 }
 
 function Image({ sub }: { sub: any }) {
@@ -22,13 +22,9 @@ function Image({ sub }: { sub: any }) {
       {" "}
       <section className={`section ${sub.class} `}>
         <div ref={ref}>
-          <img
-            src={`./${sub.img}.png`}
-            className="img "
-            alt="A London skyscraper"
-          />
+          <img src={`./${sub.img}.png`} className="img " alt="..." />
         </div>
-        <motion.h2 style={{ y }} className={` h2`}>
+        <motion.h2 style={{ y }} className={`h2`}>
           {`${sub.title}`}
         </motion.h2>
         <p className={`w-[50%] text-white ${sub.textClass}`}>{sub.text}</p>
@@ -42,19 +38,11 @@ function Image({ sub }: { sub: any }) {
 }
 
 export default function App() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   return (
-    <div className="">
+    <div className="mandatory-scroll-snapping">
       {mainSub.map((sub) => (
         <Image sub={sub} />
       ))}
-      <motion.div className="progress" style={{ scaleX }} />
     </div>
   );
 }

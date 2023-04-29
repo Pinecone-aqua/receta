@@ -15,7 +15,7 @@ export default function Collection(): JSX.Element {
   }, []);
 
   return (
-    <div className="h-[80vh] w-[80%] relative flex ms-[5%]">
+    <div className="h-[78vh] w-[80%] relative flex ms-[5%]">
       {data.map((collection, index) => (
         <div
           onClick={() => {

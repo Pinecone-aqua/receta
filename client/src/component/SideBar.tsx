@@ -35,7 +35,6 @@ export const Pages = [
   { name: "Main", subPage: <Collection />, url: "../" },
   { name: "Our Story", url: "../our", subPage: <SubOur /> },
   { name: "Advice", url: "../advice" },
-  { name: "Journal", url: "../journal" },
   { name: "Membership", url: "../member" },
   { name: "Shop", url: "../shop" },
 ];

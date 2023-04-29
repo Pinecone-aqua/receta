@@ -10,8 +10,16 @@ export class UserService {
     return this.userModel.find();
   }
 
+  async findByEmail(email: string) {
+    return await this.userModel.findOne({ email });
+  }
+
   createUser(user: any) {
-    return this.userModel.create(user);
+    return this.userModel.create({
+      email: user.email,
+      name: user.name,
+      picture: user.picture,
+    });
   }
 
   loginUser(user) {
