@@ -1,5 +1,5 @@
 import Navbar from "@/component/Navbar";
-import { RecipesType } from "@/util/Types";
+import { CategoriesType, RecipesType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
@@ -11,24 +11,28 @@ export default function Recipe(props: { recipe: RecipesType }): JSX.Element {
   console.log(recipe);
 
   return (
-    <div className="">
-      <div className="recipe-page text-[#FFFBF1]">
+    <div className="bg-[#1e1e1e] text-[#FFFBF1]">
+      <div className="recipe-page">
         <Navbar />
       </div>
-      <div className="flex">
+      <div className="flex max-w-[1300px] mx-auto">
         <div className="w-[45%] ">
           <div>
             <img className="w-full" src={`${recipe.image_url}`} alt="image" />
           </div>
-          <div className="py-5 px-5 text-center border border-b-black">
-            <h2 className="text-4xl font-bold">{recipe.name}</h2>
-            <p className="text-red-500 text-3xl font-medium">Gin</p>
+          <div className="py-5 px-5 bg-[#FFFBF1] text-center border border-b-black">
+            <h2 className="text-4xl text-[#1e1e1e] font-bold">{recipe.name}</h2>
+            <p className="text-red-500 text-3xl font-medium">
+              {recipe.categories_id.map((cate: CategoriesType, index) => (
+                <p key={index}>{cate.name}</p>
+              ))}
+            </p>
           </div>
         </div>
-        <div className="w-[55%] bg-[#1E1E1E] text-white">
+        <div className="w-[55%] relative bg-[#1E1E1E] text-white">
           <div className="h-[50%] bg-[#323232] px-[74px] overflow-y-auto">
             <Arrow />
-            <div className="text-lg absolute bg-[#323232] h-[150px] w-[45%] flex items-center">
+            <div className="text-lg absolute bg-[#323232] h-[150px] w-[80%] flex items-center border-b-[1px]">
               <div>Step-by-step</div>
             </div>
             <div className="text-[24px]">
@@ -86,6 +90,9 @@ export default function Recipe(props: { recipe: RecipesType }): JSX.Element {
             </Tabs>
           </div>
         </div>
+      </div>
+      <div className="max-w-[1300px] text-[#1e1e1e] text-[20px] mx-auto bg-[#FFFBF1] p-[20px]">
+        {recipe.description}
       </div>
       {/* <AspectRatio maxW="w-full" ratio={2}>
         <iframe src={recipes.video_url} allowFullScreen />
