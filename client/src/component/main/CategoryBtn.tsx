@@ -28,7 +28,7 @@ export default function CategoryBtn(props: {
       onClick={() => setActiveBtn(!activeBtn)}
       className={
         props.class !== activeBtn
-          ? `p-[5px] px-[20px] rounded-[25px] font-light text-currentColor bg-white border border-1`
+          ? `p-[5px] px-[20px] rounded-[25px] font-light text-[#1e1e1e] bg-white border border-1`
           : `p-[5px] px-[20px] rounded-[25px] font-light text-white border border-1`
       }
     >

@@ -9,8 +9,6 @@ export default function Navbar(): JSX.Element {
   const router = useRouter();
   const { user, setUser } = useUser();
 
-  console.log(user);
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function searchHandler(e: any): void {
     e.preventDefault();

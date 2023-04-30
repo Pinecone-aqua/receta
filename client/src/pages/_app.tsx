@@ -9,17 +9,15 @@ import UserProvider from "@/context/UserContext";
 
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }: AppProps): JSX.Element {
   return (
-    <SessionProvider session={session}>
-      <UserProvider>
-        <ProductProvider>
-          <ChakraProvider>
-            <Component {...pageProps} />
-          </ChakraProvider>
-        </ProductProvider>
-      </UserProvider>
-    </SessionProvider>
+    <UserProvider>
+      <ProductProvider>
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </ProductProvider>
+    </UserProvider>
   );
 }

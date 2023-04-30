@@ -4,7 +4,6 @@ import { FcGoogle } from "react-icons/fc";
 import { Input, Divider } from "@chakra-ui/react";
 import { FiX } from "react-icons/fi";
 import axios from "axios";
-import { useUser } from "@/context/UserContext";
 
 export default function Login(): JSX.Element {
   const router = useRouter();
