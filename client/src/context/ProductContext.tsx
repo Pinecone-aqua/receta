@@ -22,6 +22,13 @@ export default function ProductProvider({ children }: PropType) {
   useEffect(() => {
     if (localStorage.getItem("currentCollection"))
       setActiveBtn(localStorage.getItem("currentCollection"));
+    axios
+      .get(
+        `http://localhost:3003/recipes/filter?name=${localStorage.getItem(
+          "currentCollection"
+        )}&limit=8`
+      )
+      .then((res) => setRecipes(res.data));
   }, []);
 
   useEffect(() => {
@@ -31,7 +38,7 @@ export default function ProductProvider({ children }: PropType) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3003/recipes/filter?name=${activeBtn}`)
+      .get(`http://localhost:3003/recipes/filter?name=${activeBtn}&limit=8`)
       .then((res) => setRecipes(res.data));
 
     axios

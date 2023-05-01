@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
   Query,
   UploadedFile,
@@ -41,8 +40,8 @@ export class RecipesController {
   }
 
   @Get("filter")
-  filter(@Query("name") name: string) {
-    return this.recipesService.filterRecipe(name);
+  filter(@Query() query: object) {
+    return this.recipesService.filterRecipe(query);
   }
 
   @Get("filter-category")
@@ -57,11 +56,8 @@ export class RecipesController {
     @UploadedFile()
     file: any
   ) {
-    // )
     try {
       const response = await this.cloudinary.uploadImage(file);
-      console.log("res:", response);
-      console.log("body:");
 
       const data = await {
         ...JSON.parse(body.newRecipe),
