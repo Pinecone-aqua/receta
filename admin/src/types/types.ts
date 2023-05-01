@@ -7,6 +7,7 @@ export interface ToolsType {
   _id: string;
   image_url: string;
   name: string;
+  price: number;
 }
 
 export interface CocktailType {
