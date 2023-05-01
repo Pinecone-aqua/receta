@@ -8,7 +8,7 @@ export default function RecipeCard(props: {
   const router = useRouter();
   return (
     <div
-      className={`min-w-[180px] max-w-[200px]  bg-[#FFFBF1] text-[#1E1E1E]  cursor-pointer`}
+      className={`min-w-[180px] max-w-[280px]  bg-[#FFFBF1] text-[#1E1E1E]  cursor-pointer rounded-sm overflow-hidden`}
       onClick={() => {
         router.push(`/recipe/${recipe._id}`);
       }}

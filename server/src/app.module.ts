@@ -5,6 +5,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { CategoriesModule } from "./categories/categories.module";
 import { CollectionModule } from "./collections/collections.module";
+import { CommentModule } from "./comments/comments.module";
 import { GoogleLoginModule } from "./google-login/google-login.module";
 import { RecipesModule } from "./recipes/recipes.module";
 import { ToolsModule } from "./tools/tools.module";
@@ -22,6 +23,7 @@ import { UserModule } from "./users/users.module";
     CategoriesModule,
     CollectionModule,
     ToolsModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

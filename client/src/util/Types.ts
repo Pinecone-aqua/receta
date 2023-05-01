@@ -27,6 +27,13 @@ export interface UsersType {
   picture: string;
 }
 
+export interface CommentType {
+  comment: string;
+  writer: any;
+  created_at: string;
+  recipe_id: string;
+}
+
 export interface ProductContextType {
   recipes: RecipesType[] | null;
   categories: CategoriesType[];

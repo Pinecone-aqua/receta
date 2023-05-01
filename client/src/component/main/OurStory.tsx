@@ -8,16 +8,9 @@ export default function OurStory() {
   const router = useRouter();
   const { setActivePage } = useProduct();
   return (
-    <div className="">
+    <div className="text-[#FFFBF1]">
       <div className="OurStory">
         <div className="firstPart relative">
-          {/* <img
-            src="OurStory1.png"
-            alt="orange"
-            className="absolute w-[30%]"
-            style={{ right: "0px" }}
-          /> */}
-
           <img
             src="OurStory2.png"
             alt="image"
