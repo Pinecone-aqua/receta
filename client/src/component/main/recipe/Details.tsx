@@ -31,7 +31,7 @@ export default function Details({
           <div className="text-[24px]">
             <div className="font-bold mt-[160px]">Prepare</div>
             {recipe.how_to.map((single: any, index: number) => (
-              <div className="leading-8 mt-5 mb-[3rem] font-medium" key={index}>
+              <div key={index} className="leading-8 mt-5 mb-[3rem] font-medium">
                 {index + 1}. {single}
               </div>
             ))}

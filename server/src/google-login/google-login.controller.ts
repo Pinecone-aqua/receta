@@ -14,8 +14,6 @@ import { UserService } from "src/users/users.service";
 import { User } from "src/users/user.schema";
 import { JwtService } from "@nestjs/jwt";
 
-// console.log("port", process.env.PORT);
-
 @Controller()
 export class GoogleLoginController {
   constructor(
@@ -25,10 +23,10 @@ export class GoogleLoginController {
 
   @Get("google-login")
   googleLogin() {
+    console.log("cl id:", process.env.CLIENT_ID);
     const stringifiedParams = queryString.stringify({
-      client_id:
-        "1035336952326-2cpa0nhka8trjun6nmtgvtdtrc51212i.apps.googleusercontent.com",
-      redirect_uri: `http://localhost:3003/google/callback`,
+      client_id: process.env.CLIENT_ID,
+      redirect_uri: `http://localhost:${process.env.PORT}/google/callback`,
       scope: [
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
@@ -74,6 +72,9 @@ export class GoogleLoginController {
       picture: user.picture,
     };
     const token = this.jwtService.sign(payload);
-    res.status(200).cookie("token", token).redirect(`http://localhost:${3000}`);
+    res
+      .status(200)
+      .cookie("token", token)
+      .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
   }
 }
