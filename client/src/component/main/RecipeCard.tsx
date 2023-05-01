@@ -1,4 +1,4 @@
-import { RecipesType } from "@/util/Types";
+import { CategoriesType, RecipesType } from "@/util/Types";
 import { useRouter } from "next/router";
 
 export default function RecipeCard(props: {
@@ -22,7 +22,7 @@ export default function RecipeCard(props: {
       </picture>
       <div className="flex-col text-black text-center">
         <p className="text-xs text-red-500 font-medium mt-2">
-          {recipe.categories_id.map((cate: any) => cate.name)}
+          {recipe.categories_id.map((cate: CategoriesType) => cate.name)}
         </p>
         <p className={`font-bold text-currentColor`}>{recipe.name}</p>
       </div>
