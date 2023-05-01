@@ -10,8 +10,10 @@ export default function Home(): JSX.Element {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    console.log(email);
+
     const result: unknown = await axios.post(
-      "http://localhost:4000/admin-login",
+      "http://localhost:3003/users/login",
       {
         email,
         password,

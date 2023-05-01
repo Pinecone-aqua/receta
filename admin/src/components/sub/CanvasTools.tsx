@@ -42,7 +42,6 @@ export default function CanvasTools() {
               Tool image
               <input className="border" type="file" name="image" />
             </label>
-
             <div className="flex justify-between mt-[10px] mb-[10px]">
               <Button
                 className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"

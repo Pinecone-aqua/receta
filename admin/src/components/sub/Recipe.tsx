@@ -140,10 +140,6 @@ export default function Recipe(): JSX.Element {
                             <div>non alcoholic</div>
                           )}
                         </Td>
-                        {/* <Td className="p-2 word-wrap">b</Td> */}
-                        {/* <Td className="h-[40px] w-[150px] p-2 break-words">{recipe.description}</Td> */}
-                        {/* <Td className="p-2">b</Td> */}
-                        {/* <Td>{recipe.how_to}</Td> */}
                         <Td>
                           <Toast ref={toast} />
                           <ConfirmPopup />
@@ -186,11 +182,6 @@ export default function Recipe(): JSX.Element {
                     </Tbody>
                   </Table>
                 </TableContainer>
-                {/* <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
-                <Column field="name" header="Name" />
-                <Column field="collection_name" header="Collection" />
-                <Column field="_id" header="ID" />
-              </DataTable> */}
               </TabPanel>
             </TabPanel>
             <TabPanel>
@@ -220,15 +211,6 @@ export default function Recipe(): JSX.Element {
                   </Tbody>
                 </Table>
               </TableContainer>
-              {/* <DataTable value={tools} tableStyle={{ minWidth: "50rem" }}>
-                <Column field="name" header="Name" />
-                <Column
-                  field="image_url"
-                  header="Collection"
-                  body={imageBodyTemplate}
-                />
-                <Column field="_id" header="ID" />
-              </DataTable> */}
             </TabPanel>
           </TabPanels>
         </Tabs>

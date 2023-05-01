@@ -10,7 +10,6 @@ export default function Pages(): JSX.Element {
   return (
     <Layout>
       <div>
-        {/* <Recipe /> */}
         {pages.map((page: PageType, index) => (
           <div key={index}>{query == page.name.toLowerCase() && page.comp}</div>
         ))}
