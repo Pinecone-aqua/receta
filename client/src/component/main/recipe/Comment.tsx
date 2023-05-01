@@ -1,6 +1,6 @@
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-import { BsEmojiSmile } from "react-icons/bs";
+import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { GrEmoji } from "react-icons/gr";
 import { IoMdSend } from "react-icons/io";
@@ -11,6 +11,7 @@ import { Button, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 import { CommentType } from "@/util/Types";
 import moment from "moment";
 import { MdOutlineDoNotDisturbAlt } from "react-icons/md";
+import { useRouter } from "next/router";
 
 export default function Comment({
   comments,
@@ -19,26 +20,45 @@ export default function Comment({
   recipe_id: string;
   comments: CommentType[];
 }): JSX.Element {
-  const [emoji, setEmoji] = useState<any>("");
+  const [emoji, setEmoji] = useState<string>("");
   const [commentsArr, setCommentsArr] = useState<CommentType[]>(comments);
   const [showComment, setShowComment] = useState<boolean>(false);
   const { user } = useUser();
+  const router = useRouter();
 
+  // const toast = useRef(null);
+
+  //   const showSticky = () => {
+  //       toast.current.show({ severity: 'info', summary: 'Sticky', detail: 'Message Content', sticky: true });
+  //   };
+
+  //   return (
+  //       <div>
+  //           <Toast ref={toast} />
+  //           <Button onClick={showSticky} label="Sticky" />
+  //       </div>
+  //   )
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function CommentHandler(e: any) {
     e.preventDefault();
+    if (user) {
+      const data = {
+        comment: e.target.comment.value,
+        writer: { picture: user.picture, name: user.name },
+        recipe_id: recipe_id,
+        created_at: moment().format("l"),
+      };
 
-    const data = {
-      comment: e.target.comment.value,
-      writer: { picture: user?.picture, name: user?.name },
-      recipe_id: recipe_id,
-      created_at: moment().format("l"),
-    };
+      axios.post("http://localhost:3003/comments/create", data).then((res) => {
+        res.statusText === "Created"
+          ? setCommentsArr([...commentsArr, data])
+          : alert(res.data);
+      });
+    } else {
+      router.push("../login");
+    }
 
-    axios.post("http://localhost:3003/comments/create", data).then((res) => {
-      res.statusText === "Created"
-        ? setCommentsArr([...commentsArr, data])
-        : alert(res.data);
-    });
     setEmoji("");
   }
 
@@ -107,11 +127,15 @@ export default function Comment({
               <form className="flex w-full mt-[40px]" onSubmit={CommentHandler}>
                 <div className="relative flex">
                   <picture className="absolute top-0 left-0 mt-[8px] ms-2 rounded-[25px]">
-                    <img
-                      className="w-[32px] h-[32px] rounded-[25px]"
-                      src={user?.picture}
-                      alt=""
-                    />
+                    {user ? (
+                      <img
+                        className="w-[32px] h-[32px] rounded-[25px]"
+                        src={user?.picture}
+                        alt=""
+                      />
+                    ) : (
+                      <AiOutlineUser className="w-[30px] h-[30px] rounded-[25px] border text-gray-500 mt-[2px]" />
+                    )}
                   </picture>
 
                   <input
@@ -135,6 +159,7 @@ export default function Comment({
                   <div className={`absolute z-10 top-12`}>
                     <Picker
                       data={data}
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       onEmojiSelect={(e: any) => {
                         setEmoji(emoji.concat(e.native));
                       }}

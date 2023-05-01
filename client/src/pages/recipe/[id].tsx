@@ -1,9 +1,8 @@
 import Navbar from "@/component/Navbar";
-import { CategoriesType, CommentType, RecipesType } from "@/util/Types";
+import { CommentType, RecipesType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import Arrow from "../../../public/Arrow";
+
 import Comment from "@/component/main/recipe/Comment";
 import RatingComp from "@/component/main/recipe/Rating";
 import Details from "@/component/main/recipe/Details";
@@ -30,7 +29,7 @@ export default function Recipe(props: {
           value={5}
           disabled
           cancel={false}
-          className="border border-[2px] border-[black] rounded-[20px] w-[150px] p-3"
+          className="border-[2px] border-[black] rounded-[20px] w-[150px] p-3"
         />
       </div>
     </div>
