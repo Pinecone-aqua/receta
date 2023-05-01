@@ -29,13 +29,13 @@ export interface UsersType {
 
 export interface CommentType {
   comment: string;
-  writer: any;
+  writer: string;
   created_at: string;
   recipe_id: string;
 }
 
 export interface ProductContextType {
-  recipes: RecipesType[] | null;
+  recipes: RecipesType[];
   categories: CategoriesType[];
   activeBtn: string | null;
   activePage: string | null;

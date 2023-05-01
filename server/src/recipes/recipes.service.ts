@@ -44,17 +44,20 @@ export class RecipesService {
     try {
       return this.recipeModel
         .find()
-        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 })
+        .limit(8);
     } catch (err) {
       return err;
     }
   }
 
-  filterRecipe(name: string) {
+  filterRecipe(query: any) {
     try {
       return this.recipeModel
-        .find({ collection_id: name })
-        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
+        .find({ collection_id: query.name })
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 })
+        .skip(query.limit - 8)
+        .limit(8);
     } catch (err) {
       return err;
     }

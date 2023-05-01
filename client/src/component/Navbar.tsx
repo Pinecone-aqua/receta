@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
 import { useUser } from "@/context/UserContext";
-import { Avatar, Menu, MenuButton, MenuList } from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 
 export default function Navbar(): JSX.Element {
