@@ -146,6 +146,9 @@ export default function Recipe(): JSX.Element {
                             <CanvasEditButton
                               key={recipe._id}
                               recipe={recipe}
+                              collections={collections}
+                              categories={categories}
+                              tools={tools}
                             />
                             <Button
                               onClick={() => {

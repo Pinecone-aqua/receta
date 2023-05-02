@@ -95,12 +95,10 @@ export default function CanvasRecipe(props: {
     data.append("file", e.target.imageUrl.files[0]);
     data.append("newRecipe", JSON.stringify(cocktailData));
 
-    axios
-      .post("http://localhost:3003/recipes/create", data)
-      .then((res) => {
-        console.log(res)
-        // res ? console.log("sent") : <CircularProgress className="z-10 absolute top-0 left-0" isIndeterminate color='blue.300' />
-      });
+    axios.post("http://localhost:3003/recipes/create", data).then((res) => {
+      console.log(res);
+      // res ? console.log("sent") : <CircularProgress className="z-10 absolute top-0 left-0" isIndeterminate color='blue.300' />
+    });
   }
 
   return (
@@ -156,10 +154,10 @@ export default function CanvasRecipe(props: {
             <div className="flex flex-wrap gap-1 w-4/4 mt-[25px] border-b-[1px] border-black pb-[20px]">
               {tools.map((tool, index) => (
                 <div
-                className={
+                  className={
                     selectTools.includes(tool._id)
-                    ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
-                    : "w-[170px] py-[10px] border flex flex-col items-center"
+                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
+                      : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
                   onClick={() => addToolHandler(tool._id)}
@@ -183,7 +181,7 @@ export default function CanvasRecipe(props: {
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {ingredient.map((inex, index) => (
                   <div
-                  key={`input-container-${index}`}
+                    key={`input-container-${index}`}
                     className="h-full flex items-center"
                   >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
@@ -222,8 +220,8 @@ export default function CanvasRecipe(props: {
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {how.map((inex, index) => (
                   <div
-                  key={`input-container-${index}`}
-                  className="h-full flex items-center"
+                    key={`input-container-${index}`}
+                    className="h-full flex items-center"
                   >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input

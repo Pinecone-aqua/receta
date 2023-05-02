@@ -7,7 +7,7 @@ import { Tool } from "src/tools/tools.schema";
 export class ToolsService {
   constructor(@InjectModel(Tool.name) private ToolModel: Model<Tool>) {}
   all() {
-    return this.ToolModel.find();
+    return this.ToolModel.find({});
   }
 
   // create(category: any) {
