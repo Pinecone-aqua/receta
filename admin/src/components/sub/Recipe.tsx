@@ -21,6 +21,7 @@ import { CocktailType, ToolsType, CategoryType } from "@/src/types/types";
 import { Toast } from "primereact/toast";
 import { ConfirmPopup } from "primereact/confirmpopup";
 import { Button } from "primereact/button";
+import CanvasEditButton from "./CanvasEditButton";
 
 export default function Recipe(): JSX.Element {
   const [collections, setCollections] = useState([]);
@@ -140,20 +141,17 @@ export default function Recipe(): JSX.Element {
                             <div>non alcoholic</div>
                           )}
                         </Td>
-                        {/* <Td className="p-2 word-wrap">b</Td> */}
-                        {/* <Td className="h-[40px] w-[150px] p-2 break-words">{recipe.description}</Td> */}
-                        {/* <Td className="p-2">b</Td> */}
-                        {/* <Td>{recipe.how_to}</Td> */}
                         <Td>
                           <Toast ref={toast} />
                           <ConfirmPopup />
-                          <div className="">
+                          <div className="flex flex-col gap-3">
+                            <CanvasEditButton key={recipe._id} onClick={() => {console.log("recipe id",recipe._id)}} recipe={recipe} />
                             <Button
                               onClick={() => {
                                 confirm2(recipe);
                               }}
                               label="Delete"
-                              className="p-button-danger p-button-outlined"
+                              className="p-button-danger h-[30px] p-button-outlined"
                             />
                           </div>
                         </Td>

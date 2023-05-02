@@ -97,7 +97,10 @@ export default function CanvasRecipe(props: {
 
     axios
       .post("http://localhost:3003/recipes/create", data)
-      .then((res) => console.log(res, "recipe sent"));
+      .then((res) => {
+        console.log(res)
+        // res ? console.log("sent") : <CircularProgress className="z-10 absolute top-0 left-0" isIndeterminate color='blue.300' />
+      });
   }
 
   return (
@@ -110,14 +113,14 @@ export default function CanvasRecipe(props: {
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50"
+        className="w-50 relative pt-[30px]"
       >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <form
-            className="w-full h-full flex-col justify-center items-center pl-[50px]"
+            className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
             onSubmit={(e) => createCocktail(e)}
           >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
@@ -136,7 +139,7 @@ export default function CanvasRecipe(props: {
                 className="resize  bg-slate-400  w-52 rounded"
               />
             </div>
-            <div className="w-3/4 flex justify-between mb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Collection</label>
               <select
                 className="border"
@@ -150,13 +153,13 @@ export default function CanvasRecipe(props: {
             </div>
 
             <label className="block">Tools</label>
-            <div className="flex flex-wrap gap-1 w-3/4 mt-[25px]">
+            <div className="flex flex-wrap gap-1 w-4/4 mt-[25px] border-b-[1px] border-black pb-[20px]">
               {tools.map((tool, index) => (
                 <div
-                  className={
+                className={
                     selectTools.includes(tool._id)
-                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
-                      : "w-[170px] py-[10px] border flex flex-col items-center"
+                    ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
+                    : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
                   onClick={() => addToolHandler(tool._id)}
@@ -180,7 +183,7 @@ export default function CanvasRecipe(props: {
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {ingredient.map((inex, index) => (
                   <div
-                    key={`input-container-${index}`}
+                  key={`input-container-${index}`}
                     className="h-full flex items-center"
                   >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
@@ -219,8 +222,8 @@ export default function CanvasRecipe(props: {
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {how.map((inex, index) => (
                   <div
-                    key={`input-container-${index}`}
-                    className="h-full flex items-center"
+                  key={`input-container-${index}`}
+                  className="h-full flex items-center"
                   >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
@@ -253,7 +256,7 @@ export default function CanvasRecipe(props: {
               />
             </div>
 
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
+            <div className="w-3/4 flex justify-between mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
                 type="file"
@@ -261,7 +264,7 @@ export default function CanvasRecipe(props: {
                 className="bg-slate-400 w-52"
               />
             </div>
-            <div className="w-3/4 flex justify-between  mb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Tutorial video</label>
               <input
                 type="text"
@@ -269,7 +272,7 @@ export default function CanvasRecipe(props: {
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
-            <div className="w-3/4 flex justify-between  mb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px]">
               <label>Alcoholic or nonalcoholic</label>
               <input
                 onClick={() => setCheck(!check)}
@@ -279,8 +282,9 @@ export default function CanvasRecipe(props: {
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
-            <div className="flex justify-center gap-3 h-[40px]">
+            <div className="flex justify-center items-center gap-3 h-[100px]">
               <input
+                className="bg-sky-800 w-[70px] h-[40px] rounded text-white"
                 onClick={() => setShow(false)}
                 type="button"
                 value="Cancel"
@@ -288,7 +292,7 @@ export default function CanvasRecipe(props: {
 
               <button
                 type="submit"
-                className="inline-flex justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
               >
                 Create
               </button>
