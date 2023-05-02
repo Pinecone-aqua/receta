@@ -121,8 +121,6 @@ export default function Recipe(): JSX.Element {
                       <Th className="">Collection</Th>
                       <Th className="">Image</Th>
                       <Th className="">Alcoholic</Th>
-                      {/* <Th className="">Description</Th>
-                      <Th className="">How to make</Th> */}
                       <Th className="">Options</Th>
                     </Tr>
                   </Thead>
@@ -145,7 +143,10 @@ export default function Recipe(): JSX.Element {
                           <Toast ref={toast} />
                           <ConfirmPopup />
                           <div className="flex flex-col gap-3">
-                            <CanvasEditButton key={recipe._id} onClick={() => {console.log("recipe id",recipe._id)}} recipe={recipe} />
+                            <CanvasEditButton
+                              key={recipe._id}
+                              recipe={recipe}
+                            />
                             <Button
                               onClick={() => {
                                 confirm2(recipe);
@@ -184,11 +185,6 @@ export default function Recipe(): JSX.Element {
                     </Tbody>
                   </Table>
                 </TableContainer>
-                {/* <DataTable value={categories} tableStyle={{ minWidth: "50rem" }}>
-                <Column field="name" header="Name" />
-                <Column field="collection_name" header="Collection" />
-                <Column field="_id" header="ID" />
-              </DataTable> */}
               </TabPanel>
             </TabPanel>
             <TabPanel>
@@ -218,15 +214,6 @@ export default function Recipe(): JSX.Element {
                   </Tbody>
                 </Table>
               </TableContainer>
-              {/* <DataTable value={tools} tableStyle={{ minWidth: "50rem" }}>
-                <Column field="name" header="Name" />
-                <Column
-                  field="image_url"
-                  header="Collection"
-                  body={imageBodyTemplate}
-                />
-                <Column field="_id" header="ID" />
-              </DataTable> */}
             </TabPanel>
           </TabPanels>
         </Tabs>
