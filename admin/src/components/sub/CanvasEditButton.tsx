@@ -15,11 +15,8 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
   const handleShow = () => setShow(true);
   const [categories, setCategories] = useState<CreateCategoryType[]>([]);
   const [selectTools, setSelectTools] = useState<string[]>(recipe.tools_id);
-  console.log(recipe.tools_id);
-  // console.log("ee", recipe.tools_id);
 
   // add tool handler
-  console.log("selectedTools:", selectTools);
 
   function addToolHandler(id: string) {
     if (selectTools.includes(id)) {
@@ -29,7 +26,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
     }
   }
 
-  // console.log(selectTools);
+  console.log(recipe);
 
   function filterCate(name: string) {
     axios
@@ -50,8 +47,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
     <>
       <button
         className="bg-green-600 rounded text-white text-bold h-[30px] flex items-center justify-center"
-        onClick={handleShow}
-      >
+        onClick={handleShow}>
         Edit
       </button>
 
@@ -59,8 +55,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50 relative pt-[30px]"
-      >
+        className="w-50 relative pt-[30px]">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe editing</Offcanvas.Title>
         </Offcanvas.Header>
@@ -69,8 +64,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
             onSubmit={() => {
               updateRecipe(recipe._id);
-            }}
-          >
+            }}>
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
@@ -95,8 +89,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                 className="border"
                 name="collection"
                 value={recipe.collection_id}
-                onChange={(e) => filterCate(e.target.value)}
-              >
+                onChange={(e) => filterCate(e.target.value)}>
                 {collections.map(
                   (collection: CollectionType, index: number) => (
                     <option key={index}>{collection.name}</option>
@@ -117,21 +110,20 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
-                  onClick={() => addToolHandler(tool._id)}
-                >
+                  onClick={() => addToolHandler(tool._id)}>
                   <p className="">{tool.name}</p>
                   <img className="w-[80px]" src={tool.image_url} />
                 </div>
               ))}
             </div>
-            {/* <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Category</label>
-              <select name="category" id="">
+              <select value={recipe.category} name="category" id="">
                 {categories.map((category, index) => (
                   <option key={index}>{category.name}</option>
                 ))}
               </select>
-            </div> */}
+            </div>
 
             {/* <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Ingredients</label>
@@ -247,8 +239,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-              >
+                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
                 Save changes
               </button>
             </div>

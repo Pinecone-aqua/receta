@@ -48,6 +48,7 @@ export default function Recipe(): JSX.Element {
   }, []);
 
   const toast = useRef<null | any>(null);
+  console.log(tools);
 
   const confirm2 = (recipe: CocktailType) => {
     toast.current.show({
@@ -57,8 +58,7 @@ export default function Recipe(): JSX.Element {
       content: (
         <div
           className="flex flex-column align-items-center "
-          style={{ flex: "1" }}
-        >
+          style={{ flex: "1" }}>
           <div className="text-center">
             <i
               className="pi pi-exclamation-triangle"
