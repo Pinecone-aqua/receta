@@ -5,10 +5,10 @@ import {
   CreateCocktailType,
 } from "@/src/types/types";
 import axios from "axios";
+import Image from "next/image";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-// import Image from "next/image";
 export default function CanvasRecipe(props: {
   collections: CollectionType[];
   tools: ToolsType[];
@@ -65,10 +65,10 @@ export default function CanvasRecipe(props: {
     }
   }
 
-  //filter categories
+  // filter categories
   function filterCate(name: string) {
     axios
-      .get(`http://localhost:3003/categories/filter?name=${name}`)
+      .get(`http://localhost:3003/categories/filter?name=${name.toLowerCase()}`)
       .then((res) => setCategories(res.data));
   }
   useEffect(() => {
@@ -100,8 +100,6 @@ export default function CanvasRecipe(props: {
     });
   }
 
-  console.log("recipe tool", tools);
-  console.log("collections", categories);
   return (
     <>
       <Button className="my-[30px]" variant="primary" onClick={handleShow}>
@@ -112,14 +110,16 @@ export default function CanvasRecipe(props: {
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50 relative pt-[30px]">
+        className="w-50 relative pt-[30px]"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
-            onSubmit={(e) => createCocktail(e)}>
+            onSubmit={(e) => createCocktail(e)}
+          >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
@@ -141,7 +141,8 @@ export default function CanvasRecipe(props: {
               <select
                 className="border"
                 name="collection"
-                onChange={(e) => filterCate(e.target.value)}>
+                onChange={(e) => filterCate(e.target.value)}
+              >
                 {collections.map((collection, index) => (
                   <option key={index}>{collection.name}</option>
                 ))}
@@ -158,12 +159,15 @@ export default function CanvasRecipe(props: {
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
-                  onClick={() => addToolHandler(tool._id)}>
+                  onClick={() => addToolHandler(tool._id)}
+                >
                   <p className="">{tool.name}</p>
-                  <img
+                  <Image
                     src={tool.image_url}
                     alt="Landscape picture"
-                    className="w-[80px]"
+                    height={80}
+                    width={80}
+                    style={{ width: "auto", height: "auto" }}
                   />
                 </div>
               ))}
@@ -183,7 +187,8 @@ export default function CanvasRecipe(props: {
                 {ingredient.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center">
+                    className="h-full flex items-center"
+                  >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -221,7 +226,8 @@ export default function CanvasRecipe(props: {
                 {how.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center">
+                    className="h-full flex items-center"
+                  >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -289,7 +295,8 @@ export default function CanvasRecipe(props: {
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
+                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+              >
                 Create
               </button>
             </div>

@@ -17,6 +17,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
   const [categories, setCategories] = useState<CreateCategoryType[]>([]);
   const [selectTools, setSelectTools] = useState<string[]>(recipe.tools_id);
   const [how, setHow] = useState<string[]>(recipe.how_to);
+  // const [oneRec, setOneRec] = useState(recipe);
 
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
@@ -40,14 +41,14 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
   //----
 
   const removeInputHandler = (index: number) => {
-      const deleteInput = ingredient.filter((input, i) => index !== i);
-      setIngredient(deleteInput);
-    };
-  
+    const deleteInput = ingredient.filter((input, i) => index !== i);
+    setIngredient(deleteInput);
+  };
+
   const removeInputHandlerHow = (index: number) => {
-      const deleteInputHow = how.filter((input, i) => index !== i);
-      setHow(deleteInputHow);
-    };
+    const deleteInputHow = how.filter((input, i) => index !== i);
+    setHow(deleteInputHow);
+  };
 
   // add tool handler
 
@@ -59,11 +60,9 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
     }
   }
 
-  console.log(recipe);
-
   function filterCate(name: string) {
     axios
-      .get(`http://localhost:3003/categories/filter?name=${name}`)
+      .get(`http://localhost:3003/categories/filter?name=${name.toLowerCase()}`)
       .then((res) => setCategories(res.data));
   }
   useEffect(() => {
@@ -71,16 +70,30 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
       .get(`http://localhost:3003/categories/filter?name=difficulty`)
       .then((res) => setCategories(res.data));
   }, []);
+  console.log(recipe);
 
-  function updateRecipe(one: any) {
-    console.log(one);
+  function updateRecipe(e: any) {
+    e.preventDefault();
+    const data = {
+      name: e.target.name.value,
+      description: e.target.description.value,
+      categories: e.target.category.value,
+      collection: e.target.collection.value,
+      ingredients: ingredient,
+      how_to: how,
+      video_url: e.target.videoUrl.value,
+      alcohol: e.target.alcohol.value,
+      tools: selectTools,
+    };
+    console.log(data);
   }
 
   return (
     <>
       <button
         className="bg-green-600 rounded text-white text-bold h-[30px] flex items-center justify-center"
-        onClick={handleShow}>
+        onClick={handleShow}
+      >
         Edit
       </button>
 
@@ -88,22 +101,24 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50 relative pt-[30px]">
+        className="w-50 relative pt-[30px]"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe editing</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
-            onSubmit={() => {
-              updateRecipe(recipe._id);
-            }}>
+            onSubmit={(e) => {
+              updateRecipe(e);
+            }}
+          >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
                 type="text"
                 name="name"
-                value={recipe.name}
+                defaultValue={recipe.name}
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
@@ -112,7 +127,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
               <label className="block">Description</label>
               <textarea
                 name="description"
-                value={recipe.description}
+                defaultValue={recipe.description}
                 className="resize  bg-slate-400  w-52 rounded"
               />
             </div>
@@ -121,11 +136,13 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
               <select
                 className="border"
                 name="collection"
-                // value={recipe.collection_id}
-                onChange={(e) => filterCate(e.target.value)}>
+                onChange={(e) => filterCate(e.target.value)}
+              >
                 {collections.map(
                   (collection: CollectionType, index: number) => (
-                    <option key={index}>{collection.name}</option>
+                    <option value={recipe.collection_id} key={index}>
+                      {collection.name}
+                    </option>
                   )
                 )}
               </select>
@@ -143,7 +160,8 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
-                  onClick={() => addToolHandler(tool._id)}>
+                  onClick={() => addToolHandler(tool._id)}
+                >
                   <p className="">{tool.name}</p>
                   <img className="w-[80px]" src={tool.image_url} />
                 </div>
@@ -151,7 +169,11 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
             </div>
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Category</label>
-              <select value={recipe.category} name="category" id="">
+              <select
+                defaultValue={recipe.categories_id.name}
+                name="category"
+                id=""
+              >
                 {categories.map((category, index) => (
                   <option key={index}>{category.name}</option>
                 ))}
@@ -273,7 +295,8 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
+                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+              >
                 Save changes
               </button>
             </div>
