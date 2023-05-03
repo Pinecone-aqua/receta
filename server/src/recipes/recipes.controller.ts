@@ -3,7 +3,9 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
+  Put,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -68,6 +70,11 @@ export class RecipesController {
       return e.message;
     }
   }
+
+  // @Put(":id")
+  // update(@Param("id") id: string, updateRecipe) {
+  //   return `updated this recipe which ${id}`;
+  // }
 
   @Delete("delete")
   remove(@Query() recipe: string) {

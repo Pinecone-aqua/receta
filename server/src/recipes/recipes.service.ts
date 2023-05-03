@@ -81,6 +81,15 @@ export class RecipesService {
     }
   }
 
+  async updateRecipe(id: string, editedRecipe: any): Promise<any> {
+    try {
+      const recipe = await this.recipeModel.findByIdAndUpdate(id, editedRecipe);
+      return recipe;
+    } catch (err) {
+      return err;
+    }
+  }
+
   async createRecipe(recipe: CreateRecipesDto) {
     try {
       //collection find name

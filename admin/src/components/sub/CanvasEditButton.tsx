@@ -1,4 +1,3 @@
-// import { CocktailType } from "@/src/types/types";
 import {
   CollectionType,
   CreateCategoryType,
@@ -6,19 +5,24 @@ import {
 } from "@/src/types/types";
 import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
-// import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default function CanvasEditButton({ recipe, collections, tools }: any) {
-  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  //--
   const [ingredient, setIngredient] = useState<string[]>(recipe.ingredients);
   const [categories, setCategories] = useState<CreateCategoryType[]>([]);
-  const [selectTools, setSelectTools] = useState<string[]>(recipe.tools_id);
   const [how, setHow] = useState<string[]>(recipe.how_to);
+  const [check, setCheck] = useState<boolean | null>(recipe.alcohol);
+  //--
+  const idOfTools = recipe.tools_id.map((one: { _id: string; }) => one._id)
+  const [selectTools, setSelectTools] = useState<string[]>(idOfTools);
+  //--
+  // const [collectionDef, setcollectionDef] = useState();
   // const [oneRec, setOneRec] = useState(recipe);
-
+  //--
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
   const inputRefIng = useRef<HTMLInputElement>(null);
@@ -53,6 +57,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
   // add tool handler
 
   function addToolHandler(id: string) {
+    selectTools.includes(id);
     if (selectTools.includes(id)) {
       setSelectTools(selectTools.filter((tool) => tool !== id));
     } else {
@@ -69,8 +74,11 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
     axios
       .get(`http://localhost:3003/categories/filter?name=difficulty`)
       .then((res) => setCategories(res.data));
-  }, []);
-  console.log(recipe);
+    }, []);
+  // useEffect(() => {
+  //   setcollectionDef(recipe.collection_id)
+  // }, [])
+  // console.log(recipe);
 
   function updateRecipe(e: any) {
     e.preventDefault();
@@ -85,7 +93,14 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
       alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-    console.log(data);
+    const data1 = new FormData();
+    data1.append("file", e.target.imageUrl.files[0]);
+    data1.append("editedRecipe", JSON.stringify(data));
+    // console.log(data);
+    console.log(data1);
+    // axios
+    // .patch(`http://localhost:3003/recipes/${recipe._id}`, data1)
+    // .then((res) => console.log(res.data));
   }
 
   return (
@@ -134,17 +149,31 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Collection</label>
               <select
+                // value={collectionDef}
                 className="border"
                 name="collection"
                 onChange={(e) => filterCate(e.target.value)}
               >
                 {collections.map(
                   (collection: CollectionType, index: number) => (
-                    <option value={recipe.collection_id} key={index}>
+                    <option key={index}>
                       {collection.name}
                     </option>
                   )
                 )}
+              </select>
+            </div>
+
+            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+              <label className="block">Category</label>
+              <select
+                // defaultValue={recipe.categories_id.name}
+                name="category"
+                id=""
+              >
+                {categories.map((category, index) => (
+                  <option key={index}>{category.name}</option>
+                ))}
               </select>
             </div>
 
@@ -153,9 +182,9 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
               {tools.map((tool: ToolsType, index: number) => (
                 <div
                   className={
-                    selectTools.filter(
-                      (selected: any) => selected._id === tool._id
-                    ).length > 0
+                    selectTools.includes(tool._id) 
+                    //   (selected: any) => selected._id === tool._id
+                    // ).length > 0
                       ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
@@ -166,18 +195,6 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                   <img className="w-[80px]" src={tool.image_url} />
                 </div>
               ))}
-            </div>
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Category</label>
-              <select
-                defaultValue={recipe.categories_id.name}
-                name="category"
-                id=""
-              >
-                {categories.map((category, index) => (
-                  <option key={index}>{category.name}</option>
-                ))}
-              </select>
             </div>
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
@@ -267,15 +284,16 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                 className="bg-slate-400 w-52"
               />
             </div>
-            {/* <div className="w-3/4 flex justify-between mb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Tutorial video</label>
               <input
+              defaultValue={recipe.how_to}
                 type="text"
                 name="videoUrl"
                 className="bg-slate-400 w-52 rounded"
               />
-            </div> */}
-            {/* <div className="w-3/4 flex justify-between mb-[20px]">
+            </div>
+            <div className="w-3/4 flex justify-between mb-[20px]">
               <label>Alcoholic or nonalcoholic</label>
               <input
                 onClick={() => setCheck(!check)}
@@ -284,7 +302,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                 name="alcohol"
                 className="bg-slate-400 w-52 rounded"
               />
-            </div> */}
+            </div>
             <div className="flex justify-center items-center gap-3 h-[100px]">
               <input
                 className="bg-sky-800 w-[70px] h-[40px] rounded text-white"
