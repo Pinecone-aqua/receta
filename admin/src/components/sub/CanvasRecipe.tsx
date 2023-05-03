@@ -8,8 +8,7 @@ import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { CiGlass } from "react-icons/ci";
-import Image from "next/image";
+// import Image from "next/image";
 export default function CanvasRecipe(props: {
   collections: CollectionType[];
   tools: ToolsType[];
@@ -98,11 +97,11 @@ export default function CanvasRecipe(props: {
 
     axios.post("http://localhost:3003/recipes/create", data).then((res) => {
       console.log(res);
-      // res ? console.log("sent") : <CircularProgress className="z-10 absolute top-0 left-0" isIndeterminate color='blue.300' />
     });
   }
 
   console.log("recipe tool", tools);
+  console.log("collections", categories);
   return (
     <>
       <Button className="my-[30px]" variant="primary" onClick={handleShow}>
@@ -161,7 +160,7 @@ export default function CanvasRecipe(props: {
                   key={index}
                   onClick={() => addToolHandler(tool._id)}>
                   <p className="">{tool.name}</p>
-                  <Image
+                  <img
                     src={tool.image_url}
                     alt="Landscape picture"
                     className="w-[80px]"

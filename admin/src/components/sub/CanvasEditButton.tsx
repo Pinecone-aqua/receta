@@ -5,7 +5,7 @@ import {
   ToolsType,
 } from "@/src/types/types";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 // import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
@@ -13,8 +13,41 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [ingredient, setIngredient] = useState<string[]>(recipe.ingredients);
   const [categories, setCategories] = useState<CreateCategoryType[]>([]);
   const [selectTools, setSelectTools] = useState<string[]>(recipe.tools_id);
+  const [how, setHow] = useState<string[]>(recipe.how_to);
+
+  const tempRef: MutableRefObject<string> = useRef("");
+  const tempRefHow: MutableRefObject<string> = useRef("");
+  const inputRefIng = useRef<HTMLInputElement>(null);
+  const inputRefIns = useRef<HTMLInputElement>(null);
+
+  const addInputHandler = () => {
+    tempRef.current && setIngredient([...ingredient, tempRef.current]);
+    if (inputRefIng.current) {
+      inputRefIng.current.value = "";
+    }
+  };
+
+  const addInputHandlerHow = () => {
+    tempRefHow.current && setHow([...how, tempRefHow.current]);
+    if (inputRefIns.current) {
+      inputRefIns.current.value = "";
+    }
+  };
+
+  //----
+
+  const removeInputHandler = (index: number) => {
+      const deleteInput = ingredient.filter((input, i) => index !== i);
+      setIngredient(deleteInput);
+    };
+  
+  const removeInputHandlerHow = (index: number) => {
+      const deleteInputHow = how.filter((input, i) => index !== i);
+      setHow(deleteInputHow);
+    };
 
   // add tool handler
 
@@ -88,7 +121,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
               <select
                 className="border"
                 name="collection"
-                value={recipe.collection_id}
+                // value={recipe.collection_id}
                 onChange={(e) => filterCate(e.target.value)}>
                 {collections.map(
                   (collection: CollectionType, index: number) => (
@@ -125,7 +158,7 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
               </select>
             </div>
 
-            {/* <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+            <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Ingredients</label>
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {ingredient.map((inex, index) => (
@@ -162,9 +195,9 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                 onClick={addInputHandler}
                 type="button"
               />
-            </div> */}
+            </div>
 
-            {/* <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+            <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Instructions</label>
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {how.map((inex, index) => (
@@ -201,16 +234,17 @@ export default function CanvasEditButton({ recipe, collections, tools }: any) {
                 onClick={addInputHandlerHow}
                 type="button"
               />
-            </div> */}
+            </div>
 
-            {/* <div className="w-3/4 flex justify-between mt-[20px] mb-[20px]">
+            <div className="w-3/4 flex justify-between mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
+                // value={recipe.image_url}
                 type="file"
                 name="imageUrl"
                 className="bg-slate-400 w-52"
               />
-            </div> */}
+            </div>
             {/* <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Tutorial video</label>
               <input
