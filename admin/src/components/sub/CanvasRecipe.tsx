@@ -68,12 +68,16 @@ export default function CanvasRecipe(props: {
   // filter categories
   function filterCate(name: string) {
     axios
-      .get(`http://localhost:3003/categories/filter?name=${name.toLowerCase()}`)
+      .get(`http://localhost:3003/categories/filter?name=${name}`)
       .then((res) => setCategories(res.data));
   }
   useEffect(() => {
     axios
-      .get(`http://localhost:3003/categories/filter?name=difficulty`)
+      .get(
+        `http://localhost:3003/categories/filter?name=${localStorage.getItem(
+          "currentColloction"
+        )}`
+      )
       .then((res) => setCategories(res.data));
   }, []);
 

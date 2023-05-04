@@ -1,5 +1,5 @@
 import Dashboard from "./sub/Dashboard";
-import Recipe from "./sub/Recipe";
+import Recipe from "../pages/recipe";
 import User from "./sub/User";
 import { useRouter } from "next/router";
 import ProdIcon from "./icons/ProdIcon";
@@ -61,7 +61,7 @@ export const pages: PageType[] = [
   },
   {
     url: "../recipe",
-    comp: <Recipe />,
+    comp: <Recipe categories={[]} collections={[]} recipes={[]} tools={[]} />,
     name: "Recipe",
     icon: <ProdIcon />,
   },

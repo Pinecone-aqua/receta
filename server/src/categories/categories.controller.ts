@@ -11,6 +11,7 @@ export class CategoriesController {
 
   @Get("filter")
   filterRecipe(@Query("name") name: string) {
+    console.log(name);
     return this.categoriesService.filterCategory(name);
   }
 
