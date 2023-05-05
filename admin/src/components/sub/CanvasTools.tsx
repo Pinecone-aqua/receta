@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 
@@ -7,13 +8,20 @@ export default function CanvasTools() {
   const handleShow = () => setShow(true);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function createCateHandler(e: any) {
+  function createToolHandler(e: any) {
     e.preventDefault();
-    const category = {
-      collection: e.target.image.value,
+    const tool = {
       name: e.target.name.value,
+      price: e.target.price.value,
     };
-    console.log(category);
+
+    const data = new FormData();
+    data.append("file", e.target.image_url.files[0]);
+    data.append("newTool", JSON.stringify(tool));
+
+    axios
+      .post("http://localhost:3003/tools/create", data)
+      .then((res) => console.log(res));
   }
 
   return (
@@ -32,14 +40,18 @@ export default function CanvasTools() {
           <Offcanvas.Title>Create tool</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="place-content-center flex">
-          <form className="flex flex-col" onSubmit={createCateHandler}>
+          <form className="flex flex-col" onSubmit={createToolHandler}>
             <label className="flex flex-col gap-2 mb-[20px]">
               Tool name
               <input className="border" type="text" name="name" />
             </label>
             <label className="flex flex-col gap-2 mb-[20px]">
               Tool image
-              <input className="border" type="file" name="image" />
+              <input className="border" type="file" name="image_url" />
+            </label>
+            <label className="flex flex-col gap-2 mb-[20px]">
+              Tool price
+              <input className="border" type="number" name="price" />
             </label>
 
             <div className="flex justify-between mt-[10px] mb-[10px]">
