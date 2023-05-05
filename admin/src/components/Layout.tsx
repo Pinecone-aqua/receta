@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import SideBar from "./SideBar";
 
 export default function Layout({ children }: { children: JSX.Element }) {
+  //logged in bainyy, baihgui bol /login user
   return (
     <div className="flex">
       <link

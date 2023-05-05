@@ -25,10 +25,10 @@ export default function CanvasEditButton({
     recipe.collection_id
   );
   const [how, setHow] = useState<string[]>(recipe.how_to);
-  const [check, setCheck] = useState<boolean>(recipe.alcohol);
-  const [file, setFile] = useState<any | null>(recipe.image_url);
+  const [check, setCheck] = useState<boolean>(recipe.alcohol); // isAcholed
+  const [file, setFile] = useState<any | null>(recipe.image_url); //image
   const idOfTools = recipe.tools_id.map((one: { _id: string }) => one._id);
-  const [selectTools, setSelectTools] = useState<string[]>(idOfTools);
+  const [selectTools, setSelectTools] = useState<string[]>(idOfTools); //selectedTools
 
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
@@ -130,6 +130,8 @@ export default function CanvasEditButton({
           <Offcanvas.Title>Recipe editing</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
+          {/* <AdditionalFields name="Ingredients" ingredients={ingredients} setIngredients={setIngredients}/>
+          <AdditionalFields name="Instructions"/> */}
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
             onSubmit={(e) => {

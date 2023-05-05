@@ -9,7 +9,9 @@ import Image from "next/image";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
+
 export default function CanvasRecipe(props: {
+  //?
   collections: CollectionType[];
   tools: ToolsType[];
 }) {
