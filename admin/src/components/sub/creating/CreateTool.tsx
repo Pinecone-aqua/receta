@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 
-export default function CanvasTools() {
+export default function CreateTools() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -34,8 +34,7 @@ export default function CanvasTools() {
         show={show}
         onHide={handleClose}
         placement="top"
-        className="w-1/4 mx-auto rounded-md mt-[5%]"
-      >
+        className="w-1/4 mx-auto rounded-md mt-[5%]">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Create tool</Offcanvas.Title>
         </Offcanvas.Header>
@@ -58,14 +57,12 @@ export default function CanvasTools() {
               <Button
                 className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
                 type="button"
-                onClick={() => setShow(false)}
-              >
+                onClick={() => setShow(false)}>
                 Cancel
               </Button>
               <button
                 className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
-                type="submit"
-              >
+                type="submit">
                 Create
               </button>
             </div>

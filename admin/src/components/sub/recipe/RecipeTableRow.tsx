@@ -1,6 +1,6 @@
 import { Td, Tr } from "@chakra-ui/react";
 import { ConfirmPopup } from "primereact/confirmpopup";
-import CanvasEditButton from "../CanvasEditButton";
+import CanvasEditButton from "../editing/EditRecipe";
 import {
   CategoryType,
   CocktailType,
@@ -35,17 +35,6 @@ export default function RecipeTableRow({
 
   return (
     <>
-      {/* <Button
-        onClick={() =>
-          toast({
-            title: `deleted`,
-            position: "top-right",
-            isClosable: true,
-          })
-        }>
-        Deleted
-      </Button> */}
-
       <Tr>
         <Td>{recipe.name}</Td>
         <Td>{recipe.collection_id}</Td>
@@ -67,10 +56,7 @@ export default function RecipeTableRow({
             />
             <button
               onClick={deleteHandler}
-              // label="Delete"
-              className="focus:outline-none text-white p-1 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-              // className="p-button-danger h-[30px] p-button-outlined"
-            >
+              className="focus:outline-none text-white p-1 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
               Delete
             </button>
           </div>

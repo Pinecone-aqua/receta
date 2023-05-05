@@ -1,6 +1,6 @@
 import axios from "axios";
-import CanvasCateg from "../components/sub/CanvasCateg";
-import CanvasTools from "../components/sub/CanvasTools";
+import CanvasCateg from "../components/sub/creating/CreateCategory";
+import CanvasTools from "../components/sub/creating/CreateTool";
 import {
   Table,
   Thead,

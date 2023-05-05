@@ -14,7 +14,7 @@ import {
   Table,
 } from "@chakra-ui/react";
 
-import CanvasRecipe from "../CanvasRecipe";
+import CanvasRecipe from "../creating/CreateRecipe";
 import RecipeTableRow from "./RecipeTableRow";
 
 interface RecipeTablePropType {
