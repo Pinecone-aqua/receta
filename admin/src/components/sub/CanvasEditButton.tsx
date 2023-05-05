@@ -3,6 +3,7 @@ import {
   CreateCategoryType,
   ToolsType,
 } from "@/src/types/types";
+import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
@@ -24,15 +25,11 @@ export default function CanvasEditButton({
     recipe.collection_id
   );
   const [how, setHow] = useState<string[]>(recipe.how_to);
-  const [check, setCheck] = useState<boolean | null>(recipe.alcohol);
-  const [file, setFile] = useState(recipe.image_url);
-  //--
+  const [check, setCheck] = useState<boolean>(recipe.alcohol);
+  const [file, setFile] = useState<any | null>(recipe.image_url);
   const idOfTools = recipe.tools_id.map((one: { _id: string }) => one._id);
   const [selectTools, setSelectTools] = useState<string[]>(idOfTools);
-  //--
-  // const [collectionDef, setcollectionDef] = useState();
-  // const [oneRec, setOneRec] = useState(recipe);
-  //--
+
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
   const inputRefIng = useRef<HTMLInputElement>(null);
@@ -76,7 +73,6 @@ export default function CanvasEditButton({
   }
 
   // file setting
-  // console.log(recipe.image_url);
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
     console.log("dfdfdf", file);
@@ -95,16 +91,16 @@ export default function CanvasEditButton({
       alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-    console.log(data);
+    console.log("file", file);
     const formData = new FormData();
-    // formData.append("file", file);
-    console.log(JSON.stringify(data));
+    e.target.imageUrl.files[0]
+      ? formData.append("file", file)
+      : formData.append("img", file);
     formData.append("data", JSON.stringify(data));
-    // console.log(data);
-    console.log(formData);
-    // axios
-    // .patch(`http://localhost:3003/recipes/${recipe._id}`, data1)
-    // .then((res) => console.log(res.data));
+
+    axios
+      .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
+      .then((res) => console.log(res.data));
   }
 
   useEffect(() => {
@@ -287,11 +283,17 @@ export default function CanvasEditButton({
             <div className="w-3/4 flex justify-between mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
-                onChange={(e) => handleFileChange(e)}
+                accept="image/*"
+                onChange={handleFileChange}
                 type="file"
                 name="imageUrl"
-                className="bg-slate-400 w-52"
+                className="w-52"
               />
+              {file && (
+                <div>
+                  <img width="50px" height="50px" src={file} alt="cocktail" />
+                </div>
+              )}
             </div>
             <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Tutorial video</label>
@@ -307,7 +309,7 @@ export default function CanvasEditButton({
               <input
                 onClick={() => setCheck(!check)}
                 type="checkbox"
-                value={`${check}`}
+                defaultChecked={check}
                 name="alcohol"
                 className="bg-slate-400 w-52 rounded"
               />

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -71,10 +72,31 @@ export class RecipesController {
     }
   }
 
-  // @Put(":id")
-  // update(@Param("id") id: string, updateRecipe) {
-  //   return `updated this recipe which ${id}`;
-  // }
+  @Patch("update")
+  @UseInterceptors(FileInterceptor("file"))
+  async update(
+    @UploadedFile() file: any,
+    @Query("id") id: string,
+    @Body() body: any
+  ) {
+    console.log(id);
+
+    if (body.img) {
+      const data = {
+        image_url: body.img,
+        body: JSON.parse(body.data),
+        id: id,
+      };
+      return this.recipesService.updateRecipe(data);
+    } else {
+      const response = await this.cloudinary.uploadImage(file);
+      return this.recipesService.updateRecipe({
+        image_url: response?.secure_url,
+        body: JSON.parse(body.data),
+        id: id,
+      });
+    }
+  }
 
   @Delete("delete")
   remove(@Query() recipe: string) {

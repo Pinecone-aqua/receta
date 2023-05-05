@@ -1,5 +1,4 @@
-import { Td, Tr, useToast } from "@chakra-ui/react";
-import { Button } from "flowbite-react";
+import { Td, Tr } from "@chakra-ui/react";
 import { ConfirmPopup } from "primereact/confirmpopup";
 import CanvasEditButton from "../CanvasEditButton";
 import {
@@ -9,6 +8,7 @@ import {
   ToolsType,
 } from "@/src/types/types";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // const toast = useToast();
 
@@ -65,12 +65,14 @@ export default function RecipeTableRow({
               categories={categories}
               tools={tools}
             />
-            <Button
+            <button
               onClick={deleteHandler}
-              label="Delete"
-              className="focus:outline-none bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+              // label="Delete"
+              className="focus:outline-none text-white p-1 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
               // className="p-button-danger h-[30px] p-button-outlined"
-            />
+            >
+              Delete
+            </button>
           </div>
         </Td>
       </Tr>
