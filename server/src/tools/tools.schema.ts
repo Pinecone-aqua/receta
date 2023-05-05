@@ -1,15 +1,15 @@
-
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
 export class Tool {
   @Prop()
   name: string;
 
-  @Prop({ ref: 'Collection' })
+  @Prop()
+  image_url: string;
 
-  collection_id: string;
+  @Prop()
+  price: number;
 }
 
 export const ToolSchema = SchemaFactory.createForClass(Tool);
