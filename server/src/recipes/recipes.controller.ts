@@ -3,7 +3,10 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
+  Patch,
   Post,
+  Put,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -66,6 +69,32 @@ export class RecipesController {
       return this.recipesService.createRecipe(data);
     } catch (e) {
       return e.message;
+    }
+  }
+
+  @Patch("update")
+  @UseInterceptors(FileInterceptor("file"))
+  async update(
+    @UploadedFile() file: any,
+    @Query("id") id: string,
+    @Body() body: any
+  ) {
+    console.log(id);
+
+    if (body.img) {
+      const data = {
+        image_url: body.img,
+        body: JSON.parse(body.data),
+        id: id,
+      };
+      return this.recipesService.updateRecipe(data);
+    } else {
+      const response = await this.cloudinary.uploadImage(file);
+      return this.recipesService.updateRecipe({
+        image_url: response?.secure_url,
+        body: JSON.parse(body.data),
+        id: id,
+      });
     }
   }
 

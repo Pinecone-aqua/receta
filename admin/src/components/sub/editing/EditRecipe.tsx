@@ -1,29 +1,34 @@
 import {
   CollectionType,
-  ToolsType,
   CreateCategoryType,
-  CreateCocktailType,
+  ToolsType,
 } from "@/src/types/types";
 import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-export default function CanvasRecipe(props: {
-  collections: CollectionType[];
-  tools: ToolsType[];
-}) {
-  const { collections } = props;
-  const { tools } = props;
-  const [categories, setCategories] = useState<CreateCategoryType[]>([]);
-  const [show, setShow] = useState(false);
-  const [check, setCheck] = useState<boolean | null>(false);
-  const [ingredient, setIngredient] = useState<string[]>([]);
-  const [selectTools, setSelectTools] = useState<string[]>([]);
-  const [how, setHow] = useState<string[]>([]);
-
+export default function CanvasEditButton({
+  recipe,
+  collections,
+  categories,
+  tools,
+}: any) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  //--
+  const [ingredient, setIngredient] = useState<string[]>(recipe.ingredients);
+  const [filteredCategory, setFilteredCategory] = useState<
+    CreateCategoryType[]
+  >([]);
+  const [currentCollection, setCurrentCollection] = useState<any>(
+    recipe.collection_id
+  );
+  const [how, setHow] = useState<string[]>(recipe.how_to);
+  const [check, setCheck] = useState<boolean>(recipe.alcohol); // isAcholed
+  const [file, setFile] = useState<any | null>(recipe.image_url); //image
+  const idOfTools = recipe.tools_id.map((one: { _id: string }) => one._id);
+  const [selectTools, setSelectTools] = useState<string[]>(idOfTools); //selectedTools
 
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
@@ -56,8 +61,10 @@ export default function CanvasRecipe(props: {
     setHow(deleteInputHow);
   };
 
-  //add tool handler
+  // add tool handler
+
   function addToolHandler(id: string) {
+    selectTools.includes(id);
     if (selectTools.includes(id)) {
       setSelectTools(selectTools.filter((tool) => tool !== id));
     } else {
@@ -65,22 +72,15 @@ export default function CanvasRecipe(props: {
     }
   }
 
-  //filter categories
-  function filterCate(name: string) {
-    axios
-      .get(`http://localhost:3003/categories/filter?name=${name}`)
-      .then((res) => setCategories(res.data));
-  }
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3003/categories/filter?name=difficulty`)
-      .then((res) => setCategories(res.data));
-  }, []);
+  // file setting
+  const handleFileChange = (e: any) => {
+    setFile(e.target.files[0]);
+    console.log("dfdfdf", file);
+  };
 
-  function createCocktail(e: any) {
+  function updateRecipe(e: any) {
     e.preventDefault();
-
-    const cocktailData: CreateCocktailType = {
+    const data = {
       name: e.target.name.value,
       description: e.target.description.value,
       categories: e.target.category.value,
@@ -91,40 +91,59 @@ export default function CanvasRecipe(props: {
       alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-    const data = new FormData();
-    data.append("file", e.target.imageUrl.files[0]);
-    data.append("newRecipe", JSON.stringify(cocktailData));
+    console.log("file", file);
+    const formData = new FormData();
+    e.target.imageUrl.files[0]
+      ? formData.append("file", file)
+      : formData.append("img", file);
+    formData.append("data", JSON.stringify(data));
 
     axios
-      .post("http://localhost:3003/recipes/create", data)
-      .then((res) => console.log(res, "recipe sent"));
+      .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
+      .then((res) => console.log(res.data));
   }
+
+  useEffect(() => {
+    const result = categories.filter(
+      (category: any) => category.collection_name === currentCollection
+    );
+
+    setFilteredCategory(result);
+  }, [categories, currentCollection]);
 
   return (
     <>
-      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
-        create recipe
-      </Button>
+      <button
+        className="bg-green-600 rounded text-white text-bold h-[30px] flex items-center justify-center"
+        onClick={handleShow}
+      >
+        Edit
+      </button>
 
       <Offcanvas
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50"
+        className="w-50 relative pt-[30px]"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Recipe</Offcanvas.Title>
+          <Offcanvas.Title>Recipe editing</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
+          {/* <AdditionalFields name="Ingredients" ingredients={ingredients} setIngredients={setIngredients}/>
+          <AdditionalFields name="Instructions"/> */}
           <form
-            className="w-full h-full flex-col justify-center items-center pl-[50px]"
-            onSubmit={(e) => createCocktail(e)}
+            className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
+            onSubmit={(e) => {
+              updateRecipe(e);
+            }}
           >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
                 type="text"
                 name="name"
+                defaultValue={recipe.name}
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
@@ -133,29 +152,47 @@ export default function CanvasRecipe(props: {
               <label className="block">Description</label>
               <textarea
                 name="description"
+                defaultValue={recipe.description}
                 className="resize  bg-slate-400  w-52 rounded"
               />
             </div>
-            <div className="w-3/4 flex justify-between mb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Collection</label>
               <select
+                defaultValue={recipe.collection_id}
                 className="border"
                 name="collection"
-                onChange={(e) => filterCate(e.target.value)}
+                onChange={(e) => setCurrentCollection(e.target.value)}
               >
-                {collections.map((collection, index) => (
-                  <option key={index}>{collection.name}</option>
+                {collections.map(
+                  (collection: CollectionType, index: number) => (
+                    <option key={index}>{collection.name}</option>
+                  )
+                )}
+              </select>
+            </div>
+
+            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+              <label className="block">Category</label>
+              <select
+                defaultValue={recipe.categories_id[0].name}
+                name="category"
+              >
+                {filteredCategory.map((category: any, index: number) => (
+                  <option key={index}>{category.name}</option>
                 ))}
               </select>
             </div>
 
             <label className="block">Tools</label>
-            <div className="flex flex-wrap gap-1 w-3/4 mt-[25px]">
-              {tools.map((tool, index) => (
+            <div className="flex flex-wrap gap-1 w-4/4 mt-[25px] border-b-[1px] border-black pb-[20px]">
+              {tools.map((tool: ToolsType, index: number) => (
                 <div
                   className={
                     selectTools.includes(tool._id)
-                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
+                      ? //   (selected: any) => selected._id === tool._id
+                        // ).length > 0
+                        "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
@@ -165,14 +202,6 @@ export default function CanvasRecipe(props: {
                   <img className="w-[80px]" src={tool.image_url} />
                 </div>
               ))}
-            </div>
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Category</label>
-              <select name="category" id="">
-                {categories.map((category, index) => (
-                  <option key={index}>{category.name}</option>
-                ))}
-              </select>
             </div>
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
@@ -253,34 +282,43 @@ export default function CanvasRecipe(props: {
               />
             </div>
 
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px]">
+            <div className="w-3/4 flex justify-between mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
+                accept="image/*"
+                onChange={handleFileChange}
                 type="file"
                 name="imageUrl"
-                className="bg-slate-400 w-52"
+                className="w-52"
               />
+              {file && (
+                <div>
+                  <img width="50px" height="50px" src={file} alt="cocktail" />
+                </div>
+              )}
             </div>
-            <div className="w-3/4 flex justify-between  mb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Tutorial video</label>
               <input
+                defaultValue={recipe.how_to}
                 type="text"
                 name="videoUrl"
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
-            <div className="w-3/4 flex justify-between  mb-[20px]">
+            <div className="w-3/4 flex justify-between mb-[20px]">
               <label>Alcoholic or nonalcoholic</label>
               <input
                 onClick={() => setCheck(!check)}
                 type="checkbox"
-                value={`${check}`}
+                defaultChecked={check}
                 name="alcohol"
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
-            <div className="flex justify-center gap-3 h-[40px]">
+            <div className="flex justify-center items-center gap-3 h-[100px]">
               <input
+                className="bg-sky-800 w-[70px] h-[40px] rounded text-white"
                 onClick={() => setShow(false)}
                 type="button"
                 value="Cancel"
@@ -288,9 +326,9 @@ export default function CanvasRecipe(props: {
 
               <button
                 type="submit"
-                className="inline-flex justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
               >
-                Create
+                Save changes
               </button>
             </div>
           </form>

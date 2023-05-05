@@ -6,6 +6,7 @@ import { Recipe } from "src/recipes/recipe.schema";
 import { Tool } from "src/tools/tools.schema";
 import { Collection } from "src/collections/collection.schema";
 import { CreateRecipesDto } from "./recipes.create.dto";
+import { LOADIPHLPAPI } from "dns";
 
 @Injectable()
 export class RecipesService {
@@ -81,16 +82,23 @@ export class RecipesService {
     }
   }
 
+  async updateRecipe(data) {
+    console.log(data);
+
+    // return this.recipeModel.updateOne(
+    //   { _id: data.id },
+    //   { $set: { ...data.body, ...data.image_url } }
+    // );
+  }
+
   async createRecipe(recipe: CreateRecipesDto) {
     try {
-      //collection find name
       const collection = await this.collectionsModel
         .findOne({
           name: recipe.collection,
         })
         .select({ name: 1 });
 
-      //category find name
       const category = await this.categoriesModel
         .find({
           name: recipe.categories,

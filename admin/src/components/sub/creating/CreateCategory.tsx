@@ -4,7 +4,9 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-export default function CanvasCateg(props: { collections: CollectionType[] }) {
+export default function CreateCategory(props: {
+  collections: CollectionType[];
+}) {
   const { collections } = props;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -31,8 +33,7 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
         show={show}
         onHide={handleClose}
         placement="top"
-        className="w-1/5 mx-auto rounded-md mt-[5%]"
-      >
+        className="w-1/5 mx-auto rounded-md mt-[5%]">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Category</Offcanvas.Title>
         </Offcanvas.Header>
@@ -54,14 +55,12 @@ export default function CanvasCateg(props: { collections: CollectionType[] }) {
               <Button
                 className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
                 type="button"
-                onClick={() => setShow(false)}
-              >
+                onClick={() => setShow(false)}>
                 Cancel
               </Button>
               <button
                 className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
-                type="submit"
-              >
+                type="submit">
                 Create
               </button>
             </div>
