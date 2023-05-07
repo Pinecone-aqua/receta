@@ -85,10 +85,10 @@ export class RecipesService {
   async updateRecipe(data) {
     console.log(data);
 
-    // return this.recipeModel.updateOne(
-    //   { _id: data.id },
-    //   { $set: { ...data.body, ...data.image_url } }
-    // );
+    return this.recipeModel.updateOne(
+      { _id: data.id },
+      { $set: { ...data.body, ...data.image_url } }
+    );
   }
 
   async createRecipe(recipe: CreateRecipesDto) {
