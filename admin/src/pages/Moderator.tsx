@@ -1,3 +1,3 @@
 export default function Moderator(): JSX.Element {
-  return <div>cate</div>;
+  return <div className="">cate</div>;
 }

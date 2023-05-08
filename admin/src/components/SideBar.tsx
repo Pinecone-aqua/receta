@@ -1,4 +1,4 @@
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/dashboard";
 import Recipe from "../pages/recipe";
 import User from "../pages/User";
 import { useRouter } from "next/router";
@@ -36,8 +36,7 @@ export default function SideBar(): JSX.Element {
             router.push(`../${page.url}`),
               setActiveBtn(page.name),
               localStorage.setItem("btn", page.name);
-          }}
-        >
+          }}>
           <span className="mt-[3px]">{page.icon}</span>
           <p className="m-0 pl-[10px]">{page.name}</p>
         </button>
@@ -54,7 +53,7 @@ interface PageType {
 }
 export const pages: PageType[] = [
   {
-    url: "../dashboard",
+    url: "../Dashboard",
     name: "Dashboard",
     comp: <Dashboard />,
     icon: <DashIcon />,
@@ -66,19 +65,19 @@ export const pages: PageType[] = [
     icon: <ProdIcon />,
   },
   {
-    url: "../moderator",
+    url: "../Moderator",
     comp: <Moderator />,
     name: "Moderator",
     icon: <ModeIcon />,
   },
   {
-    url: "../user",
+    url: "../User",
     comp: <User />,
     name: "User",
     icon: <UserIcon />,
   },
   {
-    url: "../settings",
+    url: "../Settings",
     comp: <Settings />,
     name: "Settings",
     icon: <SettingIcon />,

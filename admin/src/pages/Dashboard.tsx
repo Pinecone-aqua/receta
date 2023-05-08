@@ -1,3 +1,3 @@
-export default function Dashboard(): JSX.Element {
-  return <div>dashboard</div>;
+export default function Dashboard() {
+  return <div className="">dashboard</div>;
 }

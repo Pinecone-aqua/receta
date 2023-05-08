@@ -14,7 +14,9 @@ export default function Layout({ children }: { children: JSX.Element }) {
       <SideBar />
       <div className="w-full">
         <Navbar />
-        <main className="bg-[#FFFBF1] min-h-[86vh]">{children}</main>
+        <main className="bg-white w-full flex justify-center gap-3 ml-[10px] min-h-[86vh]">
+          {children}
+        </main>
       </div>
     </div>
   );
