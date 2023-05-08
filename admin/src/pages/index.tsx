@@ -19,7 +19,7 @@ export default function Login(): JSX.Element {
     );
     if (result) {
       console.log("logged in");
-      router.push("/Dashboard");
+      router.push("/dashboard");
     } else {
       console.log("false");
     }

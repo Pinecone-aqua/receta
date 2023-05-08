@@ -1,4 +1,4 @@
-import Dashboard from "../pages/dashboard";
+import Dashboard from "../pages/Dashboard";
 import Recipe from "../pages/recipe";
 import User from "../pages/User";
 import Settings from "../pages/Settings";

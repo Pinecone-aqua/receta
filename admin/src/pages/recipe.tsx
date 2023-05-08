@@ -28,7 +28,6 @@ export default function Recipe({
   console.log("collections:", collections);
   return (
     <Layout>
-      {/* // <div className="w-full flex justify-center gap-3 ml-[10px]"> */}
       <div className="w-3/5 ml-[10px] mt-[20px]">
         <Tabs>
           <TabList>
@@ -49,7 +48,6 @@ export default function Recipe({
           </TabPanels>
         </Tabs>
       </div>
-      {/* </div> */}
     </Layout>
   );
 }
