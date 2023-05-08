@@ -1,12 +1,12 @@
-import Dashboard from "./sub/Dashboard";
+import Dashboard from "../pages/Dashboard";
 import Recipe from "../pages/recipe";
-import User from "./sub/User";
+import User from "../pages/User";
 import { useRouter } from "next/router";
 import ProdIcon from "./icons/ProdIcon";
-import Moderator from "./sub/Moderator";
+import Moderator from "../pages/Moderator";
 import ModeIcon from "./icons/ModeIcon";
 import UserIcon from "./icons/UserIcon";
-import Settings from "./sub/Settings";
+import Settings from "../pages/Settings";
 import SettingIcon from "./icons/SettingIcon";
 import DashIcon from "./icons/DashIcon";
 import { useEffect, useState } from "react";

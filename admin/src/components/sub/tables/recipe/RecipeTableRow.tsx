@@ -1,6 +1,6 @@
 import { Td, Tr } from "@chakra-ui/react";
 import { ConfirmPopup } from "primereact/confirmpopup";
-import CanvasEditButton from "../editing/EditRecipe";
+import CanvasEditButton from "../../editing/EditRecipe";
 import {
   CategoryType,
   CocktailType,
