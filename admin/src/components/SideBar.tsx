@@ -1,12 +1,12 @@
 import Dashboard from "../pages/dashboard";
 import Recipe from "../pages/recipe";
 import User from "../pages/User";
+import Settings from "../pages/Settings";
+import Moderator from "../pages/Moderator";
 import { useRouter } from "next/router";
 import ProdIcon from "./icons/ProdIcon";
-import Moderator from "../pages/Moderator";
 import ModeIcon from "./icons/ModeIcon";
 import UserIcon from "./icons/UserIcon";
-import Settings from "../pages/Settings";
 import SettingIcon from "./icons/SettingIcon";
 import DashIcon from "./icons/DashIcon";
 import { useEffect, useState } from "react";
@@ -53,7 +53,7 @@ interface PageType {
 }
 export const pages: PageType[] = [
   {
-    url: "../Dashboard",
+    url: "../dashboard",
     name: "Dashboard",
     comp: <Dashboard />,
     icon: <DashIcon />,
@@ -65,19 +65,19 @@ export const pages: PageType[] = [
     icon: <ProdIcon />,
   },
   {
-    url: "../Moderator",
+    url: "../moderator",
     comp: <Moderator />,
     name: "Moderator",
     icon: <ModeIcon />,
   },
   {
-    url: "../User",
+    url: "../user",
     comp: <User />,
     name: "User",
     icon: <UserIcon />,
   },
   {
-    url: "../Settings",
+    url: "../settings",
     comp: <Settings />,
     name: "Settings",
     icon: <SettingIcon />,

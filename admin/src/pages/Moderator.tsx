@@ -1,3 +1,11 @@
+import Layout from "../components/Layout";
+
 export default function Moderator(): JSX.Element {
-  return <div className="">cate</div>;
+  return (
+    <>
+      <Layout>
+        <div>Moderatir</div>
+      </Layout>
+    </>
+  );
 }

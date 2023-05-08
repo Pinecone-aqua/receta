@@ -1,3 +1,11 @@
+import Layout from "../components/Layout";
+
 export default function Settings(): JSX.Element {
-  return <div className="">sett</div>;
+  return (
+    <>
+      <Layout>
+        <div>settings</div>
+      </Layout>
+    </>
+  );
 }

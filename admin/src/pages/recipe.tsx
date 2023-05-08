@@ -9,6 +9,7 @@ import {
 import RecipeTable from "../components/sub/tables/recipe/RecipeTable";
 import CategoryTable from "../components/sub/tables/category/CategoryTable";
 import ToolTable from "../components/sub/tables/tool/ToolTable";
+import Layout from "../components/Layout";
 
 interface RecipePropType {
   categories: CategoryType[];
@@ -26,30 +27,30 @@ export default function Recipe({
   console.log("categories:", categories);
   console.log("collections:", collections);
   return (
-    // <Layout>
-    // <div className="w-full flex justify-center gap-3 ml-[10px]">
-    <div className="w-3/5 ml-[10px] mt-[20px]">
-      <Tabs>
-        <TabList>
-          <Tab>Recipes</Tab>
-          <Tab>Categories</Tab>
-          <Tab>Tools</Tab>
-        </TabList>
+    <Layout>
+      {/* // <div className="w-full flex justify-center gap-3 ml-[10px]"> */}
+      <div className="w-3/5 ml-[10px] mt-[20px]">
+        <Tabs>
+          <TabList>
+            <Tab>Recipes</Tab>
+            <Tab>Categories</Tab>
+            <Tab>Tools</Tab>
+          </TabList>
 
-        <TabPanels>
-          <RecipeTable
-            collections={collections}
-            recipes={recipes}
-            categories={categories}
-            tools={tools}
-          />
-          <CategoryTable collections={collections} categories={categories} />
-          <ToolTable tools={tools} />
-        </TabPanels>
-      </Tabs>
-    </div>
-    // </div>
-    // </Layout>
+          <TabPanels>
+            <RecipeTable
+              collections={collections}
+              recipes={recipes}
+              categories={categories}
+              tools={tools}
+            />
+            <CategoryTable collections={collections} categories={categories} />
+            <ToolTable tools={tools} />
+          </TabPanels>
+        </Tabs>
+      </div>
+      {/* </div> */}
+    </Layout>
   );
 }
 

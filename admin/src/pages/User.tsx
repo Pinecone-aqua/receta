@@ -1,3 +1,11 @@
+import Layout from "../components/Layout";
+
 export default function User(): JSX.Element {
-  return <div className="">user</div>;
+  return (
+    <>
+      <Layout>
+        <div>b</div>
+      </Layout>
+    </>
+  );
 }
