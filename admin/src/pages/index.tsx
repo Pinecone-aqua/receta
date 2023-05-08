@@ -2,7 +2,7 @@ import axios from "axios";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/router";
 
-export default function Home(): JSX.Element {
+export default function Login(): JSX.Element {
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function loginHandler(e: any) {
@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
     );
     if (result) {
       console.log("logged in");
-      router.push("/dashboard");
+      router.push("/Dashboard");
     } else {
       console.log("false");
     }
@@ -28,8 +28,7 @@ export default function Home(): JSX.Element {
     <form
       className="flex flex-col gap-4 w-[500px] mx-auto my-[20%] border p-7 rounded-md shadow "
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={(e) => loginHandler(e)}
-    >
+      onSubmit={(e) => loginHandler(e)}>
       <h1 className="text-center border-b pb-2">RECETA.</h1>
       <div>
         <div className="mb-2 block">

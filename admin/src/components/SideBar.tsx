@@ -1,12 +1,12 @@
-import Dashboard from "./sub/Dashboard";
+import Dashboard from "../pages/dashboard";
 import Recipe from "../pages/recipe";
-import User from "./sub/User";
+import User from "../pages/User";
+import Settings from "../pages/Settings";
+import Moderator from "../pages/Moderator";
 import { useRouter } from "next/router";
 import ProdIcon from "./icons/ProdIcon";
-import Moderator from "./sub/Moderator";
 import ModeIcon from "./icons/ModeIcon";
 import UserIcon from "./icons/UserIcon";
-import Settings from "./sub/Settings";
 import SettingIcon from "./icons/SettingIcon";
 import DashIcon from "./icons/DashIcon";
 import { useEffect, useState } from "react";
@@ -36,8 +36,7 @@ export default function SideBar(): JSX.Element {
             router.push(`../${page.url}`),
               setActiveBtn(page.name),
               localStorage.setItem("btn", page.name);
-          }}
-        >
+          }}>
           <span className="mt-[3px]">{page.icon}</span>
           <p className="m-0 pl-[10px]">{page.name}</p>
         </button>

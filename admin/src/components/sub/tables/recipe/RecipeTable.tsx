@@ -14,7 +14,7 @@ import {
   Table,
 } from "@chakra-ui/react";
 
-import CanvasRecipe from "../creating/CreateRecipe";
+import CreateRecipe from "../../creating/CreateRecipe";
 import RecipeTableRow from "./RecipeTableRow";
 
 interface RecipeTablePropType {
@@ -32,7 +32,7 @@ export default function RecipeTable({
 }: RecipeTablePropType) {
   return (
     <TabPanel>
-      <CanvasRecipe collections={collections} tools={tools} />
+      <CreateRecipe collections={collections} tools={tools} />
       <TableContainer>
         <Table size="lg">
           <Thead>
