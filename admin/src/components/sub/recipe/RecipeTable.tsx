@@ -53,7 +53,7 @@ export default function RecipeTable({
                 recipe={recipe}
                 key={recipe._id}
               />
-            ))}
+            )).reverse()}
           </Tbody>
         </Table>
       </TableContainer>

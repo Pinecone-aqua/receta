@@ -75,7 +75,7 @@ export default function CanvasEditButton({
   // file setting
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
-    console.log("dfdfdf", file);
+    console.log("file", file);
   };
 
   function updateRecipe(e: any) {
@@ -88,10 +88,11 @@ export default function CanvasEditButton({
       ingredients: ingredient,
       how_to: how,
       video_url: e.target.videoUrl.value,
-      alcohol: e.target.alcohol.value,
+      alcohol: e.target.alcohol.checked,
       tools: selectTools,
     };
     console.log("file", file);
+    console.log("data", data);
     const formData = new FormData();
     e.target.imageUrl.files[0]
       ? formData.append("file", file)
@@ -309,7 +310,7 @@ export default function CanvasEditButton({
             <div className="w-3/4 flex justify-between mb-[20px]">
               <label>Alcoholic or nonalcoholic</label>
               <input
-                onClick={() => setCheck(!check)}
+                onClick={()=>{setCheck(!check)}}
                 type="checkbox"
                 defaultChecked={check}
                 name="alcohol"
