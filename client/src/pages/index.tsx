@@ -43,6 +43,14 @@ export default function Home({
         </Section>
 
         <Section>
+          <OurStory />
+        </Section>
+
+        <Section>
+          <HowToUse />
+        </Section>
+
+        <Section>
           <Store tools={tools} />
         </Section>
         <Section>
