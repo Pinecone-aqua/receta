@@ -11,7 +11,7 @@ export default function HowToUse() {
           necessitatibus fugiat quia maiores ullam dolorum sit, reiciendis
           voluptates delectus.
         </p>
-        <button className="py-2 px-[6rem] border me-auto">read more</button>
+        <button className="py-3 px-[6rem] border me-auto">read more</button>
       </div>
     </div>
   );
