@@ -18,7 +18,6 @@ export class Recipe {
   image_url: string;
   @Prop()
   video_url: string;
-
   @Prop({ type: mongoose.Types.ObjectId, ref: "Collection" })
   collection_id: Collection;
   @Prop({ type: mongoose.Types.ObjectId, ref: "Category" })
