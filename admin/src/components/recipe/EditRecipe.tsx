@@ -78,7 +78,7 @@ export default function CanvasEditButton({
     setFile(e.target.files[0]);
   };
 
-  function updateRecipe(e: any) {
+  async function updateRecipe(e: any) {
     e.preventDefault();
     const data = {
       name: e.target.name.value,
@@ -101,6 +101,20 @@ export default function CanvasEditButton({
     // axios
     //   .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
     //   .then((res) => console.log(res.data));
+    try {
+      const response = await axios.patch(
+        `http://localhost:3003/recipes/update?id=${recipe._id}`,
+        formData
+      );
+      if (response.status === 200) {
+        toast.success("Recipe data updated successfully");
+      } else {
+        toast.error("Failed to update recipe");
+      }
+    } catch (error) {
+      console.log(error, "in editinng recipe");
+      toast.error("error");
+    }
   }
 
   useEffect(() => {
