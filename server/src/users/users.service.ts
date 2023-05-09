@@ -23,9 +23,13 @@ export class UserService {
   }
 
   loginUser(user) {
-    return this.userModel.findOne({
-      email: user.email,
-      password: user.password,
-    });
+    try {
+      return this.userModel.findOne({
+        email: user.email,
+        password: user.password,
+      });
+    } catch (err) {
+      return console.log(err.message);
+    }
   }
 }

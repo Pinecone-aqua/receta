@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { CheckRole } from "src/role/role.decorator";
 import { CategoriesService } from "./categories.service";
 @Controller("categories")
 export class CategoriesController {
@@ -15,6 +16,7 @@ export class CategoriesController {
   }
 
   @Post("create")
+  @CheckRole("MODERATOR", "ADMIN")
   create(@Body() body: any) {
     console.log(body);
 
