@@ -2,11 +2,10 @@ import {
   CollectionType,
   CreateCategoryType,
   ToolsType,
-} from "@/src/types/types";
-import axios from "axios";
+} from "../../util/Types";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { toast } from "react-toastify";
+import { FiEdit } from "react-icons/fi";
 
 export default function CanvasEditButton({
   recipe,
@@ -76,10 +75,9 @@ export default function CanvasEditButton({
   // file setting
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
-    console.log("file", file);
   };
 
-  async function updateRecipe(e: any) {
+  function updateRecipe(e: any) {
     e.preventDefault();
     const data = {
       name: e.target.name.value,
@@ -92,8 +90,7 @@ export default function CanvasEditButton({
       alcohol: e.target.alcohol.checked,
       tools: selectTools,
     };
-    console.log("file", file);
-    console.log("data", data);
+
     const formData = new FormData();
     e.target.imageUrl.files[0]
       ? formData.append("file", file)
@@ -103,17 +100,6 @@ export default function CanvasEditButton({
     // axios
     //   .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
     //   .then((res) => console.log(res.data));
-    try {
-      const response = await axios.patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData);
-      if(response.status === 200) {
-        toast.success('Recipe data updated successfully');
-      } else {
-        toast.error('Failed to update recipe');
-      }
-    } catch (error) {
-      console.log(error, "in editinng recipe")
-      toast.error('error')
-    }
   }
 
   useEffect(() => {
@@ -125,28 +111,27 @@ export default function CanvasEditButton({
   }, [categories, currentCollection]);
   return (
     <>
-      <button
-        className="bg-green-600 rounded text-white text-bold h-[30px] flex items-center justify-center"
-        onClick={handleShow}>
-        Edit
-      </button>
+      <FiEdit
+        onClick={handleShow}
+        className="text-green-500 text-bold h-[20px] w-[20px] cursor-pointer"
+      />
 
       <Offcanvas
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50 relative pt-[30px]">
+        className="w-50 relative pt-[30px]"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe editing</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {/* <AdditionalFields name="Ingredients" ingredients={ingredients} setIngredients={setIngredients}/>
-          <AdditionalFields name="Instructions"/> */}
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
             onSubmit={(e) => {
               updateRecipe(e);
-            }}>
+            }}
+          >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
@@ -171,7 +156,8 @@ export default function CanvasEditButton({
                 defaultValue={recipe.collection_id}
                 className="border"
                 name="collection"
-                onChange={(e) => setCurrentCollection(e.target.value)}>
+                onChange={(e) => setCurrentCollection(e.target.value)}
+              >
                 {collections.map(
                   (collection: CollectionType, index: number) => (
                     <option key={index}>{collection.name}</option>
@@ -183,8 +169,9 @@ export default function CanvasEditButton({
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Category</label>
               <select
-                defaultValue={recipe.categories_id[0].name}
-                name="category">
+                defaultValue={recipe.categories_id[0]?.name}
+                name="category"
+              >
                 {filteredCategory.map((category: any, index: number) => (
                   <option key={index}>{category.name}</option>
                 ))}
@@ -197,13 +184,12 @@ export default function CanvasEditButton({
                 <div
                   className={
                     selectTools.includes(tool._id)
-                      ? //   (selected: any) => selected._id === tool._id
-                        // ).length > 0
-                        "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
+                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
-                  onClick={() => addToolHandler(tool._id)}>
+                  onClick={() => addToolHandler(tool._id)}
+                >
                   <p className="">{tool.name}</p>
                   <img className="w-[80px]" src={tool.image_url} />
                 </div>
@@ -216,7 +202,8 @@ export default function CanvasEditButton({
                 {ingredient.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center">
+                    className="h-full flex items-center"
+                  >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -254,7 +241,8 @@ export default function CanvasEditButton({
                 {how.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center">
+                    className="h-full flex items-center"
+                  >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -332,7 +320,8 @@ export default function CanvasEditButton({
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
+                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+              >
                 Save changes
               </button>
             </div>

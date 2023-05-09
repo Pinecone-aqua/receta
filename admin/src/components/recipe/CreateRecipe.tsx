@@ -3,16 +3,17 @@ import {
   ToolsType,
   CreateCategoryType,
   CreateCocktailType,
-} from "@/src/types/types";
+} from "../../util/Types";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import AddInputButton from "./functions/AddInputButton";
+import { useCocktail } from "@/src/context/CocktailContext";
+import { Spinner } from "@chakra-ui/react";
+import AddInputButton from "../sub/creating/functions/AddInputButton";
 
 export default function CreateRecipe(props: {
-  //?
   collections: CollectionType[];
   tools: ToolsType[];
 }) {
@@ -24,6 +25,9 @@ export default function CreateRecipe(props: {
   const [ingredient, setIngredient] = useState<string[]>([]);
   const [selectTools, setSelectTools] = useState<string[]>([]);
   const [how, setHow] = useState<string[]>([]);
+  const [spinner, setSpinner] = useState<string>();
+
+  const { setRecipes, recipes } = useCocktail();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -66,8 +70,9 @@ export default function CreateRecipe(props: {
       .then((res) => setCategories(res.data));
   }, []);
 
-  function createCocktail(e: any) {
+  async function createCocktail(e: any) {
     e.preventDefault();
+    setSpinner("loading");
 
     const cocktailData: CreateCocktailType = {
       name: e.target.name.value,
@@ -84,29 +89,42 @@ export default function CreateRecipe(props: {
     data.append("file", e.target.imageUrl.files[0]);
     data.append("newRecipe", JSON.stringify(cocktailData));
 
-    axios.post("http://localhost:3003/recipes/create", data).then((res) => {
-      console.log(res);
-    });
+    const result = await axios.post(
+      "http://localhost:3003/recipes/create",
+      data
+    );
+
+    result &&
+      result.statusText == "Created" &&
+      setRecipes([...recipes, result.data]),
+      setSpinner("run"),
+      setShow(false);
   }
 
   return (
     <>
-      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
-        create recipe
+      <Button
+        className="my-[30px]"
+        style={{ background: "#454ADE" }}
+        onClick={handleShow}
+      >
+        Create recipe
       </Button>
 
       <Offcanvas
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50 relative pt-[30px]">
+        className="w-50 relative pt-[30px]"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
-            onSubmit={(e) => createCocktail(e)}>
+            onSubmit={(e) => createCocktail(e)}
+          >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
@@ -128,7 +146,8 @@ export default function CreateRecipe(props: {
               <select
                 className="border"
                 name="collection"
-                onChange={(e) => filterCate(e.target.value)}>
+                onChange={(e) => filterCate(e.target.value)}
+              >
                 {collections.map((collection, index) => (
                   <option key={index}>{collection.name}</option>
                 ))}
@@ -145,7 +164,8 @@ export default function CreateRecipe(props: {
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
-                  onClick={() => addToolHandler(tool._id)}>
+                  onClick={() => addToolHandler(tool._id)}
+                >
                   <p className="">{tool.name}</p>
                   <Image
                     src={tool.image_url}
@@ -172,7 +192,8 @@ export default function CreateRecipe(props: {
                 {ingredient.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center">
+                    className="h-full flex items-center"
+                  >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -202,7 +223,8 @@ export default function CreateRecipe(props: {
                 {how.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center">
+                    className="h-full flex items-center"
+                  >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -262,8 +284,10 @@ export default function CreateRecipe(props: {
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
+                className="h-[40px] rounded-md bg-green-600 px-3 text-sm text-white shadow-sm hover:bg-green-500"
+              >
                 Create
+                {spinner == "loading" && <Spinner className="" size="xs" />}
               </button>
             </div>
           </form>

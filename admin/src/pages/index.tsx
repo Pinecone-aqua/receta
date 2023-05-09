@@ -1,8 +1,9 @@
+import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/router";
 
-export default function Login(): JSX.Element {
+export default function Home(): JSX.Element {
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function loginHandler(e: any) {
@@ -10,25 +11,53 @@ export default function Login(): JSX.Element {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const result: unknown = await axios.post(
-      "http://localhost:4000/admin-login",
-      {
-        email,
-        password,
+    const result: any = await axios.post("http://localhost:3003/users/login", {
+      email,
+      password,
+    });
+
+    if (result?.statusText == "Created") {
+      if (result.data) {
+        router.push("/Dashboard");
+        successToast();
+      } else {
+        errToast();
       }
-    );
-    if (result) {
-      console.log("logged in");
-      router.push("/dashboard");
     } else {
-      console.log("false");
+      errToast();
     }
   }
+
+  const successToast = useToast({
+    position: "top-right",
+    title: "success",
+    containerStyle: {
+      width: "10%",
+      maxWidth: "100%",
+    },
+    status: "success",
+    duration: 2000,
+    isClosable: true,
+  });
+
+  const errToast = useToast({
+    position: "top-right",
+    title: "something wrong",
+    containerStyle: {
+      width: "10%",
+      maxWidth: "100%",
+    },
+    status: "error",
+    duration: 2000,
+    isClosable: true,
+  });
+
   return (
     <form
       className="flex flex-col gap-4 w-[500px] mx-auto my-[20%] border p-7 rounded-md shadow "
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={(e) => loginHandler(e)}>
+      onSubmit={(e) => loginHandler(e)}
+    >
       <h1 className="text-center border-b pb-2">RECETA.</h1>
       <div>
         <div className="mb-2 block">
@@ -54,8 +83,12 @@ export default function Login(): JSX.Element {
         />
       </div>
       <div className="flex items-center gap-2">
-        <Checkbox id="remember" />
-        <Label htmlFor="remember">Remember me</Label>
+        {/* <Checkbox id="remember" />
+        <Label htmlFor="remember">Remember me</Label> */}
+        <Label
+          htmlFor="remember"
+          className="text-center w-[100%] h-[1px] bg-gray-200"
+        />
       </div>
       <Button type="submit">Submit</Button>
     </form>
