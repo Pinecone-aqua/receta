@@ -10,6 +10,7 @@ import Store from "../component/main/Store";
 import ParallaxText from "../component/main/ParalloxText";
 import Layout from "../component/Layout";
 import { Section } from "../component/main/motionScroll/MotionScroll";
+import OurStory from "@/component/main/OurStory";
 // import * as dotenv from "dotenv";
 
 // dotenv.config();
@@ -38,6 +39,10 @@ export default function Home({
         </div>
         <Section>
           <Recommend recommend={recommend} />
+        </Section>
+
+        <Section>
+          <OurStory />
         </Section>
 
         <Section>
