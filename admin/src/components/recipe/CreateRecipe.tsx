@@ -6,12 +6,13 @@ import {
 } from "../../util/Types";
 import axios from "axios";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useCocktail } from "@/src/context/CocktailContext";
 import { Spinner } from "@chakra-ui/react";
 import AddInputButton from "./functions/AddInputButton";
+
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -31,13 +32,24 @@ export default function CreateRecipe(props: {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const tempRef: MutableRefObject<string> = useRef("");
+  const tempRefHow: MutableRefObject<string> = useRef("");
+  const inputRefIng = useRef<HTMLInputElement>(null);
+  const inputRefIns = useRef<HTMLInputElement>(null);
 
-  const [inputRef, setInputRef] = useState<string>("");
-  const [inputRefIns, setInputRefIns] = useState<string>("");
+  const addInputHandler = () => {
+    tempRef.current && setIngredient([...ingredient, tempRef.current]);
+    if (inputRefIng.current) {
+      inputRefIng.current.value = "";
+    }
+  };
 
-  //----
-
-  //----
+  const addInputHandlerHow = () => {
+    tempRefHow.current && setHow([...how, tempRefHow.current]);
+    if (inputRefIns.current) {
+      inputRefIns.current.value = "";
+    }
+  };
 
   const removeInputHandler = (index: number) => {
     const deleteInput = ingredient.filter((input, i) => index !== i);
@@ -130,7 +142,6 @@ export default function CreateRecipe(props: {
         <Offcanvas.Body>
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onSubmit={(e) => createCocktail(e)}
           >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
@@ -223,6 +234,7 @@ export default function CreateRecipe(props: {
                   setInputRef("");
                 }}
               />
+
             </div>
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
