@@ -1,0 +1,25 @@
+@media screen and (max-width: 800px) {
+  .store-single {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .store-sub-cont {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .store-sub-img {
+    width: 150px;
+  }
+  .store-sub-title {
+    padding: 20px;
+  }
+}
+
+.store-sub-cont {
+  display: flex;
+}
+.store-sub-img {
+  width: 200px;
+  height: 280px;
+  object-fit: cover;
+}

@@ -1,0 +1,40 @@
+.Collection {
+  display: flex;
+}
+.Collection-div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 138px 50px;
+}
+.Col-right-image {
+  object-fit: cover;
+  width: 50%;
+  height: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+  .Collection-div {
+    padding: 50px 50px;
+  }
+  .Collection {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .Col-section-left {
+    width: 100%;
+  }
+  .Col-section-right {
+    margin: 0 auto;
+    max-width: 380px;
+  }
+  .Col-right-image {
+    width: 100%;
+    margin: 0;
+  }
+  .Collection-arrow {
+    right: 45%;
+  }
+}

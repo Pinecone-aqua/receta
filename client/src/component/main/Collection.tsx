@@ -1,56 +1,74 @@
-import { useProduct } from "@/context/ProductContext";
-import { CollectionType } from "@/util/Types";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { RiArrowDropDownFill } from "react-icons/ri";
+import { useOthers } from "../../context/OthersContext";
+import { CollectionType } from "../../util/Types";
+import React, { useEffect } from "react";
+import { BsArrowDownShort } from "react-icons/bs";
+import { Section } from "./motionScroll/MotionScroll";
 
-export default function Collection(): JSX.Element {
-  const [data, setData] = useState<CollectionType[]>([]);
-  const { setActiveBtn, activeBtn } = useProduct();
-
+export default function Collection({
+  collections,
+}: {
+  collections: CollectionType[];
+}): JSX.Element {
+  const { setActiveCollectionBtn, activeCollectionBtn } = useOthers();
   useEffect(() => {
-    axios
-      .get("http://localhost:3003/collections/get")
-      .then((res) => setData(res.data));
+    localStorage.getItem("currentCollection")
+      ? setActiveCollectionBtn(localStorage.getItem("currentCollection"))
+      : setActiveCollectionBtn("Difficulty");
   }, []);
 
   return (
-    <div className="h-[78vh] w-[80%] relative flex ms-[5%]">
-      {data.map((collection, index) => (
-        <div
-          onClick={() => {
-            setActiveBtn(collection.name);
-            localStorage.setItem("currentCollection", collection.name);
-          }}
-          key={index}
-          className="w-[25%] flex justify-center items-end"
-        >
-          <div>
-            <img
-              src={`../${collection.name}.png`}
-              className={
-                activeBtn == collection.name
-                  ? `w-[100%] z-10 bottom-0 sm:hidden md:block cursor-pointer`
-                  : `w-[130px] h-[190px] cursor-pointer`
-              }
-              alt="..."
-            />
-
-            <p
-              className={
-                activeBtn == collection.name
-                  ? `z-0 absolute text-3xl top-[40%] left-[25%] font-bold text-[150px] text-currentColor`
-                  : `text-currentColor cursor-pointer text-center`
-              }
-            >
-              {collection.name}
-            </p>
-            {activeBtn == collection.name && (
-              <RiArrowDropDownFill className="absolute w-[40px] h-[40px] bottom-[-15px] ms-[11%]" />
-            )}
+    <div className="Collection Container">
+      <div className="w-[50%] relative Col-section-left">
+        <div className="Collection-div">
+          <h1 className="text-[48px] font-medium">
+            {activeCollectionBtn && activeCollectionBtn}
+          </h1>
+          <p className="text-[#8a8a8a]">
+            The origins of the word "cocktail" have been debated . The first
+            written mention of "cocktail" as a beverage appeared in The Farmers
+            Cabinet, 1803 in the United States. The first definition of a
+            cocktail as an alcoholic beverage appeared three years later in The
+            Balance and Columbian Repository May 13, 1806
+          </p>
+          <div className="gap-[12px] flex flex-wrap">
+            {collections.map((collection, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setActiveCollectionBtn(collection.name),
+                    localStorage.setItem("currentCollection", collection.name);
+                  localStorage.removeItem("category");
+                }}
+                className={
+                  activeCollectionBtn === collection.name
+                    ? "py-[6px] px-[16px] text-white bg-[#1e1e1e] border-[1px] border-[#1e1e1e] rounded-[50px] duration-300 z-10"
+                    : `py-[6px] px-[16px] text-[#1e1e1e] border-[1px] border-[#1e1e1e] rounded-[50px] z-10`
+                }
+              >
+                {collection.name}
+              </button>
+            ))}
           </div>
         </div>
-      ))}
+        <div className="Collection-arrow absolute rounded-[50%] bottom-[-26px] right-[-26px] bg-white">
+          <BsArrowDownShort className="text-black mx-auto p-[12px] w-[52px] h-[52px] border-[0.5px] border-black rounded-[50%]" />
+        </div>
+      </div>
+
+      <div className="w-[50%] Col-section-right">
+        {collections.map(
+          (collection, index) =>
+            activeCollectionBtn === collection.name && (
+              <picture key={index}>
+                <img
+                  key={index}
+                  className="Col-right-image"
+                  src={collection.image_url}
+                />
+              </picture>
+            )
+        )}
+      </div>
     </div>
   );
 }

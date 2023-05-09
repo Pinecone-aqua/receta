@@ -1,33 +1,39 @@
 import { BsArrowRightShort } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
+import { AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
+import { BsInstagram } from "react-icons/bs";
+import { Pages } from "@/util/constVariables";
+import Link from "next/link";
+import { useOthers } from "@/context/OthersContext";
 
 export default function Footer(): JSX.Element {
+  const { setActivePage } = useOthers();
   return (
-    <footer className="flex place-content-center bg-[#1e1e1e] text-center p-[80px] text-white">
-      <div className="motion-div">
-        <h2 className="text-[32px] font-bold cursor-pointer pb-[40px]">
-          receta.
-        </h2>
-        <h5 className="text-lg pb-5">Сүүлийн үеийн мэдээлэл авч байх</h5>
-        <div className="relative mb-3">
-          <input
-            type="email"
-            className="peer border  min-h-[auto] min-w-[400px] rounded bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-          />
-          <BsArrowRightShort className="absolute top-[4px] right-0 w-[30px] h-[30px]" />
-          <label
-            htmlFor="exampleFormControlInputEmail"
-            className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-white peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-          >
-            Email input
-          </label>
+    <footer className="bg-white">
+      <div className="Container footer flex relative text-black border-s-[0.5px] border-[#dadada] ps-[47px] pt-[50px] justify-between">
+        <div className="flex flex-col justify-around">
+          <h2 className="logo">receta.</h2>
+          <div className="font-medium text-[12px] max-w-[400px] leading-[15px] text-[#747474]">
+            © <span className="text-black">receta</span> 2023. Made with by{" "}
+            <span className="text-black">receta</span>club. Зохиогчийн эрх
+            хуулиар хамгаалагдсан
+          </div>
         </div>
-        <input
-          type="checkbox"
-          className="text-[#267F40] border-gray-200 rounded"
-        />
-        <label className="ms-3 text-[#267F40]" htmlFor="">
-          Би нууцлалын нөхцлийг зөвшөөрч байна
-        </label>
+        <picture>
+          <img
+            src="../footer.webp"
+            className="w-[250px] mx-auto mt-[50px]"
+            alt="footer"
+          />
+        </picture>
+
+        <picture>
+          <img
+            src="../cocktail.webp"
+            alt="cocktail"
+            className="absolute bottom-[-30px] left-[-7px] w-[15px] h-[20px]"
+          />
+        </picture>
       </div>
     </footer>
   );
