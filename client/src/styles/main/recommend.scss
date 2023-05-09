@@ -26,8 +26,8 @@
 .recommend-title-sub {
   font-family: "M PLUS 1p", sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 32px;
   line-height: 24px;
   text-align: center;
   color: #ffffff;
@@ -44,4 +44,40 @@
   line-height: 36px;
   text-align: center;
   color: #ffffff;
+}
+
+.recommend .p-carousel-indicators {
+  margin-top: 5rem !important;
+}
+.recommend .p-carousel-indicator {
+  margin: 0 !important;
+  width: 150px;
+  border-top: 1px solid white !important;
+}
+
+.recommend .p-highlight {
+  background-color: #ececec !important ;
+}
+
+.recommend .p-carousel-indicator button {
+  width: 100% !important;
+  background-color: transparent !important;
+  height: 0.3rem !important;
+}
+
+.recommend .p-carousel-items-container {
+  gap: 1.3rem;
+}
+
+.recommend .p-carousel-item {
+  flex: 1 0 31.5% !important;
+}
+
+.recommend button {
+  color: #dadada;
+}
+
+.recommend button svg {
+  width: 20px;
+  height: 20px;
 }
