@@ -35,7 +35,7 @@ export default function Header(): JSX.Element {
             <Link
               className={
                 activePage == page.name
-                  ? "border-b text-[#1e1e1e] z-10 border-[#1e1e1e]"
+                  ? "border-b text-[#1e1e1e] border-[#1e1e1e]"
                   : "text-[#1e1e1e] z-10"
               }
               key={index}
