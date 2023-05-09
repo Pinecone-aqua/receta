@@ -10,9 +10,7 @@ import { ToastContainer } from "react-toastify";
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider>
-      {/* <Layout> */}
       <Component {...pageProps} />
-      {/* </Layout> */}
       <ToastContainer />
     </ChakraProvider>
   );

@@ -6,7 +6,7 @@ import {
 } from "@/src/types/types";
 import axios from "axios";
 import Image from "next/image";
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import AddInputButton from "./functions/AddInputButton";
@@ -30,27 +30,6 @@ export default function CreateRecipe(props: {
 
   const [inputRef, setInputRef] = useState<string>("");
   const [inputRefIns, setInputRefIns] = useState<string>("");
-  // const tempRef: MutableRefObject<string> = useRef("");
-  // const tempRefHow: MutableRefObject<string> = useRef("");
-  // const inputRefIng = useRef<HTMLInputElement>(null);
-  // const inputRefIns = useRef<HTMLInputElement>(null);
-
-  // const addInputHandler = () => {
-  //   tempRef.current && setIngredient([...ingredient, tempRef.current]);
-  //   if (inputRefIng.current) {
-  //     inputRefIng.current.value = "";
-  //   }
-  // };
-
-  // const addInputHandlerHow = () => {
-  //   tempRefHow.current && setHow([...how, tempRefHow.current]);
-  //   if (inputRefIns.current) {
-  //     inputRefIns.current.value = "";
-  //   }
-  // };
-  // const dd = (ref, set,)
-
-  //----
 
   const removeInputHandler = (index: number) => {
     const deleteInput = ingredient.filter((input, i) => index !== i);
@@ -215,23 +194,6 @@ export default function CreateRecipe(props: {
                   setInputRef("");
                 }}
               />
-              {/* 
-              <input
-                id="adding"
-                type="text"
-                ref={inputRefIng}
-                name="ingredients"
-                className="bg-slate-400 w-52"
-                // onChange={(e) => {
-                //   tempRef.current = e.target.value;
-                // }}
-              />
-              <input
-                value="Add ingredient"
-                className="px-[10px] bg-green-400"
-                onClick={addInputHandler}
-                type="button"
-              /> */}
             </div>
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
@@ -253,24 +215,6 @@ export default function CreateRecipe(props: {
                   </div>
                 ))}
               </div>
-
-              {/* <input
-                id="adding"
-                type="text"
-                ref={inputRefIns}
-                name="instructions"
-                className="bg-slate-400 w-52"
-                onChange={(e) => {
-                  tempRefHow.current = e.target.value;
-                }}
-              />
-              <input
-                value="Add instructions"
-                className="px-[10px] bg-green-400"
-                onClick={addInputHandlerHow}
-                disabled={!inputRefIns.current}
-                type="button"
-              /> */}
               <AddInputButton
                 text={inputRefIns}
                 name="add How"

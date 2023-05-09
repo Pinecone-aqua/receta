@@ -1,8 +1,8 @@
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/dashboard";
 import Recipe from "../pages/recipe";
-import User from "../pages/User";
-import Settings from "../pages/Settings";
-import Moderator from "../pages/Moderator";
+import User from "../pages/user";
+import Settings from "../pages/settings";
+import Moderator from "../pages/moderator";
 import { useRouter } from "next/router";
 import ProdIcon from "./icons/ProdIcon";
 import ModeIcon from "./icons/ModeIcon";
