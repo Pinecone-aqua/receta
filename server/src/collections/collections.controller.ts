@@ -1,17 +1,37 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { CollectionService } from './collections.service';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { CloudinaryService } from "src/cloudinary/cloudinary.service";
+import { CheckRole } from "src/role/role.decorator";
+import { CollectionService } from "./collections.service";
 
-@Controller('collections')
+@Controller("collections")
 export class CollectionController {
-  constructor(private readonly collectionService: CollectionService) {}
+  constructor(
+    private readonly collectionService: CollectionService,
+    private readonly cloudinary: CloudinaryService
+  ) {}
 
-  @Get('get')
-  find() {
+  @Get("get")
+  async find() {
     return this.collectionService.allCollection();
   }
 
-  @Post('create')
-  create(@Body() body: any) {
-    return this.collectionService.createCollection(body);
+  @Post("create")
+  @CheckRole("MODERATOR", "ADMIN")
+  @UseInterceptors(FileInterceptor("file"))
+  async create(@Body() body: any, @UploadedFile() file: any) {
+    const image_url = await this.cloudinary.uploadImage(file);
+    return this.collectionService.createCollection({
+      ...JSON.parse(body.newCol),
+      image_url: image_url.secure_url,
+    });
   }
 }

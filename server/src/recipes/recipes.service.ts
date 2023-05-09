@@ -1,4 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import {
+  Body,
+  Injectable,
+  Patch,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Category } from "src/categories/category.schema";
@@ -6,7 +13,7 @@ import { Recipe } from "src/recipes/recipe.schema";
 import { Tool } from "src/tools/tools.schema";
 import { Collection } from "src/collections/collection.schema";
 import { CreateRecipesDto } from "./recipes.create.dto";
-import { LOADIPHLPAPI } from "dns";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Injectable()
 export class RecipesService {
@@ -52,6 +59,17 @@ export class RecipesService {
     }
   }
 
+  recommend() {
+    try {
+      return this.recipeModel
+        .find({ collection_id: "Difficulty" })
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 })
+        .limit(6);
+    } catch (err) {
+      return err;
+    }
+  }
+
   filterRecipe(query: any) {
     try {
       return this.recipeModel
@@ -64,41 +82,28 @@ export class RecipesService {
     }
   }
 
-  filterCateRecipe(name: string) {
+  filterCateRecipe(query: any) {
     try {
       return this.recipeModel
-        .find({ "categories_id.name": { $in: [name] } })
-        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 });
+        .find({ "categories_id.name": { $in: [query.name] } })
+        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 })
+        .skip(query.limit - 8)
+        .limit(8);
     } catch (err) {
       return err;
     }
-  }
-
-  async remove(recipe: any) {
-    try {
-      return await this.recipeModel.deleteOne({ _id: recipe.id });
-    } catch (err) {
-      return err;
-    }
-  }
-
-  async updateRecipe(data) {
-    console.log(data);
-
-    return this.recipeModel.updateOne(
-      { _id: data.id },
-      { $set: { ...data.body, ...data.image_url } }
-    );
   }
 
   async createRecipe(recipe: CreateRecipesDto) {
     try {
+      //collection find name
       const collection = await this.collectionsModel
         .findOne({
           name: recipe.collection,
         })
         .select({ name: 1 });
 
+      //category find name
       const category = await this.categoriesModel
         .find({
           name: recipe.categories,
@@ -109,7 +114,7 @@ export class RecipesService {
         .find({
           _id: recipe.tools,
         })
-        .select({ name: 1 });
+        .select({ name: 1, image_url: 1 });
 
       return this.recipeModel.create({
         name: recipe.name,
@@ -126,5 +131,28 @@ export class RecipesService {
     } catch (err) {
       return err;
     }
+  }
+
+  async remove(recipe: any) {
+    try {
+      return await this.recipeModel.deleteOne({ _id: recipe.id });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async findRecipeTools(name: string) {
+    try {
+      return this.recipeModel.find({ "tools_id.name": { $in: [name] } });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async updateRecipe(data: any) {
+    return this.recipeModel.updateOne(
+      { _id: data.id },
+      { $set: { ...data.body, ...data.image_url } }
+    );
   }
 }

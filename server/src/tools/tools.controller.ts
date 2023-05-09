@@ -1,46 +1,32 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Query,
-  UploadedFile,
-  UseInterceptors,
-} from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
-import { CloudinaryService } from "src/cloudinary/cloudinary.service";
+import { Controller, Get, Query } from "@nestjs/common";
 import { ToolsService } from "./tools.service";
-
 @Controller("tools")
 export class ToolsController {
-  constructor(
-    private readonly toolService: ToolsService,
-    private readonly cloudinary: CloudinaryService
-  ) {}
+  constructor(private readonly toolService: ToolsService) {}
 
   @Get("get")
   find() {
-    return this.toolService.allTools();
+    return this.toolService.all();
   }
 
-  @Post("create")
-  @UseInterceptors(FileInterceptor("file"))
-  async create(
-    @Body() body: any,
-    @UploadedFile()
-    file: any
-  ) {
-    try {
-      const response = await this.cloudinary.uploadImage(file);
-
-      const data = await {
-        ...JSON.parse(body.newTool),
-        image_url: response?.secure_url,
-      };
-      console.log(data);
-      return this.toolService.createTool(data);
-    } catch (e) {
-      return e.message;
-    }
+  @Get("find")
+  findTool(@Query("id") id: string) {
+    return this.toolService.findId(id);
   }
+
+  @Get("get-ids")
+  getIds() {
+    return this.toolService.getIds();
+  }
+
+  // @Post('create')
+  // create(@Body() body: any) {
+  //   console.log('body: ', body);
+
+  // try {
+  //   return this.toolService.create(body);
+  // } catch (err) {
+  //   return err;
+  // }
+  // }
 }

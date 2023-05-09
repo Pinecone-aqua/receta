@@ -3,10 +3,8 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Patch,
   Post,
-  Put,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -14,6 +12,7 @@ import {
 import { RecipesService } from "./recipes.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { CloudinaryService } from "src/cloudinary/cloudinary.service";
+import { CheckRole } from "src/role/role.decorator";
 
 @Controller("recipes")
 export class RecipesController {
@@ -32,6 +31,11 @@ export class RecipesController {
     return this.recipesService.findRecipe(id);
   }
 
+  @Get("get-used-tool")
+  getLength(@Query("name") name: string) {
+    return this.recipesService.findRecipeTools(name);
+  }
+
   @Get("get-ids")
   findId() {
     return this.recipesService.allId();
@@ -47,13 +51,19 @@ export class RecipesController {
     return this.recipesService.filterRecipe(query);
   }
 
+  @Get("recommend")
+  recommend() {
+    return this.recipesService.recommend();
+  }
+
   @Get("filter-category")
-  filterCategory(@Query("name") name: string) {
-    return this.recipesService.filterCateRecipe(name);
+  filterCategory(@Query() query: any) {
+    return this.recipesService.filterCateRecipe(query);
   }
 
   @Post("create")
   @UseInterceptors(FileInterceptor("file"))
+  @CheckRole("MODERATOR", "ADMIN")
   async create(
     @Body() body: any,
     @UploadedFile()
@@ -74,6 +84,7 @@ export class RecipesController {
 
   @Patch("update")
   @UseInterceptors(FileInterceptor("file"))
+  @CheckRole("MODERATOR", "ADMIN")
   async update(
     @UploadedFile() file: any,
     @Query("id") id: string,
@@ -99,6 +110,7 @@ export class RecipesController {
   }
 
   @Delete("delete")
+  @CheckRole("MODERATOR", "ADMIN")
   remove(@Query() recipe: string) {
     return this.recipesService.remove(recipe);
   }

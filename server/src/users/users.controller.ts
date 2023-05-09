@@ -12,7 +12,11 @@ export class UserController {
 
   @Post("login")
   login(@Body() user) {
-    return this.userService.loginUser(user);
+    try {
+      return this.userService.loginUser(user);
+    } catch (err) {
+      return err;
+    }
   }
 
   @Post("create")

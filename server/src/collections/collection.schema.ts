@@ -4,6 +4,8 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 export class Collection {
   @Prop()
   name: string;
+  @Prop()
+  image_url: string;
 }
 
 export const CollectionSchema = SchemaFactory.createForClass(Collection);
