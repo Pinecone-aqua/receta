@@ -1,34 +1,35 @@
 import {
   CollectionType,
-  CreateCategoryType,
   ToolsType,
-} from "@/src/types/types";
+  CreateCategoryType,
+  CreateCocktailType,
+} from "../../util/Types";
 import axios from "axios";
+import Image from "next/image";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useCocktail } from "@/src/context/CocktailContext";
+import { Spinner } from "@chakra-ui/react";
 
-export default function CanvasEditButton({
-  recipe,
-  collections,
-  categories,
-  tools,
-}: any) {
+export default function CreateRecipe(props: {
+  collections: CollectionType[];
+  tools: ToolsType[];
+}) {
+  const { collections } = props;
+  const { tools } = props;
+  const [categories, setCategories] = useState<CreateCategoryType[]>([]);
+  const [show, setShow] = useState(false);
+  const [check, setCheck] = useState<boolean | null>(false);
+  const [ingredient, setIngredient] = useState<string[]>([]);
+  const [selectTools, setSelectTools] = useState<string[]>([]);
+  const [how, setHow] = useState<string[]>([]);
+  const [spinner, setSpinner] = useState<string>();
+
+  const { setRecipes, recipes } = useCocktail();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [show, setShow] = useState(false);
-  //--
-  const [ingredient, setIngredient] = useState<string[]>(recipe.ingredients);
-  const [filteredCategory, setFilteredCategory] = useState<
-    CreateCategoryType[]
-  >([]);
-  const [currentCollection, setCurrentCollection] = useState<any>(
-    recipe.collection_id
-  );
-  const [how, setHow] = useState<string[]>(recipe.how_to);
-  const [check, setCheck] = useState<boolean>(recipe.alcohol); // isAcholed
-  const [file, setFile] = useState<any | null>(recipe.image_url); //image
-  const idOfTools = recipe.tools_id.map((one: { _id: string }) => one._id);
-  const [selectTools, setSelectTools] = useState<string[]>(idOfTools); //selectedTools
 
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
@@ -61,10 +62,8 @@ export default function CanvasEditButton({
     setHow(deleteInputHow);
   };
 
-  // add tool handler
-
+  //add tool handler
   function addToolHandler(id: string) {
-    selectTools.includes(id);
     if (selectTools.includes(id)) {
       setSelectTools(selectTools.filter((tool) => tool !== id));
     } else {
@@ -72,15 +71,27 @@ export default function CanvasEditButton({
     }
   }
 
-  // file setting
-  const handleFileChange = (e: any) => {
-    setFile(e.target.files[0]);
-    console.log("file", file);
-  };
+  // filter categories
+  function filterCate(name: string) {
+    axios
+      .get(`http://localhost:3003/categories/filter?name=${name}`)
+      .then((res) => setCategories(res.data));
+  }
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:3003/categories/filter?name=${localStorage.getItem(
+          "currentColloction"
+        )}`
+      )
+      .then((res) => setCategories(res.data));
+  }, []);
 
-  function updateRecipe(e: any) {
+  async function createCocktail(e: any) {
     e.preventDefault();
-    const data = {
+    setSpinner("loading");
+
+    const cocktailData: CreateCocktailType = {
       name: e.target.name.value,
       description: e.target.description.value,
       categories: e.target.category.value,
@@ -88,38 +99,34 @@ export default function CanvasEditButton({
       ingredients: ingredient,
       how_to: how,
       video_url: e.target.videoUrl.value,
-      alcohol: e.target.alcohol.checked,
+      alcohol: e.target.alcohol.value,
       tools: selectTools,
     };
-    console.log("file", file);
-    console.log("data", data);
-    const formData = new FormData();
-    e.target.imageUrl.files[0]
-      ? formData.append("file", file)
-      : formData.append("img", file);
-    formData.append("data", JSON.stringify(data));
+    const data = new FormData();
+    data.append("file", e.target.imageUrl.files[0]);
+    data.append("newRecipe", JSON.stringify(cocktailData));
 
-    axios
-      .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
-      .then((res) => console.log(res.data));
-  }
-
-  useEffect(() => {
-    const result = categories.filter(
-      (category: any) => category.collection_name === currentCollection
+    const result = await axios.post(
+      "http://localhost:3003/recipes/create",
+      data
     );
 
-    setFilteredCategory(result);
-  }, [categories, currentCollection]);
+    result &&
+      result.statusText == "Created" &&
+      setRecipes([...recipes, result.data]),
+      setSpinner("run"),
+      setShow(false);
+  }
 
   return (
     <>
-      <button
-        className="bg-green-600 rounded text-white text-bold h-[30px] flex items-center justify-center"
+      <Button
+        className="my-[30px]"
+        style={{ background: "#454ADE" }}
         onClick={handleShow}
       >
-        Edit
-      </button>
+        Create recipe
+      </Button>
 
       <Offcanvas
         show={show}
@@ -128,23 +135,18 @@ export default function CanvasEditButton({
         className="w-50 relative pt-[30px]"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Recipe editing</Offcanvas.Title>
+          <Offcanvas.Title>Recipe</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {/* <AdditionalFields name="Ingredients" ingredients={ingredients} setIngredients={setIngredients}/>
-          <AdditionalFields name="Instructions"/> */}
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
-            onSubmit={(e) => {
-              updateRecipe(e);
-            }}
+            onSubmit={(e) => createCocktail(e)}
           >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
                 type="text"
                 name="name"
-                defaultValue={recipe.name}
                 className="bg-slate-400 w-52 rounded"
               />
             </div>
@@ -153,56 +155,52 @@ export default function CanvasEditButton({
               <label className="block">Description</label>
               <textarea
                 name="description"
-                defaultValue={recipe.description}
                 className="resize  bg-slate-400  w-52 rounded"
               />
             </div>
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Collection</label>
               <select
-                defaultValue={recipe.collection_id}
                 className="border"
                 name="collection"
-                onChange={(e) => setCurrentCollection(e.target.value)}
+                onChange={(e) => filterCate(e.target.value)}
               >
-                {collections.map(
-                  (collection: CollectionType, index: number) => (
-                    <option key={index}>{collection.name}</option>
-                  )
-                )}
-              </select>
-            </div>
-
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Category</label>
-              <select
-                defaultValue={recipe.categories_id[0].name}
-                name="category"
-              >
-                {filteredCategory.map((category: any, index: number) => (
-                  <option key={index}>{category.name}</option>
+                {collections.map((collection, index) => (
+                  <option key={index}>{collection.name}</option>
                 ))}
               </select>
             </div>
 
             <label className="block">Tools</label>
             <div className="flex flex-wrap gap-1 w-4/4 mt-[25px] border-b-[1px] border-black pb-[20px]">
-              {tools.map((tool: ToolsType, index: number) => (
+              {tools.map((tool, index) => (
                 <div
                   className={
                     selectTools.includes(tool._id)
-                      ? //   (selected: any) => selected._id === tool._id
-                        // ).length > 0
-                        "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
+                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
                   onClick={() => addToolHandler(tool._id)}
                 >
                   <p className="">{tool.name}</p>
-                  <img className="w-[80px]" src={tool.image_url} />
+                  <Image
+                    src={tool.image_url}
+                    alt="Landscape picture"
+                    height={80}
+                    width={80}
+                    style={{ width: "auto", height: "auto" }}
+                  />
                 </div>
               ))}
+            </div>
+            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+              <label className="block">Category</label>
+              <select name="category" id="">
+                {categories.map((category, index) => (
+                  <option key={index}>{category.name}</option>
+                ))}
+              </select>
             </div>
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
@@ -286,22 +284,14 @@ export default function CanvasEditButton({
             <div className="w-3/4 flex justify-between mt-[20px] mb-[20px]">
               <label className="block">Photo or image</label>
               <input
-                accept="image/*"
-                onChange={handleFileChange}
                 type="file"
                 name="imageUrl"
-                className="w-52"
+                className="bg-slate-400 w-52"
               />
-              {file && (
-                <div>
-                  <img width="50px" height="50px" src={file} alt="cocktail" />
-                </div>
-              )}
             </div>
             <div className="w-3/4 flex justify-between mb-[20px]">
               <label className="block">Tutorial video</label>
               <input
-                defaultValue={recipe.how_to}
                 type="text"
                 name="videoUrl"
                 className="bg-slate-400 w-52 rounded"
@@ -310,9 +300,9 @@ export default function CanvasEditButton({
             <div className="w-3/4 flex justify-between mb-[20px]">
               <label>Alcoholic or nonalcoholic</label>
               <input
-                onClick={()=>{setCheck(!check)}}
+                onClick={() => setCheck(!check)}
                 type="checkbox"
-                defaultChecked={check}
+                value={`${check}`}
                 name="alcohol"
                 className="bg-slate-400 w-52 rounded"
               />
@@ -327,9 +317,10 @@ export default function CanvasEditButton({
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                className="h-[40px] rounded-md bg-green-600 px-3 text-sm text-white shadow-sm hover:bg-green-500"
               >
-                Save changes
+                Create
+                {spinner == "loading" && <Spinner className="" size="xs" />}
               </button>
             </div>
           </form>

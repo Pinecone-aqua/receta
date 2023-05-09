@@ -4,16 +4,17 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import { ToastContainer } from "react-toastify";
-// import Layout from "../components/Layout";
+import OthersProvider from "../context/OthersContext";
+import CocktailProvider from "../context/CocktailContext";
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider>
-      {/* <Layout> */}
-      <Component {...pageProps} />
-      {/* </Layout> */}
-      <ToastContainer />
+      <CocktailProvider>
+        <OthersProvider>
+          <Component {...pageProps} />
+        </OthersProvider>
+      </CocktailProvider>
     </ChakraProvider>
   );
 }

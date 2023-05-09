@@ -1,4 +1,4 @@
-import { CollectionType } from "@/src/types/types";
+import { CollectionType } from "../../util/Types";
 import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -25,7 +25,11 @@ export default function CreateCategory(props: {
 
   return (
     <>
-      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
+      <Button
+        className="my-[30px]"
+        style={{ background: "#454ADE" }}
+        onClick={handleShow}
+      >
         Create category
       </Button>
 
@@ -33,7 +37,8 @@ export default function CreateCategory(props: {
         show={show}
         onHide={handleClose}
         placement="top"
-        className="w-1/5 mx-auto rounded-md mt-[5%]">
+        className="w-1/5 mx-auto rounded-md mt-[5%]"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Category</Offcanvas.Title>
         </Offcanvas.Header>
@@ -55,12 +60,14 @@ export default function CreateCategory(props: {
               <Button
                 className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
                 type="button"
-                onClick={() => setShow(false)}>
+                onClick={() => setShow(false)}
+              >
                 Cancel
               </Button>
               <button
                 className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
-                type="submit">
+                type="submit"
+              >
                 Create
               </button>
             </div>
