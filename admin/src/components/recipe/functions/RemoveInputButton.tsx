@@ -1,33 +1,23 @@
-export default function AddInputButton({
-  text,
-  func,
-  name,
-  setInput,
-}: {
-  name: string;
-  text: string;
-  func: any;
-  setInput: any;
-}) {
-  return (
-    <>
-      <input
-        id="adding"
-        type="text"
-        value={text}
-        name="ingredients"
-        className="bg-slate-400 w-52"
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      />
-      <input
-        value={name}
-        disabled={!text}
-        className={`px-[10px] ${text ? "bg-green-400" : "bg-gray-400"}`}
-        onClick={func}
-        type="button"
-      />
-    </>
-  );
+import React from "react";
+
+interface RemoveButtonProps {
+  index: number;
+  onClick: (index: number) => void;
 }
+
+const RemoveButton: React.FC<RemoveButtonProps> = ({ index, onClick }) => {
+  const handleClick = () => {
+    onClick(index);
+  };
+
+  return (
+    <input
+      value="Remove"
+      className="px-[10px] bg-red-500"
+      onClick={handleClick}
+      type="button"
+    />
+  );
+};
+
+export default RemoveButton;
