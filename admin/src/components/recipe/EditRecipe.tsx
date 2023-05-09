@@ -3,6 +3,7 @@ import {
   CreateCategoryType,
   ToolsType,
 } from "../../util/Types";
+import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FiEdit } from "react-icons/fi";

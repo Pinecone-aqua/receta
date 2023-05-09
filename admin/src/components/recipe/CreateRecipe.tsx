@@ -11,7 +11,6 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useCocktail } from "@/src/context/CocktailContext";
 import { Spinner } from "@chakra-ui/react";
-import AddInputButton from "./functions/AddInputButton";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -91,19 +90,16 @@ export default function CreateRecipe(props: {
     data.append("file", e.target.imageUrl.files[0]);
     data.append("newRecipe", JSON.stringify(cocktailData));
 
-    try {
-      const result = await axios.post(
-        "http://localhost:3003/recipes/create",
-        data
-      );
-      if (result.statusText === "Created") {
-        setRecipes([...recipes, result.data]),
-          setSpinner("run"),
-          setShow(false);
-      }
-    } catch (error) {
-      console.log(error, "error in creating");
-    }
+    const result = await axios.post(
+      "http://localhost:3003/recipes/create",
+      data
+    );
+
+    result &&
+      result.statusText == "Created" &&
+      setRecipes([...recipes, result.data]),
+      setSpinner("run"),
+      setShow(false);
   }
 
   return (
@@ -128,7 +124,6 @@ export default function CreateRecipe(props: {
         <Offcanvas.Body>
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onSubmit={(e) => createCocktail(e)}
           >
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
