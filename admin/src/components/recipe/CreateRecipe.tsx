@@ -11,6 +11,7 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useCocktail } from "@/src/context/CocktailContext";
 import { Spinner } from "@chakra-ui/react";
+import AddInputButton from "./functions/AddInputButton";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];

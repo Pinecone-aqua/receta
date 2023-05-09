@@ -3,10 +3,6 @@ import {
   CreateCategoryType,
   ToolsType,
 } from "../../util/Types";
-<<<<<<< HEAD:admin/src/components/recipe/EditRecipe.tsx
-import axios from "axios";
-=======
->>>>>>> d06454d (leo push):admin/src/components/sub/editing/EditRecipe.tsx
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FiEdit } from "react-icons/fi";
@@ -104,23 +100,6 @@ export default function CanvasEditButton({
     // axios
     //   .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
     //   .then((res) => console.log(res.data));
-<<<<<<< HEAD:admin/src/components/recipe/EditRecipe.tsx
-    try {
-      const response = await axios.patch(
-        `http://localhost:3003/recipes/update?id=${recipe._id}`,
-        formData
-      );
-      if (response.status === 200) {
-        toast.success("Recipe data updated successfully");
-      } else {
-        toast.error("Failed to update recipe");
-      }
-    } catch (error) {
-      console.log(error, "in editinng recipe");
-      toast.error("error");
-    }
-=======
->>>>>>> d06454d (leo push):admin/src/components/sub/editing/EditRecipe.tsx
   }
 
   useEffect(() => {
