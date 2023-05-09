@@ -11,6 +11,7 @@ import ParallaxText from "../component/main/ParalloxText";
 import Layout from "../component/Layout";
 import { Section } from "../component/main/motionScroll/MotionScroll";
 import OurStory from "@/component/main/OurStory";
+import HowToUse from "@/component/main/HowToUse";
 // import * as dotenv from "dotenv";
 
 // dotenv.config();
@@ -43,6 +44,10 @@ export default function Home({
 
         <Section>
           <OurStory />
+        </Section>
+
+        <Section>
+          <HowToUse />
         </Section>
 
         <Section>
