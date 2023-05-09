@@ -1,5 +1,3 @@
-// import { ReactNode } from "react";
-
 export interface CollectionType {
   name: string;
 }
@@ -44,4 +42,18 @@ export interface CategoryType {
   collection_name: string;
   _id: string;
   name: string;
+}
+
+export interface OthersContextType {
+  activePage: string | null;
+  setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export interface CocktailContextType {
+  recipes: CocktailType[];
+  setRecipes: React.Dispatch<React.SetStateAction<CocktailType[]>>;
+}
+
+export interface PropType {
+  children: React.ReactNode;
 }

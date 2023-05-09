@@ -1,46 +1,50 @@
-import Dashboard from "../pages/dashboard";
-import Recipe from "../pages/recipe";
-import User from "../pages/User";
-import Settings from "../pages/Settings";
-import Moderator from "../pages/Moderator";
 import { useRouter } from "next/router";
-import ProdIcon from "./icons/ProdIcon";
-import ModeIcon from "./icons/ModeIcon";
-import UserIcon from "./icons/UserIcon";
-import SettingIcon from "./icons/SettingIcon";
-import DashIcon from "./icons/DashIcon";
-import { useEffect, useState } from "react";
+import { BiHomeAlt2 } from "react-icons/bi";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { TbBrandShopee } from "react-icons/tb";
+import { RiSettings3Fill } from "react-icons/ri";
+import { MdBookmarkBorder } from "react-icons/md";
+import { CiLogout } from "react-icons/ci";
+import { useOthers } from "../context/OthersContext";
 
 export default function SideBar(): JSX.Element {
-  const [activeBtn, setActiveBtn] = useState<string | null>();
-
-  useEffect(() => {
-    if (localStorage.getItem("btn")) setActiveBtn(localStorage.getItem("btn"));
-  }, []);
+  const { activePage, setActivePage } = useOthers();
 
   const router = useRouter();
   return (
-    <div className="h-[100vh] bg-[#054B68] ps-[50px] fixed">
-      <h1 className="text-[#FFFBF1] text-[32px] font-bold mb-[100px] mt-[50px]">
-        receta.
-      </h1>
-      {pages.map((page, index) => (
-        <button
-          key={index}
-          className={
-            activeBtn == page.name
-              ? "h-[40px] w-[200px] text-[20px] text-left text-[#054B68] bg-[#FFFBF1] flex mb-[20px] items-center rounded-l-lg  pl-[10px]"
-              : "h-[40px] w-[200px] text-[20px] text-left text-[#FFFBF1] flex items-center mb-[20px]"
-          }
-          onClick={() => {
-            router.push(`../${page.url}`),
-              setActiveBtn(page.name),
-              localStorage.setItem("btn", page.name);
-          }}>
-          <span className="mt-[3px]">{page.icon}</span>
-          <p className="m-0 pl-[10px]">{page.name}</p>
-        </button>
-      ))}
+    <div className="h-[100vh] ps-[40px] fixed bg-white">
+      <div className="">
+        <h1 className="text-[#454ADE] text-[32px] font-bold mb-[80px] mt-[50px]">
+          receta.
+        </h1>
+        <div>
+          {pages.map((page, index) => (
+            <button
+              key={index}
+              className={
+                activePage == page.name
+                  ? "w-[200px] rounded-md text-[20px] text-left text-[#fff] bg-[#454ADE] flex mb-[20px] items-center p-[8px]"
+                  : "w-[200px] text-[20px] text-left text-[#C9C9C9] bg-[#FCFCFC] flex items-center mb-[20px] p-[8px]"
+              }
+              onClick={() => {
+                router.push(`../${page.url}`);
+                setActivePage(page.name);
+                localStorage.setItem("page", page.name);
+              }}
+            >
+              <span className="mt-[3px] w-[20px] h-[20px] mb-[2px]">
+                {page.icon}
+              </span>
+              <p className="m-0 pl-[10px]">{page.name}</p>
+            </button>
+          ))}
+        </div>
+
+        <div className="flex gap-[6px] cursor-pointer mt-[30vh]">
+          <CiLogout className="text-[#FF543E] mt-[2px] w-[20px] h-[20px] ms-[6px]" />{" "}
+          <p>Log out</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -48,38 +52,33 @@ export default function SideBar(): JSX.Element {
 interface PageType {
   name: string;
   url: string;
-  comp: JSX.Element;
   icon: JSX.Element;
 }
 export const pages: PageType[] = [
   {
-    url: "../dashboard",
+    url: "../Dashboard",
     name: "Dashboard",
-    comp: <Dashboard />,
-    icon: <DashIcon />,
+    icon: <BiHomeAlt2 />,
   },
   {
-    url: "../recipe",
-    comp: <Recipe categories={[]} collections={[]} recipes={[]} tools={[]} />,
+    url: "../Recipe",
     name: "Recipe",
-    icon: <ProdIcon />,
+    icon: <TbBrandShopee />,
   },
+
   {
-    url: "../moderator",
-    comp: <Moderator />,
-    name: "Moderator",
-    icon: <ModeIcon />,
-  },
-  {
-    url: "../user",
-    comp: <User />,
+    url: "../User",
     name: "User",
-    icon: <UserIcon />,
+    icon: <BsFillPeopleFill />,
   },
   {
-    url: "../settings",
-    comp: <Settings />,
+    url: "../Order",
+    name: "Order",
+    icon: <MdBookmarkBorder />,
+  },
+  {
+    url: "../Settings",
     name: "Settings",
-    icon: <SettingIcon />,
+    icon: <RiSettings3Fill />,
   },
 ];

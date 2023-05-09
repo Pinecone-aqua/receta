@@ -26,7 +26,11 @@ export default function CreateTools() {
 
   return (
     <>
-      <Button className="my-[30px]" variant="primary" onClick={handleShow}>
+      <Button
+        className="my-[30px]"
+        style={{ background: "#454ADE" }}
+        onClick={handleShow}
+      >
         Create tools
       </Button>
 
@@ -34,7 +38,8 @@ export default function CreateTools() {
         show={show}
         onHide={handleClose}
         placement="top"
-        className="w-1/4 mx-auto rounded-md mt-[5%]">
+        className="w-1/4 mx-auto rounded-md mt-[5%]"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Create tool</Offcanvas.Title>
         </Offcanvas.Header>
@@ -57,12 +62,14 @@ export default function CreateTools() {
               <Button
                 className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
                 type="button"
-                onClick={() => setShow(false)}>
+                onClick={() => setShow(false)}
+              >
                 Cancel
               </Button>
               <button
                 className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
-                type="submit">
+                type="submit"
+              >
                 Create
               </button>
             </div>
