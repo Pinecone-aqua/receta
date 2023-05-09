@@ -22,9 +22,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/pages/api/auth/[...nextauth].js",
     "./src/component/Login.jsx",
-    "./tailwind.config.js"
+    "./tailwind.config.js",
+    "src/hooks/useBoundingRect.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,125 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./main-page/recipe";
-@import "./main-page/style";
+@import "./main/recipe";
+@import "./header";
+@import "./main/collection.scss";
+@import "./main/recommend.scss";
+@import "./main/parallax.scss";
+@import "./main/store.scss";
+@import "./news/news.scss";
+@import "./motion-menu.scss";
+@import "./test.scss";
+@import "./main/howtouse.scss";
+@import "./store/store.scss";
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p&family=Yomogi&display=swap");
+
+::-webkit-scrollbar-thumb:horizontal {
+  background: rgb(7, 6, 6);
+  border-radius: 2px;
+  // border-radius: 50%;
+}
+::-webkit-scrollbar {
+  height: 3px;
+  width: 10px;
+  // border-top: 0.5px solid #d5d5d5;
+  // border-bottom: 0.5px solid #d5d5d5;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 100;
+  color: #1e1e1e;
+}
+
+.Container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.scroll-ul {
+  display: flex;
+  list-style: none;
+  overflow-x: scroll;
+  gap: 32px;
+}
+.scroll-li {
+  flex: 0 0 230px;
+  background: var(--accent);
+}
+
+.scroll-li:last-of-type {
+  margin: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .footer {
+    justify-content: center;
+  }
+  .Store {
+    display: block;
+  }
+  .Store-image {
+    width: 90%;
+    height: 500px;
+    object-fit: cover;
+    padding-left: 68px;
+  }
+  .Store-image-abs {
+    width: 50%;
+    height: 500px;
+    object-fit: cover;
+  }
+  .buyButton {
+    width: 86%;
+  }
+  .footer-email-input {
+    width: 80%;
+  }
+  .footer-email-label {
+    width: 80%;
+  }
+  .recommend {
+    padding: 0;
+  }
+  .Store-slider {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .Store-image {
+    min-width: 300px;
+    height: 500px;
+    object-fit: cover;
+    padding: 10px;
+  }
+  .Store-image-abs {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+  .Store-title {
+    padding: 0;
+  }
+  .Store-shop-slider {
+    padding-left: 10px;
+  }
+  .Store-image-icon {
+    bottom: 0;
+    right: 50px;
+  }
+  .recipe {
+    width: 40%;
+  }
+}

@@ -1,0 +1,19 @@
+.recipeCard-image {
+  display: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: overlay;
+  transition: 100s;
+}
+
+.recipeCard-text {
+  font-family: "M PLUS 1p", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+}
+.recipeCard-image:hover {
+  mix-blend-mode: screen;
+}

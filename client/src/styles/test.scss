@@ -1,0 +1,12 @@
+.box {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(213, 209, 209);
+  display: fixed;
+}
+@media screen and (max-width: 900px) {
+  .box {
+    display: none;
+  }
+}

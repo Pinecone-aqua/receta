@@ -1,10 +1,9 @@
-import { PropType, UserContextType, UsersType } from "@/util/Types";
+import { PropType, UserContextType, UsersType } from "../util/Types";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import jwtDecide from "jwt-decode";
 import Cookies from "js-cookie";
 
 const userContext = createContext<UserContextType>({} as UserContextType);
-//custom hook
 export const useUser = () => useContext(userContext);
 
 export default function UserProvider({ children }: PropType) {
