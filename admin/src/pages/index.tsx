@@ -88,7 +88,11 @@ export default function Home(): JSX.Element {
         <Label
           htmlFor="remember"
           className="text-center w-[100%] h-[1px] bg-gray-200"
+<<<<<<< HEAD
         ></Label>
+=======
+        />
+>>>>>>> d06454d (leo push)
       </div>
       <Button type="submit">Submit</Button>
     </form>
