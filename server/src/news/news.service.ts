@@ -12,7 +12,7 @@ export class NewsService {
     private readonly cloudinary: CloudinaryService
   ) {}
   all() {
-    return this.NewsModel.find().select({ _id: 1, title: 1, subTitle: 1 });
+    return this.NewsModel.find();
   }
 
   findId(id: string) {
@@ -22,17 +22,26 @@ export class NewsService {
   async create(data: CreateNewsDto, file: any) {
     try {
       const { secure_url } = await this.cloudinary.uploadImage(file);
-      console.log("img", secure_url);
-      console.log("data", data);
-
-      // return this.NewsModel.create({ data });
+      return await this.NewsModel.create({ ...data, image_url: secure_url });
     } catch (err) {
       return err;
     }
   }
-  delete(id: string) {
+  async delete(news: any) {
+    const regex = /\/v\d+\/([^/]+)\.\w{3,4}$/;
+    const getPublicIdFromUrl = (url: string) => {
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    };
+
     try {
-      return this.NewsModel.deleteOne({ _id: id });
+      const { image_url } = await this.findId(news.id);
+      const publicId = getPublicIdFromUrl(image_url);
+      const destroiedImage = await this.cloudinary.deleteImage(publicId);
+      return (
+        destroiedImage.result == "ok" &&
+        this.NewsModel.deleteOne({ _id: news.id })
+      );
     } catch (err) {
       return err;
     }

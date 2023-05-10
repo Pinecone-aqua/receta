@@ -14,6 +14,7 @@ import {
   Input,
   Textarea,
   DrawerFooter,
+  Spinner,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import axios from "axios";
@@ -26,6 +27,7 @@ export default function CreateNews(): JSX.Element {
 
   function CreateNewsHandler(e: any) {
     e.preventDefault();
+    setSpinner("loading");
     const newsData: CreateNewsType = {
       name: e.target.name.value,
       description: e.target.desc.value,
@@ -35,13 +37,13 @@ export default function CreateNews(): JSX.Element {
     };
     const data = new FormData();
     data.append("file", e.target.image.files[0]);
-    data.append("newNews", JSON.stringify(newsData));
+    data.append("newData", JSON.stringify(newsData));
     axios
-      .post(`http://localhost:3003/news/create`, newsData)
+      .post(`http://localhost:3003/news/create`, data)
       .then(
         (res) =>
-          res.data.length > 0 &&
-          (setNews([...news, res.data]), setSpinner("run"), onClose)
+          res.data &&
+          (setNews([...news, res.data]), setSpinner("run"), onClose())
       );
   }
 
@@ -97,7 +99,11 @@ export default function CreateNews(): JSX.Element {
                 value="Cancel"
                 className="w-[90px] p-2 me-4 rounded-md border"
               />
-              <Button colorScheme="teal" type="submit">
+              <Button
+                colorScheme="teal"
+                type="submit"
+                leftIcon={spinner == "loading" ? <Spinner size="xs" /> : <></>}
+              >
                 Submit
               </Button>
             </DrawerFooter>

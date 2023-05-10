@@ -7,6 +7,7 @@ import { CategoriesModule } from "./categories/categories.module";
 import { CollectionModule } from "./collections/collections.module";
 import { CommentModule } from "./comments/comments.module";
 import { GoogleLoginModule } from "./google-login/google-login.module";
+import { NewsModule } from "./news/news.module";
 import { RecipesModule } from "./recipes/recipes.module";
 import { ToolsModule } from "./tools/tools.module";
 import { UserModule } from "./users/users.module";
@@ -24,6 +25,7 @@ import { UserModule } from "./users/users.module";
     CollectionModule,
     ToolsModule,
     CommentModule,
+    NewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

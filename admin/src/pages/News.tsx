@@ -11,7 +11,8 @@ import axios from "axios";
 import { GetStaticProps } from "next";
 import { useEffect } from "react";
 import Layout from "../components/Layout";
-import CreateNews from "../components/new/CreateNewsCanvas";
+import CreateNews from "../components/news/CreateNewsCanvas";
+import DeleteAlert from "../components/news/DeleteNews";
 import { useOthers } from "../context/OthersContext";
 import { NewsType } from "../util/Types";
 
@@ -24,31 +25,38 @@ export default function News({
   useEffect(() => {
     setNews(newsData);
   }, []);
+
   return (
     <Layout>
-      <div>
+      <div className="border p-4 rounded-md">
         <CreateNews />
-        <TableContainer>
-          <Table size="md">
+        <TableContainer className="mt-5">
+          <Table size="sm">
             <Thead>
               <Tr>
                 <Th>Title</Th>
-                <Th>Sub title</Th>
                 <Th>Name</Th>
-                <Th>Description</Th>
                 <Th>Category</Th>
+                <Th>Image</Th>
+                <Th>Option</Th>
               </Tr>
             </Thead>
             <Tbody>
-              {news?.map((categ, index) => (
-                <Tr key={index}>
-                  <Td>{categ.title}</Td>
-                  <Td>{categ.subTitle}</Td>
-                  <Td>{categ.name}</Td>
-                  <Td>{categ.description}</Td>
-                  <Td>{categ.category}</Td>
-                </Tr>
-              ))}
+              {news
+                .map((newsData, index) => (
+                  <Tr key={index}>
+                    <Td>{newsData.title}</Td>
+                    <Td>{newsData.name}</Td>
+                    <Td>{newsData.category}</Td>
+                    <Td>
+                      <img className="h-[80px]" src={newsData.image_url} />
+                    </Td>
+                    <Td>
+                      <DeleteAlert newsData={newsData} />
+                    </Td>
+                  </Tr>
+                ))
+                .reverse()}
             </Tbody>
           </Table>
         </TableContainer>
