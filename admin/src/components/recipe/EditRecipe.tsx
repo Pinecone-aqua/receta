@@ -6,6 +6,7 @@ import {
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FiEdit } from "react-icons/fi";
+import axios from "axios";
 
 export default function CanvasEditButton({
   recipe,
@@ -96,10 +97,11 @@ export default function CanvasEditButton({
       ? formData.append("file", file)
       : formData.append("img", file);
     formData.append("data", JSON.stringify(data));
-
-    // axios
-    //   .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
-    //   .then((res) => console.log(res.data));
+    console.log(data);
+    console.log(file);
+    axios
+      .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
+      .then((res) => console.log(res.data));
   }
 
   useEffect(() => {
@@ -121,8 +123,7 @@ export default function CanvasEditButton({
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50 relative pt-[30px]"
-      >
+        className="w-50 relative pt-[30px]">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe editing</Offcanvas.Title>
         </Offcanvas.Header>
@@ -131,8 +132,7 @@ export default function CanvasEditButton({
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
             onSubmit={(e) => {
               updateRecipe(e);
-            }}
-          >
+            }}>
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
@@ -157,8 +157,7 @@ export default function CanvasEditButton({
                 defaultValue={recipe.collection_id}
                 className="border"
                 name="collection"
-                onChange={(e) => setCurrentCollection(e.target.value)}
-              >
+                onChange={(e) => setCurrentCollection(e.target.value)}>
                 {collections.map(
                   (collection: CollectionType, index: number) => (
                     <option key={index}>{collection.name}</option>
@@ -171,8 +170,7 @@ export default function CanvasEditButton({
               <label className="block">Category</label>
               <select
                 defaultValue={recipe.categories_id[0]?.name}
-                name="category"
-              >
+                name="category">
                 {filteredCategory.map((category: any, index: number) => (
                   <option key={index}>{category.name}</option>
                 ))}
@@ -189,8 +187,7 @@ export default function CanvasEditButton({
                       : "w-[170px] py-[10px] border flex flex-col items-center"
                   }
                   key={index}
-                  onClick={() => addToolHandler(tool._id)}
-                >
+                  onClick={() => addToolHandler(tool._id)}>
                   <p className="">{tool.name}</p>
                   <img className="w-[80px]" src={tool.image_url} />
                 </div>
@@ -203,8 +200,7 @@ export default function CanvasEditButton({
                 {ingredient.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center"
-                  >
+                    className="h-full flex items-center">
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -242,8 +238,7 @@ export default function CanvasEditButton({
                 {how.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center"
-                  >
+                    className="h-full flex items-center">
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
                       value="Remove"
@@ -321,8 +316,7 @@ export default function CanvasEditButton({
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-              >
+                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
                 Save changes
               </button>
             </div>

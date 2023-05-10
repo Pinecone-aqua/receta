@@ -10,9 +10,8 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useCocktail } from "@/src/context/CocktailContext";
 import { Spinner } from "@chakra-ui/react";
-import AddInputButton from "./functions/AddInputButton";
-import RemoveButton from "./functions/RemoveInputButton";
 import AddToolHandler from "./functions/AddToolHandler";
+import InputMappingInCreate from "./functions/InputMappingInCreate";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -79,7 +78,8 @@ export default function CreateRecipe(props: {
       if (result.statusText === "Created") {
         setRecipes([...recipes, result.data]),
           setSpinner("run"),
-          setShow(false);
+          setShow(false),
+          setSelectTools([]);
       }
     } catch (error) {
       console.log(error, "error in creating");
@@ -155,55 +155,21 @@ export default function CreateRecipe(props: {
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Ingredients</label>
-              <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
-                {ingredient.map((inex, index) => (
-                  <div
-                    key={`input-container-${index}`}
-                    className="h-full flex items-center">
-                    <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                    <RemoveButton
-                      ingredient={ingredient} 
-                      setIngredient={setIngredient}
-                      index={index}
-                    />
-                  </div>
-                ))}
-              </div>
-              <AddInputButton
-                text={inputIng}
-                name="addIngredient"
-                setInput={setInputIng}
-                func={() => {
-                  setIngredient([...ingredient, inputIng]);
-                  setInputIng("");
-                }}
+              <InputMappingInCreate
+                item={ingredient}
+                setItem={setIngredient}
+                inputText={inputIng}
+                setInputText={setInputIng}
               />
             </div>
 
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Instructions</label>
-              <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
-                {how.map((inex, index) => (
-                  <div
-                    key={`input-container-${index}`}
-                    className="h-full flex items-center">
-                    <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                    <RemoveButton
-                      ingredient={how} 
-                      setIngredient={setHow}
-                      index={index}
-                    />
-                  </div>
-                ))}
-              </div>
-              <AddInputButton
-                text={inputIns}
-                name="add How"
-                setInput={setInputIns}
-                func={() => {
-                  setHow([...how, inputIns]);
-                  setInputIns("");
-                }}
+              <InputMappingInCreate
+                item={how}
+                setItem={setHow}
+                inputText={inputIns}
+                setInputText={setInputIns}
               />
             </div>
 
