@@ -80,15 +80,15 @@ interface Props {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const collections = await axios
-    .get(`${process.env.SERVER_PORT}/collections/get`)
+    .get(`http://localhost:3003/collections/get`)
     .then((res) => res.data);
 
   const recommend = await axios
-    .get(`${process.env.SERVER_PORT}/recipes/recommend`)
+    .get(`http://localhost:3003/recipes/recommend`)
     .then((res) => res.data);
 
   const tools = await axios
-    .get(`${process.env.SERVER_PORT}/tools/get`)
+    .get(`http://localhost:3003/tools/get`)
     .then((res) => res.data);
 
   return {
