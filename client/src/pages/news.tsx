@@ -1,15 +1,19 @@
 import Header from "@/component/Header";
-import ParallaxText from "@/component/main/ParalloxText";
+// import ParallaxText from "@/component/main/ParalloxText";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { RiCloseFill } from "react-icons/ri";
+import { Section } from "@/component/main/motionScroll/MotionScroll";
 
 export default function Shop(): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedData, setSelectedData] = useState<any>(null);
   return (
     <>
       <div className={``} onClick={() => selectedData && setSelectedData(null)}>
-        <Header />
+        <div className={selectedData ? `opacity-[0.1]` : ""}>
+          <Header />
+        </div>
         {/* <div className="News-parallox">
         <ParallaxText baseVelocity={-2}>
           <div className="News-parallox-text flex gap-10">
@@ -17,32 +21,35 @@ export default function Shop(): JSX.Element {
           </div>
         </ParallaxText>
       </div> */}
-        <div className="Container flex flex-wrap card-container relative">
-          {cardData.map((item: any) => (
-            <motion.div
-              layoutId={item.id}
-              onClick={() => !selectedData && setSelectedData(item)}
-              className={selectedData ? `card disable` : `card active`}
-            >
-              <motion.h5>{item.category}</motion.h5>
-              <motion.h2>{item.title}</motion.h2>
-            </motion.div>
-          ))}
-          <AnimatePresence>
-            {selectedData && (
+        <Section>
+          <div className="Container flex flex-wrap card-container relative">
+            {cardData.map((item: any, index: number) => (
               <motion.div
-                layoutId={selectedData.id}
-                className={`selected-card bg-[#${selectedData.bg}]`}
+                layoutId={item.id}
+                key={index}
+                onClick={() => !selectedData && setSelectedData(item)}
+                className={selectedData ? `card disable` : `card active`}
               >
-                <motion.h5>{selectedData.category}</motion.h5>
-                <motion.h2>{selectedData.title}</motion.h2>
-                <motion.button onClick={() => setSelectedData(null)}>
-                  <RiCloseFill className="w-[30px] h-[30px] p-1 rounded-[25px] bg-[#eca387] hover:bg-[#eca599]  absolute right-6 top-5" />
-                </motion.button>
+                <motion.h5>{item.category}</motion.h5>
+                <motion.h2>{item.title}</motion.h2>
               </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+            ))}
+            <AnimatePresence>
+              {selectedData && (
+                <motion.div
+                  layoutId={selectedData.id}
+                  className={`selected-card Container`}
+                >
+                  <motion.h5>{selectedData.category}</motion.h5>
+                  <motion.h2>{selectedData.title}</motion.h2>
+                  <motion.button onClick={() => setSelectedData(null)}>
+                    <RiCloseFill className="w-[30px] h-[30px] p-1 rounded-[25px]   absolute right-6 top-7" />
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </Section>
       </div>
     </>
   );
