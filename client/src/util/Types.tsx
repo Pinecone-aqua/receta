@@ -2,17 +2,22 @@ export interface CollectionType {
   name: string;
   image_url: string;
 }
+
+interface tempType {
+  _id: string;
+  name: string;
+}
 export interface RecipesType {
   _id: string;
   name: string;
   description: string;
   collection: string;
-  ingredients: object[];
+  ingredients: string[];
   how_to: object[];
   video_url: string;
   image_url: string;
-  categories_id: [];
-  tools_id: string[];
+  categories_id: tempType[];
+  tools_id: tempType[];
   alcohol: boolean;
 }
 
