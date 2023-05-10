@@ -24,13 +24,13 @@
   margin: 5px;
   border-radius: 10px;
   color: white;
-  transition: 0.1ss;
 }
 .active {
   background-color: #547673;
 }
 .disable {
   background-color: #c9d5cf;
+  transition: 0.3s;
 }
 
 .card:nth-child(4n + 1),
