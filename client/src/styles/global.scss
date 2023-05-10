@@ -8,7 +8,7 @@
 @import "./main/parallax.scss";
 @import "./main/store.scss";
 @import "./news/news.scss";
-@import "./motion-menu.scss";
+@import "./main/motion-menu.scss";
 @import "./test.scss";
 @import "./main/howtouse.scss";
 @import "./store/store.scss";
@@ -19,7 +19,6 @@
 ::-webkit-scrollbar-thumb:horizontal {
   background: rgb(7, 6, 6);
   border-radius: 2px;
-  // border-radius: 50%;
 }
 ::-webkit-scrollbar {
   height: 3px;
@@ -39,7 +38,6 @@ html {
   font-size: 32px;
   font-weight: 700;
   cursor: pointer;
-  z-index: 100;
   color: #1e1e1e;
 }
 

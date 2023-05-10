@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Collection from "../component/main/Collection";
 import Categories from "../component/cocktails/Categories";
 import Recipes from "../component/cocktails/Recipes";
@@ -33,6 +33,7 @@ export default function Home({
             <Collection collections={collections} />
           </div>
         </Section>
+
         <Categories />
         <div className="relative">
           <Recipes />
