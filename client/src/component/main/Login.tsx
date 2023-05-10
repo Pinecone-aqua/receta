@@ -2,20 +2,17 @@ import { useRouter } from "next/router";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import {
-  Input,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  FormControl,
-  FormLabel,
   useDisclosure,
-  Divider,
   Tooltip,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { FaCocktail } from "react-icons/fa";
 
 export default function Login() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,29 +43,22 @@ export default function Login() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Login modal</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Email or name</FormLabel>
-              <Input
-                ref={initialRef}
-                placeholder="First name"
-                className="mb-[10px]"
-              />
-              <Input ref={initialRef} placeholder="Password" />
-              <button className="w-full shadow rounded-md  bg-white px-[16px] py-[6px] mt-5">
-                Login
-              </button>
-              <Divider orientation="horizontal" className="mt-6" />
-            </FormControl>
-
+          <ModalHeader className="flex text-[#101419] gap-2">
+            <FaCocktail className="mt-1" />
+            <h1 className="login-logo">receta.</h1>
+          </ModalHeader>
+          <ModalCloseButton className="mt-2" />
+          <ModalBody pb={10}>
+            <p className="login-title">Welcome back</p>
+            <p className="login-sub-title">
+              Please sign in your google account thanks!
+            </p>
             <span
               onClick={googleLoginHandler}
-              className="flex place-content-center cursor-pointer mt-5 px-5 p-2 bg-white shadow rounded-[25px] gap-2"
+              className="flex place-content-center cursor-pointer mt-6 mb-2 px-5 py-2 bg-white border border-[#cecdcd] rounded-md gap-2 hover:bg-gray-50 duration-300"
             >
-              <p className="text-[16px]">sign in google</p>
               <FcGoogle className="mt-[3px] w-[20px] h-[20px]" />
+              <p className="text-[16px] text-[#547673]">sign in google</p>
             </span>
           </ModalBody>
         </ModalContent>
