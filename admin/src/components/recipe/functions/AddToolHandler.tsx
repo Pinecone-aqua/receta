@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 
 type Tool = {
@@ -10,7 +10,7 @@ type Tool = {
 type ToolProps = {
   tools: Tool[];
   selectTools: string[];
-  setSelectTools: string[];
+  setSelectTools: Dispatch<SetStateAction<string[]>>;
 };
 
 const AddToolHandler: React.FC<ToolProps> = ({
@@ -18,7 +18,6 @@ const AddToolHandler: React.FC<ToolProps> = ({
   selectTools,
   setSelectTools,
 }) => {
-  //   const [selectTools, setSelectTools] = useState<string[]>([]);
 
   function addToolHandler(id: string) {
     if (selectTools.includes(id)) {

@@ -5,14 +5,13 @@ import {
   CreateCocktailType,
 } from "../../util/Types";
 import axios from "axios";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useCocktail } from "@/src/context/CocktailContext";
 import { Spinner } from "@chakra-ui/react";
 import AddInputButton from "./functions/AddInputButton";
-// import RemoveButton from "./functions/RemoveInputButton";
+import RemoveButton from "./functions/RemoveInputButton";
 import AddToolHandler from "./functions/AddToolHandler";
 
 export default function CreateRecipe(props: {
@@ -36,25 +35,6 @@ export default function CreateRecipe(props: {
 
   const [inputIng, setInputIng] = useState<string>("");
   const [inputIns, setInputIns] = useState<string>("");
-
-  const removeInputHandler = (index: number) => {
-    const deleteInput = ingredient.filter((input, i) => index !== i);
-    setIngredient(deleteInput);
-  };
-
-  const removeInputHandlerHow = (index: number) => {
-    const deleteInputHow = how.filter((input, i) => index !== i);
-    setHow(deleteInputHow);
-  };
-
-  //add tool handler
-  // function addToolHandler(id: string) {
-  //   if (selectTools.includes(id)) {
-  //     setSelectTools(selectTools.filter((tool) => tool !== id));
-  //   } else {
-  //     setSelectTools([...selectTools, id]);
-  //   }
-  // }
 
   // filter categories
   function filterCate(name: string) {
@@ -90,7 +70,7 @@ export default function CreateRecipe(props: {
     const data = new FormData();
     data.append("file", e.target.imageUrl.files[0]);
     data.append("newRecipe", JSON.stringify(cocktailData));
-
+    console.log(cocktailData);
     try {
       const result = await axios.post(
         "http://localhost:3003/recipes/create",
@@ -163,25 +143,6 @@ export default function CreateRecipe(props: {
                 setSelectTools={setSelectTools}
                 tools={tools}
               />
-              {/* {tools.map((tool, index) => (
-                <div
-                  className={
-                    selectTools.includes(tool._id)
-                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
-                      : "w-[170px] py-[10px] border flex flex-col items-center"
-                  }
-                  key={index}
-                  onClick={() => addToolHandler(tool._id)}>
-                  <p className="">{tool.name}</p>
-                  <Image
-                    src={tool.image_url}
-                    alt="Landscape picture"
-                    height={80}
-                    width={80}
-                    style={{ width: "auto", height: "auto" }}
-                  />
-                </div>
-              ))} */}
             </div>
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Category</label>
@@ -200,18 +161,10 @@ export default function CreateRecipe(props: {
                     key={`input-container-${index}`}
                     className="h-full flex items-center">
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                    {/* <RemoveButton
-                      inex={inex}
+                    <RemoveButton
+                      ingredient={ingredient} 
+                      setIngredient={setIngredient}
                       index={index}
-                      onClick={removeInputHandlerHow}
-                    /> */}
-                    <input
-                      value="Remove"
-                      className="px-[10px] bg-red-500"
-                      onClick={() => {
-                        removeInputHandler(index);
-                      }}
-                      type="button"
                     />
                   </div>
                 ))}
@@ -235,13 +188,10 @@ export default function CreateRecipe(props: {
                     key={`input-container-${index}`}
                     className="h-full flex items-center">
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                    <input
-                      value="Remove"
-                      className="px-[10px] bg-red-500"
-                      onClick={() => {
-                        removeInputHandlerHow(index);
-                      }}
-                      type="button"
+                    <RemoveButton
+                      ingredient={how} 
+                      setIngredient={setHow}
+                      index={index}
                     />
                   </div>
                 ))}
