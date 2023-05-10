@@ -14,6 +14,7 @@ import { Tool } from "src/tools/tools.schema";
 import { Collection } from "src/collections/collection.schema";
 import { CreateRecipesDto } from "./recipes.create.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { CloudinaryService } from "src/cloudinary/cloudinary.service";
 
 @Injectable()
 export class RecipesService {
@@ -21,7 +22,8 @@ export class RecipesService {
     @InjectModel(Recipe.name) private recipeModel: Model<Recipe>,
     @InjectModel(Collection.name) private collectionsModel: Model<Collection>,
     @InjectModel(Category.name) private categoriesModel: Model<Category>,
-    @InjectModel(Tool.name) private toolsModel: Model<Tool>
+    @InjectModel(Tool.name) private toolsModel: Model<Tool>,
+    private readonly cloudinary: CloudinaryService
   ) {}
 
   allRecipe() {
@@ -96,14 +98,12 @@ export class RecipesService {
 
   async createRecipe(recipe: CreateRecipesDto) {
     try {
-      //collection find name
       const collection = await this.collectionsModel
         .findOne({
           name: recipe.collection,
         })
         .select({ name: 1 });
 
-      //category find name
       const category = await this.categoriesModel
         .find({
           name: recipe.categories,
@@ -134,8 +134,22 @@ export class RecipesService {
   }
 
   async remove(recipe: any) {
+    const regex = /\/v\d+\/([^/]+)\.\w{3,4}$/;
+
+    const getPublicIdFromUrl = (url: string) => {
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    };
+
     try {
-      return await this.recipeModel.deleteOne({ _id: recipe.id });
+      const { image_url } = await this.findRecipe(recipe.id);
+      const publicId = getPublicIdFromUrl(image_url);
+      const destroiedImage = await this.cloudinary.deleteImage(publicId);
+
+      return (
+        destroiedImage.result == "ok" &&
+        (await this.recipeModel.deleteOne({ _id: recipe.id }))
+      );
     } catch (err) {
       return err;
     }
