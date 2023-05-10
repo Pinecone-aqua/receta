@@ -1,18 +1,63 @@
 import Heart from "@/icons/Heart";
 import LeftArrow from "@/icons/LeftArrow";
-import { CategoriesType, RecipesType } from "@/util/Types";
+import { CategoriesType, RecipesType, ToolType } from "@/util/Types";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Carousel } from "primereact/carousel";
+import { useEffect, useState } from "react";
 
-export default function Details({
-  recipe,
-}: {
+interface DetailsType {
   recipe: RecipesType;
-}): JSX.Element {
+  tools: ToolType[];
+}
+
+export default function Details({ recipe, tools }: DetailsType): JSX.Element {
+  const [usedTools, setUsedTools] = useState<any>([]);
   const router = useRouter();
+
+  function getToolById(id: string) {
+    return tools.find((tool: ToolType) => tool._id === id);
+  }
+
+  useEffect(() => {
+    const temp = recipe.tools_id?.map((tool) => {
+      return getToolById(tool._id);
+    });
+    setUsedTools(temp);
+  }, []);
+  const toolTemplate = (tool: any) => {
+    return (
+      <div className="my-auto">
+        <Link href={`../cocktail/${tool._id}`}>
+          <img src={tool.image_url} alt={tool.name} />
+          <div className="text-white text-center mt-4">
+            <div className="mb-3">{tool.name}</div>
+          </div>
+        </Link>
+      </div>
+    );
+  };
+  const responsiveOptions = [
+    {
+      breakpoint: "1199px",
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "991px",
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "767px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+
   return (
-    <div className="flex max-w-[1300px] mx-auto border-x border-[#424242]">
+    <div className="flex max-w-[1300px] h-[80vh] mx-auto border-x border-[#424242] relative">
       <div className="w-[50%] ">
         <div className="relative">
           <img className="w-full" src={`${recipe.image_url}`} alt="image" />
@@ -29,15 +74,15 @@ export default function Details({
           </div>
         </div>
       </div>
-      <div className="w-[55%] relative text-white">
-        <div className="h-[30%]"></div>
+      <div className="w-[50%] relative text-white">
+        <div className="h-[25%]"></div>
         <div className="h-[400px] px-[74px] overflow-y-auto">
           <div className="w-[80%] flex items-center text-xl">
             <div>How to make</div>
           </div>
           <div className="text-[24px] mt-5">
             <div className="font-bold text-[36px]">{recipe.name}</div>
-            {recipe.how_to.map((single: any, index: number) => (
+            {recipe.how_to?.map((single: any, index: number) => (
               <div
                 key={index}
                 className="leading-8 mt-[3rem] mb-[3.5rem] font-medium"
@@ -48,6 +93,59 @@ export default function Details({
             ))}
           </div>
         </div>
+        <img
+          className="absolute right-[5%] top-[30%]"
+          src="../DownArrow.png"
+          alt="image"
+        />
+      </div>
+      <div className="max-w-[1300px] w-full mx-auto h-[45vh] text-white bg-[#121212] singleProd-tab absolute bottom-[-38%] py-5 px-10">
+        <Tabs>
+          <TabList className="px-10">
+            <Tab
+              _selected={{
+                color: "white !important",
+                borderBottom: "1px solid white",
+              }}
+            >
+              <span className="text-xl px-3">Ingredients</span>
+            </Tab>
+            <Tab
+              _selected={{
+                color: "white !important",
+                borderBottom: "1px solid white",
+              }}
+            >
+              <span className="text-xl px-10">Tools</span>
+            </Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <div className="flex flex-col flex-wrap justify-between mt-5 ps-6 gap-3 overflow-y-auto text-2xl">
+                {recipe.ingredients?.map(
+                  (ingredient: string, index: number) => (
+                    <div key={index}>
+                      {index + 1}. {ingredient}
+                    </div>
+                  )
+                )}
+              </div>
+            </TabPanel>
+            <TabPanel>
+              <div className="mt-5 recipe-carousel">
+                <Carousel
+                  value={usedTools}
+                  numVisible={4}
+                  numScroll={1}
+                  responsiveOptions={responsiveOptions}
+                  itemTemplate={toolTemplate}
+                  indicatorsContentClassName={"flex justify-center gap-0"}
+                />
+              </div>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </div>
     </div>
   );

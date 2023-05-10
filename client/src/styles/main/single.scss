@@ -1,0 +1,35 @@
+.singleProd-tab .chakra-tabs__tablist {
+  border: none;
+  gap: 3rem;
+}
+
+.singleProd-tab .chakra-tabs__tablist button {
+  color: #6b6b6b;
+}
+
+// .recipe-carousel .p-carousel-indicators {
+//   margin-top: 5rem !important;
+// }
+.recipe-carousel .p-carousel-indicator {
+  margin: 0 !important;
+  width: 150px;
+  border-top: 1px solid white !important;
+}
+
+.recipe-carousel .p-highlight {
+  background-color: #ececec !important ;
+}
+
+.recipe-carousel .p-carousel-indicator button {
+  width: 100% !important;
+  background-color: transparent !important;
+  height: 0.3rem !important;
+}
+
+.recipe-carousel button {
+  color: #dadada;
+}
+
+.p-rating-icon {
+  color: #f3d951 !important;
+}

@@ -1,4 +1,4 @@
-import { CommentType, RecipesType } from "@/util/Types";
+import { CommentType, RecipesType, ToolType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import Comment from "@/component/cocktail/Comment";
@@ -9,32 +9,45 @@ import Layout from "@/component/Layout";
 import Link from "next/link";
 import { useOthers } from "@/context/OthersContext";
 
-export default function Recipe(props: {
+interface RecipeType {
   recipe: RecipesType;
   comments: CommentType[];
   recommend: RecipesType[];
-}): JSX.Element {
-  const recipe: RecipesType = props.recipe;
-  const comments: CommentType[] = props.comments;
-  const recommend: RecipesType[] = props.recommend;
+  tools: ToolType[];
+}
+
+export default function Recipe({
+  recipe,
+  comments,
+  recommend,
+  tools,
+}: RecipeType): JSX.Element {
   const { setActivePage } = useOthers();
 
   return (
     <Layout>
-      <div className="bg-[#1A1A1A]">
-        <Details recipe={recipe} />
-        <div className="text-[#1e1e1e] text-[20px] mx-auto bg-[#FFFBF1] p-[20px]">
-          <p>{recipe.description}</p>
-          <div className="flex gap-5">
-            <Comment comments={comments} recipe_id={recipe._id} />
-            <RatingComp />
+      <div className="bg-[#1A1A1A] ">
+        <Details recipe={recipe} tools={tools} />
+        <div className="bg-[#FFFBF1] border-b border-[#dadada]">
+          <div className="text-[#1e1e1e] text-[20px] max-w-[1300px] pt-[430px] pb-20 mx-auto border-x border-[#dadada]">
+            <div className="px-20">
+              <div className="flex justify-between">
+                <p className="text-3xl font-bold">{recipe.name}</p>
+                <div>
+                  <Rating value={5} disabled cancel={false} />
+                </div>
+              </div>
+              <p className="w-[65%] mt-8">{recipe.description}</p>
+            </div>
           </div>
-          <Rating
-            value={5}
-            disabled
-            cancel={false}
-            className="border-[2px] border-[black] rounded-[20px] w-[150px] p-3"
-          />
+        </div>
+        <div className="bg-[#FFFBF1]">
+          <div className="max-w-[1300px] mx-auto border-x border-[#dadada]">
+            <div className="flex gap-5 px-20 py-10">
+              <Comment comments={comments} recipe_id={recipe._id} />
+              <RatingComp />
+            </div>
+          </div>
         </div>
         <h3 className="text-[24px] mt-[50px]">Recommended cocktails</h3>
         <div className="flex py-[50px] border-b">
@@ -44,7 +57,6 @@ export default function Recipe(props: {
                 <Link
                   href={cocktail._id}
                   key={index}
-                  className=""
                   onClick={() => {
                     localStorage.setItem("page", "");
                     setActivePage("");
@@ -91,12 +103,16 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({
   const recommend = await axios
     .get(`http://localhost:3003/recipes/recommend`)
     .then((res) => res.data);
+  const tools = await axios
+    .get(`http://localhost:3003/tools/get`)
+    .then((res) => res.data);
 
   return {
     props: {
-      recipe: recipe,
-      comments: comments,
-      recommend: recommend,
+      recipe,
+      comments,
+      recommend,
+      tools,
     },
   };
 };
