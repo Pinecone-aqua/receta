@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { FaCocktail } from "react-icons/fa";
 
 export default function Login() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,15 +43,18 @@ export default function Login() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Login modal</ModalHeader>
+          <ModalHeader className="flex gap-5 text-[#292F36]">
+            <FaCocktail className="" />
+            <h1 className="">receta.</h1>
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={10}>
             <span
               onClick={googleLoginHandler}
-              className="flex place-content-center cursor-pointer mt-5 mb-2 px-5 p-2 bg-white shadow shadow-[#1e1e1e] rounded-[25px] gap-2"
+              className="flex place-content-center cursor-pointer mt-5 mb-2 px-5 py-2 bg-white border rounded-md gap-2"
             >
-              <p className="text-[16px]">sign in google</p>
               <FcGoogle className="mt-[3px] w-[20px] h-[20px]" />
+              <p className="text-[16px]">sign in google</p>
             </span>
           </ModalBody>
         </ModalContent>
