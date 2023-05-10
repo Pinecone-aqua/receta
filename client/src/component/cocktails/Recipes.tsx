@@ -4,7 +4,7 @@ import { useOthers } from "../../context/OthersContext";
 import axios from "axios";
 import { useCocktail } from "../../context/CocktailContext";
 import { Tooltip } from "@chakra-ui/react";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function Recipes(): JSX.Element {
   const { activeCollectionBtn, activeCategoryBtn } = useOthers();
@@ -37,9 +37,11 @@ export default function Recipes(): JSX.Element {
   return (
     <div className="py-[10px] relative mb-[40px]">
       <div className="flex flex-wrap  border-x-[0.5px] border-[#dadada] Container gap-[16px] pb-[80px] place-content-center mx-auto">
-        {recipes.map((recipe, index) => (
-          <RecipeCard recipe={recipe} key={index} />
-        ))}
+        <Suspense fallback={<p className="text-blac text-[24px]">Loading</p>}>
+          {recipes.map((recipe, index) => (
+            <RecipeCard recipe={recipe} key={index} />
+          ))}
+        </Suspense>
       </div>
       <Tooltip label="empty" aria-label="A tooltip">
         <div

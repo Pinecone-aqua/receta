@@ -12,7 +12,7 @@ export const Example = () => {
     <motion.nav
       animate={isOpen ? "open" : "closed"}
       ref={containerRef}
-      className="motion-menu-ul z-10"
+      className="motion-menu-ul"
     >
       <MenuToggle toggle={() => toggleOpen()} />
       <Navigation isOpen={isOpen} />
