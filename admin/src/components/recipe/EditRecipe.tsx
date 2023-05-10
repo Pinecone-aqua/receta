@@ -3,7 +3,6 @@ import {
   CreateCategoryType,
   ToolsType,
 } from "../../util/Types";
-import axios from "axios";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FiEdit } from "react-icons/fi";
@@ -98,9 +97,9 @@ export default function CanvasEditButton({
       : formData.append("img", file);
     formData.append("data", JSON.stringify(data));
 
-    axios
-      .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
-      .then((res) => console.log(res.data));
+    // axios
+    //   .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
+    //   .then((res) => console.log(res.data));
   }
 
   useEffect(() => {

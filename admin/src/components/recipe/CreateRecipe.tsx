@@ -5,12 +5,14 @@ import {
   CreateCocktailType,
 } from "../../util/Types";
 import axios from "axios";
-import Image from "next/image";
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useCocktail } from "@/src/context/CocktailContext";
 import { Spinner } from "@chakra-ui/react";
+import AddInputButton from "./functions/AddInputButton";
+import RemoveButton from "./functions/RemoveInputButton";
+import AddToolHandler from "./functions/AddToolHandler";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -31,45 +33,8 @@ export default function CreateRecipe(props: {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const tempRef: MutableRefObject<string> = useRef("");
-  const tempRefHow: MutableRefObject<string> = useRef("");
-  const inputRefIng = useRef<HTMLInputElement>(null);
-  const inputRefIns = useRef<HTMLInputElement>(null);
-
-  const addInputHandler = () => {
-    tempRef.current && setIngredient([...ingredient, tempRef.current]);
-    if (inputRefIng.current) {
-      inputRefIng.current.value = "";
-    }
-  };
-
-  const addInputHandlerHow = () => {
-    tempRefHow.current && setHow([...how, tempRefHow.current]);
-    if (inputRefIns.current) {
-      inputRefIns.current.value = "";
-    }
-  };
-
-  //----
-
-  const removeInputHandler = (index: number) => {
-    const deleteInput = ingredient.filter((input, i) => index !== i);
-    setIngredient(deleteInput);
-  };
-
-  const removeInputHandlerHow = (index: number) => {
-    const deleteInputHow = how.filter((input, i) => index !== i);
-    setHow(deleteInputHow);
-  };
-
-  //add tool handler
-  function addToolHandler(id: string) {
-    if (selectTools.includes(id)) {
-      setSelectTools(selectTools.filter((tool) => tool !== id));
-    } else {
-      setSelectTools([...selectTools, id]);
-    }
-  }
+  const [inputIng, setInputIng] = useState<string>("");
+  const [inputIns, setInputIns] = useState<string>("");
 
   // filter categories
   function filterCate(name: string) {
@@ -105,17 +70,20 @@ export default function CreateRecipe(props: {
     const data = new FormData();
     data.append("file", e.target.imageUrl.files[0]);
     data.append("newRecipe", JSON.stringify(cocktailData));
-
-    const result = await axios.post(
-      "http://localhost:3003/recipes/create",
-      data
-    );
-
-    result &&
-      result.statusText == "Created" &&
-      setRecipes([...recipes, result.data]),
-      setSpinner("run"),
-      setShow(false);
+    console.log(cocktailData);
+    try {
+      const result = await axios.post(
+        "http://localhost:3003/recipes/create",
+        data
+      );
+      if (result.statusText === "Created") {
+        setRecipes([...recipes, result.data]),
+          setSpinner("run"),
+          setShow(false);
+      }
+    } catch (error) {
+      console.log(error, "error in creating");
+    }
   }
 
   return (
@@ -123,8 +91,7 @@ export default function CreateRecipe(props: {
       <Button
         className="my-[30px]"
         style={{ background: "#454ADE" }}
-        onClick={handleShow}
-      >
+        onClick={handleShow}>
         Create recipe
       </Button>
 
@@ -132,16 +99,15 @@ export default function CreateRecipe(props: {
         show={show}
         onHide={handleClose}
         placement="end"
-        className="w-50 relative pt-[30px]"
-      >
+        className="w-50 relative pt-[30px]">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Recipe</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <form
             className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
-            onSubmit={(e) => createCocktail(e)}
-          >
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onSubmit={(e) => createCocktail(e)}>
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="">Cocktail name</label>
               <input
@@ -163,8 +129,7 @@ export default function CreateRecipe(props: {
               <select
                 className="border"
                 name="collection"
-                onChange={(e) => filterCate(e.target.value)}
-              >
+                onChange={(e) => filterCate(e.target.value)}>
                 {collections.map((collection, index) => (
                   <option key={index}>{collection.name}</option>
                 ))}
@@ -173,26 +138,11 @@ export default function CreateRecipe(props: {
 
             <label className="block">Tools</label>
             <div className="flex flex-wrap gap-1 w-4/4 mt-[25px] border-b-[1px] border-black pb-[20px]">
-              {tools.map((tool, index) => (
-                <div
-                  className={
-                    selectTools.includes(tool._id)
-                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
-                      : "w-[170px] py-[10px] border flex flex-col items-center"
-                  }
-                  key={index}
-                  onClick={() => addToolHandler(tool._id)}
-                >
-                  <p className="">{tool.name}</p>
-                  <Image
-                    src={tool.image_url}
-                    alt="Landscape picture"
-                    height={80}
-                    width={80}
-                    style={{ width: "auto", height: "auto" }}
-                  />
-                </div>
-              ))}
+              <AddToolHandler
+                selectTools={selectTools}
+                setSelectTools={setSelectTools}
+                tools={tools}
+              />
             </div>
             <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
               <label className="block">Category</label>
@@ -209,36 +159,24 @@ export default function CreateRecipe(props: {
                 {ingredient.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center"
-                  >
+                    className="h-full flex items-center">
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                    <input
-                      value="Remove"
-                      className="px-[10px] bg-red-500"
-                      onClick={() => {
-                        removeInputHandler(index);
-                      }}
-                      type="button"
+                    <RemoveButton
+                      ingredient={ingredient} 
+                      setIngredient={setIngredient}
+                      index={index}
                     />
                   </div>
                 ))}
               </div>
-
-              <input
-                id="adding"
-                type="text"
-                ref={inputRefIng}
-                name="ingredients"
-                className="bg-slate-400 w-52"
-                onChange={(e) => {
-                  tempRef.current = e.target.value;
+              <AddInputButton
+                text={inputIng}
+                name="addIngredient"
+                setInput={setInputIng}
+                func={() => {
+                  setIngredient([...ingredient, inputIng]);
+                  setInputIng("");
                 }}
-              />
-              <input
-                value="Add ingredient"
-                className="px-[10px] bg-green-400"
-                onClick={addInputHandler}
-                type="button"
               />
             </div>
 
@@ -248,36 +186,24 @@ export default function CreateRecipe(props: {
                 {how.map((inex, index) => (
                   <div
                     key={`input-container-${index}`}
-                    className="h-full flex items-center"
-                  >
+                    className="h-full flex items-center">
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                    <input
-                      value="Remove"
-                      className="px-[10px] bg-red-500"
-                      onClick={() => {
-                        removeInputHandlerHow(index);
-                      }}
-                      type="button"
+                    <RemoveButton
+                      ingredient={how} 
+                      setIngredient={setHow}
+                      index={index}
                     />
                   </div>
                 ))}
               </div>
-
-              <input
-                id="adding"
-                type="text"
-                ref={inputRefIns}
-                name="instructions"
-                className="bg-slate-400 w-52"
-                onChange={(e) => {
-                  tempRefHow.current = e.target.value;
+              <AddInputButton
+                text={inputIns}
+                name="add How"
+                setInput={setInputIns}
+                func={() => {
+                  setHow([...how, inputIns]);
+                  setInputIns("");
                 }}
-              />
-              <input
-                value="Add instructions"
-                className="px-[10px] bg-green-400"
-                onClick={addInputHandlerHow}
-                type="button"
               />
             </div>
 
@@ -317,8 +243,7 @@ export default function CreateRecipe(props: {
 
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 text-sm text-white shadow-sm hover:bg-green-500"
-              >
+                className="h-[40px] rounded-md bg-green-600 px-3 text-sm text-white shadow-sm hover:bg-green-500">
                 Create
                 {spinner == "loading" && <Spinner className="" size="xs" />}
               </button>
