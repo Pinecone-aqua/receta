@@ -60,6 +60,7 @@ export interface PropType {
   children: React.ReactNode;
 }
 export interface NewsType {
+  _id: string;
   name: string;
   description: string;
   title: string;

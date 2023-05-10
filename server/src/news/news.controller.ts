@@ -10,7 +10,6 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { CheckRole } from "src/role/role.decorator";
-import { CreateNewsDto } from "./news.create.dto";
 import { NewsService } from "./news.service";
 @Controller("news")
 export class NewsController {
@@ -30,7 +29,7 @@ export class NewsController {
   @UseInterceptors(FileInterceptor("file"))
   create(@UploadedFile() file: any, @Body() body: any) {
     const data = {
-      ...JSON.parse(body.newNews),
+      ...JSON.parse(body.newData),
     };
     return this.toolService.create(data, file);
   }
