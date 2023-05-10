@@ -21,7 +21,7 @@ export default function Recipe(props: {
 
   return (
     <Layout>
-      <div className="Container">
+      <div className="bg-[#1A1A1A]">
         <Details recipe={recipe} />
         <div className="text-[#1e1e1e] text-[20px] mx-auto bg-[#FFFBF1] p-[20px]">
           <p>{recipe.description}</p>
