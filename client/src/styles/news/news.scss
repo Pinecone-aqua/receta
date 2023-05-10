@@ -16,7 +16,7 @@
 }
 .card {
   position: relative;
-  padding: 25px;
+  // padding: 25px;
   height: 400px;
   flex: 0 0 40%;
   max-width: 40%;
@@ -26,16 +26,17 @@
   color: white;
 }
 .active {
-  background-color: #547673;
+  // background-color: #547673;
 }
 .disable {
-  background-color: #c9d5cf;
+  // background-color: #c9d5cf;
+  opacity: 0.3;
   transition: 0.3s;
 }
 
 .card:nth-child(4n + 1),
 .card:nth-child(4n + 4) {
-  flex: 0 0 60%;
+  flex: 0 0 70%;
   max-width: 58%;
 }
 
@@ -51,11 +52,20 @@
   color: white;
 }
 
+.motion-card-image {
+  // absolute w-[90%] z-[-10] h-[90%]
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
 @media screen and (max-width: 1000px) {
   .card:nth-child(4n + 1),
   .card:nth-child(4n + 4) {
-    flex: 0 0 55%;
-    max-width: 55%;
+    flex: 0 0 60%;
+    max-width: 56%;
   }
 }
 

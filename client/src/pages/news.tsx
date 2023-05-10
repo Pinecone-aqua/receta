@@ -4,34 +4,61 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { RiCloseFill } from "react-icons/ri";
 import { Section } from "@/component/main/motionScroll/MotionScroll";
+import { NewsType } from "@/util/Types";
+import { GetStaticProps } from "next";
+import axios from "axios";
+import Image from "next/image";
 
-export default function Shop(): JSX.Element {
+export default function Shop({
+  newsData,
+}: {
+  newsData: NewsType[];
+}): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedData, setSelectedData] = useState<any>(null);
+
+  // const imageLoader = ({
+  //   src,
+  //   width,
+  //   quality,
+  // }: {
+  //   src: string;
+  //   width: number;
+  //   quality: number;
+  // }) => {
+  //   return `https://res.cloudinary.com/${src}?w=${width}&q=${quality || 20}`;
+  // };
   return (
     <>
       <div className={``} onClick={() => selectedData && setSelectedData(null)}>
         <div className={selectedData ? `opacity-[0.1]` : ""}>
           <Header />
         </div>
-        {/* <div className="News-parallox">
-        <ParallaxText baseVelocity={-2}>
-          <div className="News-parallox-text flex gap-10">
-            <p>receta news.</p> <p>receta news.</p> <p>receta news.</p>
-          </div>
-        </ParallaxText>
-      </div> */}
         <Section>
           <div className="Container flex flex-wrap card-container relative">
-            {cardData.map((item: any, index: number) => (
+            {newsData.map((item: NewsType, index: number) => (
               <motion.div
-                layoutId={item.id}
+                layoutId={item._id}
                 key={index}
                 onClick={() => !selectedData && setSelectedData(item)}
                 className={selectedData ? `card disable` : `card active`}
               >
-                <motion.h5>{item.category}</motion.h5>
-                <motion.h2>{item.title}</motion.h2>
+                <motion.div>
+                  <Image
+                    className="motion-card-image rounded-md"
+                    src={item.image_url}
+                    fill={true}
+                    alt={`${item.name} image`}
+                  />
+                </motion.div>
+                <div className="flex flex-col justify-between h-full p-4">
+                  <motion.h2 className="p-2 font-bold text-[18px]">
+                    {item.category}
+                  </motion.h2>
+                  <motion.h5 className="p-2 text-lg font-bold text-[18px]">
+                    {item.title}
+                  </motion.h5>
+                </div>
               </motion.div>
             ))}
             <AnimatePresence>
@@ -55,45 +82,17 @@ export default function Shop(): JSX.Element {
   );
 }
 
-const cardData = [
-  {
-    id: "c",
-    category: "Pizza",
-    title: "5 Food Apps Delivering the Best of Your City",
-  },
-  {
-    id: "f",
-    category: "How to",
-    title: "Arrange Your Apple Devices for the Gram",
-  },
-  {
-    id: "a",
-    category: "Pedal Power",
-    title: "Map Apps for the Superior Mode of Transport",
-  },
-  {
-    id: "g",
-    category: "Holidays",
-    title: "Our Pick of Apps to Help You Escape From Apps",
-  },
-  {
-    id: "d",
-    category: "Photography",
-    title: "The Latest Ultra-Specific Photography Editing Apps",
-  },
-  {
-    id: "h",
-    category: "They're all the same",
-    title: "100 Cupcake Apps for the Cupcake Connoisseur",
-  },
-  {
-    id: "e",
-    category: "Cats",
-    title: "Yes, They Are Sociopaths",
-  },
-  {
-    id: "b",
-    category: "Holidays",
-    title: "Seriously the Only Escape is the Stratosphere",
-  },
-];
+interface Props {
+  newsData: NewsType[];
+}
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const newsData = await axios
+    .get(`http://localhost:3003/news/all`)
+    .then((res) => res.data);
+
+  return {
+    props: {
+      newsData: newsData,
+    },
+  };
+};

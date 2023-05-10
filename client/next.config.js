@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["cocktailclub.com", "localhost"],
+    protocol: "https",
+    hostname: "res.cloudinary.com/**",
   },
 };
 

@@ -63,3 +63,12 @@ export interface ToolType {
   image_url: string;
   _id: string;
 }
+export interface NewsType {
+  _id: string;
+  name: string;
+  description: string;
+  title: string;
+  subTitle: string;
+  image_url: string;
+  category: string;
+}
