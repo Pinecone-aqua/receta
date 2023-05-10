@@ -43,18 +43,22 @@ export default function Login() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader className="flex gap-5 text-[#292F36]">
-            <FaCocktail className="" />
-            <h1 className="">receta.</h1>
+          <ModalHeader className="flex text-[#101419] gap-2">
+            <FaCocktail className="mt-1" />
+            <h1 className="login-logo">receta.</h1>
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton className="mt-2" />
           <ModalBody pb={10}>
+            <p className="login-title">Welcome back</p>
+            <p className="login-sub-title">
+              Please sign in your google account thanks!
+            </p>
             <span
               onClick={googleLoginHandler}
-              className="flex place-content-center cursor-pointer mt-5 mb-2 px-5 py-2 bg-white border rounded-md gap-2"
+              className="flex place-content-center cursor-pointer mt-6 mb-2 px-5 py-2 bg-white border border-[#cecdcd] rounded-md gap-2 hover:bg-gray-50 duration-300"
             >
               <FcGoogle className="mt-[3px] w-[20px] h-[20px]" />
-              <p className="text-[16px]">sign in google</p>
+              <p className="text-[16px] text-[#547673]">sign in google</p>
             </span>
           </ModalBody>
         </ModalContent>
