@@ -47,6 +47,8 @@ export interface CategoryType {
 export interface OthersContextType {
   activePage: string | null;
   setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
+  news: NewsType[];
+  setNews: React.Dispatch<React.SetStateAction<NewsType[]>>;
 }
 
 export interface CocktailContextType {
@@ -56,4 +58,19 @@ export interface CocktailContextType {
 
 export interface PropType {
   children: React.ReactNode;
+}
+export interface NewsType {
+  name: string;
+  description: string;
+  title: string;
+  subTitle: string;
+  image_url: string;
+  category: string;
+}
+export interface CreateNewsType {
+  name: string;
+  description: string;
+  title: string;
+  subTitle: string;
+  category: string;
 }

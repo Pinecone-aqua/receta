@@ -6,6 +6,7 @@ import { RiSettings3Fill } from "react-icons/ri";
 import { MdBookmarkBorder } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { useOthers } from "../context/OthersContext";
+import { SiApplenews } from "react-icons/si";
 
 export default function SideBar(): JSX.Element {
   const { activePage, setActivePage } = useOthers();
@@ -64,6 +65,11 @@ export const pages: PageType[] = [
     url: "../Recipe",
     name: "Recipe",
     icon: <TbBrandShopee />,
+  },
+  {
+    url: "../News",
+    name: "News",
+    icon: <SiApplenews />,
   },
 
   {
