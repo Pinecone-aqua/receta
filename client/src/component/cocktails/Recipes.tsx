@@ -35,8 +35,8 @@ export default function Recipes(): JSX.Element {
   }
 
   return (
-    <div className="py-[10px] relative mb-[40px]">
-      <div className="flex flex-wrap  border-x-[0.5px] border-[#dadada] Container gap-[16px] pb-[80px] place-content-center mx-auto">
+    <div className="relative mb-[88px]">
+      <div className="flex flex-wrap  border-x-[0.5px] border-[#dadada] Container gap-[16px] pb-[48px] place-content-center mx-auto">
         <Suspense fallback={<p className="text-blac text-[24px]">Loading</p>}>
           {recipes.map((recipe, index) => (
             <RecipeCard recipe={recipe} key={index} />
@@ -48,7 +48,7 @@ export default function Recipes(): JSX.Element {
           className="place-content-center cursor-pointer flex my-10 border-b-[0.5px] border-[#dadada] Container"
           onClick={ReadMore}
         >
-          <div className="text-white absolute bottom-[-30px]">
+          <div className="text-white absolute bottom-[-40px]">
             <BsArrowDownShort className="animate-bounce text-black bg-white mx-auto p-[8px] w-[48px] h-[48px] border-[0.5px] border-black rounded-[50%]" />
             <p className="text-[12px] text-black">Цааш үзэх</p>
           </div>

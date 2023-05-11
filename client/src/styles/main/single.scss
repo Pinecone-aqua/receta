@@ -12,7 +12,7 @@
 // }
 .recipe-carousel .p-carousel-indicator {
   margin: 0 !important;
-  width: 150px;
+  // width: 150px;
   border-top: 1px solid white !important;
 }
 
@@ -32,4 +32,8 @@
 
 .p-rating-icon {
   color: #f3d951 !important;
+}
+
+.recipe-carousel .p-carousel-item {
+  padding: 10px;
 }

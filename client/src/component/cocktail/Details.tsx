@@ -29,7 +29,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
   const toolTemplate = (tool: any) => {
     return (
       <div className="my-auto">
-        <Link href={`../cocktail/${tool._id}`}>
+        <Link href={`../store/${tool._id}`}>
+
           <img src={tool.image_url} alt={tool.name} />
           <div className="text-white text-center mt-4">
             <div className="mb-3">{tool.name}</div>
@@ -41,6 +42,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
   const responsiveOptions = [
     {
       breakpoint: "1199px",
+
       numVisible: 3,
       numScroll: 1,
     },
@@ -75,7 +77,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
         </div>
       </div>
       <div className="w-[50%] relative text-white">
-        <div className="h-[25%]"></div>
+        <div className="h-[25%]" />
+
         <div className="h-[400px] px-[74px] overflow-y-auto">
           <div className="w-[80%] flex items-center text-xl">
             <div>How to make</div>
@@ -99,7 +102,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
           alt="image"
         />
       </div>
-      <div className="max-w-[1300px] w-full mx-auto h-[45vh] text-white bg-[#121212] singleProd-tab absolute bottom-[-38%] py-5 px-10">
+      <div className="max-w-[1300px] w-full mx-auto text-white bg-[#121212] singleProd-tab absolute bottom-[-38%] py-5 px-10">
         <Tabs>
           <TabList className="px-10">
             <Tab
@@ -122,7 +125,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
 
           <TabPanels>
             <TabPanel>
-              <div className="flex flex-col flex-wrap justify-between mt-5 ps-6 gap-3 overflow-y-auto text-2xl">
+              <div className="flex flex-col flex-wrap justify-between mt-5 ps-6 gap-3 overflow-y-auto text-2xl min-h-[38vh]">
+
                 {recipe.ingredients?.map(
                   (ingredient: string, index: number) => (
                     <div key={index}>
@@ -132,18 +136,19 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                 )}
               </div>
             </TabPanel>
-            <TabPanel>
-              <div className="mt-5 recipe-carousel">
+            <div className="mt-5 recipe-carousel">
+              <TabPanel>
                 <Carousel
+                  circular={true}
                   value={usedTools}
-                  numVisible={4}
-                  numScroll={1}
+                  numVisible={5}
                   responsiveOptions={responsiveOptions}
                   itemTemplate={toolTemplate}
                   indicatorsContentClassName={"flex justify-center gap-0"}
                 />
-              </div>
-            </TabPanel>
+              </TabPanel>
+            </div>
+
           </TabPanels>
         </Tabs>
       </div>

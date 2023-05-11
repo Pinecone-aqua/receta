@@ -110,7 +110,7 @@ export default function Store({ tools }: { tools: ToolType[] }): JSX.Element {
                   <HiOutlineArrowRight className="my-auto cursor-pointer ms-[64px] text-white w-[42px] h-[42px] rounded-[25px] p-3 border" />
                 </div>
               </div>
-              <button className="buyButton w-[385px] text-[#ffffff] border-[#ffffff] font-semibold leading-[16px] text-[16px] py-[16px] border-[1px]">
+              <button className="buyButton w-[385px] text-[#ffffff] border-[#ffffff] font-semibold leading-[16px] text-[16px] py-[16px] border-[1px] hover:bg-[]">
                 buy bar set
               </button>
             </div>

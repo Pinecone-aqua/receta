@@ -21,7 +21,7 @@ export default function Recipe(props: {
         <div className="flex bg-white Container store-single">
           <picture className="w-full">
             <img
-              className="h-[80vh] border-e border-dashed object-cover "
+              className="h-[80vh] border-e border-dashed object-cover"
               src={tool.image_url}
               alt="tool"
             />
@@ -39,18 +39,17 @@ export default function Recipe(props: {
             <button className="buy-button">Coming soon buy</button>
           </div>
         </div>
-        <div className="bg-[#fcfcfc]">
-          <h3 className="mt-10 text-[24px] Container text-[#FAFAFA]   store-sub-title">
+        <div className="bg-[#f0f0f0]">
+          <h3 className="mt-10  text-[24px] Container text-[#121212] store-sub-title pt-20">
             Popular
           </h3>
-          <div className="flex justify-between py-[30px] Container store-sub-cont border-b">
+          <div className="flex justify-between py-[30px] Container store-sub-cont pb-20">
             {props.tools.slice(0, 5).map(
               (tool: ToolType, index: number) =>
                 props.tool.name !== tool.name && (
                   <Link
                     href={tool._id}
                     key={index}
-                    className="border"
                     onClick={() => {
                       localStorage.setItem("page", "");
                       setActivePage("");
@@ -61,7 +60,7 @@ export default function Recipe(props: {
                       className="store-sub-img"
                       alt="tool"
                     />
-                    <p className="text-center py-2 text-[#1a1a1a]">
+                    <p className="text-center py-2 text-[#171717]">
                       {tool.name}
                     </p>
                   </Link>

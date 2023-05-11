@@ -43,7 +43,7 @@ export default function Comment({
           : alert(res.data);
       });
     } else {
-      router.push("../login");
+      alert("login");
     }
 
     setEmoji("");

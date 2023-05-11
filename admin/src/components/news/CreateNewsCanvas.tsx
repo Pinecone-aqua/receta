@@ -50,7 +50,7 @@ export default function CreateNews(): JSX.Element {
   return (
     <>
       <Button colorScheme="teal" onClick={onOpen}>
-        Create user
+        Create
       </Button>
       <Drawer isOpen={isOpen} placement="right" size="lg" onClose={onClose}>
         <DrawerOverlay />

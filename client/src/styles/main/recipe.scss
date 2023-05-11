@@ -1,19 +1,28 @@
-.recipeCard-image {
-  display: absolute;
+.recipeCard-img {
   width: 100%;
-  height: 100%;
+  height: 340px;
   object-fit: cover;
-  mix-blend-mode: overlay;
-  transition: 100s;
+}
+
+.recipeCard-title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #6e6e6e;
+  text-align: center;
 }
 
 .recipeCard-text {
-  font-family: "M PLUS 1p", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
-  color: white;
+  color: #121212;
+  text-align: center;
 }
-.recipeCard-image:hover {
-  mix-blend-mode: screen;
+@media screen and (max-width: 600px) {
+  .recipeCard-img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
 }
