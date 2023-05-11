@@ -25,6 +25,22 @@
   padding: 20px;
 }
 
+.Store-shop-slider .p-carousel-next {
+  border: 1px solid gray !important;
+}
+
+.Store-shop-slider .p-carousel-prev {
+  border: 1px solid gray !important;
+}
+
+.Store-shop-slider .p-carousel-next svg {
+  color: white;
+}
+
+.Store-shop-slider .p-carousel-prev svg {
+  color: white;
+}
+
 .Store-shop-slider .p-carousel-prev {
   display: none;
 }
