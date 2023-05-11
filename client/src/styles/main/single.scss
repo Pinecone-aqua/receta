@@ -7,12 +7,8 @@
   color: #6b6b6b;
 }
 
-// .recipe-carousel .p-carousel-indicators {
-//   margin-top: 5rem !important;
-// }
 .recipe-carousel .p-carousel-indicator {
   margin: 0 !important;
-  // width: 150px;
   border-top: 1px solid white !important;
 }
 
@@ -36,4 +32,51 @@
 
 .recipe-carousel .p-carousel-item {
   padding: 10px;
+}
+
+.recipe-carousel .p-carousel-indicators {
+  display: none;
+}
+
+.tabs .chakra-tabs__tablist {
+  border-bottom: none;
+}
+
+.related .p-carousel-indicators {
+  display: none;
+}
+
+.related .p-carousel-content {
+  overflow: visible;
+}
+
+.related .p-carousel-container {
+  position: relative;
+}
+
+.related .p-carousel-next {
+  position: absolute;
+  top: -80px;
+  right: 1%;
+  border: 1px solid gray !important;
+}
+.related .p-carousel-next svg {
+  color: white;
+}
+.related .p-carousel-prev svg {
+  color: white;
+}
+.related .p-carousel-prev {
+  position: absolute;
+  top: -80px;
+  right: calc(1% + 60px);
+  border: 1px solid gray !important;
+}
+
+.related .p-carousel-item {
+  flex: 1 0 25% !important;
+}
+
+.related .p-carousel-item {
+  padding: 0 20px;
 }

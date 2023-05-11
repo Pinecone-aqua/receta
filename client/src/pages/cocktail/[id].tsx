@@ -8,6 +8,8 @@ import { Rating } from "primereact/rating";
 import Layout from "@/component/Layout";
 import Link from "next/link";
 import { useOthers } from "@/context/OthersContext";
+import { Carousel } from "primereact/carousel";
+import Image from "next/image";
 
 interface RecipeType {
   recipe: RecipesType;
@@ -23,7 +25,47 @@ export default function Recipe({
   tools,
 }: RecipeType): JSX.Element {
   const { setActivePage } = useOthers();
+  const recommendTemplate = (recipe: RecipesType) => (
+    <div className="my-auto">
+      <Link href={`../cocktail/${recipe._id}`}>
+        <Image
+          src={recipe.image_url}
+          alt={`${recipe.name} image`}
+          width={1000}
+          height={1000}
+        />
+        <div className="text-white text-center mt-4">
+          {recipe.categories_id.map((cate: any) => (
+            <p className="text-[#989898]"> {cate.name}</p>
+          ))}
+          <div
+            className="mb-3 text-[20px] text-[#dadada
+          ] font-medium"
+          >
+            {recipe.name}
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
 
+  const responsiveOptions = [
+    {
+      breakpoint: "1199px",
+      numVisible: 4,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "1091px",
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "767px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
   return (
     <Layout>
       <div className="bg-[#1A1A1A] ">
@@ -49,24 +91,24 @@ export default function Recipe({
             </div>
           </div>
         </div>
-        <h3 className="text-[24px] mt-[50px]">Recommended cocktails</h3>
-        <div className="flex py-[50px] border-b">
-          {recommend.map(
-            (cocktail, index) =>
-              recipe._id !== cocktail._id && (
-                <Link
-                  href={cocktail._id}
-                  key={index}
-                  onClick={() => {
-                    localStorage.setItem("page", "");
-                    setActivePage("");
-                  }}
-                >
-                  <img src={cocktail.image_url} alt="cocktail" />
-                  <p className="text-center text-[#fcfcfc]">{cocktail.name}</p>
-                </Link>
-              )
-          )}
+        <div className="related">
+          <div className="max-w-[1300px] mx-auto mt-[50px] text-white text-[28px] font-semibold">
+            <p>Related cocktails</p>
+            <p className="mt-1 border w-[80px]"></p>
+          </div>
+          <div className="max-w-[1340px] mx-auto py-[50px] border-b">
+            <div className="w-full">
+              <Carousel
+                circular={true}
+                value={recommend}
+                numVisible={4}
+                numScroll={1}
+                responsiveOptions={responsiveOptions}
+                itemTemplate={recommendTemplate}
+                indicatorsContentClassName={"flex flex-wrap justify-center"}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
