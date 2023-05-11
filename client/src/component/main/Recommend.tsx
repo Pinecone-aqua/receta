@@ -1,15 +1,15 @@
 import { RecipesType } from "../../util/Types";
-
 import Link from "next/link";
 import React from "react";
 import { Carousel } from "primereact/carousel";
 import Image from "next/image";
-export default function Recoommend({
+
+export default function Recommend({
   recommend,
 }: {
   recommend: RecipesType[];
 }): JSX.Element {
-  const productTemplate = (recipe: RecipesType) => (
+  const recommendTemplate = (recipe: RecipesType) => (
     <div className="my-auto">
       <Link href={`../cocktail/${recipe._id}`}>
         <Image
@@ -62,7 +62,7 @@ export default function Recoommend({
           numVisible={3}
           numScroll={1}
           responsiveOptions={responsiveOptions}
-          itemTemplate={productTemplate}
+          itemTemplate={recommendTemplate}
           indicatorsContentClassName={"flex flex-wrap justify-center"}
         />
       </div>

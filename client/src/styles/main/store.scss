@@ -8,3 +8,31 @@
   margin-right: -3px;
   margin-top: -3px;
 }
+
+.Store-shop-slider .p-highlight {
+  background-color: #ececec !important ;
+}
+
+.Store-shop-slider .p-carousel-indicators {
+  display: none;
+}
+
+.Store-shop-slider .p-carousel-items-container {
+  width: 100%;
+}
+
+.Store-shop-slider .p-carousel-item {
+  padding: 20px;
+}
+
+.Store-shop-slider .p-carousel-prev {
+  display: none;
+}
+
+.tool-icon {
+  display: none;
+}
+
+.tool-card:hover .tool-icon {
+  display: block;
+}
