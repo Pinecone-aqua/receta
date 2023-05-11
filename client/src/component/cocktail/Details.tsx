@@ -30,6 +30,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
     return (
       <div className="my-auto">
         <Link href={`../store/${tool._id}`}>
+
           <img src={tool.image_url} alt={tool.name} />
           <div className="text-white text-center mt-4">
             <div className="mb-3">{tool.name}</div>
@@ -41,16 +42,17 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
   const responsiveOptions = [
     {
       breakpoint: "1199px",
-      numVisible: 5,
-      numScroll: 2,
+
+      numVisible: 3,
+      numScroll: 1,
     },
     {
       breakpoint: "991px",
-      numVisible: 3,
-      numScroll: 2,
+      numVisible: 2,
+      numScroll: 1,
     },
     {
-      breakpoint: "567px",
+      breakpoint: "767px",
       numVisible: 1,
       numScroll: 1,
     },
@@ -76,6 +78,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
       </div>
       <div className="w-[50%] relative text-white">
         <div className="h-[25%]" />
+
         <div className="h-[400px] px-[74px] overflow-y-auto">
           <div className="w-[80%] flex items-center text-xl">
             <div>How to make</div>
@@ -123,6 +126,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
           <TabPanels>
             <TabPanel>
               <div className="flex flex-col flex-wrap justify-between mt-5 ps-6 gap-3 overflow-y-auto text-2xl min-h-[38vh]">
+
                 {recipe.ingredients?.map(
                   (ingredient: string, index: number) => (
                     <div key={index}>
@@ -138,13 +142,13 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   circular={true}
                   value={usedTools}
                   numVisible={5}
-                  numScroll={1}
                   responsiveOptions={responsiveOptions}
                   itemTemplate={toolTemplate}
                   indicatorsContentClassName={"flex justify-center gap-0"}
                 />
               </TabPanel>
             </div>
+
           </TabPanels>
         </Tabs>
       </div>
