@@ -15,6 +15,7 @@ import CreateNews from "../components/news/CreateNewsCanvas";
 import DeleteAlert from "../components/news/DeleteNews";
 import { useOthers } from "../context/OthersContext";
 import { NewsType } from "../util/Types";
+import Image from "next/image";
 
 export default function News({
   newsData,
@@ -49,7 +50,14 @@ export default function News({
                     <Td>{newsData.name}</Td>
                     <Td>{newsData.category}</Td>
                     <Td>
-                      <img className="h-[80px]" src={newsData.image_url} />
+                      {/* <img className="h-[80px]" src={newsData.image_url} /> */}
+                      <Image
+                        className="rounded-md h-[50px] w-[50px]"
+                        src={newsData.image_url}
+                        width={1000}
+                        height={1000}
+                        alt={`${newsData.name} image`}
+                      />
                     </Td>
                     <Td>
                       <DeleteAlert newsData={newsData} />

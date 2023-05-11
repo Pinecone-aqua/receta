@@ -51,7 +51,7 @@ export default function Collection({
           </div>
         </div>
         <div className="Collection-arrow absolute rounded-[50%] bottom-[-26px] right-[-26px] bg-white">
-          <BsArrowDownShort className="text-black mx-auto p-[12px] w-[52px] h-[52px] border-[0.5px] border-black rounded-[50%]" />
+          <BsArrowDownShort className="text-black mx-auto p-[12px] w-[48px] h-[48px] border-[0.5px] border-black rounded-[50%]" />
         </div>
       </div>
 

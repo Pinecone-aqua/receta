@@ -28,7 +28,7 @@ export default function OurStory() {
   ];
   return (
     <div className="bg-black text-white ourstory">
-      <div className="Container">
+      {/* <div className="Container">
         <h1 className="text-[72px] font-semibold px-10 py-[6rem]">
           <span className="border-b pb-3">Our</span> story
         </h1>
@@ -52,7 +52,7 @@ export default function OurStory() {
             <button className="py-2 px-[6rem] border me-auto">read more</button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

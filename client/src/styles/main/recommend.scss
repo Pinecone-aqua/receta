@@ -1,24 +1,16 @@
 .recommend {
   background-image: url("./../../../public/recommendBg.png");
-  background-position: center;
-  background-size: cover;
 }
 .recommend-title {
   font-family: "M PLUS 1p", sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 64px;
-  line-height: 120px;
+  font-size: 56px;
+  line-height: 64px;
+  margin-bottom: 28px;
   text-align: center;
-  background: linear-gradient(
-    270.6deg,
-    #000000 23.27%,
-    #999999 36.51%,
-    #ececec 47.21%,
-    #777777 73.62%,
-    #2d2d2d 82.44%,
-    #b3b3b3 92.31%
-  );
+  background-color: #2a2a72;
+  background-image: linear-gradient(315deg, #d1d1ff 0%, #0c164d 74%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -27,32 +19,10 @@
   font-family: "M PLUS 1p", sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 24px;
   text-align: center;
-  color: #ffffff;
-}
-.recommend-button {
-  padding: 8px 32px;
-  gap: 10px;
-  width: 301px;
-  height: 52px;
-  border: 1px solid #ffffff;
-  border-radius: 90px;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 36px;
-  text-align: center;
-  color: #ffffff;
-}
-
-.recommend .p-carousel-indicators {
-  margin-top: 5rem !important;
-}
-.recommend .p-carousel-indicator {
-  margin: 0 !important;
-  width: 150px;
-  border-top: 1px solid white !important;
+  color: #e0e0e0;
 }
 
 .recommend .p-highlight {
@@ -62,22 +32,12 @@
 .recommend .p-carousel-indicator button {
   width: 100% !important;
   background-color: transparent !important;
-  height: 0.3rem !important;
 }
 
 .recommend .p-carousel-items-container {
-  gap: 1.3rem;
+  width: 100%;
 }
 
 .recommend .p-carousel-item {
-  flex: 1 0 31.5% !important;
-}
-
-.recommend button {
-  color: #dadada;
-}
-
-.recommend button svg {
-  width: 20px;
-  height: 20px;
+  padding: 20px;
 }

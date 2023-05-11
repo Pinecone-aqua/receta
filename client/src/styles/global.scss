@@ -18,16 +18,10 @@
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p&family=Yomogi&display=swap");
 
-::-webkit-scrollbar-thumb:horizontal {
+::-webkit-scrollbar-thumb {
   background: rgb(7, 6, 6);
-  border-radius: 2px;
 }
-::-webkit-scrollbar {
-  height: 3px;
-  width: 10px;
-  // border-top: 0.5px solid #d5d5d5;
-  // border-bottom: 0.5px solid #d5d5d5;
-}
+
 html {
   scroll-behavior: smooth;
 }
@@ -90,9 +84,7 @@ html {
   .footer-email-label {
     width: 80%;
   }
-  .recommend {
-    padding: 0;
-  }
+
   .Store-slider {
     width: 100%;
   }
@@ -100,7 +92,7 @@ html {
 
 @media screen and (max-width: 600px) {
   .Store-image {
-    min-width: 300px;
+    min-width: 200px;
     height: 500px;
     object-fit: cover;
     padding: 10px;

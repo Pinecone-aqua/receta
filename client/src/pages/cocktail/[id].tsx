@@ -63,7 +63,7 @@ export default function Recipe({
                   }}
                 >
                   <img src={cocktail.image_url} alt="cocktail" />
-                  <p className="text-center">{cocktail.name}</p>
+                  <p className="text-center text-[#fcfcfc]">{cocktail.name}</p>
                 </Link>
               )
           )}
