@@ -132,12 +132,15 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
         </Tabs>
 
         <img
-          className="absolute right-[5%] top-[40%]"
+          className="absolute right-[5%] top-[35%]"
           src="../DownArrow.png"
           alt="image"
         />
       </div>
-      <div className="max-w-[1300px] w-full mx-auto text-white bg-[#121212] singleProd-tab absolute bottom-[-28%] py-5 px-10">
+      <div className="max-w-[1300px] w-full mx-auto text-white bg-[#121212] singleProd-tab absolute bottom-[-33.5%] py-5 px-10">
+        <div className="text-2xl font-semibold ps-[3.5rem] mt-5">
+          Used tools
+        </div>
         <div className="mt-5 recipe-carousel">
           <Carousel
             circular={true}
