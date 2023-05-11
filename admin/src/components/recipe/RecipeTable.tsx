@@ -1,6 +1,11 @@
+import CreateRecipe from "../recipe/CreateRecipe";
+// import Sorting from "./functions/Sorting";
+import RecipeTableRow from "./RecipeTableRow";
+// import { useCocktail } from "@/src/context/CocktailContext";
+import { useState } from "react";
 import {
   CategoryType,
-  CocktailType,
+  // CocktailType,
   CollectionType,
   ToolsType,
 } from "../../util/Types";
@@ -13,10 +18,7 @@ import {
   Tr,
   Table,
 } from "@chakra-ui/react";
-
-import CanvasRecipe from "../recipe/CreateRecipe";
-import RecipeTableRow from "./RecipeTableRow";
-import { useCocktail } from "@/src/context/CocktailContext";
+import Sorting from "./functions/Sorting";
 
 interface RecipeTablePropType {
   categories: CategoryType[];
@@ -29,10 +31,30 @@ export default function RecipeTable({
   collections,
   tools,
 }: RecipeTablePropType) {
-  const { recipes } = useCocktail();
+  const [sorted, setSorted] = useState();
+  // const { recipes } = useCocktail();
+  // const [selectedCategory, setSelectedCategory] = useState<string>();
+  // const [selectedCollection, setSelectedCollection] = useState<string>();
+  // console.log(selectedCategory);
+  // console.log(recipes);
+  // console.log("d", selectedCollection);
+  // const filteredRecipesByCategory = recipes.filter(
+  //   (recipe) => recipe.categories_id[0].name === selectedCategory
+  // );
+  // const filteredRecipesByCollection = recipes.filter(
+  //   (recipe) => recipe.collection_id === selectedCollection
+  // );
+
   return (
     <TabPanel className="">
-      <CanvasRecipe collections={collections} tools={tools} />
+      <div className="flex justify-between items-center">
+        <CreateRecipe collections={collections} tools={tools} />
+        <Sorting
+          sorted={sorted}
+          setSorted={setSorted}
+          collections={collections}
+        />
+      </div>
       <TableContainer>
         <Table size="sm">
           <Thead>
@@ -45,8 +67,8 @@ export default function RecipeTable({
             </Tr>
           </Thead>
           <Tbody>
-            {recipes
-              ?.map((recipe: CocktailType) => (
+            {/* {recipes
+              .map((recipe: CocktailType) => (
                 <RecipeTableRow
                   categories={categories}
                   tools={tools}
@@ -55,7 +77,7 @@ export default function RecipeTable({
                   key={recipe._id}
                 />
               ))
-              .reverse()}
+              .reverse()} */}
           </Tbody>
         </Table>
       </TableContainer>

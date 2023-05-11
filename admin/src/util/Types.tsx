@@ -44,6 +44,12 @@ export interface CategoryType {
   name: string;
 }
 
+export interface CollectionType {
+  name: string;
+  _id: string;
+  image_url: string;
+}
+
 export interface OthersContextType {
   activePage: string | null;
   setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
