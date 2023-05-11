@@ -1,13 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Sigmar&display=swap");
-
-.buy-button {
-  font-family: "Sigmar", cursive;
-  padding: 10px;
-  border: 1px solid black;
+.buyButton {
   transition: 0.2s;
 }
-.buy-button:hover {
-  box-shadow: -3px 3px 1px #4b4b4b;
+.buyButton:hover {
+  box-shadow: -3px 3px 1px hsl(0, 0%, 100%);
   margin-left: 3px;
   margin-bottom: 3px;
   margin-right: -3px;

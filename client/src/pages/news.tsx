@@ -19,53 +19,74 @@ export default function Shop({
 
   return (
     <>
-      <div className={``} onClick={() => selectedData && setSelectedData(null)}>
-        <div className={selectedData ? `opacity-[0.1]` : ""}>
+      <div>
+        <div className={selectedData ? `w-full h-full absolute z-[100]` : ""} />
+        <div className={selectedData ? `opacity-[0.3]` : ""}>
           <Header />
         </div>
         <Section>
-          <div className="Container flex flex-wrap card-container relative">
-            {newsData
-              .map((item: NewsType, index: number) => (
-                <motion.div
-                  layoutId={item._id}
-                  key={index}
-                  onClick={() => !selectedData && setSelectedData(item)}
-                  className={
-                    selectedData
-                      ? `card disable  bg-gradient-to-t from-black to-black`
-                      : `card active  bg-black`
-                  }
-                >
-                  <motion.div className="news-card-container">
-                    <Image
-                      className="motion-card-image"
-                      src={item.image_url}
-                      fill={true}
-                      alt={`${item.name} image`}
-                    />
+          <div className="relative Container">
+            <div
+              className={
+                selectedData
+                  ? `opacity-[0.3] w-full Container flex flex-wrap card-container relative`
+                  : "w-full Container flex flex-wrap card-container relative"
+              }
+            >
+              {newsData
+                .map((item: NewsType, index: number) => (
+                  <motion.div
+                    layoutId={item._id}
+                    key={index}
+                    onClick={() => !selectedData && setSelectedData(item)}
+                    className={
+                      selectedData
+                        ? `card disable bg-gradient-to-t from-black to-black `
+                        : `card active bg-black`
+                    }
+                  >
+                    <motion.div className="news-card-container">
+                      <Image
+                        className="motion-card-image"
+                        src={item.image_url}
+                        fill={true}
+                        alt={`${item.name} image`}
+                      />
+                    </motion.div>
+                    <div className="flex flex-col justify-end h-full p-8">
+                      <motion.h2 className="font-normal text-[16px] news-category ">
+                        {item.category}
+                      </motion.h2>
+                      <motion.h5 className="text-lg font-bold text-[24px] news-title z-10 py-">
+                        {item.title}
+                      </motion.h5>
+                    </div>
                   </motion.div>
-                  <div className="flex flex-col justify-end h-full p-8">
-                    <motion.h2 className="font-normal text-[16px] news-category ">
-                      {item.category}
-                    </motion.h2>
-                    <motion.h5 className="text-lg font-bold text-[24px] news-title z-10 py-">
-                      {item.title}
-                    </motion.h5>
-                  </div>
-                </motion.div>
-              ))
-              .reverse()}
+                ))
+                .reverse()}
+            </div>
             <AnimatePresence>
               {selectedData && (
                 <motion.div
                   layoutId={selectedData.id}
-                  className={`selected-card Container`}
+                  className={`selected-card Container flex`}
                 >
-                  <motion.h5>{selectedData.category}</motion.h5>
-                  <motion.h2>{selectedData.title}</motion.h2>
+                  <Image
+                    src={selectedData.image_url}
+                    alt={`${selectedData.name} image`}
+                    width={1000}
+                    height={1000}
+                    className="w-[60%] h-[80vh] object-cover"
+                  />
+                  <motion.div className="flex w-[60%] flex-col justify-between h-full p-10">
+                    <motion.h3 className="text-[24px] font-bold">
+                      {selectedData.name}
+                    </motion.h3>
+                    <motion.p>{selectedData.description}</motion.p>
+                  </motion.div>
+
                   <motion.button onClick={() => setSelectedData(null)}>
-                    <RiCloseFill className="w-[30px] h-[30px] p-1 rounded-[25px] absolute right-6 top-7" />
+                    <RiCloseFill className="w-[30px] h-[30px] p-1 rounded-[25px] absolute right-6 top-11" />
                   </motion.button>
                 </motion.div>
               )}

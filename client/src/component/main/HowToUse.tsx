@@ -1,6 +1,10 @@
+import { useOthers } from "@/context/OthersContext";
+import { useRouter } from "next/router";
 import React from "react";
 
 export default function HowToUse() {
+  const router = useRouter();
+  const { setActivePage } = useOthers();
   return (
     <div className="HowToUse py-[5rem] text-white">
       <div className="Container flex flex-col gap-7">
@@ -11,7 +15,16 @@ export default function HowToUse() {
           necessitatibus fugiat quia maiores ullam dolorum sit, reiciendis
           voluptates delectus.
         </p>
-        <button className="py-3 px-[6rem] border me-auto">read more</button>
+        <button
+          className="py-3 px-[6rem] border me-auto"
+          onClick={() => {
+            router.push("../news"),
+              localStorage.setItem("page", "news"),
+              setActivePage("news");
+          }}
+        >
+          read more
+        </button>
       </div>
     </div>
   );
