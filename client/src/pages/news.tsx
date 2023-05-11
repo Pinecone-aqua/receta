@@ -76,9 +76,9 @@ export default function Shop({
                     alt={`${selectedData.name} image`}
                     width={1000}
                     height={1000}
-                    className="w-[60%] h-[80vh] object-cover"
+                    className="selected-card-image"
                   />
-                  <motion.div className="flex w-[60%] flex-col justify-between h-full p-10">
+                  <motion.div className="selected-card-div">
                     <motion.h3 className="text-[24px] font-bold">
                       {selectedData.name}
                     </motion.h3>
@@ -86,7 +86,7 @@ export default function Shop({
                   </motion.div>
 
                   <motion.button onClick={() => setSelectedData(null)}>
-                    <RiCloseFill className="w-[30px] h-[30px] p-1 rounded-[25px] absolute right-6 top-11" />
+                    <RiCloseFill className="w-[30px] h-[30px] p-1 rounded-[25px] absolute right-6 top-6" />
                   </motion.button>
                 </motion.div>
               )}

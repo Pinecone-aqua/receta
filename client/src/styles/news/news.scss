@@ -63,12 +63,39 @@
 .card:hover h5 {
   font-size: 28px;
 }
+.selected-card-image {
+  // w-[60%] h-[80vh]  object-cover
+  width: 600px;
+  height: 80vh;
+  object-fit: cover;
+}
+.selected-card-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+}
 
 @media screen and (max-width: 1000px) {
   .card:nth-child(4n + 1),
   .card:nth-child(4n + 4) {
     flex: 0 0 60%;
     max-width: 56%;
+  }
+  .selected-card {
+    display: block;
+  }
+  .selected-card-image {
+    max-width: 800px;
+    width: 100%;
+    opacity: 0.5;
+  }
+  .selected-card-div {
+    position: absolute;
+    justify-content: end;
+    width: 100%;
+    top: 0;
   }
 }
 
