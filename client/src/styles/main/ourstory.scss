@@ -45,3 +45,21 @@
 .ourstory .p-carousel-next svg path {
   padding: 2rem;
 }
+@media screen and (max-width: 900px) {
+  .ourstory-cont {
+    display: block;
+  }
+  .ourstory-right {
+    padding: 20px;
+  }
+  .ourstory-img {
+    padding: 20px;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .ourstory-title {
+    font-size: 50px;
+    padding: 20px;
+  }
+}

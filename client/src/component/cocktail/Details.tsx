@@ -63,7 +63,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
         <div className="relative">
           <div className="image-bg">
             <img className="w-full" src={`${recipe.image_url}`} alt="image" />
-            <div className="overlay"></div>
+            <div className="overlay" />
           </div>
           <div className="text-white text-[52px] absolute bottom-[10%] left-[32%] font-semibold tracking-wider">
             {recipe.name}
