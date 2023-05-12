@@ -113,7 +113,7 @@ export default function CreateRecipe(props: {
               <input
                 type="text"
                 name="name"
-                className="bg-slate-400 w-52 rounded"
+                className="bg-indigo-300 w-52 rounded"
               />
             </div>
 
@@ -121,7 +121,7 @@ export default function CreateRecipe(props: {
               <label className="block">Description</label>
               <textarea
                 name="description"
-                className="resize  bg-slate-400  w-52 rounded"
+                className="bg-indigo-300 w-52 rounded block px-[10px] py-[10px] text-sm text-black border-0 dark:bg-gray-800 "
               />
             </div>
             <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
@@ -135,7 +135,6 @@ export default function CreateRecipe(props: {
                 ))}
               </select>
             </div>
-
             <label className="block">Tools</label>
             <div className="flex flex-wrap gap-1 w-4/4 mt-[25px] border-b-[1px] border-black pb-[20px]">
               <AddToolHandler
@@ -201,15 +200,14 @@ export default function CreateRecipe(props: {
             </div>
             <div className="flex justify-center items-center gap-3 h-[100px]">
               <input
-                className="bg-sky-800 w-[70px] h-[40px] rounded text-white"
+                className="border-2 border-solid font-medium border-green-600 rounded w-[70px] h-[40px] text-sm text-green-600"
                 onClick={() => setShow(false)}
                 type="button"
                 value="Cancel"
               />
-
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 text-sm text-white shadow-sm hover:bg-green-500">
+                className="h-[40px] rounded-md font-medium bg-green-600 px-3 text-sm text-white shadow-sm hover:bg-green-500">
                 Create
                 {spinner == "loading" && <Spinner className="" size="xs" />}
               </button>

@@ -16,7 +16,7 @@ export default function AddInputButton({
         type="text"
         value={text}
         name="ingredients"
-        className="bg-slate-400 w-52"
+        className="bg-indigo-300 w-52"
         onChange={(e) => {
           setInput(e.target.value);
         }}

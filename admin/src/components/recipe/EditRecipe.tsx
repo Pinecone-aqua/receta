@@ -308,15 +308,14 @@ export default function CanvasEditButton({
             </div>
             <div className="flex justify-center items-center gap-3 h-[100px]">
               <input
-                className="bg-sky-800 w-[70px] h-[40px] rounded text-white"
+                className="border-2 border-solid font-medium border-green-600 rounded w-[70px] h-[40px] text-sm text-green-600"
                 onClick={() => setShow(false)}
                 type="button"
                 value="Cancel"
               />
-
               <button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
+                className="h-[40px] rounded-md font-medium bg-green-600 px-3 text-sm text-white shadow-sm hover:bg-green-500">
                 Save changes
               </button>
             </div>
