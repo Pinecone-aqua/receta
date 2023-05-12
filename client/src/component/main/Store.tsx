@@ -1,4 +1,5 @@
 import { useOthers } from "@/context/OthersContext";
+import Recipe from "@/pages/cocktail/[id]";
 import { RecipesType } from "@/util/Types";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -64,13 +65,20 @@ export default function Store({
           Store
         </h1>
         <div className="flex Store">
-          <div className="relative min-w-[43%] Store-image h-full object-cover mt-auto">
-            <picture>
-              <img src="../Store.webp" className="Store-image-abs" alt="" />
-            </picture>
+          <div className="relative Store-image h-full object-cover mt-auto">
+            <Image
+              src={snowBank.image_url}
+              width={1000}
+              height={1000}
+              alt={"snowbank"}
+              className="Store-image-abs"
+            />
+
             <HiOutlineShoppingBag
               onClick={() => {
-                router.push(`../store`);
+                router.push("../store");
+                localStorage.setItem("page", "store");
+                setActivePage("store");
               }}
               className={`${shopIcon} Store-image-icon text-[#A0A0A0] border-[#A0A0A0] absolute bottom-[40px] right-[40px] hover:border-white hover:text-white`}
             />
