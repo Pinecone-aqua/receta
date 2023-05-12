@@ -7,11 +7,17 @@ import { MdBookmarkBorder } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { useOthers } from "../context/OthersContext";
 import { SiApplenews } from "react-icons/si";
+import { useEffect } from "react";
 
 export default function SideBar(): JSX.Element {
   const { activePage, setActivePage } = useOthers();
 
   const router = useRouter();
+
+  useEffect(() => {
+    const savedPage = localStorage.getItem("page");
+    setActivePage(savedPage || "Dashboard");
+  }, []);
   return (
     <div className="h-[100vh] ps-[40px] fixed bg-white">
       <div className="">
@@ -28,11 +34,10 @@ export default function SideBar(): JSX.Element {
                   : "w-[200px] text-[20px] text-left text-[#C9C9C9] bg-[#FCFCFC] flex items-center mb-[20px] p-[8px]"
               }
               onClick={() => {
-                router.push(`../${page.url}`);
+                router.push(`/${page.url}`);
                 setActivePage(page.name);
                 localStorage.setItem("page", page.name);
-              }}
-            >
+              }}>
               <span className="mt-[3px] w-[20px] h-[20px] mb-[2px]">
                 {page.icon}
               </span>
