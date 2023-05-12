@@ -3,8 +3,8 @@ import React from "react";
 
 export default function OurStory() {
   const ourStoryValue = [
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab porro vitae. Quasi quis impedit, qui ex reprehenderit rerum assumenda architecto dicta, veniam distinctio amet atque odio rem debitis aliquam neque eveniet eos tempora!",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ab porro vitae. Quasi quis impedit, qui ex reprehenderit rerum assumenda architecto dicta, veniam distinctio amet atque odio rem debitis aliquam neque eveniet eos tempora! part2",
+    "In the late 19th and early 20th century, bars went from being seedy spots hidden in alleyways to popular gathering spots. Bartenders began dressing up to work and following set recipes.",
+    "Jerry Thomas published the country’s first cocktail book, The Bon Vivant’s Compnion, in 1862.",
   ];
   const ourStoryTemplate = (value: any) => {
     return <p className="text-[18px] py-2">{value}</p>;
@@ -28,7 +28,7 @@ export default function OurStory() {
   ];
   return (
     <div className="bg-black text-white ourstory">
-      {/* <div className="Container">
+      <div className="Container  border-s-[0.5px] border-[#424242]">
         <h1 className="text-[72px] font-semibold px-10 py-[6rem]">
           <span className="border-b pb-3">Our</span> story
         </h1>
@@ -36,7 +36,7 @@ export default function OurStory() {
           <img src="./OurStory.png" alt="image" />
           <div className="ps-10 flex flex-col justify-between">
             <div>
-              <h1 className="text-4xl font-semibold">Write title here</h1>
+              <h1 className="text-4xl font-semibold">Receta team</h1>
               <div className="mt-5">
                 <Carousel
                   value={ourStoryValue}
@@ -52,7 +52,7 @@ export default function OurStory() {
             <button className="py-2 px-[6rem] border me-auto">read more</button>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

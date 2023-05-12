@@ -1,14 +1,16 @@
 import { useOthers } from "@/context/OthersContext";
-import { ToolType } from "@/util/Types";
+import { RecipesType } from "@/util/Types";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Carousel } from "primereact/carousel";
 import React from "react";
-import { useRef } from "react";
-import { HiOutlineShoppingBag, HiOutlineArrowRight } from "react-icons/hi";
-export default function Store({ tools }: { tools: ToolType[] }): JSX.Element {
+import { HiOutlineShoppingBag } from "react-icons/hi";
+export default function Store({
+  snowBank,
+}: {
+  snowBank: RecipesType;
+}): JSX.Element {
   const router = useRouter();
-  const ref = useRef(null);
   const { setActivePage } = useOthers();
   const shopIcon =
     "w-[30px] h-[30px] p-[10px] w-[50px] h-[50px] rounded-[25px] border cursor-pointer ease-in duration-100";
@@ -62,7 +64,7 @@ export default function Store({ tools }: { tools: ToolType[] }): JSX.Element {
           Store
         </h1>
         <div className="flex Store">
-          <div className="relative min-w-[43%] Store-image h-[1083px] object-cover mt-auto">
+          <div className="relative min-w-[43%] Store-image h-full object-cover mt-auto">
             <picture>
               <img src="../Store.webp" className="Store-image-abs" alt="" />
             </picture>
@@ -74,49 +76,47 @@ export default function Store({ tools }: { tools: ToolType[] }): JSX.Element {
             />
           </div>
           <div className="ps-[65px] w-[57%] Store-shop-slider h-full flex flex-col justify-start">
-            <h2 className="font-semibold text-[48px] leading-[72px] text-[#FFFFFF]">
-              Cocktail store
+            <h2 className="font-semibold text-[48px] leading-[72px] text-[#FFFFFF] ms-[20px]">
+              Snowbank
             </h2>
             <div className="flex flex-col gap-[74px] pt-[50px] h-[40%]">
               <div>
-                <h3 className="font-semibold text-[28px] leading-[24px] text-[#FFFFFF] pb-[40px]">
+                <h3 className="font-semibold text-[28px] leading-[24px] text-[#FFFFFF] pb-[40px] ps-[20px]">
                   Tools
                 </h3>
 
                 <div>
                   <Carousel
                     circular={true}
-                    value={tools}
+                    value={snowBank.tools_id}
                     numVisible={2}
                     numScroll={1}
                     responsiveOptions={responsiveOptions}
                     itemTemplate={toolTemplate}
-                    // indicatorsContentClassName={
-                    //   "flex flex-wrap justify-center"
-                    // }
                   />
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-[28px] leading-[24px] text-[#FFFFFF] pb-[40px]">
-                  Tools
+                <h3 className="font-semibold text-[28px] leading-[24px] text-[#FFFFFF] pb-[40px] ps-[20px]">
+                  Ingredients
                 </h3>
-
-                <div>
-                  <Carousel
-                    circular={true}
-                    value={tools}
-                    numVisible={2}
-                    numScroll={1}
-                    responsiveOptions={responsiveOptions}
-                    itemTemplate={toolTemplate}
-                    // indicatorsContentClassName={
-                    //   "flex flex-wrap justify-center"
-                    // }
-                  />
+                <div className="p-[20px] flex flex-col gap-2 w-[84%]">
+                  {snowBank.ingredients.map((ing: any, index: number) => (
+                    <div className="text-[#f4f4f4]" key={index}>
+                      {ing}
+                    </div>
+                  ))}
                 </div>
               </div>
-              <button className="buyButton w-[385px] text-[#ffffff] border-[#ffffff] font-semibold leading-[16px] text-[16px] py-[16px] border-[1px] hover:bg-[]">
+
+              <button
+                className="buyButton w-[385px] ms-[20px] text-[#ffffff] border-[#ffffff] font-semibold leading-[16px] text-[16px] py-[16px] border-[1px]"
+                onClick={() => {
+                  router.push("../store");
+                  localStorage.setItem("page", "store");
+                  setActivePage("store");
+                }}
+              >
                 buy bar set
               </button>
             </div>
