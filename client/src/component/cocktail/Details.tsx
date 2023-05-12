@@ -56,7 +56,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
       numScroll: 1,
     },
   ];
-  console.log(recipe);
+
   return (
     <div className="flex max-w-[1300px] h-[90vh] mx-auto border-x border-[#424242] relative">
       <div className="w-[50%] ">
