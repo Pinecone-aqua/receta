@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useOthers } from "@/context/OthersContext";
 import { Carousel } from "primereact/carousel";
 import Image from "next/image";
+import Recommend from "@/component/main/Recommend";
 
 interface RecipeType {
   recipe: RecipesType;
@@ -25,8 +26,9 @@ export default function Recipe({
   tools,
 }: RecipeType): JSX.Element {
   const { setActivePage } = useOthers();
+
   const recommendTemplate = (recipe: RecipesType) => (
-    <div className="my-auto">
+    <div className="my-auto" key={recipe._id}>
       <Link href={`../cocktail/${recipe._id}`}>
         <Image
           src={recipe.image_url}
@@ -36,7 +38,9 @@ export default function Recipe({
         />
         <div className="text-white text-center mt-4">
           {recipe.categories_id.map((cate: any) => (
-            <p className="text-[#989898]"> {cate.name}</p>
+            <p className="text-[#989898]" key={cate._id}>
+              {cate.name}
+            </p>
           ))}
           <div
             className="mb-3 text-[20px] text-[#dadada
@@ -52,7 +56,7 @@ export default function Recipe({
   const responsiveOptions = [
     {
       breakpoint: "1199px",
-      numVisible: 4,
+      numVisible: 3,
       numScroll: 1,
     },
     {
@@ -105,7 +109,6 @@ export default function Recipe({
                 numScroll={1}
                 responsiveOptions={responsiveOptions}
                 itemTemplate={recommendTemplate}
-                indicatorsContentClassName={"flex flex-wrap justify-center"}
               />
             </div>
           </div>

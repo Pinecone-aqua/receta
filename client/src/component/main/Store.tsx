@@ -35,6 +35,7 @@ export default function Store({
   const toolTemplate = (tool: any) => (
     <div
       className="cursor-pointer relative tool-card"
+      key={tool._id}
       onClick={() => {
         router.push(`../store/${tool._id}`);
         setActivePage("");

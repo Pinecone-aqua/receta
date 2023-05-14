@@ -15,7 +15,7 @@ interface DetailsType {
 export default function Details({ recipe, tools }: DetailsType): JSX.Element {
   const [usedTools, setUsedTools] = useState<any>([]);
   const router = useRouter();
-  console.log(usedTools.length);
+
   function getToolById(id: string) {
     return tools.find((tool: ToolType) => tool._id === id);
   }
@@ -28,7 +28,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
   }, []);
   const toolTemplate = (tool: any) => {
     return (
-      <div className="my-auto">
+      <div className="my-auto" key={tool._id}>
         <Link href={`../store/${tool._id}`}>
           <img src={tool.image_url} alt={tool.name} />
           <div className="text-white text-center mt-4">
@@ -59,8 +59,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
 
   return (
     <div className="border-x border-[#424242] relative">
-      <div className="flex max-w-[1300px] mx-auto">
-        <div className="w-[50%] ">
+      <div className="flex flex-col min-[991px]:flex-row max-w-[1300px] mx-auto">
+        <div className="w-full min-[991px]:w-[50%]">
           <div className="relative">
             <div className="image-bg">
               <img className="w-full" src={`${recipe.image_url}`} alt="image" />
@@ -85,7 +85,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
             </div>
           </div>
         </div>
-        <div className="w-[50%] relative text-white tabs">
+        <div className="w-full min-[991px]:w-[50%] relative text-white tabs">
           <Tabs>
             <TabList
               className="px-10"
@@ -111,7 +111,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
 
             <TabPanels>
               <TabPanel>
-                <div className="h-[600px] flex flex-col flex-wrap mt-20 px-[76px] gap-10 overflow-y-auto text-xl min-h-[38vh]">
+                <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] flex flex-col flex-wrap mt-20 px-[76px] gap-10 overflow-y-auto text-xl">
                   {recipe.ingredients?.map(
                     (ingredient: string, index: number) => (
                       <div key={index}>
@@ -122,7 +122,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="h-[600px] px-[74px] mt-20 overflow-y-auto">
+                <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] px-[74px] mt-20 overflow-y-auto">
                   <div className="text-[20px]">
                     {recipe.how_to?.map((single: any, index: number) => (
                       <div
@@ -149,7 +149,10 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
             {usedTools.length < 5 ? (
               <div className="flex max-[767px]:flex-col gap-[2%] px-[3.5rem]">
                 {usedTools.map((tool: any) => (
-                  <div className="w-[23.5%] max-[991px]:w-[49%] max-[767px]:w-full">
+                  <div
+                    className="w-[23.5%] max-[991px]:w-[49%] max-[767px]:w-full"
+                    key={tool._id}
+                  >
                     <Link href={`../store/${tool._id}`}>
                       <img src={tool.image_url} alt={tool.name} />
                       <div className="text-white text-center mt-4">

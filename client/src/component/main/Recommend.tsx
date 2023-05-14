@@ -10,7 +10,7 @@ export default function Recommend({
   recommend: RecipesType[];
 }): JSX.Element {
   const recommendTemplate = (recipe: RecipesType) => (
-    <div className="my-auto">
+    <div className="my-auto" key={recipe._id}>
       <Link href={`../cocktail/${recipe._id}`}>
         <Image
           src={recipe.image_url}
@@ -20,7 +20,9 @@ export default function Recommend({
         />
         <div className="text-white text-center mt-4">
           {recipe.categories_id.map((cate: any) => (
-            <p className="text-[#989898]"> {cate.name}</p>
+            <p className="text-[#989898]" key={cate._id}>
+              {cate.name}
+            </p>
           ))}
           <div
             className="mb-3 text-[20px] text-[#dadada

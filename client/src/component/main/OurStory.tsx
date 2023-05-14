@@ -11,7 +11,11 @@ export default function OurStory(): JSX.Element {
     "Jerry Thomas published the country’s first cocktail book, The Bon Vivant’s Compnion, in 1862.",
   ];
   const ourStoryTemplate = (value: any) => {
-    return <p className="text-[18px] py-2">{value}</p>;
+    return (
+      <p key={value._id} className="text-[18px] py-2">
+        {value}
+      </p>
+    );
   };
   const responsiveOptions = [
     {
