@@ -1,4 +1,15 @@
-import { Controller, Get, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Query,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { CheckRole } from "src/role/role.decorator";
 import { ToolsService } from "./tools.service";
 @Controller("tools")
 export class ToolsController {
@@ -19,14 +30,21 @@ export class ToolsController {
     return this.toolService.getIds();
   }
 
-  // @Post('create')
-  // create(@Body() body: any) {
-  //   console.log('body: ', body);
-
-  // try {
-  //   return this.toolService.create(body);
-  // } catch (err) {
-  //   return err;
-  // }
-  // }
+  @Post("create")
+  @UseInterceptors(FileInterceptor("file"))
+  create(@UploadedFile() file: any, @Body() body: any) {
+    try {
+      const data = {
+        ...JSON.parse(body.newTool),
+      };
+      return this.toolService.create(data, file);
+    } catch (err) {
+      return err;
+    }
+  }
+  @Delete("delete")
+  @CheckRole("MODERATOR", "ADMIN")
+  remove(@Query() id: string) {
+    return this.toolService.remove(id);
+  }
 }

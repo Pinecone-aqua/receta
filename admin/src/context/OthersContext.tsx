@@ -1,5 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { NewsType, OthersContextType, PropType } from "../util/Types";
+import {
+  CategoryType,
+  NewsType,
+  OthersContextType,
+  PropType,
+  ToolsType,
+} from "../util/Types";
 
 const othersContext = createContext<OthersContextType>({} as OthersContextType);
 export const useOthers = () => useContext(othersContext);
@@ -7,6 +13,8 @@ export const useOthers = () => useContext(othersContext);
 export default function OthersProvider({ children }: PropType) {
   const [activePage, setActivePage] = useState<string | null>("");
   const [news, setNews] = useState<NewsType[]>([]);
+  const [tools, setTools] = useState<ToolsType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
 
   useEffect(() => {
     localStorage.getItem("page")
@@ -21,6 +29,10 @@ export default function OthersProvider({ children }: PropType) {
         setActivePage,
         news,
         setNews,
+        tools,
+        setTools,
+        categories,
+        setCategories,
       }}
     >
       {children}

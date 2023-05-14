@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Query } from "@nestjs/common";
 import { CheckRole } from "src/role/role.decorator";
 import { CategoriesService } from "./categories.service";
 @Controller("categories")
@@ -21,5 +21,11 @@ export class CategoriesController {
     console.log(body);
 
     return this.categoriesService.create(body);
+  }
+
+  @Delete("delete")
+  @CheckRole("MODERATOR", "ADMIN")
+  delete(@Query() cate: any) {
+    return this.categoriesService.delete(cate);
   }
 }

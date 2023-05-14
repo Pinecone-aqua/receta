@@ -1,81 +1,101 @@
+import { useOthers } from "@/src/context/OthersContext";
+import { Button } from "@chakra-ui/button";
+import { FormLabel } from "@chakra-ui/form-control";
+import { useDisclosure } from "@chakra-ui/hooks";
+import { Input } from "@chakra-ui/input";
+import { Box, Stack } from "@chakra-ui/layout";
+import {
+  DrawerFooter,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+} from "@chakra-ui/modal";
+import { Spinner } from "@chakra-ui/spinner";
 import axios from "axios";
 import React, { useState } from "react";
-import { Button, Offcanvas } from "react-bootstrap";
 
 export default function CreateTools() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [spinner, setSpinner] = useState<string>();
+  const { tools, setTools } = useOthers();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function createToolHandler(e: any) {
+  async function createToolHandler(e: any) {
+    setSpinner("loading");
     e.preventDefault();
     const tool = {
       name: e.target.name.value,
-      price: e.target.price.value,
     };
 
     const data = new FormData();
-    data.append("file", e.target.image_url.files[0]);
+    data.append("file", e.target.image.files[0]);
     data.append("newTool", JSON.stringify(tool));
 
-    axios
-      .post("http://localhost:3003/tools/create", data)
-      .then((res) => console.log(res));
+    const result = await axios.post("http://localhost:3003/tools/create", data);
+    if (result.data.name === tool.name) {
+      console.log(result);
+
+      setTools([...tools, result.data]);
+      setSpinner("run");
+      onClose();
+    }
   }
 
   return (
     <>
       <Button
-        className="my-[30px]"
-        style={{ background: "#454ADE" }}
-        onClick={handleShow}
+        className="my-[20px]"
+        style={{ background: "teal", border: "teal", color: "white" }}
+        onClick={onOpen}
       >
-        Create tools
+        Create category
       </Button>
 
-      <Offcanvas
-        show={show}
-        onHide={handleClose}
-        placement="top"
-        className="w-1/4 mx-auto rounded-md mt-[5%]"
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Create tool</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body className="place-content-center flex">
-          <form className="flex flex-col" onSubmit={createToolHandler}>
-            <label className="flex flex-col gap-2 mb-[20px]">
-              Tool name
-              <input className="border" type="text" name="name" />
-            </label>
-            <label className="flex flex-col gap-2 mb-[20px]">
-              Tool image
-              <input className="border" type="file" name="image_url" />
-            </label>
-            <label className="flex flex-col gap-2 mb-[20px]">
-              Tool price
-              <input className="border" type="number" name="price" />
-            </label>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form className="flex flex-col" onSubmit={createToolHandler}>
+              <Stack spacing="16px">
+                <Box>
+                  <FormLabel htmlFor="name">Name</FormLabel>
+                  <Input name="name" placeholder="Please enter tool name" />
+                </Box>
+                <Box>
+                  <input
+                    type="file"
+                    name="image"
+                    className="text-sm text-grey-500 file:mr-5 file:py-2 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:cursor-pointer hover:file:bg-amber-50 hover:file:text-amber-700"
+                  />
+                </Box>
 
-            <div className="flex justify-between mt-[10px] mb-[10px]">
-              <Button
-                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
-                type="button"
-                onClick={() => setShow(false)}
-              >
-                Cancel
-              </Button>
-              <button
-                className="w-1/4 bg-green-500 rounded-md text-white px-[15px] py-[5px]"
-                type="submit"
-              >
-                Create
-              </button>
-            </div>
-          </form>
-        </Offcanvas.Body>
-      </Offcanvas>
+                <DrawerFooter borderTopWidth="1px">
+                  <input
+                    type="button"
+                    onClick={onClose}
+                    value="Cancel"
+                    className="w-[90px] p-2 me-4 rounded-md border"
+                  />
+                  <Button
+                    colorScheme="teal"
+                    type="submit"
+                    leftIcon={
+                      spinner == "loading" ? <Spinner size="xs" /> : <></>
+                    }
+                  >
+                    Submit
+                  </Button>
+                </DrawerFooter>
+              </Stack>
+            </form>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

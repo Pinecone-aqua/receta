@@ -45,4 +45,11 @@ export class CategoriesService {
       return err;
     }
   }
+  async delete(cate: any) {
+    try {
+      return await this.categoriesModel.deleteOne({ _id: cate.id });
+    } catch (err) {
+      return err;
+    }
+  }
 }

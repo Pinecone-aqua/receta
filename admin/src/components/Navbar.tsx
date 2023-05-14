@@ -13,8 +13,8 @@ export default function Navbar(): JSX.Element {
     console.log(e.target.search.value);
   }
   return (
-    <div className="text-white my-[50px] p-[16px] flex justify-between rounded-md">
-      <div className="text-[#454ADE]">{activePage && activePage}</div>
+    <div className="text-white my-[50px] p-[16px] flex justify-between rounded-md border-[0.2px]">
+      <div className="text-[teal]">{activePage && activePage}</div>
       <div className="flex">
         <form className="relative min-w-[300px] me-4" onSubmit={searchHandler}>
           <input

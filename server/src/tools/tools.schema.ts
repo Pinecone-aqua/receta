@@ -4,9 +4,8 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 export class Tool {
   @Prop()
   name: string;
-
-  @Prop({ ref: "Collection" })
-  collection_id: string;
+  @Prop()
+  image_url: string;
 }
 
 export const ToolSchema = SchemaFactory.createForClass(Tool);

@@ -57,7 +57,8 @@ export default function Home(): JSX.Element {
     <form
       className="flex flex-col gap-4 w-[500px] mx-auto my-[20%] border p-7 rounded-md shadow "
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={(e) => loginHandler(e)}>
+      onSubmit={(e) => loginHandler(e)}
+    >
       <h1 className="text-center border-b pb-2">RECETA.</h1>
       <div>
         <div className="mb-2 block">
@@ -83,11 +84,10 @@ export default function Home(): JSX.Element {
         />
       </div>
       <div className="flex items-center gap-2">
-        {/* <Checkbox id="remember" />
-        <Label htmlFor="remember">Remember me</Label> */}
         <Label
           htmlFor="remember"
-          className="text-center w-[100%] h-[1px] bg-gray-200"></Label>
+          className="text-center w-[100%] h-[1px] bg-gray-200"
+        />
       </div>
       <Button type="submit">Submit</Button>
     </form>

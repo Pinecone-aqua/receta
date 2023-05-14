@@ -18,7 +18,6 @@ const AddToolHandler: React.FC<ToolProps> = ({
   selectTools,
   setSelectTools,
 }) => {
-
   function addToolHandler(id: string) {
     if (selectTools.includes(id)) {
       setSelectTools(selectTools.filter((tool) => tool !== id));
@@ -33,11 +32,12 @@ const AddToolHandler: React.FC<ToolProps> = ({
         <div
           className={
             selectTools.includes(tool._id)
-              ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
-              : "w-[170px] py-[10px] border flex flex-col items-center"
+              ? "w-[170px] py-[10px] border-[1px] border-teal-500 cursor-pointer flex flex-col items-center"
+              : "w-[170px] py-[10px] border-[0.5px] border-[#dadada] flex flex-col cursor-pointer items-center"
           }
           key={index}
-          onClick={() => addToolHandler(tool._id)}>
+          onClick={() => addToolHandler(tool._id)}
+        >
           <p className="">{tool.name}</p>
           <Image
             src={tool.image_url}
