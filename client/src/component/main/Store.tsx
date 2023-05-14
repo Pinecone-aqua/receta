@@ -53,7 +53,7 @@ export default function Store({
         {tool.name}
       </p>
       <HiOutlineShoppingBag
-        className={`${shopIcon} text-white absolute top-0 z-10 hover:block mx-[38.5%] mt-[120px] tool-icon`}
+        className={`${shopIcon} text-white absolute top-0 z-10 hover:block mx-[37%] mt-[105px] tool-icon`}
       />
     </div>
   );

@@ -43,17 +43,15 @@ export default function Recipes(): JSX.Element {
           ))}
         </Suspense>
       </div>
-      <Tooltip label="empty" aria-label="A tooltip">
-        <div
-          className="place-content-center cursor-pointer flex my-10 border-b-[0.5px] border-[#dadada] Container"
-          onClick={ReadMore}
-        >
-          <div className="text-white absolute bottom-[-40px]">
-            <BsArrowDownShort className="animate-bounce text-black bg-white mx-auto p-[8px] w-[48px] h-[48px] border-[0.5px] border-black rounded-[50%]" />
-            <p className="text-[12px] text-black">Цааш үзэх</p>
-          </div>
+      <div
+        className="place-content-center cursor-pointer flex my-10 border-b-[0.5px] border-[#dadada] Container"
+        onClick={ReadMore}
+      >
+        <div className="text-white absolute bottom-[-40px]">
+          <BsArrowDownShort className="animate-bounce text-black bg-white mx-auto p-[8px] w-[48px] h-[48px] border-[0.5px] border-black rounded-[50%]" />
+          <p className="text-[12px] text-black">Цааш үзэх</p>
         </div>
-      </Tooltip>
+      </div>
     </div>
   );
 }
