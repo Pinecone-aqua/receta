@@ -1,5 +1,6 @@
 import { useCocktail } from "@/src/context/CocktailContext";
-import { CocktailType } from "@/src/util/Types";
+import { useOthers } from "@/src/context/OthersContext";
+import { CategoryType } from "@/src/util/Types";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -15,20 +16,22 @@ import axios from "axios";
 import React from "react";
 import { MdDelete } from "react-icons/md";
 
-export default function DeleteAlert({ recipe }: { recipe: CocktailType }) {
+export default function DeleteAlert({ category }: { category: CategoryType }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef(null);
-  const { setRecipes, recipes } = useCocktail();
+
+  const { setCategories, categories } = useOthers();
 
   async function deleteHandler() {
-    const filterData = recipes.filter(
-      (filterRecipe) => filterRecipe._id !== recipe._id
+    const filterData = categories.filter(
+      (filterCate) => filterCate._id !== category._id
     );
+
     const result = await axios.delete(
-      `http://localhost:3003/recipes/delete?id=${recipe._id}`
+      `http://localhost:3003/categories/delete?id=${category._id}`
     );
     if (result && result.data.deletedCount == 1) {
-      setRecipes(filterData);
+      setCategories(filterData);
       successToast();
     }
   }
@@ -65,7 +68,7 @@ export default function DeleteAlert({ recipe }: { recipe: CocktailType }) {
 
             <AlertDialogBody>
               Are you sure?{" "}
-              <span className="text-red-300 font-bold">{recipe.name}</span>{" "}
+              <span className="text-red-300 font-bold">{category.name}</span>{" "}
               delete
             </AlertDialogBody>
 

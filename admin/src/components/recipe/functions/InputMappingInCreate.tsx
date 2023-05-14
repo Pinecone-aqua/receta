@@ -1,3 +1,6 @@
+import { Box } from "@chakra-ui/layout";
+import { Textarea } from "@chakra-ui/textarea";
+import { bottom } from "@popperjs/core";
 import AddInputButton from "./sub/AddInputButton";
 import RemoveButton from "./sub/RemoveInputButton";
 
@@ -15,25 +18,19 @@ const InputMapping: React.FC<ItemProps> = ({
   setInputText,
 }) => (
   <>
-    {" "}
-    <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
-      {item.map((single, index) => (
-        <div
-          key={`input-container-${index}`}
-          className="h-full flex items-center"
-        >
-          <p className="w-[200px] m-0 bg-gray-400">{single}</p>
-          <RemoveButton
-            ingredient={item}
-            setIngredient={setItem}
-            index={index}
-          />
-        </div>
-      ))}
-    </div>
+    {item.map((single, index) => (
+      <Box key={`input-container-${index}`} className="h-full  items-center">
+        <Textarea
+          disabled={true}
+          value={single}
+          style={{ color: "black", minHeight: "40px", marginBottom: "5px" }}
+        />
+        <RemoveButton ingredient={item} setIngredient={setItem} index={index} />
+      </Box>
+    ))}
     <AddInputButton
       text={inputText}
-      name="addIngredient"
+      name="Add Ingredient"
       setInput={setInputText}
       func={() => {
         setItem([...item, inputText]);

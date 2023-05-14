@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: JSX.Element }) {
         crossOrigin="anonymous"
       />
 
-      <div className="w-[380px]">
+      <div className="w-[350px]">
         <SideBar />
       </div>
       <div className="w-full me-[2%]">

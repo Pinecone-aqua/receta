@@ -1,3 +1,4 @@
+import { Input } from "@chakra-ui/input";
 import React from "react";
 
 interface IngredientProps {
@@ -6,22 +7,29 @@ interface IngredientProps {
   index: number;
 }
 
-const RemoveButton: React.FC<IngredientProps> = ({ index, ingredient, setIngredient }) => {
-
-const removeInputHandler = (index: number) => {
-  const deleteInput = ingredient.filter((input, i) => index !== i);
-  setIngredient(deleteInput);
-};
+const RemoveButton: React.FC<IngredientProps> = ({
+  index,
+  ingredient,
+  setIngredient,
+}) => {
+  const removeInputHandler = (index: number) => {
+    const deleteInput = ingredient.filter((input, i) => index !== i);
+    setIngredient(deleteInput);
+  };
 
   return (
-    <input
-    value="Remove"
-    className="px-[10px] bg-red-500"
-    onClick={() => {
-      removeInputHandler(index);
-    }}
-    type="button"
-  />
+    <Input
+      value="Remove"
+      style={{
+        backgroundColor: "red",
+        color: "white",
+        marginBottom: "10px",
+      }}
+      onClick={() => {
+        removeInputHandler(index);
+      }}
+      type="button"
+    />
   );
 };
 

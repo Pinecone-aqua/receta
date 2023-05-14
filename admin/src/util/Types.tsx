@@ -49,6 +49,10 @@ export interface OthersContextType {
   setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
   news: NewsType[];
   setNews: React.Dispatch<React.SetStateAction<NewsType[]>>;
+  tools: ToolsType[];
+  setTools: React.Dispatch<React.SetStateAction<ToolsType[]>>;
+  categories: CategoryType[];
+  setCategories: React.Dispatch<React.SetStateAction<CategoryType[]>>;
 }
 
 export interface CocktailContextType {

@@ -1,3 +1,6 @@
+import { Input } from "@chakra-ui/input";
+import { Textarea } from "@chakra-ui/textarea";
+
 export default function AddInputButton({
   text,
   func,
@@ -10,24 +13,27 @@ export default function AddInputButton({
   setInput: any;
 }) {
   return (
-    <>
-      <input
+    <div>
+      <Textarea
         id="adding"
-        type="text"
         value={text}
         name="ingredients"
-        className="bg-slate-400 w-52"
+        style={{ minHeight: "40px", marginTop: "15px" }}
         onChange={(e) => {
           setInput(e.target.value);
         }}
       />
-      <input
+      <Input
         value={name}
         disabled={!text}
-        className={`px-[10px] ${text ? "bg-green-400" : "bg-gray-400"}`}
+        style={{
+          color: "white",
+          backgroundColor: `${text ? "green" : "gray"}`,
+          marginTop: "5px",
+        }}
         onClick={func}
         type="button"
       />
-    </>
+    </div>
   );
 }

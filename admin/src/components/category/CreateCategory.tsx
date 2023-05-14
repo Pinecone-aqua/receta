@@ -1,79 +1,106 @@
 import { CollectionType } from "../../util/Types";
 import axios from "axios";
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas";
+import { useOthers } from "@/src/context/OthersContext";
+import { Spinner } from "@chakra-ui/spinner";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
+  ModalHeader,
+  DrawerFooter,
+} from "@chakra-ui/modal";
+import { useDisclosure } from "@chakra-ui/hooks";
+import { Box, Stack } from "@chakra-ui/layout";
+import { FormLabel } from "@chakra-ui/form-control";
+import { Input } from "@chakra-ui/input";
+import { Select } from "@chakra-ui/select";
+import { Button } from "@chakra-ui/button";
 
 export default function CreateCategory(props: {
   collections: CollectionType[];
 }) {
   const { collections } = props;
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { setCategories, categories } = useOthers();
+  const [spinner, setSpinner] = useState<string>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function createCateHandler(e: any) {
+  async function createCateHandler(e: any) {
+    setSpinner("loading");
     e.preventDefault();
     const category = {
       collection: e.target.collection.value,
       name: e.target.name.value,
     };
 
-    axios.post("http://localhost:3003/categories/create", { ...category });
+    const result = await axios.post("http://localhost:3003/categories/create", {
+      ...category,
+    });
+    if (result.statusText === "Created") {
+      setCategories([...categories, result.data]);
+      setSpinner("run");
+      onClose();
+    }
   }
 
   return (
     <>
       <Button
-        className="my-[30px]"
-        style={{ background: "#454ADE" }}
-        onClick={handleShow}
+        className="my-[20px]"
+        style={{ background: "teal", border: "teal", color: "white" }}
+        onClick={onOpen}
       >
         Create category
       </Button>
 
-      <Offcanvas
-        show={show}
-        onHide={handleClose}
-        placement="top"
-        className="w-1/5 mx-auto rounded-md mt-[5%]"
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Category</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body className="place-content-center flex">
-          <form className="flex flex-col w-3/4" onSubmit={createCateHandler}>
-            <label className="flex justify-between mb-[40px] mt-[10px]">
-              Collection
-              <select className="border" name="collection">
-                {collections.map((collection, index) => (
-                  <option key={index}>{collection.name}</option>
-                ))}
-              </select>
-            </label>
-            <label className="flex flex-col gap-2 mb-[40px]">
-              Category name
-              <input className="border" type="text" name="name" />
-            </label>
-            <div className="flex justify-between mb-[10px]">
-              <Button
-                className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
-                type="button"
-                onClick={() => setShow(false)}
-              >
-                Cancel
-              </Button>
-              <button
-                className="w-[100px] h-[40px] bg-green-500 rounded-md text-white px-[15px] py-[5px] mt-[10px]"
-                type="submit"
-              >
-                Create
-              </button>
-            </div>
-          </form>
-        </Offcanvas.Body>
-      </Offcanvas>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form className="flex flex-col w-full" onSubmit={createCateHandler}>
+              <Stack spacing="16px">
+                <Box>
+                  <FormLabel htmlFor="name">Collection</FormLabel>
+                  <Select name="collection">
+                    {collections.map((collection, index) => (
+                      <option key={index} value={collection.name}>
+                        {collection.name}
+                      </option>
+                    ))}
+                  </Select>
+                </Box>
+                <Box>
+                  <FormLabel htmlFor="name">Category name</FormLabel>
+                  <Input name="name" placeholder="Please enter category name" />
+                </Box>
+                <DrawerFooter borderTopWidth="1px">
+                  <input
+                    type="button"
+                    onClick={onClose}
+                    value="Cancel"
+                    className="w-[90px] p-2 me-4 rounded-md border"
+                  />
+                  <Button
+                    colorScheme="teal"
+                    type="submit"
+                    leftIcon={
+                      spinner == "loading" ? <Spinner size="xs" /> : <></>
+                    }
+                  >
+                    Submit
+                  </Button>
+                </DrawerFooter>
+              </Stack>
+            </form>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
