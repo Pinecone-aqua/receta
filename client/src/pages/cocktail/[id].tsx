@@ -71,7 +71,7 @@ export default function Recipe({
       <div className="bg-[#1A1A1A] ">
         <Details recipe={recipe} tools={tools} />
         <div className="bg-[#FFFBF1] border-b border-[#dadada]">
-          <div className="text-[#1e1e1e] text-[20px] max-w-[1300px] pt-[430px] pb-20 mx-auto border-x border-[#dadada]">
+          <div className="text-[#1e1e1e] text-[20px] max-w-[1300px] pt-[10vh] pb-20 mx-auto border-x border-[#dadada]">
             <div className="px-20">
               <div className="flex justify-between">
                 <p className="text-3xl font-bold">{recipe.name}</p>
