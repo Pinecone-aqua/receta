@@ -12,9 +12,6 @@ import Layout from "../component/Layout";
 import { Section } from "../component/main/motionScroll/MotionScroll";
 import OurStory from "@/component/main/OurStory";
 import HowToUse from "@/component/main/HowToUse";
-// import * as dotenv from "dotenv";
-
-// dotenv.config();
 
 export default function Home({
   collections,
@@ -31,7 +28,7 @@ export default function Home({
     <Layout>
       <>
         <Section>
-          <div className="border-b-[0.5px] border-[#dadada]">
+          <div className="border-b-[0.5px] border-[#dadada] h-[58vh]">
             <Collection collections={collections} />
           </div>
         </Section>
@@ -100,9 +97,9 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   return {
     props: {
-      collections: collections,
-      recommend: recommend,
-      tools: tools,
+      collections,
+      recommend,
+      tools,
       snowBank,
     },
   };
