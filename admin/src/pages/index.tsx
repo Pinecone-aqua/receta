@@ -1,9 +1,11 @@
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { Button, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/router";
+import RecetaIcon from "../icons/RecetaIcon";
+import UserIcon from "../icons/UserIcon";
+import PasswordIcon from "../icons/PasswordIcon";
 
-export default function Home(): JSX.Element {
+export default function Login(): JSX.Element {
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function loginHandler(e: any) {
@@ -54,42 +56,47 @@ export default function Home(): JSX.Element {
   });
 
   return (
+    <div className="w-screen h-screen flex">
+      <div className="w-1/2 h-full bg-blue-100"><img className="w-full h-full object-cover" src="/MaskGroup.png" /></div>
+      <div className="w-1/2 h-full flex justify-center items-center bg-[#1E1E1E]">
     <form
-      className="flex flex-col gap-4 w-[500px] mx-auto my-[20%] border p-7 rounded-md shadow "
+      className="flex flex-col justify-center gap-4 w-[406px] p-7 "
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={(e) => loginHandler(e)}
     >
-      <h1 className="text-center border-b pb-2">RECETA.</h1>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="email1" value="Your email" />
-        </div>
-        <TextInput
-          name="email"
-          id="email1"
-          type="email"
-          placeholder="name@flowbite.com"
-          required={true}
-        />
+      <div className="w-full flex jsutify-between">
+        <RecetaIcon />
+        <p className="text-lime-800 text-lg font-bold ml-[8px] mt-[3px]">admin 1.3.0</p>
       </div>
       <div>
-        <div className="mb-2 block">
-          <Label htmlFor="password1" value="Your password" />
+        <div className="h-[40px] flex border-b items-center">
+          <UserIcon />
+          <input
+            className="w-full italic placeholder-white ml-[10px] bg-transparent focus:outline-none text-white"
+            name="email"
+            id="email1"
+            type="email"
+            placeholder="username"
+            required={true}
+          />
         </div>
-        <TextInput
-          name="password"
-          id="password1"
-          type="password"
-          required={true}
-        />
       </div>
-      <div className="flex items-center gap-2">
-        <Label
-          htmlFor="remember"
-          className="text-center w-[100%] h-[1px] bg-gray-200"
-        />
+      <div>
+        <div className="h-[40px] flex border-b items-center">
+          <PasswordIcon />
+          <input
+            className="w-full italic placeholder-white ml-[10px] bg-transparent focus:outline-none text-white"
+            name="password"
+            id="password1"
+            type="password"
+            placeholder="password"
+            required={true}
+          />
+        </div>
       </div>
-      <Button type="submit">Submit</Button>
+      <button className="bg-white h-[38px] rounded-full font-bold hover:bg-zinc-300 border-none mt-[10px]" type="submit">Нэвтрэх</button>
     </form>
+      </div>
+    </div>
   );
 }
