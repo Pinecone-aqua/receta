@@ -1,5 +1,3 @@
-import Footer from "@/component/Footer";
-import Header from "@/component/Header";
 import Layout from "@/component/Layout";
 import { useOthers } from "@/context/OthersContext";
 import { ToolType } from "@/util/Types";
@@ -55,11 +53,13 @@ export default function Recipe(props: {
                       setActivePage("");
                     }}
                   >
-                    <img
-                      src={tool.image_url}
-                      className="store-sub-img"
-                      alt="tool"
-                    />
+                    <picture>
+                      <img
+                        src={tool.image_url}
+                        className="store-sub-img"
+                        alt="tool"
+                      />
+                    </picture>
                     <p className="text-center py-2 text-[#171717]">
                       {tool.name}
                     </p>

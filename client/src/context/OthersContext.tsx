@@ -8,8 +8,9 @@ const productContext = createContext<OthersContextType>(
 export const useOthers = () => useContext(productContext);
 
 export default function ProductProvider({ children }: PropType) {
-  const [activeCollectionBtn, setActiveCollectionBtn] =
-    useState<any>("Difficulty");
+  const [activeCollectionBtn, setActiveCollectionBtn] = useState<string | null>(
+    "Difficulty"
+  );
   const [activePage, setActivePage] = useState<string | null>("");
   const [activeCategoryBtn, setActiveCategoryBtn] = useState<string | null>("");
 

@@ -2,7 +2,7 @@ export class CreateRecipesDto {
   name: string;
   description: string;
   collection: string;
-  ingredients: object[]; // name
+  ingredients: object[];
   how_to: object[];
   video_url: string;
   image_url: string;
