@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import { CiSearch } from "react-icons/ci";
+// import { useRouter } from "next/router";
+// import { CiSearch } from "react-icons/ci";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { useOthers } from "../context/OthersContext";
 
 export default function Navbar(): JSX.Element {
-  const { activePage, setActivePage } = useOthers();
-  const router = useRouter();
+  const { activePage} = useOthers();
+  // const router = useRouter();
 
   return (
     <div className="text-white my-[50px] p-[16px] flex justify-between rounded-md border-[0.2px]">

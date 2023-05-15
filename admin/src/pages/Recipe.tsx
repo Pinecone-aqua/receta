@@ -1,19 +1,8 @@
-import axios from "axios";
-import CanvasCateg from "../components/category/CreateCategory";
-import CanvasTools from "../components/tool/CreateTool";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
   Tabs,
   TabList,
   Tab,
   TabPanels,
-  TabPanel,
 } from "@chakra-ui/react";
 import {
   CategoryType,
@@ -21,13 +10,14 @@ import {
   CollectionType,
   ToolsType,
 } from "../util/Types";
-import Layout from "../components/Layout";
-import RecipeTable from "../components/recipe/tables/RecipeTable";
 import { useEffect } from "react";
 import { useCocktail } from "../context/CocktailContext";
 import { useOthers } from "../context/OthersContext";
-import DeleteAlert from "../components/category/DeleteCategory";
-import Delete from "../components/tool/DeleteTool";
+import axios from "axios";
+import Layout from "../components/Layout";
+import RecipeMain from "../components/recipe/functions/recipePage/RecipeMain";
+import CategoriesMain from "../components/recipe/functions/recipePage/CategoriesMain";
+import ToolsMain from "../components/recipe/functions/recipePage/ToolsMain";
 
 interface RecipePropType {
   categoriesData: CategoryType[];
@@ -61,74 +51,14 @@ export default function Recipe({
           </TabList>
 
           <TabPanels className="border rounded-md ps-[20px]">
-            <RecipeTable
+            <RecipeMain 
               collections={collections}
+              recipes={recipes}
               categories={categoriesData}
-              tools={tools}
+              tools={tools} 
             />
-            <TabPanel>
-              <CanvasCateg collections={collections} />
-              <TableContainer>
-                <Table size="md">
-                  <Thead>
-                    <Tr>
-                      <Th>Name</Th>
-                      <Th>Collection</Th>
-                      <Th>ID</Th>
-                      <Th>Option</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {categories
-                      .map((categ, index) => (
-                        <Tr key={index}>
-                          <Td>{categ.name}</Td>
-                          <Td>{categ.collection_name}</Td>
-                          <Td>{categ._id}</Td>
-                          <Td className="text-center">
-                            <DeleteAlert category={categ} />
-                          </Td>
-                        </Tr>
-                      ))
-                      .reverse()}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-            </TabPanel>
-            <TabPanel>
-              <CanvasTools />
-              <TableContainer>
-                <Table size="sm">
-                  <Thead>
-                    <Tr>
-                      <Th>Name</Th>
-                      <Th>Image</Th>
-                      <Th>ID</Th>
-                      <Th>Option</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {tools
-                      .map((tool, index) => (
-                        <Tr key={index}>
-                          <Td>{tool.name}</Td>
-                          <Td>
-                            <img
-                              className="w-[80px] drop-shadow-2xl"
-                              src={tool.image_url}
-                            />
-                          </Td>
-                          <Td>{tool._id}</Td>
-                          <Td className="text-center ps-4">
-                            <Delete tool={tool} />
-                          </Td>
-                        </Tr>
-                      ))
-                      .reverse()}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-            </TabPanel>
+              <CategoriesMain categories={categories} collections={collections} />
+              <ToolsMain tools={tools}/>
           </TabPanels>
         </Tabs>
       </div>

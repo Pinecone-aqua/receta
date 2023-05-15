@@ -1,6 +1,5 @@
 import { useOthers } from "@/context/OthersContext";
-import { CategoriesType, RecipesType } from "@/util/Types";
-// import Image from "next/image";
+import { RecipesType } from "@/util/Types";
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -32,7 +31,7 @@ export default function RecipeCard(props: {
       <div className="mt-3">
         {" "}
         <p className="recipeCard-title">
-          {recipe.categories_id.map((cate: CategoriesType) => cate.name)}
+          {recipe.categories_id.map((cate: any) => cate.name)}
         </p>
         <p className="recipeCard-text">{recipe.name}</p>
       </div>

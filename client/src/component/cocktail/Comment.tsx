@@ -11,7 +11,6 @@ import { Button, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 import { CommentType } from "@/util/Types";
 import moment from "moment";
 import { MdOutlineDoNotDisturbAlt } from "react-icons/md";
-import { useRouter } from "next/router";
 
 export default function Comment({
   comments,
@@ -21,10 +20,9 @@ export default function Comment({
   comments: CommentType[];
 }): JSX.Element {
   const [emoji, setEmoji] = useState<string>("");
-  const [commentsArr, setCommentsArr] = useState<any>(comments);
+  const [commentsArr, setCommentsArr] = useState<CommentType[]>(comments);
   const [showComment, setShowComment] = useState<boolean>(false);
   const { user } = useUser();
-  const router = useRouter();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function CommentHandler(e: any) {
@@ -102,13 +100,15 @@ export default function Comment({
             <div className="relative">
               <form className="flex w-full mt-[40px]" onSubmit={CommentHandler}>
                 <div className="relative flex">
-                  <picture className="absolute top-0 left-0 mt-[8px] ms-2 rounded-[25px]">
+                  <picture className="absolute top-0 left-0 mt-[5px] ms-1 rounded-[25px]">
                     {user ? (
-                      <img
-                        className="w-[32px] h-[32px] rounded-[25px]"
-                        src={user?.picture}
-                        alt=""
-                      />
+                      <picture>
+                        <img
+                          className="w-[32px] h-[32px] rounded-[25px]"
+                          src={user.picture}
+                          alt=""
+                        />
+                      </picture>
                     ) : (
                       <AiOutlineUser className="w-[30px] h-[30px] rounded-[25px] border text-gray-500 mt-[2px]" />
                     )}
@@ -119,8 +119,8 @@ export default function Comment({
                     name="comment"
                     className={
                       emoji
-                        ? `border border-gray-500 ps-[45px] p-[8px] w-[695px] rounded-[20px] w-[100%]`
-                        : `border border-gray-500 ps-[45px] p-[8px] w-[300px] rounded-[20px] w-[100%]`
+                        ? `border border-gray-500 ps-[45px] p-[8px] w-[695px] rounded-[20px]`
+                        : `border border-gray-500 ps-[45px] p-[8px] w-[300px] rounded-[20px]`
                     }
                     placeholder="write a comment"
                     value={emoji}
@@ -128,7 +128,7 @@ export default function Comment({
                   />
                   <GrEmoji
                     onClick={() => setShowComment(!showComment)}
-                    className="hover:bg-gray-100 rounded-[25px] absolute cursor-pointer w-[30px] h-[30px] right-3 top-[8px]"
+                    className="hover:bg-gray-100 rounded-[25px] absolute cursor-pointer w-[30px] h-[30px] right-2 top-[5px]"
                   />
                 </div>
                 {showComment && (

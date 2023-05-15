@@ -10,13 +10,12 @@ export default function OurStory(): JSX.Element {
     "In the late 19th and early 20th century, bars went from being seedy spots hidden in alleyways to popular gathering spots. Bartenders began dressing up to work and following set recipes.",
     "Jerry Thomas published the country’s first cocktail book, The Bon Vivant’s Compnion, in 1862.",
   ];
-  const ourStoryTemplate = (value: any) => {
-    return (
-      <p key={value._id} className="text-[18px] py-2">
-        {value}
-      </p>
-    );
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ourStoryTemplate = (value: any) => (
+    <p key={value._id} className="text-[18px] py-2">
+      {value}
+    </p>
+  );
   const responsiveOptions = [
     {
       breakpoint: "1199px",

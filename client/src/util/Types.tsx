@@ -22,6 +22,7 @@ export interface RecipesType {
 }
 
 export interface CategoriesType {
+  _id: string;
   name: string;
   collection_id: { name: string };
 }
@@ -43,8 +44,8 @@ export interface CommentType {
 export interface OthersContextType {
   categories: CategoriesType[];
   setCategories: React.Dispatch<React.SetStateAction<CategoriesType[]>>;
-  activeCollectionBtn: any;
-  setActiveCollectionBtn: React.Dispatch<React.SetStateAction<any>>;
+  activeCollectionBtn: string | null;
+  setActiveCollectionBtn: React.Dispatch<React.SetStateAction<string | null>>;
   activePage: string | null;
   setActivePage: React.Dispatch<React.SetStateAction<string | null>>;
   activeCategoryBtn: string | null;

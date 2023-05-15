@@ -27,9 +27,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import AddToolHandler from "./functions/AddToolHandler";
-import InputMappingInCreate from "./functions/InputMappingInCreate";
+import InputMappingInCreate from "./functions/mapping/InputMappingInCreate"
 import Cookies from "js-cookie";
-import InputMappingInCreate from "./functions/mapping/InputMappingInCreate";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -97,8 +96,6 @@ export default function CreateRecipe(props: {
       setSpinner("run");
       onClose();
       setSelectTools([]);
-      setIngredient([]);
-      setHow([]);
     }
   }
 

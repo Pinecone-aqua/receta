@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Collection from "../component/main/Collection";
 import Categories from "../component/cocktails/Categories";
 import Recipes from "../component/cocktails/Recipes";
@@ -16,7 +16,6 @@ import HowToUse from "@/component/main/HowToUse";
 export default function Home({
   collections,
   recommend,
-  tools,
   snowBank,
 }: {
   collections: CollectionType[];

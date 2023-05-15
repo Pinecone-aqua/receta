@@ -8,7 +8,7 @@ export default function Collection({
 }: {
   collections: CollectionType[];
 }): JSX.Element {
-  const { setActiveCollectionBtn, activeCollectionBtn } = useOthers();
+  const { setActiveCollectionBtn } = useOthers();
   let activeIndex = 0;
 
   useEffect(() => {

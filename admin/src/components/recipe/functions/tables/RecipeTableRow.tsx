@@ -1,13 +1,14 @@
 import { Td, Tr } from "@chakra-ui/react";
 import { ConfirmPopup } from "primereact/confirmpopup";
-import CanvasEditButton from "../EditRecipe";
+import CanvasEditButton from "../../EditRecipe";
+import Image from "next/image";
 import {
   CategoryType,
   CocktailType,
   CollectionType,
   ToolsType,
-} from "../../../util/Types";
-import DeleteAlert from "../DeleteRecipe";
+} from "../../../../util/Types";
+import DeleteAlert from "../../DeleteRecipe";
 
 interface RecipeTableRowPropType {
   categories: CategoryType[];
@@ -28,7 +29,13 @@ export default function RecipeTableRow({
         <Td>{recipe.name}</Td>
         <Td>{recipe.collection_id}</Td>
         <Td className="">
-          <img width="70px" src={recipe.image_url} />
+          <Image
+            width={70}
+            height={200}
+            className="drop-shadow-2xl"
+            src={recipe.image_url}
+            alt="recipe image"
+          />
         </Td>
         <Td>
           {recipe.alcohol ? <div>alcoholic</div> : <div>non alcoholic</div>}

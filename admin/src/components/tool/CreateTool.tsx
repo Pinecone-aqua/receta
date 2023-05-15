@@ -59,7 +59,7 @@ export default function CreateTools() {
         style={{ background: "teal", border: "teal", color: "white" }}
         onClick={onOpen}
       >
-        Create category
+        Create tool
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>

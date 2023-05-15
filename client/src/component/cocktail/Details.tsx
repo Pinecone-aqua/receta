@@ -13,6 +13,7 @@ interface DetailsType {
 }
 
 export default function Details({ recipe, tools }: DetailsType): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [usedTools, setUsedTools] = useState<any>([]);
   const router = useRouter();
 
@@ -63,8 +64,14 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
         <div className="w-full min-[991px]:w-[50%]">
           <div className="relative">
             <div className="image-bg">
-              <img className="w-full" src={`${recipe.image_url}`} alt="image" />
-              <div className="overlay"></div>
+              <picture>
+                <img
+                  className="w-full"
+                  src={`${recipe.image_url}`}
+                  alt="image"
+                />
+              </picture>
+              <div className="overlay" />
             </div>
             <div className="text-white text-[52px] absolute bottom-[10%] w-full text-center font-semibold tracking-wider">
               {recipe.name}
@@ -124,7 +131,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
               <TabPanel>
                 <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] px-[74px] mt-20 overflow-y-auto">
                   <div className="text-[20px]">
-                    {recipe.how_to?.map((single: any, index: number) => (
+                    {recipe.how_to.map((single: any, index: number) => (
                       <div
                         key={index}
                         className="leading-8 mb-[3rem] font-medium"

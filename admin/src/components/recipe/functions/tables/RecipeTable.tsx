@@ -3,45 +3,31 @@ import {
   CocktailType,
   CollectionType,
   ToolsType,
-} from "../../../util/Types";
+} from "../../../../util/Types";
 import {
   TableContainer,
-  TabPanel,
   Tbody,
   Th,
   Thead,
   Tr,
   Table,
 } from "@chakra-ui/react";
-
-import CanvasRecipe from "../CreateRecipe";
 import RecipeTableRow from "./RecipeTableRow";
-import { useCocktail } from "@/src/context/CocktailContext";
-import SearchFunc from "../functions/SearchFunc";
-import { useState } from "react";
 
 interface RecipeTablePropType {
   categories: CategoryType[];
   collections: CollectionType[];
   tools: ToolsType[];
+  sortedData: CocktailType[];
 }
 
 export default function RecipeTable({
   categories,
   collections,
   tools,
+  sortedData,
 }: RecipeTablePropType) {
-  const { recipes } = useCocktail();
-  const [sortedRecipe, setSortedRecipe] = useState(recipes);
   return (
-    <TabPanel className="">
-      <div className="w-full flex justify-between items-center">
-        <CanvasRecipe collections={collections} tools={tools} />
-        <SearchFunc
-          sortedRecipe={sortedRecipe}
-          setSortedRecipe={setSortedRecipe}
-        />
-      </div>
       <TableContainer>
         <Table size="sm">
           <Thead>
@@ -54,8 +40,8 @@ export default function RecipeTable({
             </Tr>
           </Thead>
           <Tbody>
-            {sortedRecipe
-              ?.map((recipe: CocktailType) => (
+            {sortedData
+              .map((recipe: CocktailType) => (
                 <RecipeTableRow
                   categories={categories}
                   tools={tools}
@@ -64,10 +50,9 @@ export default function RecipeTable({
                   key={recipe._id}
                 />
               ))
-              .reverse()}
+              }
           </Tbody>
         </Table>
       </TableContainer>
-    </TabPanel>
   );
 }
