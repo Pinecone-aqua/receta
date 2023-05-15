@@ -27,24 +27,24 @@ export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
     <Layout>
       <div className="w-screen flex flex-col justify-center">
         <div className="w-full h-auto relative flex flex-col items-center justify-center">
-          <img src="/Rectangle.png" className="w-full relative" />
+          <img src="/Rectangle.png" className="w-full relative store-img" />
           <div className="w-full flex flex-col justify-center items-center absolute">
             <h5 className="font-bold text-white text-8xl font-poppins">
               STORE
             </h5>
-            <div className="w-[608px] h-[56px] flex items-center border border-[#424242] px-[23px] py-2 mt-[50px]">
+            <div className="w-[608px] store-search-input h-[56px] flex items-center border border-[#424242] px-[23px] py-2 mt-[50px]">
               <input
                 type="text"
                 onChange={handleSort}
                 placeholder="search tools"
-                className="w-full italic placeholder-black  focus:outline-none bg-transparent mr-[20px]"
+                className="w-full italic placeholder-black focus:outline-none bg-transparent mr-[20px]"
               />
               <SearchIcon />
             </div>
           </div>
         </div>
         <div className="w-full flex justify-center border-b border-[#dadada]">
-          <div className="w-[1120px] flex flex-wrap gap-6 py-[50px] border-s-[0.5px] border-[#dadada] px-[10px]">
+          <div className="w-[1120px] flex flex-wrap gap-6 py-[50px] border-s-[0.5px] border-[#dadada] justify-center">
             {sortedTools.length > 0 ? (
               sortedTools.map((tool, index) => (
                 <div

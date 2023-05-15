@@ -9,11 +9,13 @@ export default function about(): JSX.Element {
           <h1 className="about-title absolute top-[300px] text-center w-full">
             OUR STORY
           </h1>
-          <img
-            className="object-cover w-full h-[672px]"
-            src="../aboutBgg.jpg"
-            alt=""
-          />
+          <picture>
+            <img
+              className="object-cover w-full h-[672px]"
+              src="../aboutBgg.jpg"
+              alt=""
+            />
+          </picture>
           <div className="about-div-cont">
             <div className="flex about-div first">
               <div className="about-div-text left">
@@ -41,12 +43,14 @@ export default function about(): JSX.Element {
             </div>
           </div>
           <div className="block relative w-full place-items-center ">
-            <img
-              className="w-[100%] object-cover h-[50vh]"
-              src="../aboutBg2.jpg"
-              alt=""
-            />
-            <div className="absolute top-1/2 text-center lg:px-[300px] text-center">
+            <picture>
+              <img
+                className="w-[100%] object-cover h-[50vh]"
+                src="../aboutBg2.jpg"
+                alt=""
+              />
+            </picture>
+            <div className="absolute top-1/2 lg:px-[300px] text-center">
               In the late 19th and early 20th century, bars went from being
               seedy spots hidden in alleyways to popular gathering spots.
               Bartenders began dressing up to work and following set recipes.
@@ -60,7 +64,9 @@ export default function about(): JSX.Element {
               </div>
               <p className="absolute w-full h-[0.5px] border-b-[0.5px] bottom-6 border-[#424242]" />
             </div>
-            <img src="../aboutBg4.jpg" alt="" />
+            <picture>
+              <img src="../aboutBg4.jpg" alt="bg" />
+            </picture>
           </div>{" "}
           <div className="about-last-text">
             <p className="text-white Container">
@@ -72,10 +78,10 @@ export default function about(): JSX.Element {
               Magrann-Wells previously told Business Insider that new bartenders
               must get experience before getting into large venues. Many
               bartenders start as waiters or bartending assistants before
-              getting a gig themselves. "Experience is key, especially when
-              going for the giant mega-clubs where the atmosphere is tense and
-              the payout is ridiculous," Magrann-Well said. "So take the jobs
-              where you can get them."
+              getting a gig themselves. Experience is key, especially when going
+              for the giant mega-clubs where the atmosphere is tense and the
+              payout is ridiculous, Magrann-Well said. So take the jobs where
+              you can get them.
             </p>
           </div>
         </section>

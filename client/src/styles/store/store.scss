@@ -38,3 +38,22 @@
   margin-right: -3px;
   margin-top: -3px;
 }
+@media screen and (max-width: 900px) {
+  .store-img {
+    height: 400px;
+    object-fit: cover;
+  }
+  .store-search-input {
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .store-img {
+    height: 250px;
+    object-fit: cover;
+  }
+  .store-search-input {
+    max-width: 300px;
+  }
+}

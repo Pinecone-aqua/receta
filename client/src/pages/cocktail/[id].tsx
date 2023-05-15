@@ -7,10 +7,8 @@ import Details from "@/component/cocktail/Details";
 import { Rating } from "primereact/rating";
 import Layout from "@/component/Layout";
 import Link from "next/link";
-import { useOthers } from "@/context/OthersContext";
 import { Carousel } from "primereact/carousel";
 import Image from "next/image";
-import Recommend from "@/component/main/Recommend";
 
 interface RecipeType {
   recipe: RecipesType;
@@ -25,8 +23,6 @@ export default function Recipe({
   recommend,
   tools,
 }: RecipeType): JSX.Element {
-  const { setActivePage } = useOthers();
-
   const recommendTemplate = (recipe: RecipesType) => (
     <div className="my-auto" key={recipe._id}>
       <Link href={`../cocktail/${recipe._id}`}>
@@ -98,7 +94,7 @@ export default function Recipe({
         <div className="related">
           <div className="max-w-[1300px] mx-auto mt-[50px] text-white text-[28px] font-semibold">
             <p>Related cocktails</p>
-            <p className="mt-1 border w-[80px]"></p>
+            <p className="mt-1 border w-[80px]" />
           </div>
           <div className="max-w-[1340px] mx-auto py-[50px] border-b">
             <div className="w-full">
