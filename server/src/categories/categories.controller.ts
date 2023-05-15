@@ -1,5 +1,14 @@
-import { Body, Controller, Delete, Get, Post, Query } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Query,
+  UseGuards,
+} from "@nestjs/common";
 import { CheckRole } from "src/role/role.decorator";
+import { CheckRoleGuard } from "src/role/role.guard";
 import { CategoriesService } from "./categories.service";
 @Controller("categories")
 export class CategoriesController {
@@ -16,6 +25,7 @@ export class CategoriesController {
   }
 
   @Post("create")
+  @UseGuards(CheckRoleGuard)
   @CheckRole("MODERATOR", "ADMIN")
   create(@Body() body: any) {
     console.log(body);
@@ -24,6 +34,7 @@ export class CategoriesController {
   }
 
   @Delete("delete")
+  @UseGuards(CheckRoleGuard)
   @CheckRole("MODERATOR", "ADMIN")
   delete(@Query() cate: any) {
     return this.categoriesService.delete(cate);

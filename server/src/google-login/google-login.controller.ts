@@ -23,7 +23,6 @@ export class GoogleLoginController {
 
   @Get("google-login")
   googleLogin() {
-    console.log("cl id:", process.env.CLIENT_ID);
     const stringifiedParams = queryString.stringify({
       client_id: process.env.CLIENT_ID,
       redirect_uri: `http://localhost:${process.env.PORT}/google/callback`,
@@ -50,7 +49,6 @@ export class GoogleLoginController {
       throw new HttpException("Bad Request", HttpStatus.BAD_REQUEST);
 
     const profile: any = await getGoogleUserInfo(accessToken);
-    console.log("profile:", profile);
 
     let user = await this.userService.findByEmail(profile.email);
 
@@ -63,8 +61,6 @@ export class GoogleLoginController {
       };
       user = await this.userService.createUser(userInput);
     }
-
-    console.log("picture: ", user.picture);
 
     const payload = {
       name: user.name,

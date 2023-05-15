@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/modal";
 import { Spinner } from "@chakra-ui/spinner";
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 
 export default function CreateTools() {
@@ -26,6 +27,7 @@ export default function CreateTools() {
   async function createToolHandler(e: any) {
     setSpinner("loading");
     e.preventDefault();
+    const token = Cookies.get("token");
     const tool = {
       name: e.target.name.value,
     };
@@ -34,10 +36,16 @@ export default function CreateTools() {
     data.append("file", e.target.image.files[0]);
     data.append("newTool", JSON.stringify(tool));
 
-    const result = await axios.post("http://localhost:3003/tools/create", data);
+    const result = await axios.post(
+      "http://localhost:3003/tools/create",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (result.data.name === tool.name) {
-      console.log(result);
-
       setTools([...tools, result.data]);
       setSpinner("run");
       onClose();

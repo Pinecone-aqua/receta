@@ -18,28 +18,35 @@ import { FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Select } from "@chakra-ui/select";
 import { Button } from "@chakra-ui/button";
+import Cookies from "js-cookie";
 
 export default function CreateCategory(props: {
   collections: CollectionType[];
 }) {
   const { collections } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const { setCategories, categories } = useOthers();
   const [spinner, setSpinner] = useState<string>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function createCateHandler(e: any) {
-    setSpinner("loading");
     e.preventDefault();
+    setSpinner("loading");
+    const token = Cookies.get("token");
     const category = {
       collection: e.target.collection.value,
       name: e.target.name.value,
     };
 
-    const result = await axios.post("http://localhost:3003/categories/create", {
-      ...category,
-    });
+    const result = await axios.post(
+      "http://localhost:3003/categories/create",
+      {
+        ...category,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     if (result.statusText === "Created") {
       setCategories([...categories, result.data]);
       setSpinner("run");

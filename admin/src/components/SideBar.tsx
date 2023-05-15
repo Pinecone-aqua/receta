@@ -8,10 +8,12 @@ import { CiLogout } from "react-icons/ci";
 import { useOthers } from "../context/OthersContext";
 import { SiApplenews } from "react-icons/si";
 import { useEffect } from "react";
+import { useUser } from "../context/UserContext";
+import Cookies from "js-cookie";
 
 export default function SideBar(): JSX.Element {
   const { activePage, setActivePage } = useOthers();
-
+  const { setUser } = useUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function SideBar(): JSX.Element {
   }, []);
   return (
     <div className="h-[100vh] sidebar ps-[40px] bg-white">
-      <div className="fixed ">
+      <div className="fixed">
         <h1 className="text-[teal] text-[32px] font-bold mb-[80px] mt-[50px] sidebar-title">
           receta.
         </h1>
@@ -47,7 +49,12 @@ export default function SideBar(): JSX.Element {
           ))}
         </div>
 
-        <div className="flex gap-[6px] cursor-pointer mt-[30vh]">
+        <div
+          className="flex gap-[6px] cursor-pointer mt-[30vh]"
+          onClick={() => {
+            setUser(null), Cookies.remove("token"), router.push("../Login");
+          }}
+        >
           <CiLogout className="text-[#FF543E] mt-[2px] w-[20px] h-[20px] ms-[6px]" />{" "}
           <p>Log out</p>
         </div>
@@ -63,7 +70,7 @@ interface PageType {
 }
 export const pages: PageType[] = [
   {
-    url: "../Dashboard",
+    url: "../",
     name: "Dashboard",
     icon: <BiHomeAlt2 />,
   },

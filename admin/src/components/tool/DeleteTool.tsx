@@ -12,6 +12,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import React from "react";
 import { MdDelete } from "react-icons/md";
 
@@ -23,6 +24,7 @@ export default function DeleteAlert({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef(null);
   const { setTools, tools } = useOthers();
+  const token = Cookies.get("token");
 
   async function deleteHandler() {
     const filterData = tools.filter(
@@ -30,7 +32,12 @@ export default function DeleteAlert({
     );
 
     const result = await axios.delete(
-      `http://localhost:3003/tools/delete?id=${tool._id}`
+      `http://localhost:3003/tools/delete?id=${tool._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     if (result && result.data.deletedCount == 1) {
       setTools(filterData);

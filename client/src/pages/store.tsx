@@ -44,7 +44,7 @@ export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
           </div>
         </div>
         <div className="w-full flex justify-center border-b border-[#dadada]">
-          <div className="Container flex flex-wrap justify-between py-[50px] border-s-[0.5px] border-[#dadada] px-[10px]">
+          <div className="w-[1120px] flex flex-wrap gap-6 py-[50px] border-s-[0.5px] border-[#dadada] px-[10px]">
             {sortedTools.length > 0 ? (
               sortedTools.map((tool, index) => (
                 <div
@@ -69,8 +69,8 @@ export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
                 </div>
               ))
             ) : (
-              <div className="w-full flex justify-center">
-                <p>No tools found</p>
+              <div className="w-[1100px] text-center">
+                <p className="text-[24px]">No tools found</p>
               </div>
             )}
           </div>
