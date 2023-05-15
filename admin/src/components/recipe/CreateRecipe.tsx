@@ -27,7 +27,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import AddToolHandler from "./functions/AddToolHandler";
-import InputMappingInCreate from "./functions/InputMappingInCreate";
+import InputMappingInCreate from "./functions/mapping/InputMappingInCreate"
 import Cookies from "js-cookie";
 
 export default function CreateRecipe(props: {

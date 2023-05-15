@@ -24,7 +24,8 @@
     "**/*.tsx",
     "./src/component/Login.jsx",
     "./tailwind.config.js",
-    "src/hooks/useBoundingRect.js"
+    "src/hooks/useBoundingRect.js",
+    "../admin/src/pages/Search.tsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,30 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-import { CiSearch } from "react-icons/ci";
+// import { useRouter } from "next/router";
+// import { CiSearch } from "react-icons/ci";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { useOthers } from "../context/OthersContext";
 
 export default function Navbar(): JSX.Element {
-  const [show, setShow] = useState(false);
-  const { activePage } = useOthers();
+  const { activePage} = useOthers();
+  // const router = useRouter();
 
-  function searchHandler(e: any): void {
-    e.preventDefault();
-    console.log(e.target.search.value);
-  }
   return (
     <div className="text-white my-[50px] p-[16px] flex justify-between rounded-md border-[0.2px]">
       <div className="text-[teal]">{activePage && activePage}</div>
       <div className="flex">
-        <form className="relative min-w-[300px] me-4" onSubmit={searchHandler}>
-          <input
-            type="text"
-            name="search"
-            className="w-full border-b placeholder-[#454ADE] bg-[#fff] text-[#454ADE] text-md"
-            placeholder="search"
-          />
-          <CiSearch className="absolute right-0 top-0 w-[25px] h-[25px] text-[#454ADE]" />
-        </form>
+        {/* <CiSearch
+          className=" w-[25px] h-[25px] text-[#454ADE] me-[20px]"
+          onClick={() => {
+            router.push("../Search");
+            localStorage.removeItem("page");
+            setActivePage(null);
+          }}
+        /> */}
         <picture>
           <img
             className="rounded-[50%] h-[25px] object-cover w-[25px]"
@@ -32,7 +26,7 @@ export default function Navbar(): JSX.Element {
             alt="..."
           />
         </picture>
-        <RiArrowDropDownFill className="w-6 h-6" />
+        <RiArrowDropDownFill className="w-6 h-6 cursor-po" />
       </div>
     </div>
   );

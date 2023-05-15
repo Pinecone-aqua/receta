@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/layout";
 import { Textarea } from "@chakra-ui/textarea";
 import { bottom } from "@popperjs/core";
-import AddInputButton from "./sub/AddInputButton";
-import RemoveButton from "./sub/RemoveInputButton";
+import AddInputButton from "../sub/AddInputButton";
+import RemoveButton from "../sub/RemoveInputButton";
 
 interface ItemProps {
   item: string[];
