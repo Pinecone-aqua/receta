@@ -22,7 +22,7 @@ import {
   ToolsType,
 } from "../util/Types";
 import Layout from "../components/Layout";
-import RecipeTable from "../components/recipe/RecipeTable";
+import RecipeTable from "../components/recipe/tables/RecipeTable";
 import { useEffect } from "react";
 import { useCocktail } from "../context/CocktailContext";
 import { useOthers } from "../context/OthersContext";

@@ -29,6 +29,7 @@ import {
 import AddToolHandler from "./functions/AddToolHandler";
 import InputMappingInCreate from "./functions/InputMappingInCreate";
 import Cookies from "js-cookie";
+import InputMappingInCreate from "./functions/mapping/InputMappingInCreate";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -96,6 +97,8 @@ export default function CreateRecipe(props: {
       setSpinner("run");
       onClose();
       setSelectTools([]);
+      setIngredient([]);
+      setHow([]);
     }
   }
 
