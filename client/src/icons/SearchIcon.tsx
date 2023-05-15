@@ -1,8 +1,26 @@
 export default function SearchIcon() {
   return (
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.58073 17.4974C13.953 17.4974 17.4974 13.953 17.4974 9.58073C17.4974 5.20847 13.953 1.66406 9.58073 1.66406C5.20847 1.66406 1.66406 5.20847 1.66406 9.58073C1.66406 13.953 5.20847 17.4974 9.58073 17.4974Z" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M18.3307 18.3307L16.6641 16.6641" stroke="#121212" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9.58073 17.4974C13.953 17.4974 17.4974 13.953 17.4974 9.58073C17.4974 5.20847 13.953 1.66406 9.58073 1.66406C5.20847 1.66406 1.66406 5.20847 1.66406 9.58073C1.66406 13.953 5.20847 17.4974 9.58073 17.4974Z"
+        stroke="#121212"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18.3307 18.3307L16.6641 16.6641"
+        stroke="#121212"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

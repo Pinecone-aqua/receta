@@ -5,11 +5,14 @@ export class User {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Prop()
-  picture: string;
+  picture?: string;
+
+  @Prop()
+  password?: string;
 
   @Prop({ default: "CLIENT" })
   role: "CLIENT" | "ADMIN" | "MODERATOR";

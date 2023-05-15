@@ -28,6 +28,7 @@ import {
 } from "@chakra-ui/react";
 import AddToolHandler from "./functions/AddToolHandler";
 import InputMappingInCreate from "./functions/InputMappingInCreate";
+import Cookies from "js-cookie";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -66,6 +67,7 @@ export default function CreateRecipe(props: {
   async function createCocktail(e: any) {
     e.preventDefault();
     setSpinner("loading");
+    const token = Cookies.get("token");
 
     const cocktailData: CreateCocktailType = {
       name: e.target.name.value,
@@ -84,7 +86,10 @@ export default function CreateRecipe(props: {
 
     const result = await axios.post(
       "http://localhost:3003/recipes/create",
-      data
+      data,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
     );
     if (result.data.name === cocktailData.name) {
       setRecipes([...recipes, result.data]);

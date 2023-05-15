@@ -7,12 +7,14 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { RecipesService } from "./recipes.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { CloudinaryService } from "src/cloudinary/cloudinary.service";
 import { CheckRole } from "src/role/role.decorator";
+import { CheckRoleGuard } from "src/role/role.guard";
 
 @Controller("recipes")
 export class RecipesController {
@@ -63,6 +65,7 @@ export class RecipesController {
 
   @Post("create")
   @UseInterceptors(FileInterceptor("file"))
+  @UseGuards(CheckRoleGuard)
   @CheckRole("MODERATOR", "ADMIN")
   async create(
     @Body() body: any,
@@ -84,6 +87,7 @@ export class RecipesController {
 
   @Patch("update")
   @UseInterceptors(FileInterceptor("file"))
+  @UseGuards(CheckRoleGuard)
   @CheckRole("MODERATOR", "ADMIN")
   async update(
     @UploadedFile() file: any,
@@ -110,6 +114,7 @@ export class RecipesController {
   }
 
   @Delete("delete")
+  @UseGuards(CheckRoleGuard)
   @CheckRole("MODERATOR", "ADMIN")
   remove(@Query() recipe: string) {
     return this.recipesService.remove(recipe);

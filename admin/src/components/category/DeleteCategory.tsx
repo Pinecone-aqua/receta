@@ -1,4 +1,3 @@
-import { useCocktail } from "@/src/context/CocktailContext";
 import { useOthers } from "@/src/context/OthersContext";
 import { CategoryType } from "@/src/util/Types";
 import {
@@ -13,6 +12,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import React from "react";
 import { MdDelete } from "react-icons/md";
 
@@ -26,9 +26,13 @@ export default function DeleteAlert({ category }: { category: CategoryType }) {
     const filterData = categories.filter(
       (filterCate) => filterCate._id !== category._id
     );
+    const token = Cookies.get("token");
 
     const result = await axios.delete(
-      `http://localhost:3003/categories/delete?id=${category._id}`
+      `http://localhost:3003/categories/delete?id=${category._id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
     );
     if (result && result.data.deletedCount == 1) {
       setCategories(filterData);

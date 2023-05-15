@@ -7,15 +7,18 @@ import { ChakraProvider } from "@chakra-ui/react";
 import OthersProvider from "../context/OthersContext";
 import CocktailProvider from "../context/CocktailContext";
 import Loader from "../components/Loader";
+import UserProvider from "../context/UserContext";
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider>
       <CocktailProvider>
         <OthersProvider>
-          <Loader>
-            <Component {...pageProps} />
-          </Loader>
+          <UserProvider>
+            <Loader>
+              <Component {...pageProps} />
+            </Loader>
+          </UserProvider>
         </OthersProvider>
       </CocktailProvider>
     </ChakraProvider>

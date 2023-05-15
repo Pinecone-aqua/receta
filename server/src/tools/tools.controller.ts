@@ -6,10 +6,12 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { CheckRole } from "src/role/role.decorator";
+import { CheckRoleGuard } from "src/role/role.guard";
 import { ToolsService } from "./tools.service";
 @Controller("tools")
 export class ToolsController {
@@ -31,6 +33,8 @@ export class ToolsController {
   }
 
   @Post("create")
+  @UseGuards(CheckRoleGuard)
+  @CheckRole("MODERATOR", "ADMIN")
   @UseInterceptors(FileInterceptor("file"))
   create(@UploadedFile() file: any, @Body() body: any) {
     try {
@@ -43,6 +47,7 @@ export class ToolsController {
     }
   }
   @Delete("delete")
+  @UseGuards(CheckRoleGuard)
   @CheckRole("MODERATOR", "ADMIN")
   remove(@Query() id: string) {
     return this.toolService.remove(id);
