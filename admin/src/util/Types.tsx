@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface CollectionType {
   name: string;
 }
@@ -60,6 +62,12 @@ export interface CocktailContextType {
   setRecipes: React.Dispatch<React.SetStateAction<CocktailType[]>>;
 }
 
+export interface UserContextType {
+  user: UsersType | null;
+  setUser: React.Dispatch<React.SetStateAction<UsersType | null>>;
+  users: UsersType[];
+  setUsers: React.Dispatch<React.SetStateAction<UsersType[]>>;
+}
 export interface PropType {
   children: React.ReactNode;
 }
@@ -78,4 +86,19 @@ export interface CreateNewsType {
   title: string;
   subTitle: string;
   category: string;
+}
+export interface UsersType {
+  _id: string;
+  name: string;
+  email: string;
+  picture?: string;
+  role: string;
+  password?: string;
+}
+
+export interface UserProps {
+  usersData: UsersType[];
+}
+export interface PropType {
+  children: React.ReactNode;
 }

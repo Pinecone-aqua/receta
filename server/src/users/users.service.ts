@@ -1,11 +1,15 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Res } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { User } from "./user.schema";
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    private readonly jwtService: JwtService
+  ) {}
   allUser() {
     return this.userModel.find();
   }
@@ -18,18 +22,52 @@ export class UserService {
     return this.userModel.create({
       email: user.email,
       name: user.name,
-      picture: user.picture,
+      role: user.role,
     });
   }
 
-  loginUser(user) {
+  async loginUser(user: any) {
     try {
-      return this.userModel.findOne({
+      const findAdmin = await this.userModel.findOne({
         email: user.email,
         password: user.password,
+        role: "ADMIN",
+      });
+      const payload = {
+        _id: findAdmin._id,
+        name: findAdmin.name,
+        email: findAdmin.email,
+        role: findAdmin.role,
+        password: findAdmin.password,
+      };
+      return { access_token: await this.jwtService.signAsync(payload) };
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async delete(user: any) {
+    try {
+      return this.userModel.deleteOne({
+        _id: user.id,
       });
     } catch (err) {
-      return console.log(err.message);
+      return err;
     }
+  }
+  async updateUser(_id: string, user: any) {
+    return await this.userModel.findOneAndUpdate({ _id }, user);
+  }
+
+  async updateAdmin(_id: string, user: any) {
+    const updatedAdmin = await this.userModel.findOneAndUpdate({ _id }, user);
+    const payload = {
+      _id: updatedAdmin._id,
+      name: updatedAdmin.name,
+      email: updatedAdmin.email,
+      role: updatedAdmin.role,
+      password: user.password,
+    };
+    return { access_token: await this.jwtService.signAsync(payload) };
   }
 }
