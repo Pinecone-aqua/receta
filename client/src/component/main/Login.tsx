@@ -21,10 +21,12 @@ export default function Login() {
   const finalRef = React.useRef(null);
 
   function googleLoginHandler() {
-    axios.get("http://localhost:3003/google-login").then((res) => {
-      router.push(res.data);
-      localStorage.setItem("page", "cocktails");
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/google-login`)
+      .then((res) => {
+        router.push(res.data);
+        localStorage.setItem("page", "cocktails");
+      });
   }
 
   return (

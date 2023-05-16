@@ -23,6 +23,7 @@ export default function Comment({
   const [commentsArr, setCommentsArr] = useState<CommentType[]>(comments);
   const [showComment, setShowComment] = useState<boolean>(false);
   const { user } = useUser();
+  console.log(process.env.SERVER_PORT);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function CommentHandler(e: any) {
@@ -35,11 +36,13 @@ export default function Comment({
         created_at: moment().format("l"),
       };
 
-      axios.post("http://localhost:3003/comments/create", data).then((res) => {
-        res.statusText === "Created"
-          ? setCommentsArr([...commentsArr, data])
-          : alert(res.data);
-      });
+      axios
+        .post(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/comments/create`, data)
+        .then((res) => {
+          res.statusText === "Created"
+            ? setCommentsArr([...commentsArr, data])
+            : alert(res.data);
+        });
     } else {
       alert("login");
     }

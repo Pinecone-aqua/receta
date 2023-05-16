@@ -14,7 +14,9 @@ export default function Recipes(): JSX.Element {
     localStorage.getItem("category")
       ? axios
           .get(
-            `http://localhost:3003/recipes/filter-category?name=${activeCategoryBtn}&limit=${
+            `${
+              process.env.NEXT_PUBLIC_PUBLIC_SERVER
+            }/recipes/filter-category?name=${activeCategoryBtn}&limit=${
               recipes.length + 8
             }`
           )
@@ -24,7 +26,9 @@ export default function Recipes(): JSX.Element {
           )
       : axios
           .get(
-            `http://localhost:3003/recipes/filter?name=${activeCollectionBtn}&limit=${
+            `${
+              process.env.NEXT_PUBLIC_PUBLIC_SERVER
+            }/recipes/filter?name=${activeCollectionBtn}&limit=${
               recipes.length + 8
             }`
           )
