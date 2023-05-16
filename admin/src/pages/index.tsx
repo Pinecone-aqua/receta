@@ -8,9 +8,16 @@ import {
   StatLabel,
   StatNumber,
 } from "@chakra-ui/react";
+import axios from "axios";
 import Layout from "../components/Layout";
+import { CocktailType } from "../util/Types";
+import RecipeColGraphic from "../components/recipe/functions/RecipeColGraphic";
 
-export default function Login(): JSX.Element {
+interface RecipePropType {
+  recipes: CocktailType[];
+}
+
+export default function Login({ recipes }: RecipePropType): JSX.Element {
   return (
     <Layout>
       <>
@@ -36,7 +43,20 @@ export default function Login(): JSX.Element {
         <CircularProgress value={40} color="green.400">
           <CircularProgressLabel>40%</CircularProgressLabel>
         </CircularProgress>
+        <RecipeColGraphic recipes={recipes} />;
       </>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const recipes = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/all`)
+    .then((res) => res.data);
+
+  return {
+    props: {
+      recipes,
+    },
+  };
 }
