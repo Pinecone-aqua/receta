@@ -86,7 +86,7 @@ interface Props {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const tools = await axios
-    .get(`http://localhost:3003/tools/get`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
     .then((res) => res.data);
 
   return {

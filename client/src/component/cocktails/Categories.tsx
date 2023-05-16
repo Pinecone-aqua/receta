@@ -18,13 +18,13 @@ export default function Categories(): JSX.Element {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3003/recipes/filter?name=${activeCollectionBtn}&limit=8`
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/filter?name=${activeCollectionBtn}&limit=8`
       )
       .then((res) => setRecipes(res.data));
 
     axios
       .get(
-        `http://localhost:3003/categories/filter?name=${activeCollectionBtn}`
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/filter?name=${activeCollectionBtn}`
       )
       .then((res) => setCategories(res.data));
 

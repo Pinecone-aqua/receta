@@ -74,7 +74,7 @@ export default function Recipe(props: {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await axios.get(`http://localhost:3003/tools/get-ids`);
+  const res = await axios.get(`${process.env.SERVER_PORT}/tools/get-ids`);
   const resJson = await res.data;
   const paths = await resJson.map((id: { _id: string }) => ({
     params: {
@@ -95,12 +95,12 @@ export const getStaticProps: GetStaticProps<ToolProps> = async ({
   params,
 }: GetStaticPropsContext) => {
   const res = await axios.get(
-    `http://localhost:3003/tools/find?id=${params?.id}`
+    `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/find?id=${params?.id}`
   );
   const tool = await res.data;
 
   const tools = await axios
-    .get(`http://localhost:3003/tools/get`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
     .then((res) => res.data);
 
   return {

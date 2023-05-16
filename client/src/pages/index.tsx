@@ -79,19 +79,21 @@ interface Props {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const collections = await axios
-    .get(`http://localhost:3003/collections/get`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/collections/get`)
     .then((res) => res.data);
 
   const recommend = await axios
-    .get(`http://localhost:3003/recipes/recommend`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/recommend`)
     .then((res) => res.data);
 
   const tools = await axios
-    .get(`http://localhost:3003/tools/get`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
     .then((res) => res.data);
 
   const snowBank = await axios
-    .get("http://localhost:3003/recipes/get?id=645db1cc3eb2920376b90458")
+    .get(
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/get?id=645db1cc3eb2920376b90458`
+    )
     .then((res) => res.data);
 
   return {
