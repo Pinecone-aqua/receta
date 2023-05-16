@@ -24,14 +24,14 @@ export class GoogleLoginController {
   @Get("google-login")
   googleLogin() {
     const stringifiedParams = queryString.stringify({
-      client_id: process.env.CLIENT_ID,
+      client_id: process.env.GOOGLE_CLIENT_ID,
       redirect_uri: `https://receta-server.onrender.com/google/callback`,
       scope: [
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
       ].join(" "),
       response_type: "code",
-      access_type: "offline",
+      access_type: "online",
       prompt: "consent",
     });
     return `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
