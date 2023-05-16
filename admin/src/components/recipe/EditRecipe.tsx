@@ -4,19 +4,37 @@ import {
   ToolsType,
 } from "../../util/Types";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
-import Offcanvas from "react-bootstrap/Offcanvas";
+// import Offcanvas from "react-bootstrap/Offcanvas";
 import { FiEdit } from "react-icons/fi";
 import axios from "axios";
-
+import {
+  Box,
+  Button,
+  Checkbox,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  FormLabel,
+  Input,
+  Select,
+  Spinner,
+  Stack,
+  Textarea,
+  useDisclosure,
+} from "@chakra-ui/react";
 export default function CanvasEditButton({
   recipe,
   collections,
   categories,
   tools,
 }: any) {
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+  // const [show, setShow] = useState(false);
   //--
   const [ingredient, setIngredient] = useState<string[]>(recipe.ingredients);
   const [filteredCategory, setFilteredCategory] = useState<
@@ -30,7 +48,8 @@ export default function CanvasEditButton({
   const [file, setFile] = useState<any | null>(recipe.image_url); //image
   const idOfTools = recipe.tools_id.map((one: { _id: string }) => one._id);
   const [selectTools, setSelectTools] = useState<string[]>(idOfTools); //selectedTools
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [spinner, setSpinner] = useState<string>("");
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
   const inputRefIng = useRef<HTMLInputElement>(null);
@@ -75,6 +94,8 @@ export default function CanvasEditButton({
 
   function updateRecipe(e: any) {
     e.preventDefault();
+    setSpinner("loading");
+
     const data = {
       name: e.target.name.value,
       description: e.target.description.value,
@@ -110,47 +131,46 @@ export default function CanvasEditButton({
   return (
     <>
       <FiEdit
-        onClick={handleShow}
+        onClick={onOpen}
         className="text-green-500 text-bold h-[20px] w-[20px] cursor-pointer"
       />
 
-      <Offcanvas
-        show={show}
-        onHide={handleClose}
-        placement="end"
-        className="w-50 relative pt-[30px]"
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Recipe editing</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
+      <Drawer isOpen={isOpen} placement="right" size="lg" onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="teal">
+            Edit recipe
+          </DrawerHeader>
+          <DrawerBody padding="16px 36px">
           <form
-            className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
+            // className="w-full h-full flex-col justify-center items-center pl-[50px] mb-[30px]"
             onSubmit={(e) => {
               updateRecipe(e);
             }}
           >
-            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="">Cocktail name</label>
-              <input
+            <Stack spacing={"24px"} paddingBottom={"24px"}>
+                <Box>
+              <FormLabel>Cocktail name</FormLabel>
+              <Input
                 type="text"
                 name="name"
                 defaultValue={recipe.name}
                 className="bg-slate-400 w-52 rounded"
               />
-            </div>
+              </Box>
 
-            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Description</label>
-              <textarea
+           <Box>
+              <FormLabel className="block">Description</FormLabel>
+              <Textarea
                 name="description"
                 defaultValue={recipe.description}
                 className="resize  bg-slate-400  w-52 rounded"
-              />
-            </div>
-            <div className="w-3/4 flex justify-between mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Collection</label>
-              <select
+                />
+            </Box>
+           <Box>
+              <FormLabel className="block">Collection</FormLabel>
+              <Select
                 defaultValue={recipe.collection_id}
                 className="border"
                 name="collection"
@@ -159,87 +179,90 @@ export default function CanvasEditButton({
                 {collections.map(
                   (collection: CollectionType, index: number) => (
                     <option key={index}>{collection.name}</option>
-                  )
-                )}
-              </select>
-            </div>
+                    )
+                    )}
+              </Select>
+            </Box>
 
-            <div className="w-3/4 flex justify-between  mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Category</label>
-              <select
+            <Box>
+              <FormLabel className="block">Category</FormLabel>
+              <Select
                 defaultValue={recipe.categories_id[0]?.name}
                 name="category"
-              >
+                >
                 {filteredCategory.map((category: any, index: number) => (
                   <option key={index}>{category.name}</option>
-                ))}
-              </select>
-            </div>
+                  ))}
+              </Select>
+            </Box>
 
-            <label className="block">Tools</label>
+            <Box>
+            <FormLabel className="block">Tools</FormLabel>
             <div className="flex flex-wrap gap-1 w-4/4 mt-[25px] border-b-[1px] border-black pb-[20px]">
               {tools.map((tool: ToolsType, index: number) => (
                 <div
-                  className={
-                    selectTools.includes(tool._id)
-                      ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
-                      : "w-[170px] py-[10px] border flex flex-col items-center"
-                  }
-                  key={index}
-                  onClick={() => addToolHandler(tool._id)}
+                className={
+                  selectTools.includes(tool._id)
+                  ? "w-[170px] py-[10px] border bg-slate-300 flex flex-col items-center"
+                  : "w-[170px] py-[10px] border flex flex-col items-center"
+                }
+                key={index}
+                onClick={() => addToolHandler(tool._id)}
                 >
                   <p className="">{tool.name}</p>
                   <img className="w-[80px]" src={tool.image_url} />
                 </div>
               ))}
             </div>
-
-            <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Ingredients</label>
-              <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
-                {ingredient.map((inex, index) => (
-                  <div
+            </Box>
+            <Box>
+              <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
+                <FormLabel className="block">Ingredients</FormLabel>
+                <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
+                  {ingredient.map((inex, index) => (
+                    <div
                     key={`input-container-${index}`}
                     className="h-full flex items-center"
-                  >
-                    <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
-                    <input
-                      value="Remove"
-                      className="px-[10px] bg-red-500"
-                      onClick={() => {
-                        removeInputHandler(index);
-                      }}
-                      type="button"
-                    />
-                  </div>
-                ))}
+                    >
+                      <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
+                      <input
+                        value="Remove"
+                        className="px-[10px] bg-red-500"
+                        onClick={() => {
+                          removeInputHandler(index);
+                        }}
+                        type="button"
+                        />
+                    </div>
+                  ))}
+                </div>
+
+                <Input
+                  id="adding"
+                  type="text"
+                  ref={inputRefIng}
+                  name="ingredients"
+                  className="bg-slate-400 w-52"
+                  onChange={(e) => {
+                    tempRef.current = e.target.value;
+                  }}
+                  />
+                <input
+                  value="Add ingredient"
+                  className="px-[10px] bg-green-400"
+                  onClick={addInputHandler}
+                  type="button"
+                  />
               </div>
-
-              <input
-                id="adding"
-                type="text"
-                ref={inputRefIng}
-                name="ingredients"
-                className="bg-slate-400 w-52"
-                onChange={(e) => {
-                  tempRef.current = e.target.value;
-                }}
-              />
-              <input
-                value="Add ingredient"
-                className="px-[10px] bg-green-400"
-                onClick={addInputHandler}
-                type="button"
-              />
-            </div>
-
+            </Box>
+            <Box>
             <div className="mt-[20px] mb-[20px] border-b-[1px] border-black pb-[20px]">
-              <label className="block">Instructions</label>
+              <FormLabel className="block">Instructions</FormLabel>
               <div className="flex flex-col gap-2 pt-[20px] pb-[20px]">
                 {how.map((inex, index) => (
                   <div
-                    key={`input-container-${index}`}
-                    className="h-full flex items-center"
+                  key={`input-container-${index}`}
+                  className="h-full flex items-center"
                   >
                     <p className="w-[200px] m-0 bg-gray-400">{inex}</p>
                     <input
@@ -249,12 +272,12 @@ export default function CanvasEditButton({
                         removeInputHandlerHow(index);
                       }}
                       type="button"
-                    />
+                      />
                   </div>
                 ))}
               </div>
 
-              <input
+              <Input
                 id="adding"
                 type="text"
                 ref={inputRefIns}
@@ -263,69 +286,73 @@ export default function CanvasEditButton({
                 onChange={(e) => {
                   tempRefHow.current = e.target.value;
                 }}
-              />
+                />
               <input
                 value="Add instructions"
                 className="px-[10px] bg-green-400"
                 onClick={addInputHandlerHow}
                 type="button"
-              />
+                />
             </div>
+            </Box>
 
-            <div className="w-3/4 flex justify-between mt-[20px] mb-[20px]">
-              <label className="block">Photo or image</label>
+            <Box>
+              <FormLabel className="block">Photo or image</FormLabel>
               <input
                 accept="image/*"
                 onChange={handleFileChange}
                 type="file"
                 name="imageUrl"
-                className="w-52"
-              />
+                className="text-sm text-grey-500 file:mr-5 file:py-2 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:cursor-pointer hover:file:bg-amber-50 hover:file:text-amber-700"
+                />
               {file && (
                 <div>
                   <img width="50px" height="50px" src={file} alt="cocktail" />
                 </div>
               )}
-            </div>
-            <div className="w-3/4 flex justify-between mb-[20px]">
-              <label className="block">Tutorial video</label>
-              <input
+            </Box>
+            <Box>
+              <FormLabel className="block">Tutorial video</FormLabel>
+              <Input
                 defaultValue={recipe.how_to}
                 type="text"
                 name="videoUrl"
-                className="bg-slate-400 w-52 rounded"
-              />
-            </div>
-            <div className="w-3/4 flex justify-between mb-[20px]">
-              <label>Alcoholic or nonalcoholic</label>
-              <input
+                />
+            </Box>
+            <Box>
+              <FormLabel>Alcoholic or nonalcoholic</FormLabel>
+              <Checkbox
                 onClick={() => {
                   setCheck(!check);
                 }}
-                type="checkbox"
                 defaultChecked={check}
                 name="alcohol"
-                className="bg-slate-400 w-52 rounded"
-              />
-            </div>
-            <div className="flex justify-center items-center gap-3 h-[100px]">
+                colorScheme="green"
+                />
+             </Box>
+                </Stack>
+            <DrawerFooter borderTopWidth="1px">
               <input
-                className="bg-sky-800 w-[70px] h-[40px] rounded text-white"
-                onClick={() => setShow(false)}
+                className="w-[90px] p-2 me-4 rounded-md border"
+                onClick={onClose}
                 type="button"
                 value="Cancel"
               />
 
-              <button
+              <Button
                 type="submit"
-                className="h-[40px] rounded-md bg-green-600 px-3 py-2 text-sm text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                colorScheme="teal"
+                leftIcon={
+                    spinner == "loading" ? <Spinner size="xs" /> : <></>
+                  }
               >
                 Save changes
-              </button>
-            </div>
+              </Button>
+            </DrawerFooter>
           </form>
-        </Offcanvas.Body>
-      </Offcanvas>
+        </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 }
