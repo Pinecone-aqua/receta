@@ -9,7 +9,7 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { CheckRole } from "src/role/role.decorator";
+import { CheckRole } from "../role/role.decorator";
 import { NewsService } from "./news.service";
 @Controller("news")
 export class NewsController {

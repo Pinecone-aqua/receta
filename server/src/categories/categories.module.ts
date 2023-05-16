@@ -1,12 +1,9 @@
 import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { MongooseModule } from "@nestjs/mongoose";
-import { Category, CategorySchema } from "src/categories/category.schema";
-import {
-  Collection,
-  CollectionSchema,
-} from "src/collections/collection.schema";
-import { CheckRoleGuard } from "src/role/role.guard";
+import { Category, CategorySchema } from "../categories/category.schema";
+import { Collection, CollectionSchema } from "../collections/collection.schema";
+import { CheckRoleGuard } from "../role/role.guard";
 import { CategoriesController } from "./categories.controller";
 import { CategoriesService } from "./categories.service";
 @Module({

@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { GoogleLoginController } from "./google-login.controller";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { UserModule } from "src/users/users.module";
+import { UserModule } from "../users/users.module";
 // import { UserModule } from "src/users/users.module";
 
 @Module({

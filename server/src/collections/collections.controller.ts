@@ -7,8 +7,8 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { CloudinaryService } from "src/cloudinary/cloudinary.service";
-import { CheckRole } from "src/role/role.decorator";
+import { CloudinaryService } from "../cloudinary/cloudinary.service";
+import { CheckRole } from "../role/role.decorator";
 import { CollectionService } from "./collections.service";
 
 @Controller("collections")
