@@ -20,12 +20,13 @@ import {
   FormLabel,
   Input,
   Select,
-  Spinner,
+  // Spinner,
   Stack,
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import Cookies from "js-cookie";
 export default function CanvasEditButton({
   recipe,
   collections,
@@ -45,7 +46,7 @@ export default function CanvasEditButton({
   const idOfTools = recipe.tools_id.map((one: { _id: string }) => one._id);
   const [selectTools, setSelectTools] = useState<string[]>(idOfTools); //selectedTools
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [spinner, setSpinner] = useState<string>("");
+  // const [spinner, setSpinner] = useState<string>("");
   const tempRef: MutableRefObject<string> = useRef("");
   const tempRefHow: MutableRefObject<string> = useRef("");
   const inputRefIng = useRef<HTMLInputElement>(null);
@@ -90,7 +91,8 @@ export default function CanvasEditButton({
 
   function updateRecipe(e: any) {
     e.preventDefault();
-    setSpinner("loading");
+    // setSpinner("loading");
+    const token = Cookies.get("token");
 
     const data = {
       name: e.target.name.value,
@@ -109,14 +111,20 @@ export default function CanvasEditButton({
       ? formData.append("file", file)
       : formData.append("img", file);
     formData.append("data", JSON.stringify(data));
-    console.log(data);
-    console.log(file);
     axios
       .patch(
-        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/update?id=${recipe._id}`,
-        formData
+        `http://localhost:3003/recipes/update?id=${recipe._id}`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       )
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
@@ -381,9 +389,9 @@ export default function CanvasEditButton({
                 <Button
                   type="submit"
                   colorScheme="teal"
-                  leftIcon={
-                    spinner == "loading" ? <Spinner size="xs" /> : <></>
-                  }
+                  // leftIcon={
+                  //   spinner == "loading" ? <Spinner size="xs" /> : <></>
+                  // }
                 >
                   Save changes
                 </Button>

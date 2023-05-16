@@ -94,7 +94,12 @@ export class RecipesController {
     @Query("id") id: string,
     @Body() body: any
   ) {
-    console.log(id);
+    const regex = /\/v\d+\/([^/]+)\.\w{3,4}$/;
+
+    const getPublicIdFromUrl = (url: string) => {
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    };
 
     if (body.img) {
       const data = {
@@ -104,12 +109,17 @@ export class RecipesController {
       };
       return this.recipesService.updateRecipe(data);
     } else {
-      const response = await this.cloudinary.uploadImage(file);
-      return this.recipesService.updateRecipe({
+      const { image_url } = await this.findRecipe(id);
+      const publicId = getPublicIdFromUrl(image_url);
+      const destroiedImage = await this.cloudinary.deleteImage(publicId);
+      const response =
+        destroiedImage && (await this.cloudinary.uploadImage(file));
+      const data = {
         image_url: response?.secure_url,
         body: JSON.parse(body.data),
         id: id,
-      });
+      };
+      return this.recipesService.updateRecipe(data);
     }
   }
 
