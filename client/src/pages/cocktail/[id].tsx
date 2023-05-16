@@ -115,7 +115,7 @@ export default function Recipe({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await axios.get(`http://localhost:3003/recipes/get-ids`);
+  const res = await axios.get(`${process.env.SERVER_PORT}/recipes/get-ids`);
   const resJson = await res.data;
   const paths = await resJson.map((id: { _id: string }) => ({
     params: {
@@ -136,16 +136,20 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({
   params,
 }: GetStaticPropsContext) => {
   const recipe = await axios
-    .get(`http://localhost:3003/recipes/get?id=${params?.id}`)
+    .get(
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/get?id=${params?.id}`
+    )
     .then((res) => res.data);
   const comments = await axios
-    .get(`http://localhost:3003/comments/find?id=${params?.id}`)
+    .get(
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/comments/find?id=${params?.id}`
+    )
     .then((res) => res.data);
   const recommend = await axios
-    .get(`http://localhost:3003/recipes/recommend`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/recommend`)
     .then((res) => res.data);
   const tools = await axios
-    .get(`http://localhost:3003/tools/get`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
     .then((res) => res.data);
 
   return {

@@ -14,7 +14,7 @@ export default function CategoryBtn(props: { category: string }): JSX.Element {
     if (activeCategoryBtn == props.category) {
       axios
         .get(
-          `http://localhost:3003/recipes/filter-category?name=${activeCategoryBtn}&limit=8`
+          `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/filter-category?name=${activeCategoryBtn}&limit=8`
         )
         .then((res) => setRecipes(res.data));
     }
