@@ -39,7 +39,7 @@ export default function CreateNews(): JSX.Element {
     data.append("file", e.target.image.files[0]);
     data.append("newData", JSON.stringify(newsData));
     axios
-      .post(`http://localhost:3003/news/create`, data)
+      .post(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/create`, data)
       .then(
         (res) =>
           res.data &&

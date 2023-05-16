@@ -18,9 +18,12 @@ export default function UsersRow({ user, index }: TableRowType) {
     const token = Cookies.get("token");
     if (window.confirm("Устгах уу?")) {
       axios
-        .delete(`http://localhost:3003/users/delete?id=${user._id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
+        .delete(
+          `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/delete?id=${user._id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
         .then((res) => {
           console.log("res", res);
 

@@ -116,7 +116,10 @@ export default function CanvasEditButton({
     console.log(data);
     console.log(file);
     axios
-      .patch(`http://localhost:3003/recipes/update?id=${recipe._id}`, formData)
+      .patch(
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/update?id=${recipe._id}`,
+        formData
+      )
       .then((res) => console.log(res.data));
   }
 

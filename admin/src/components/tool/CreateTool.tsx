@@ -37,7 +37,7 @@ export default function CreateTools() {
     data.append("newTool", JSON.stringify(tool));
 
     const result = await axios.post(
-      "http://localhost:3003/tools/create",
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/create`,
       data,
       {
         headers: {

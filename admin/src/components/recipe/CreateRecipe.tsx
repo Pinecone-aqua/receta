@@ -27,7 +27,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import AddToolHandler from "./functions/AddToolHandler";
-import InputMappingInCreate from "./functions/mapping/InputMappingInCreate"
+import InputMappingInCreate from "./functions/mapping/InputMappingInCreate";
 import Cookies from "js-cookie";
 
 export default function CreateRecipe(props: {
@@ -49,13 +49,15 @@ export default function CreateRecipe(props: {
 
   function filterCate(name: string) {
     axios
-      .get(`http://localhost:3003/categories/filter?name=${name}`)
+      .get(
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/filter?name=${name}`
+      )
       .then((res) => setCategories(res.data));
   }
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3003/categories/filter?name=${
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/filter?name=${
           localStorage.getItem("currentColloction")
             ? localStorage.getItem("currentColloction")
             : "Strong"
@@ -85,7 +87,7 @@ export default function CreateRecipe(props: {
     data.append("newRecipe", JSON.stringify(cocktailData));
 
     const result = await axios.post(
-      "http://localhost:3003/recipes/create",
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/create`,
       data,
       {
         headers: { Authorization: `Bearer ${token}` },

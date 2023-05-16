@@ -65,7 +65,7 @@ export default function Settings(): JSX.Element {
         password: e.target.verPassword.value,
       };
       const result = await axios.patch(
-        `http://localhost:3003/users/admin/${user?._id}`,
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/admin/${user?._id}`,
         data,
         {
           headers: { Authorization: `Bearer ${token}` },
