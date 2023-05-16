@@ -27,7 +27,7 @@ export default function DeleteAlert({ recipe }: { recipe: CocktailType }) {
       (filterRecipe) => filterRecipe._id !== recipe._id
     );
     const result = await axios.delete(
-      `http://localhost:3003/recipes/delete?id=${recipe._id}`,
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/delete?id=${recipe._id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

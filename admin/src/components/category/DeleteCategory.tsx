@@ -29,7 +29,7 @@ export default function DeleteAlert({ category }: { category: CategoryType }) {
     const token = Cookies.get("token");
 
     const result = await axios.delete(
-      `http://localhost:3003/categories/delete?id=${category._id}`,
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/delete?id=${category._id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

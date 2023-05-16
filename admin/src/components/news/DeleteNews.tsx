@@ -26,7 +26,9 @@ export default function DeleteAlert({ newsData }: { newsData: NewsType }) {
     );
 
     axios
-      .delete(`http://localhost:3003/news/delete?id=${newsData._id}`)
+      .delete(
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/delete?id=${newsData._id}`
+      )
       .then((res) => res.statusText == "OK" && setNews(filterData));
   }
 
