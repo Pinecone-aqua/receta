@@ -29,7 +29,7 @@ export default function CreateCategory(props: {
   const [spinner, setSpinner] = useState<string>();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async function createCateHandler(e: any) {
+  async function createCateHandler(e: any): Promise<void> {
     e.preventDefault();
     setSpinner("loading");
     const token = Cookies.get("token");
@@ -70,7 +70,11 @@ export default function CreateCategory(props: {
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <form className="flex flex-col w-full" onSubmit={createCateHandler}>
+            <form
+              className="flex flex-col w-full"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onSubmit={(e: any) => createCateHandler(e)}
+            >
               <Stack spacing="16px">
                 <Box>
                   <FormLabel htmlFor="name">Collection</FormLabel>
