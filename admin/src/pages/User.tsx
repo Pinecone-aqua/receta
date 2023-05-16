@@ -62,7 +62,7 @@ export default function User({
 
 export const getStaticProps: GetStaticProps<UserProps> = async () => {
   const usersData = await axios
-    .get(`http://localhost:3003/users/all`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/all`)
     .then((res) => res.data);
 
   return {

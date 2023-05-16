@@ -38,11 +38,15 @@ export default function EditUserModal({ user }: UserModalType) {
       (filterUser: { _id: any }) => filterUser._id !== user._id
     );
     axios
-      .patch(`http://localhost:3003/users/${user._id}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .patch(
+        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/${user._id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         if (res.data.email == data.email) {
           setUsers([...filterData, data]);

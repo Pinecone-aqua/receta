@@ -1,9 +1,4 @@
-import {
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-} from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels } from "@chakra-ui/react";
 import {
   CategoryType,
   CocktailType,
@@ -51,14 +46,14 @@ export default function Recipe({
           </TabList>
 
           <TabPanels className="border rounded-md ps-[20px]">
-            <RecipeMain 
+            <RecipeMain
               collections={collections}
               recipes={recipes}
               categories={categoriesData}
-              tools={tools} 
+              tools={tools}
             />
-              <CategoriesMain categories={categories} collections={collections} />
-              <ToolsMain tools={tools}/>
+            <CategoriesMain categories={categories} collections={collections} />
+            <ToolsMain tools={tools} />
           </TabPanels>
         </Tabs>
       </div>
@@ -68,19 +63,19 @@ export default function Recipe({
 
 export async function getStaticProps() {
   const categoriesData = await axios
-    .get(`http://localhost:3003/categories/get`)
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/get`)
     .then((res) => res.data);
 
   const collections = await axios
-    .get("http://localhost:3003/collections/get")
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/collections/get`)
     .then((res) => res.data);
 
   const recipes = await axios
-    .get("http://localhost:3003/recipes/all")
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/all`)
     .then((res) => res.data);
 
   const toolsData = await axios
-    .get("http://localhost:3003/tools/get")
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
     .then((res) => res.data);
 
   return {

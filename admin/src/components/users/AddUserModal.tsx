@@ -39,7 +39,7 @@ export default function AddUserModal({ title }: AddUserModalType) {
     const token = Cookies.get("token");
 
     const result = await axios.post(
-      `http://localhost:3003/users/create`,
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/create`,
       data,
       {
         headers: {

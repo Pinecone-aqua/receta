@@ -39,7 +39,7 @@ export default function CreateCategory(props: {
     };
 
     const result = await axios.post(
-      "http://localhost:3003/categories/create",
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/create`,
       {
         ...category,
       },

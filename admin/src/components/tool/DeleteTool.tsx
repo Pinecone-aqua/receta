@@ -32,7 +32,7 @@ export default function DeleteAlert({
     );
 
     const result = await axios.delete(
-      `http://localhost:3003/tools/delete?id=${tool._id}`,
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/delete?id=${tool._id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

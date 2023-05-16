@@ -17,10 +17,13 @@ export default function Login(): JSX.Element {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const result = await axios.post("http://localhost:3003/users/login", {
-      email,
-      password,
-    });
+    const result = await axios.post(
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/login`,
+      {
+        email,
+        password,
+      }
+    );
 
     if (result.data.access_token) {
       Cookies.set("token", result.data.access_token);
