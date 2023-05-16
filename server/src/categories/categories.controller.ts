@@ -7,8 +7,8 @@ import {
   Query,
   UseGuards,
 } from "@nestjs/common";
-import { CheckRole } from "src/role/role.decorator";
-import { CheckRoleGuard } from "src/role/role.guard";
+import { CheckRole } from "../role/role.decorator";
+import { CheckRoleGuard } from "../role/role.guard";
 import { CategoriesService } from "./categories.service";
 @Controller("categories")
 export class CategoriesController {

@@ -12,9 +12,9 @@ import {
 } from "@nestjs/common";
 import { RecipesService } from "./recipes.service";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { CloudinaryService } from "src/cloudinary/cloudinary.service";
-import { CheckRole } from "src/role/role.decorator";
-import { CheckRoleGuard } from "src/role/role.guard";
+import { CloudinaryService } from "../cloudinary/cloudinary.service";
+import { CheckRole } from "../role/role.decorator";
+import { CheckRoleGuard } from "../role/role.guard";
 
 @Controller("recipes")
 export class RecipesController {

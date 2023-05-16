@@ -10,8 +10,8 @@ import * as queryString from "query-string";
 import { Request, Response } from "express";
 import { getAccessTokenFromCode } from "./getAccessTokenFromCode";
 import { getGoogleUserInfo } from "./getGoogleUserInfo";
-import { UserService } from "src/users/users.service";
-import { User } from "src/users/user.schema";
+import { UserService } from "../users/users.service";
+import { User } from "../users/user.schema";
 import { JwtService } from "@nestjs/jwt";
 
 @Controller()
