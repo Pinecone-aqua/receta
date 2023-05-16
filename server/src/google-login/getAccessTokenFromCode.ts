@@ -8,7 +8,7 @@ export async function getAccessTokenFromCode(code: any) {
     client_id: process.env.CLIENT_ID,
     client_secret: process.env.CLIENT_SECRET,
     grant_type: "authorization_code",
-    redirect_uri: `http://localhost:${process.env.PORT}/google/callback`,
+    redirect_uri: `https://receta-server.onrender.com/google/callback`,
     code,
   });
 
