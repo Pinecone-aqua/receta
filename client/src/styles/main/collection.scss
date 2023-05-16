@@ -26,15 +26,14 @@
   background-position: center;
   background-size: cover;
 }
-
 .slider3 {
-  background-image: url("./../../../public/collection3.png");
+  background-image: url("./../../../public/collection4.png");
   background-position: center;
   background-size: cover;
 }
 
 .slider4 {
-  background-image: url("./../../../public/collection4.png");
+  background-image: url("./../../../public/collection3.png");
   background-position: center;
   background-size: cover;
 }
@@ -43,29 +42,6 @@
   position: relative;
 }
 
-.collection-container > .collection-article {
-  position: absolute;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-}
-
-.collection-container > .collection-article[data-status="inactive"] {
-  transform: translateX(-100%);
-}
-
-.collection-article {
-  transition: transform 600ms ease;
-}
-
-.collection-article[data-status="active"] {
-  transform: translateX(0%);
-}
-
-.collection-article[data-status="becoming-active-from-inactive"] {
-  transform: translateX(100%);
-  transition: none;
-}
 @media screen and (max-width: 1000px) {
   .Collection-div {
     padding: 50px 50px;

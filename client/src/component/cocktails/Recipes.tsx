@@ -3,8 +3,7 @@ import { BsArrowDownShort } from "react-icons/bs";
 import { useOthers } from "../../context/OthersContext";
 import axios from "axios";
 import { useCocktail } from "../../context/CocktailContext";
-import { Tooltip } from "@chakra-ui/react";
-import React, { Suspense } from "react";
+import React from "react";
 
 export default function Recipes(): JSX.Element {
   const { activeCollectionBtn, activeCategoryBtn } = useOthers();
@@ -41,23 +40,20 @@ export default function Recipes(): JSX.Element {
   return (
     <div className="relative mb-[88px]">
       <div className="flex flex-wrap  border-x-[0.5px] border-[#dadada] Container gap-[16px] pb-[48px] place-content-center mx-auto">
-        <Suspense fallback={<p className="text-blac text-[24px]">Loading</p>}>
-          {recipes.map((recipe, index) => (
-            <RecipeCard recipe={recipe} key={index} />
-          ))}
-        </Suspense>
+        {recipes.map((recipe, index) => (
+          <RecipeCard recipe={recipe} key={index} />
+        ))}
       </div>
-      <Tooltip label="empty" aria-label="A tooltip">
-        <div
-          className="place-content-center cursor-pointer flex my-10 border-b-[0.5px] border-[#dadada] Container"
-          onClick={ReadMore}
-        >
-          <div className="text-white absolute bottom-[-40px]">
-            <BsArrowDownShort className="animate-bounce text-black bg-white mx-auto p-[8px] w-[48px] h-[48px] border-[0.5px] border-black rounded-[50%]" />
-            <p className="text-[12px] text-black">Цааш үзэх</p>
-          </div>
+
+      <div
+        className="place-content-center cursor-pointer flex my-10 border-b-[0.5px] border-[#dadada] Container"
+        onClick={ReadMore}
+      >
+        <div className="text-white absolute bottom-[-40px]">
+          <BsArrowDownShort className="animate-bounce text-black bg-white mx-auto p-[8px] w-[48px] h-[48px] border-[0.5px] border-black rounded-[50%]" />
+          <p className="text-[12px] text-black">Цааш үзэх</p>
         </div>
-      </Tooltip>
+      </div>
     </div>
   );
 }

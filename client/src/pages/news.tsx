@@ -69,14 +69,14 @@ export default function Shop({
               {selectedData && (
                 <motion.div
                   layoutId={selectedData.id}
-                  className={`selected-card Container flex`}
+                  className={`selected-card Container `}
                 >
                   <Image
                     src={selectedData.image_url}
                     alt={`${selectedData.name} image`}
                     width={1000}
                     height={1000}
-                    className="selected-card-image"
+                    className="w-[1120px] object-cover h-[600px]"
                   />
                   <motion.div className="selected-card-div">
                     <motion.h3 className="text-[24px] font-bold">

@@ -87,9 +87,9 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
             >
               <LeftArrow />
             </div>
-            <div className="absolute top-[5%] right-[5%] cursor-pointer">
+            {/* <div className="absolute top-[5%] right-[5%] cursor-pointer">
               <Heart />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="w-full min-[991px]:w-[50%] relative text-white tabs">

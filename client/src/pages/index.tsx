@@ -27,7 +27,7 @@ export default function Home({
     <Layout>
       <>
         <Section>
-          <div className="border-b-[0.5px] border-[#dadada] h-[58vh]">
+          <div className="border-b-[0.5px] border-[#dadada] h-[60vh]">
             <Collection collections={collections} />
           </div>
         </Section>
@@ -53,7 +53,7 @@ export default function Home({
           <Store snowBank={snowBank} />
         </Section>
         <Section>
-          <div className=" bg-gradient-to-r from-[#0F342D] to-[#0F342D]  py-[25px]">
+          <div className=" bg-gradient-to-r from-[#343434] to-[#444444]  py-[25px]">
             <ParallaxText baseVelocity={-1.5}>
               <h2 className="pb-[20px] text-[72px] font-bold text-[#f4f4f4] me-[20px] cocktail-parallox-text">
                 receta. receta. receta.

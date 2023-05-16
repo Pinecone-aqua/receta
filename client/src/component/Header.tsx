@@ -8,6 +8,7 @@ import Login from "./main/Login";
 import { useOthers } from "../context/OthersContext";
 import { Example } from "./main/menu/MotionMenu";
 import React from "react";
+import { TbLogout } from "react-icons/tb";
 
 export default function Header(): JSX.Element {
   const router = useRouter();
@@ -59,33 +60,36 @@ export default function Header(): JSX.Element {
           <Menu>
             <div className="flex gap-5">
               <MenuButton>
-                <picture>
-                  <img
-                    className="w-[35px] h-[35px] rounded-[25px]"
-                    src={user.picture}
-                    alt=""
-                  />
-                </picture>
+                {user.picture ? (
+                  <picture>
+                    <img
+                      className="w-[35px] h-[35px] rounded-[25px]"
+                      src={user.picture}
+                      alt=""
+                    />
+                  </picture>
+                ) : (
+                  <div className="w-[35px] h-[35px] p-1 rounded-[25px] bg-[#f2f2f2] text-black text-center  uppercase">
+                    {user.name?.slice(0, 1)}
+                  </div>
+                )}
               </MenuButton>
               <Example />
             </div>
             <MenuList className="flex text-center flex-col gap-3">
-              <p className="text-[16px] p-2 text-gray-600 border-b-[1px]">
-                hello! {user.name}
-              </p>
-              <p className="text-gray-500 cursor-pointer hover:text-[#1e1e1e]">
-                settings
-              </p>
-              <p className="text-gray-500 cursor-pointer hover:text-[#1e1e1e]">
-                account
-              </p>
+              <div className="text-[16px] p-2 text-gray-600 border-b-[1px] flex w-full justify-center gap-1">
+                Hello!{" "}
+                <p className="text-black text-center font-bold"> {user.name}</p>
+              </div>
+
               <p
-                className="text-gray-500 cursor-pointer hover:text-[#1e1e1e]"
+                className="text-gray-500 cursor-pointer hover:text-[#1e1e1e] flex justify-center mx-auto"
                 onClick={() => {
                   setUser(undefined), Cookies.remove("token");
                 }}
               >
                 log out
+                <TbLogout className="mt-[5px] ms-[8px]" />
               </p>
             </MenuList>
           </Menu>
