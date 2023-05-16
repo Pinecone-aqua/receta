@@ -25,7 +25,7 @@ export class GoogleLoginController {
   googleLogin() {
     const stringifiedParams = queryString.stringify({
       client_id: process.env.CLIENT_ID,
-      redirect_uri: `http://localhost:${process.env.PORT}/google/callback`,
+      redirect_uri: `https://receta-server.onrender.com/google/callback`,
       scope: [
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
