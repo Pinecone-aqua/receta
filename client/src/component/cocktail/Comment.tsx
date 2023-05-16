@@ -20,10 +20,9 @@ export default function Comment({
   comments: CommentType[];
 }): JSX.Element {
   const [emoji, setEmoji] = useState<string>("");
-  const [commentsArr, setCommentsArr] = useState<CommentType[]>(comments);
+  const [commentsArr, setCommentsArr] = useState<CommentType[] | any>(comments);
   const [showComment, setShowComment] = useState<boolean>(false);
   const { user } = useUser();
-  console.log(process.env.SERVER_PORT);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function CommentHandler(e: any) {

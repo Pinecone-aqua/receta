@@ -46,6 +46,8 @@ export default function OurStory(): JSX.Element {
               <h1 className="text-4xl font-semibold">Receta team</h1>
               <div className="mt-5">
                 <Carousel
+                  prevIcon={<></>}
+                  nextIcon={<></>}
                   value={ourStoryValue}
                   circular={true}
                   numVisible={1}

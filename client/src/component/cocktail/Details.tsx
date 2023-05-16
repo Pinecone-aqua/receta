@@ -171,6 +171,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
               </div>
             ) : (
               <Carousel
+                prevIcon={<></>}
+                nextIcon={<></>}
                 circular={true}
                 value={usedTools}
                 numVisible={5}
