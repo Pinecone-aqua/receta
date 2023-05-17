@@ -51,7 +51,7 @@ export default function AllData({
     collections: collectionsData.length,
     tools: toolsData.length,
     users: usersData.length,
-    newsData: newsData.length,
+    news: newsData.length,
   };
 
   useEffect(() => {
@@ -84,13 +84,12 @@ export default function AllData({
         },
       ],
     });
-  }, [counted]);
-  console.log(chartData);
+  }, []);
 
   return (
-    <div className="w-1/2 flex flex-col items-center">
-      <div className="mb-[30px]">All datas </div>
-      <Bar data={chartData} />
+    <div className="w-[90%] flex flex-col items-center">
+      <div className="mb-[30px] text-[32px] text-[teal]">Data chart</div>
+      {chartData && <Bar data={chartData} />}
     </div>
   );
 }

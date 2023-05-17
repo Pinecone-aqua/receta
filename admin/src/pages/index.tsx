@@ -30,7 +30,7 @@ export default function Dashboard({
 }: RecipePropType): JSX.Element {
   return (
     <Layout>
-      <div className="flex">
+      <div className="w-full flex flex-col gap-5">
         <AllData
           recipes={recipes}
           categoriesData={categoriesData}
