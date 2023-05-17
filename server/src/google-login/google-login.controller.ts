@@ -45,11 +45,13 @@ export class GoogleLoginController {
     if (!code) throw new HttpException("Bad Request", HttpStatus.BAD_REQUEST);
 
     const accessToken = await getAccessTokenFromCode(code);
+
     if (!accessToken)
       throw new HttpException("Bad Request", HttpStatus.BAD_REQUEST);
 
+    console.log("access token taken");
     const profile: any = await getGoogleUserInfo(accessToken);
-
+    console.log("profile taken");
     let user = await this.userService.findByEmail(profile.email);
 
     if (!user) {
@@ -68,6 +70,7 @@ export class GoogleLoginController {
       picture: user.picture,
     };
     const token = this.jwtService.sign(payload);
+    console.log("before redirect: ", payload);
     res
       .status(200)
       .cookie("token", token)
