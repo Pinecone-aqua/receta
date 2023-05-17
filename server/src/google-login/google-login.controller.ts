@@ -74,6 +74,6 @@ export class GoogleLoginController {
     res
       .status(200)
       .cookie("token", token)
-      .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+      .redirect(`${process.env.CLIENT_PORT}`);
   }
 }
