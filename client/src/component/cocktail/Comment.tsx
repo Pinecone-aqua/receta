@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { AiOutlineUser } from "react-icons/ai";
@@ -20,10 +22,9 @@ export default function Comment({
   comments: CommentType[];
 }): JSX.Element {
   const [emoji, setEmoji] = useState<string>("");
-  const [commentsArr, setCommentsArr] = useState<CommentType[]>(comments);
+  const [commentsArr, setCommentsArr] = useState<any>(comments);
   const [showComment, setShowComment] = useState<boolean>(false);
   const { user } = useUser();
-  console.log(process.env.SERVER_PORT);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function CommentHandler(e: any) {
@@ -39,7 +40,7 @@ export default function Comment({
       axios
         .post(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/comments/create`, data)
         .then((res) => {
-          res.statusText === "Created"
+          res.data.comment === data.comment
             ? setCommentsArr([...commentsArr, data])
             : alert(res.data);
         });
@@ -72,24 +73,30 @@ export default function Comment({
           >
             Comment
           </MenuButton>
-          <MenuList className="p-10 lg:w-[900px] sm:w-[500px] absolute bottom-[56px]">
+          <MenuList className="p-10 lg:w-[900px] md:w-[500px] w-[300px] absolute bottom-[56px]">
             {" "}
             <h2 className="border-b-2 py-[10px] text-[24px] font-medium">
               Comment
             </h2>
             {commentsArr.length == 0 && (
               <div className="flex text-gray-500">
-                <MdOutlineDoNotDisturbAlt className="w-[25px] h-[25px] mt-[2px]" />{" "}
-                empty
+                <MdOutlineDoNotDisturbAlt className="w-[25px] h-[25px] mt-[3px]" />
+                <p className="text-center text-[20px] ms-1">Not comment</p>
               </div>
             )}
             {commentsArr.map((data: any, index: number) => (
-              <div className="" key={index}>
+              <div key={index}>
                 <div key={index} className="flex py-4">
-                  <img
-                    className="rounded-[25px] w-[32px] h-[32px]"
-                    src={data.writer.picture}
-                  />
+                  {data.writer.picture ? (
+                    <img
+                      className="rounded-[25px] w-[32px] h-[32px]"
+                      src={data.writer.picture}
+                    />
+                  ) : (
+                    <div className="w-[35px] h-[35px] p-1 rounded-[25px] bg-[#f2f2f2] text-black text-center  uppercase">
+                      {data.writer.name?.slice(0, 1)}
+                    </div>
+                  )}
                   <p className="ms-[10px]"> {data.writer.name}</p>
                   <p className="ms-[10px] mt-1 text-[16px] text-gray-400">
                     {data.created_at}
@@ -103,15 +110,21 @@ export default function Comment({
             <div className="relative">
               <form className="flex w-full mt-[40px]" onSubmit={CommentHandler}>
                 <div className="relative flex">
-                  <picture className="absolute top-0 left-0 mt-[5px] ms-1 rounded-[25px]">
+                  <picture className="absolute top-0 left-0 mt-[5px] ms-2 rounded-[25px]">
                     {user ? (
-                      <picture>
-                        <img
-                          className="w-[32px] h-[32px] rounded-[25px]"
-                          src={user.picture}
-                          alt=""
-                        />
-                      </picture>
+                      <div>
+                        {user.picture ? (
+                          <img
+                            className="w-[32px] h-[32px] rounded-[25px]"
+                            src={user.picture}
+                            alt=""
+                          />
+                        ) : (
+                          <div className="w-[32px] h-[32px] p-1 rounded-[25px] bg-[#f2f2f2] text-black text-center uppercase">
+                            {user.name?.slice(0, 1)}
+                          </div>
+                        )}
+                      </div>
                     ) : (
                       <AiOutlineUser className="w-[30px] h-[30px] rounded-[25px] border text-gray-500 mt-[2px]" />
                     )}
@@ -122,8 +135,8 @@ export default function Comment({
                     name="comment"
                     className={
                       emoji
-                        ? `border border-gray-500 ps-[45px] p-[8px] w-[695px] rounded-[20px]`
-                        : `border border-gray-500 ps-[45px] p-[8px] w-[300px] rounded-[20px]`
+                        ? `border border-gray-500 ps-[45px] p-[8px] lg:w-[695px] w-[200px] rounded-[20px]`
+                        : `border border-gray-500 ps-[45px] p-[8px] lg:w-[300px] w-[200px] rounded-[20px]`
                     }
                     placeholder="write a comment"
                     value={emoji}

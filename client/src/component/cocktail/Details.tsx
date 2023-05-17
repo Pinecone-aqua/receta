@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Heart from "@/icons/Heart";
-import LeftArrow from "@/icons/LeftArrow";
 import { RecipesType, ToolType } from "@/util/Types";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Carousel } from "primereact/carousel";
 import { useEffect, useState } from "react";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 interface DetailsType {
   recipe: RecipesType;
@@ -59,8 +58,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
 
   return (
     <div className="border-x border-[#424242] relative">
-      <div className="flex flex-col min-[900px]:flex-row max-w-[1300px] mx-auto">
-        <div className="w-full min-[900px]:w-[50%]">
+      <div className="flex flex-col min-[990px]:flex-row max-w-[1300px] mx-auto">
+        <div className="w-full min-[990px]:w-[50%]">
           <div className="relative">
             <div className="image-bg">
               <picture>
@@ -84,7 +83,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                 router.back();
               }}
             >
-              <LeftArrow />
+              <SlArrowLeft />
             </div>
           </div>
         </div>
@@ -100,7 +99,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="px-8 py-5 md:text-[24px] text:">
+                <span className="px-8 py-5 md:text-[24px] text:[16px]">
                   Ingredients
                 </span>
               </Tab>
@@ -110,7 +109,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="md:text-[24px] px-8 py-5 details-title">
+                <span className="md:text-[24px] px-8 py-5 text:[16px]">
                   Step by step
                 </span>
               </Tab>
@@ -122,7 +121,10 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   {recipe.ingredients.map(
                     (ingredient: string, index: number) => (
                       <div key={index}>
-                        {index + 1}. <span className="ps-2">{ingredient}</span>
+                        {index + 1}.{" "}
+                        <span className="ps-2 md:text-[22px] sm:text-[16px]">
+                          {ingredient}
+                        </span>
                       </div>
                     )
                   )}
@@ -136,8 +138,12 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                         key={index}
                         className="leading-8 mb-[3rem] font-medium"
                       >
-                        <p className="mb-1">Step {index + 1}.</p>
-                        <p>{single}</p>
+                        <p className="mb-1 md:text-[22px] sm:text-[16px]">
+                          Step {index + 1}.
+                        </p>
+                        <p className="md:text-[22px] sm:text-[16px]">
+                          {single}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -171,6 +177,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
               </div>
             ) : (
               <Carousel
+                nextIcon={<SlArrowRight />}
+                prevIcon={<SlArrowLeft />}
                 circular={true}
                 value={usedTools}
                 numVisible={5}

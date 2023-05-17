@@ -64,13 +64,11 @@ export default function Collection({
           {collections.map(
             (collection, index) =>
               activeCollectionBtn === collection.name && (
-                <picture key={index}>
-                  <img
-                    key={index}
-                    className="Col-right-image"
-                    src={collection.image_url}
-                  />
-                </picture>
+                <img
+                  key={index}
+                  className="Col-right-image"
+                  src={collection.image_url}
+                />
               )
           )}
         </div>

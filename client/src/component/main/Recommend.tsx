@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RecipesType } from "../../util/Types";
 import Link from "next/link";
 import React from "react";
 import { Carousel } from "primereact/carousel";
 import Image from "next/image";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 export default function Recommend({
   recommend,
@@ -59,6 +61,8 @@ export default function Recommend({
       <h1 className="recommend-title">We recommend you</h1>
       <div className="Container w-full">
         <Carousel
+          prevIcon={<SlArrowLeft />}
+          nextIcon={<SlArrowRight />}
           circular={true}
           value={recommend}
           numVisible={3}
