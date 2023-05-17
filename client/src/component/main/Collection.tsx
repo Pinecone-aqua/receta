@@ -18,13 +18,13 @@ export default function Collection({
 
   return (
     <div className={`slider${silder}`}>
-      <div className="Collection Container ">
-        <div className="w-[50%] relative Col-section-left ">
+      <div className="Collection Container relative">
+        <div className="w-[50%] relative Col-section-left h-full">
           <div className="Collection-div">
-            <h1 className="text-[48px] text-[#fff] font-medium">
+            <h1 className="text-[48px] text-[#fff] font-medium Collection-title">
               {activeCollectionBtn && activeCollectionBtn}
             </h1>
-            <p className="text-[#fff]">
+            <p className="text-[#fff] Collection-text">
               The origins of the word `cocktail` have been debated . The first
               written mention of `cocktail` as a beverage appeared in The
               Farmers Cabinet, 1803 in the United States. The first definition

@@ -27,7 +27,7 @@ export default function Home({
     <Layout>
       <>
         <Section>
-          <div className="border-b-[0.5px] border-[#dadada] h-[60vh]">
+          <div className="border-b-[0.5px] border-[#dadada]">
             <Collection collections={collections} />
           </div>
         </Section>

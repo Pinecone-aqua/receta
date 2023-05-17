@@ -10,7 +10,6 @@
 .Col-right-image {
   object-fit: cover;
   width: 50%;
-  height: 80%;
   margin: 0 auto;
   margin-top: 50px;
 }
@@ -37,9 +36,8 @@
   background-position: center;
   background-size: cover;
 }
-
-.collection-container {
-  position: relative;
+.Collection-text {
+  font-size: 18px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -60,8 +58,23 @@
   .Col-right-image {
     width: 100%;
     margin: 0;
+    max-height: 500px;
+    object-fit: cover;
   }
   .Collection-arrow {
     right: 45%;
+  }
+  .Collection-text {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .Collection-title {
+    font-size: 32px;
+  }
+  .Collection-div {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
   }
 }
