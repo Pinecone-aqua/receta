@@ -2,6 +2,7 @@ import { useOthers } from "@/context/OthersContext";
 import { useRouter } from "next/router";
 import { Carousel } from "primereact/carousel";
 import React from "react";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 export default function OurStory(): JSX.Element {
   const { setActivePage } = useOthers();
@@ -46,6 +47,8 @@ export default function OurStory(): JSX.Element {
               <h1 className="text-4xl font-semibold">Receta team</h1>
               <div className="mt-5">
                 <Carousel
+                  prevIcon={<SlArrowLeft />}
+                  nextIcon={<SlArrowRight />}
                   value={ourStoryValue}
                   circular={true}
                   numVisible={1}

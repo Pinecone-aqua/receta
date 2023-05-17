@@ -1,17 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RecipesType } from "../../util/Types";
 import Link from "next/link";
 import React from "react";
 import { Carousel } from "primereact/carousel";
 import Image from "next/image";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import { useOthers } from "@/context/OthersContext";
 
 export default function Recommend({
   recommend,
 }: {
   recommend: RecipesType[];
 }): JSX.Element {
+  const { setActivePage } = useOthers();
   const recommendTemplate = (recipe: RecipesType) => (
     <div className="my-auto" key={recipe._id}>
-      <Link href={`../cocktail/${recipe._id}`}>
+      <Link
+        href={`../cocktail/${recipe._id}`}
+        onClick={() => {
+          localStorage.removeItem("page");
+          setActivePage("");
+        }}
+      >
         <Image
           src={recipe.image_url}
           alt={`${recipe.name} image`}
@@ -59,6 +69,8 @@ export default function Recommend({
       <h1 className="recommend-title">We recommend you</h1>
       <div className="Container w-full">
         <Carousel
+          prevIcon={<SlArrowLeft />}
+          nextIcon={<SlArrowRight />}
           circular={true}
           value={recommend}
           numVisible={3}

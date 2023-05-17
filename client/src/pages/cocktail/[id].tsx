@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommentType, RecipesType, ToolType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
@@ -9,6 +10,7 @@ import Layout from "@/component/Layout";
 import Link from "next/link";
 import { Carousel } from "primereact/carousel";
 import Image from "next/image";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 interface RecipeType {
   recipe: RecipesType;
@@ -68,7 +70,7 @@ export default function Recipe({
   ];
   return (
     <Layout>
-      <div className="bg-[#1A1A1A] ">
+      <div className="bg-[#1A1A1A]">
         <Details recipe={recipe} tools={tools} />
         <div className="bg-[#FFFBF1] border-b border-[#dadada]">
           <div className="text-[#1e1e1e] text-[20px] max-w-[1300px] pt-[10vh] pb-20 mx-auto border-x border-[#dadada]">
@@ -101,6 +103,8 @@ export default function Recipe({
           <div className="max-w-[1340px] mx-auto py-[50px] border-b">
             <div className="w-full">
               <Carousel
+                prevIcon={<SlArrowLeft />}
+                nextIcon={<SlArrowRight />}
                 circular={true}
                 value={recommend}
                 numVisible={4}

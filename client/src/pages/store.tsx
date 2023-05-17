@@ -1,6 +1,6 @@
 import Layout from "@/component/Layout";
 import { useOthers } from "@/context/OthersContext";
-import SearchIcon from "@/icons/SearchIcon";
+import { CiSearch } from "react-icons/ci";
 import { ToolType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticProps } from "next";
@@ -39,12 +39,12 @@ export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
                 placeholder="search tools"
                 className="w-full italic placeholder-black focus:outline-none bg-transparent mr-[20px]"
               />
-              <SearchIcon />
+              <CiSearch className="w-[30px] h-[30px]" />
             </div>
           </div>
         </div>
         <div className="w-full flex justify-center border-b border-[#dadada]">
-          <div className="w-[1120px] flex flex-wrap gap-6 py-[50px] border-s-[0.5px] border-[#dadada] px-[10px]">
+          <div className="w-[1120px] flex flex-wrap gap-6 justify-center py-[50px] border-s-[0.5px] border-[#dadada] px-[10px]">
             {sortedTools.length > 0 ? (
               sortedTools.map((tool, index) => (
                 <div
@@ -54,7 +54,7 @@ export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
                     setActivePage("");
                   }}
                   key={index}
-                  className="w-[256px] h-[400px] cursor-pointer hover:drop-shadow-2xl "
+                  className="w-[256px] h-[400px] cursor-pointer"
                 >
                   <img
                     className="w-full hover:bg-violet-600"
@@ -69,7 +69,7 @@ export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
                 </div>
               ))
             ) : (
-              <div className="w-[1100px] text-center">
+              <div className="w-full text-center">
                 <p className="text-[24px]">No tools found</p>
               </div>
             )}

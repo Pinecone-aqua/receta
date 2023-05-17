@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useOthers } from "@/context/OthersContext";
 import { RecipesType } from "@/util/Types";
 import React from "react";

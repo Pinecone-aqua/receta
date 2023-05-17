@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useOthers } from "@/context/OthersContext";
-import Recipe from "@/pages/cocktail/[id]";
-import { RecipesType } from "@/util/Types";
+import { RecipesType, ToolType } from "@/util/Types";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Carousel } from "primereact/carousel";
 import React from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+
 export default function Store({
   snowBank,
 }: {
@@ -32,7 +34,7 @@ export default function Store({
       numScroll: 1,
     },
   ];
-  const toolTemplate = (tool: any) => (
+  const toolTemplate = (tool: ToolType) => (
     <div
       className="cursor-pointer relative tool-card"
       key={tool._id}
@@ -96,6 +98,8 @@ export default function Store({
 
                 <div>
                   <Carousel
+                    nextIcon={<SlArrowRight />}
+                    prevIcon={<SlArrowLeft />}
                     circular={true}
                     value={snowBank.tools_id}
                     numVisible={2}
