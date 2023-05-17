@@ -4,6 +4,8 @@ import { ToolType } from "@/util/Types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { SlArrowLeft } from "react-icons/sl";
 
 export default function Recipe(props: {
   tool: ToolType;
@@ -12,11 +14,20 @@ export default function Recipe(props: {
   const tool: ToolType = props.tool;
   const label = "text-[16px] font-light border-b border-dashed ";
   const { setActivePage } = useOthers();
+  const router = useRouter();
 
   return (
     <Layout>
       <div className="">
-        <div className="flex bg-white Container store-single">
+        <div className="flex bg-white Container store-single relative">
+          <div
+            className="absolute top-[5%] left-[5%] cursor-pointer"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <SlArrowLeft className="w-[16px] h-[16px]" />
+          </div>
           <picture className="w-full">
             <img
               className="h-[80vh] border-e border-dashed object-cover"

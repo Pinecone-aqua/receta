@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { useOthers } from "@/context/OthersContext";
 import { RecipesType, ToolType } from "@/util/Types";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Link from "next/link";
@@ -16,6 +17,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [usedTools, setUsedTools] = useState<any>([]);
   const router = useRouter();
+  const { setActivePage } = useOthers();
 
   function getToolById(id: string) {
     return tools.find((tool: ToolType) => tool._id === id);
@@ -81,9 +83,11 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
               className="absolute top-[5%] left-[5%] cursor-pointer"
               onClick={() => {
                 router.back();
+                localStorage.setItem("page", "cocktails");
+                setActivePage("cocktails");
               }}
             >
-              <SlArrowLeft />
+              <SlArrowLeft className="text-white w-[16px] h-[16px]" />
             </div>
           </div>
         </div>

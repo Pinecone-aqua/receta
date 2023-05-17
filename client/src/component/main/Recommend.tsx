@@ -5,15 +5,23 @@ import React from "react";
 import { Carousel } from "primereact/carousel";
 import Image from "next/image";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import { useOthers } from "@/context/OthersContext";
 
 export default function Recommend({
   recommend,
 }: {
   recommend: RecipesType[];
 }): JSX.Element {
+  const { setActivePage } = useOthers();
   const recommendTemplate = (recipe: RecipesType) => (
     <div className="my-auto" key={recipe._id}>
-      <Link href={`../cocktail/${recipe._id}`}>
+      <Link
+        href={`../cocktail/${recipe._id}`}
+        onClick={() => {
+          localStorage.removeItem("page");
+          setActivePage("");
+        }}
+      >
         <Image
           src={recipe.image_url}
           alt={`${recipe.name} image`}
