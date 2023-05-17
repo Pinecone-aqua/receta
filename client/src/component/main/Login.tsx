@@ -26,8 +26,8 @@ export default function Login() {
       .then((res) => {
         console.log("res", res);
 
-        router.push(res.data);
-        localStorage.setItem("page", "cocktails");
+        // router.push(res.data);
+        // localStorage.setItem("page", "cocktails");
       });
   }
 
