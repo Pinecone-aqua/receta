@@ -1,42 +1,83 @@
-import {
-  CircularProgress,
-  CircularProgressLabel,
-  Stat,
-  StatArrow,
-  StatGroup,
-  StatHelpText,
-  StatLabel,
-  StatNumber,
-} from "@chakra-ui/react";
+import axios from "axios";
 import Layout from "../components/Layout";
+import {
+  CategoryType,
+  CocktailType,
+  CollectionType,
+  NewsType,
+  ToolsType,
+  UsersType,
+} from "../util/Types";
+import RecipeColGraphic from "../components/recipe/functions/RecipeColGraphic";
+import AllData from "../components/recipe/functions/AllData";
 
-export default function Login(): JSX.Element {
+interface RecipePropType {
+  categoriesData: CategoryType[];
+  collections: CollectionType[];
+  recipes: CocktailType[];
+  toolsData: ToolsType[];
+  users: UsersType[];
+  news: NewsType[];
+}
+
+export default function Dashboard({
+  categoriesData,
+  recipes,
+  toolsData,
+  users,
+  news,
+  collections,
+}: RecipePropType): JSX.Element {
   return (
     <Layout>
-      <>
-        <StatGroup>
-          <Stat>
-            <StatLabel>Sent</StatLabel>
-            <StatNumber>345,670</StatNumber>
-            <StatHelpText>
-              <StatArrow type="increase" />
-              23.36%
-            </StatHelpText>
-          </Stat>
-
-          <Stat>
-            <StatLabel>Clicked</StatLabel>
-            <StatNumber>45</StatNumber>
-            <StatHelpText>
-              <StatArrow type="decrease" />
-              9.05%
-            </StatHelpText>
-          </Stat>
-        </StatGroup>
-        <CircularProgress value={40} color="green.400">
-          <CircularProgressLabel>40%</CircularProgressLabel>
-        </CircularProgress>
-      </>
+      <div className="w-full flex flex-col gap-5">
+        <AllData
+          recipes={recipes}
+          categoriesData={categoriesData}
+          collectionsData={collections}
+          toolsData={toolsData}
+          usersData={users}
+          newsData={news}
+        />
+        <RecipeColGraphic recipes={recipes} />
+      </div>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const users = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/all`)
+    .then((res) => res.data);
+
+  const news = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/all`)
+    .then((res) => res.data);
+
+  const recipes = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/all`)
+    .then((res) => res.data);
+
+  const categoriesData = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/get`)
+    .then((res) => res.data);
+
+  const collections = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/collections/get`)
+    .then((res) => res.data);
+
+  const toolsData = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
+    .then((res) => res.data);
+
+  return {
+    props: {
+      recipes,
+      users,
+      news,
+      categoriesData,
+      collections,
+      toolsData,
+    },
+  };
 }

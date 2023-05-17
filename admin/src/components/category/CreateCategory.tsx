@@ -1,7 +1,7 @@
 import { CollectionType } from "../../util/Types";
 import axios from "axios";
 import { useState } from "react";
-import { useOthers } from "@/src/context/OthersContext";
+import { useOthers } from "../../context/OthersContext";
 import { Spinner } from "@chakra-ui/spinner";
 import {
   Modal,

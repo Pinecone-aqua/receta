@@ -70,12 +70,12 @@ export async function getStaticProps() {
     .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/collections/get`)
     .then((res) => res.data);
 
-  const recipes = await axios
-    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/all`)
-    .then((res) => res.data);
-
   const toolsData = await axios
     .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
+    .then((res) => res.data);
+
+  const recipes = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/all`)
     .then((res) => res.data);
 
   return {
