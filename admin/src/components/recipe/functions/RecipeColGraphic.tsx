@@ -1,21 +1,23 @@
 import { CocktailType } from "@/src/util/Types";
 import { useEffect, useState } from "react";
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { PolarArea } from "react-chartjs-2";
-import { Chart as Chartjs, ArcElement, CategoryScale, LinearScale, Title, BarElement, Tooltip, Legend } from "chart.js";
 
 interface GraphicPropType {
   recipes: CocktailType[];
 }
-
+ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 export default function RecipeColGraphic({ recipes }: GraphicPropType) {
-  const [chartData, setChartData] = useState<any>({});
-  const [chartOptions, setChartOptions] = useState({});
-  
-  const countedByCol: Record<string, number> = recipes.reduce(
-    (count: any, recipe) => {
+  const [chartData, setChartData] = useState<any>();
 
-      Chartjs.register(ArcElement, CategoryScale, BarElement ,LinearScale, Title, Tooltip, Legend);
-      
+  const countedByCol: Record<string, number> = recipes.reduce(
+    (count: Record<string, number>, recipe) => {
       const { collection_id } = recipe;
       if (count[collection_id]) {
         count[collection_id]++;
@@ -26,59 +28,38 @@ export default function RecipeColGraphic({ recipes }: GraphicPropType) {
     },
     {}
   );
-  
+
   useEffect(() => {
     const colNames = Object.keys(countedByCol);
     const colNumbers = Object.values(countedByCol);
 
-    const data = {
+    setChartData({
       labels: colNames,
       datasets: [
         {
           label: "Recipes by collection",
           data: colNumbers,
           backgroundColor: [
-            "rgb(255, 99, 132)",
-            "rgb(75, 192, 192)",
-            "rgb(255, 205, 86)",
-            "rgb(201, 203, 207)",
+            "rgba(255, 99, 132, 0.5)",
+            "rgba(54, 162, 235, 0.5)",
+            "rgba(255, 206, 86, 0.5)",
+            "rgba(75, 192, 192, 0.5)",
           ],
+          borderWidth: 1,
         },
       ],
-    };
-
-    setChartData(data);
-
-    setChartOptions({
-      plugins: {
-        legend: {
-          position: 'top'
-        },
-        title: {
-          display: true,
-          text: 'recipes in collection'
-        }
-      },
-      maintainAspectRatio: false,
-      response: true
-    })
+    });
   }, [recipes]);
 
-  useEffect(() => {
-    setChartOptions({
-      plugins: {
-        legend: {
-          position: 'top'
-        },
-        title: {
-          display: true,
-          text: 'recipes in collection'
-        }
-      },
-      maintainAspectRatio: false,
-      response: true
-    })
-  }, []);
-
-  return <div>{chartData && <PolarArea data={chartData} options={chartOptions} />}</div>;
+  return (
+    <div className="w-1/2 flex flex-col items-center">
+      <div className="mb-[30px]">Recipes in collection </div>
+      {chartData && (
+        <PolarArea
+          data={chartData}
+          style={{ width: "100%", height: "500px" }}
+        />
+      )}
+    </div>
+  );
 }
