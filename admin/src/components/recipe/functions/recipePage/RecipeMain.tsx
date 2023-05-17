@@ -1,8 +1,19 @@
 import { useState } from "react";
 import RecipeTable from "../tables/RecipeTable";
-import { CategoryType, CocktailType, CollectionType, ToolsType } from "@/src/util/Types";
+import {
+  CategoryType,
+  CocktailType,
+  CollectionType,
+  ToolsType,
+} from "@/src/util/Types";
 import CreateRecipe from "../../CreateRecipe";
-import { Input, TabPanel } from "@chakra-ui/react";
+import {
+  Input,
+  InputGroup,
+  InputLeftElement,
+  TabPanel,
+} from "@chakra-ui/react";
+import { RiSearch2Line } from "react-icons/ri";
 
 interface CategoriesPropType {
   categories: CategoryType[];
@@ -15,7 +26,7 @@ export default function RecipeMain({
   collections,
   recipes,
   categories,
-  tools
+  tools,
 }: CategoriesPropType): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -26,21 +37,28 @@ export default function RecipeMain({
   const filteredData = recipes.filter((one: { name: string }) =>
     one.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const sortedData = filteredData.sort(
-    (a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+  const sortedData = filteredData.sort((a, b) =>
+    a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+  );
 
   return (
     <TabPanel className="">
       <div className="w-full flex justify-between items-center">
         <CreateRecipe collections={collections} tools={tools} />
-        <Input onChange={handleSort}
-          type="text"
-          name="search"
-          width="300px"
-          className="pl-[10px] focus:outline-none h-[30px] border-b bg-[#fff] text-[#454ADE] text-md mr-[20px]"
-          placeholder="search" size='sm' />
+
+        <InputGroup maxWidth={"650px"}>
+          <InputLeftElement pointerEvents="none">
+            <RiSearch2Line className="w-[20px] h-[20px] text-gray-300" />
+          </InputLeftElement>
+          <Input type="tel" placeholder="Search" onChange={handleSort} />
+        </InputGroup>
       </div>
-        <RecipeTable sortedData={sortedData} categories={categories} collections={collections} tools={tools} />
+      <RecipeTable
+        sortedData={sortedData}
+        categories={categories}
+        collections={collections}
+        tools={tools}
+      />
     </TabPanel>
   );
 }
