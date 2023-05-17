@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Heart from "@/icons/Heart";
 import LeftArrow from "@/icons/LeftArrow";
 import { RecipesType, ToolType } from "@/util/Types";
@@ -22,37 +23,35 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
   }
 
   useEffect(() => {
-    const temp = recipe.tools_id?.map((tool) => {
-      return getToolById(tool._id);
-    });
+    const temp = recipe.tools_id.map((tool) => getToolById(tool._id));
     setUsedTools(temp);
   }, []);
-  const toolTemplate = (tool: any) => {
-    return (
-      <div className="my-auto" key={tool._id}>
-        <Link href={`../store/${tool._id}`}>
-          <img src={tool.image_url} alt={tool.name} />
-          <div className="text-white text-center mt-4">
-            <div className="mb-3">{tool.name}</div>
-          </div>
-        </Link>
-      </div>
-    );
-  };
+
+  const toolTemplate = (tool: ToolType) => (
+    <div className="my-auto" key={tool._id}>
+      <Link href={`../store/${tool._id}`}>
+        <img src={tool.image_url} alt={tool.name} />
+        <div className="text-white text-center mt-4">
+          <div className="mb-3">{tool.name}</div>
+        </div>
+      </Link>
+    </div>
+  );
+
   const responsiveOptions = [
     {
       breakpoint: "1199px",
 
-      numVisible: 3,
+      numVisible: 4,
       numScroll: 1,
     },
     {
-      breakpoint: "991px",
+      breakpoint: "910px",
       numVisible: 2,
       numScroll: 1,
     },
     {
-      breakpoint: "767px",
+      breakpoint: "520px",
       numVisible: 1,
       numScroll: 1,
     },
@@ -60,8 +59,8 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
 
   return (
     <div className="border-x border-[#424242] relative">
-      <div className="flex flex-col min-[991px]:flex-row max-w-[1300px] mx-auto">
-        <div className="w-full min-[991px]:w-[50%]">
+      <div className="flex flex-col min-[900px]:flex-row max-w-[1300px] mx-auto">
+        <div className="w-full min-[900px]:w-[50%]">
           <div className="relative">
             <div className="image-bg">
               <picture>
@@ -87,9 +86,6 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
             >
               <LeftArrow />
             </div>
-            {/* <div className="absolute top-[5%] right-[5%] cursor-pointer">
-              <Heart />
-            </div> */}
           </div>
         </div>
         <div className="w-full min-[991px]:w-[50%] relative text-white tabs">
@@ -104,7 +100,9 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="text-xl px-10 py-7">Ingredients</span>
+                <span className="px-8 py-5 md:text-[24px] text:">
+                  Ingredients
+                </span>
               </Tab>
               <Tab
                 _selected={{
@@ -112,14 +110,16 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="text-xl px-10 py-7">Step by step</span>
+                <span className="md:text-[24px] px-8 py-5 details-title">
+                  Step by step
+                </span>
               </Tab>
             </TabList>
 
             <TabPanels>
               <TabPanel>
                 <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] flex flex-col flex-wrap mt-20 px-[76px] gap-10 overflow-y-auto text-xl">
-                  {recipe.ingredients?.map(
+                  {recipe.ingredients.map(
                     (ingredient: string, index: number) => (
                       <div key={index}>
                         {index + 1}. <span className="ps-2">{ingredient}</span>

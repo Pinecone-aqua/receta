@@ -52,16 +52,16 @@ export default function Recipe({
   const responsiveOptions = [
     {
       breakpoint: "1199px",
+      numVisible: 4,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "910px",
       numVisible: 3,
       numScroll: 1,
     },
     {
-      breakpoint: "1091px",
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: "767px",
+      breakpoint: "520px",
       numVisible: 1,
       numScroll: 1,
     },
@@ -72,20 +72,22 @@ export default function Recipe({
         <Details recipe={recipe} tools={tools} />
         <div className="bg-[#FFFBF1] border-b border-[#dadada]">
           <div className="text-[#1e1e1e] text-[20px] max-w-[1300px] pt-[10vh] pb-20 mx-auto border-x border-[#dadada]">
-            <div className="px-20">
+            <div className="px-20 singleProd-sub-div">
               <div className="flex justify-between">
                 <p className="text-3xl font-bold">{recipe.name}</p>
                 <div>
                   <Rating value={5} disabled cancel={false} />
                 </div>
               </div>
-              <p className="w-[65%] mt-8">{recipe.description}</p>
+              <p className="w-[65%] mt-8 singleProd-description">
+                {recipe.description}
+              </p>
             </div>
           </div>
         </div>
         <div className="bg-[#FFFBF1]">
           <div className="max-w-[1300px] mx-auto border-x border-[#dadada]">
-            <div className="flex gap-5 px-20 py-10">
+            <div className="flex gap-5 px-20 py-10 singleProd-review">
               <Comment comments={comments} recipe_id={recipe._id} />
               <RatingComp />
             </div>

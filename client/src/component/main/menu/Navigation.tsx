@@ -11,6 +11,7 @@ const variants = {
   },
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Navigation = ({ isOpen }: { isOpen: any }) => (
   <motion.ul variants={variants} className={isOpen ? "open-ul" : "close-ul"}>
     <MenuItem />

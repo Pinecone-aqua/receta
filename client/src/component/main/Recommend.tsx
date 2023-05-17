@@ -42,12 +42,12 @@ export default function Recommend({
       numScroll: 1,
     },
     {
-      breakpoint: "1091px",
+      breakpoint: "767px",
       numVisible: 2,
       numScroll: 1,
     },
     {
-      breakpoint: "767px",
+      breakpoint: "520px",
       numVisible: 1,
       numScroll: 1,
     },

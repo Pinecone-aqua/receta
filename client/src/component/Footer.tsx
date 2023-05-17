@@ -1,6 +1,6 @@
 export default function Footer(): JSX.Element {
   return (
-    <footer className="bg-white">
+    <footer className="bg-white mb-[50px]">
       <div className="Container footer flex relative text-black border-s-[0.5px] border-[#dadada] ps-[47px] pt-[50px] justify-between">
         <div className="flex flex-col justify-around">
           <h2 className="logo">receta.</h2>

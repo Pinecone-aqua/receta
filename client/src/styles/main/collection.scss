@@ -13,7 +13,11 @@
   margin: 0 auto;
   margin-top: 50px;
 }
-
+.Col-section-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .slider1 {
   background-image: url("./../../../public/collection1.png");
   background-position: center;
