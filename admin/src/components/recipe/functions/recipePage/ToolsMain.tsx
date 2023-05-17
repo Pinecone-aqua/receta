@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { ToolsType } from "@/src/util/Types";
-import { Input, TabPanel } from "@chakra-ui/react";
+import {
+  Input,
+  InputGroup,
+  InputLeftElement,
+  TabPanel,
+} from "@chakra-ui/react";
 import CreateTools from "@/src/components/tool/CreateTool";
 import ToolsTable from "../tables/ToolsTable";
+import { RiSearch2Line } from "react-icons/ri";
 
 interface ToolsPropType {
   tools: ToolsType[];
 }
 
-export default function ToolsMain({
-  tools
-}: ToolsPropType): JSX.Element {
+export default function ToolsMain({ tools }: ToolsPropType): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSort(e: React.ChangeEvent<HTMLInputElement>) {
@@ -20,28 +24,22 @@ export default function ToolsMain({
   const filteredData = tools.filter((one: { name: string }) =>
     one.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const sortedData = filteredData.sort(
-    (a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+  const sortedData = filteredData.sort((a, b) =>
+    a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+  );
 
   return (
     <TabPanel className="">
       <div className="w-full flex justify-between items-center">
         <CreateTools />
-        <Input onChange={handleSort}
-          type="text"
-          name="search"
-          width="300px"
-          className="pl-[10px] focus:outline-none h-[30px] border-b bg-[#fff] text-[#454ADE] text-md mr-[20px]"
-          placeholder="search" size='sm' />
-        {/* <input
-          onChange={handleSort}
-          type="text"
-          name="search"
-          className="w-1/4 pl-[10px] focus:outline-none h-[30px] border-b placeholder-[#454ADE] bg-[#fff] text-[#454ADE] text-md mr-[20px]"
-          placeholder="search"
-        /> */}
+        <InputGroup maxWidth={"650px"}>
+          <InputLeftElement pointerEvents="none">
+            <RiSearch2Line className="w-[20px] h-[20px] text-gray-300" />
+          </InputLeftElement>
+          <Input type="tel" placeholder="Search" onChange={handleSort} />
+        </InputGroup>
       </div>
-        <ToolsTable sortedData={sortedData}/>
+      <ToolsTable sortedData={sortedData} />
     </TabPanel>
   );
 }
