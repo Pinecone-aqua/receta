@@ -9,27 +9,27 @@ const variants = {
     y: 0,
     opacity: 1,
     transition: {
-      y: { stiffness: 1000, velocity: -100 },
+      y: { stiffness: 100, velocity: -10 },
     },
   },
   closed: {
-    y: 50,
+    y: 2,
     opacity: 0,
     transition: {
-      y: { stiffness: 1000 },
+      y: { stiffness: 200 },
     },
   },
 };
 
 export const MenuItem = () => {
-  const { setActivePage } = useOthers();
+  const { setActivePage, activePage } = useOthers();
   return (
     <motion.li
       variants={variants}
       whileTap={{ scale: 0.95 }}
       className="flex flex-col gap-5"
     >
-      <h1 className="text-[26px] border-b p-3">receta.</h1>
+      <h1 className="text-[26px] border-b py-3 text-center">receta.</h1>
       {Pages.map((page, index) => (
         <Link
           href={page.url}
@@ -38,7 +38,11 @@ export const MenuItem = () => {
             localStorage.setItem("page", page.name);
             setActivePage(page.name);
           }}
-          className="cursor-pointer py-2 hover:bg-[#DFDFDF] p-3 duration-200"
+          className={
+            activePage === page.name
+              ? "cursor-pointer bg-[#DFDFDF] py-3 text-center duration-200"
+              : "cursor-pointer hover:bg-[#DFDFDF] py-3 text-center duration-200"
+          }
         >
           {page.name}
         </Link>

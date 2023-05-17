@@ -53,14 +53,14 @@ export default function Home({
           <Store snowBank={snowBank} />
         </Section>
         <Section>
-          <div className=" bg-gradient-to-r from-[#343434] to-[#444444]  py-[25px]">
+          <div className="bg-gradient-to-r from-[#343434] to-[#444444] py-[25px]">
             <ParallaxText baseVelocity={-1.5}>
               <h2 className="pb-[20px] text-[72px] font-bold text-[#f4f4f4] me-[20px] cocktail-parallox-text">
                 receta. receta. receta.
               </h2>
             </ParallaxText>
             <ParallaxText baseVelocity={1}>
-              <h2 className="text-[#051210] text-[52px] uppercase me-[50px]">
+              <h2 className="text-[#051210] text-[52px] uppercase me-[50px] cocktail-parallox-text-sub">
                 you try these drinks goodluck
               </h2>
             </ParallaxText>
