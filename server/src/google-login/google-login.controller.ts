@@ -72,9 +72,6 @@ export class GoogleLoginController {
     const token = this.jwtService.sign(payload);
     console.log("before redirect: ", payload);
     console.log("client port: ", process.env.CLIENT_PORT);
-    res
-      .status(200)
-      .cookie("token", token)
-      .redirect(`${process.env.CLIENT_PORT}`);
+    res.status(200).send(token).redirect(`${process.env.CLIENT_PORT}`);
   }
 }
