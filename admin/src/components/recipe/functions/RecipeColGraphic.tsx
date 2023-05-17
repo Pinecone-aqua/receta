@@ -1,19 +1,21 @@
 import { CocktailType } from "@/src/util/Types";
 import { useEffect, useState } from "react";
 import { PolarArea } from "react-chartjs-2";
-import { Chart, ArcElement, CategoryScale, LinearScale, Title } from "chart.js";
+import { Chart as Chartjs, ArcElement, CategoryScale, LinearScale, Title, BarElement, Tooltip, Legend } from "chart.js";
 
 interface GraphicPropType {
   recipes: CocktailType[];
 }
 
 export default function RecipeColGraphic({ recipes }: GraphicPropType) {
-  const [chartData, setChartData] = useState<any>(null);
-
-  Chart.register(ArcElement, CategoryScale, LinearScale, Title);
-
+  const [chartData, setChartData] = useState<any>({});
+  const [chartOptions, setChartOptions] = useState({});
+  
   const countedByCol: Record<string, number> = recipes.reduce(
     (count: any, recipe) => {
+
+      Chartjs.register(ArcElement, CategoryScale, BarElement ,LinearScale, Title, Tooltip, Legend);
+      
       const { collection_id } = recipe;
       if (count[collection_id]) {
         count[collection_id]++;
@@ -24,7 +26,7 @@ export default function RecipeColGraphic({ recipes }: GraphicPropType) {
     },
     {}
   );
-
+  
   useEffect(() => {
     const colNames = Object.keys(countedByCol);
     const colNumbers = Object.values(countedByCol);
@@ -33,7 +35,7 @@ export default function RecipeColGraphic({ recipes }: GraphicPropType) {
       labels: colNames,
       datasets: [
         {
-          label: "My First Dataset",
+          label: "Recipes by collection",
           data: colNumbers,
           backgroundColor: [
             "rgb(255, 99, 132)",
@@ -46,7 +48,37 @@ export default function RecipeColGraphic({ recipes }: GraphicPropType) {
     };
 
     setChartData(data);
-  }, [countedByCol]);
 
-  return <div>{chartData && <PolarArea data={chartData} />}</div>;
+    setChartOptions({
+      plugins: {
+        legend: {
+          position: 'top'
+        },
+        title: {
+          display: true,
+          text: 'recipes in collection'
+        }
+      },
+      maintainAspectRatio: false,
+      response: true
+    })
+  }, [recipes]);
+
+  useEffect(() => {
+    setChartOptions({
+      plugins: {
+        legend: {
+          position: 'top'
+        },
+        title: {
+          display: true,
+          text: 'recipes in collection'
+        }
+      },
+      maintainAspectRatio: false,
+      response: true
+    })
+  }, []);
+
+  return <div>{chartData && <PolarArea data={chartData} options={chartOptions} />}</div>;
 }
