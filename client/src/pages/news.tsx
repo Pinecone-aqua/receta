@@ -1,13 +1,20 @@
 import Header from "@/component/Header";
-// import ParallaxText from "@/component/main/ParalloxText";
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { RiCloseFill } from "react-icons/ri";
+import { motion } from "framer-motion";
 import { Section } from "@/component/main/motionScroll/MotionScroll";
 import { NewsType } from "@/util/Types";
 import { GetStaticProps } from "next";
 import axios from "axios";
 import Image from "next/image";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 export default function Shop({
   newsData,
@@ -16,34 +23,25 @@ export default function Shop({
 }): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedData, setSelectedData] = useState<any>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
       <div>
-        <div className={selectedData ? `w-full h-full absolute z-[100]` : ""} />
-        <div className={selectedData ? `opacity-[0.3]` : ""}>
-          <Header />
-        </div>
+        <Header />
         <Section>
           <div className="relative Container">
-            <div
-              className={
-                selectedData
-                  ? `opacity-[0.3] w-full Container flex flex-wrap card-container relative`
-                  : "w-full Container flex flex-wrap card-container relative"
-              }
-            >
+            <div className="w-full Container flex flex-wrap card-container relative">
               {newsData
                 .map((item: NewsType, index: number) => (
                   <motion.div
                     layoutId={item._id}
                     key={index}
-                    onClick={() => !selectedData && setSelectedData(item)}
-                    className={
-                      selectedData
-                        ? `card disable bg-gradient-to-t from-black to-black `
-                        : `card active bg-black`
-                    }
+                    onClick={() => {
+                      !selectedData && setSelectedData(item);
+                      onOpen();
+                    }}
+                    className="card"
                   >
                     <motion.div className="news-card-container">
                       <Image
@@ -65,32 +63,43 @@ export default function Shop({
                 ))
                 .reverse()}
             </div>
-            <AnimatePresence>
-              {selectedData && (
-                <motion.div
-                  layoutId={selectedData.id}
-                  className={`selected-card Container `}
-                >
-                  <Image
-                    src={selectedData.image_url}
-                    alt={`${selectedData.name} image`}
-                    width={1000}
-                    height={1000}
-                    className="w-[1120px] object-cover h-[600px]"
-                  />
-                  <motion.div className="selected-card-div">
-                    <motion.h3 className="text-[24px] font-bold">
-                      {selectedData.name}
-                    </motion.h3>
-                    <motion.p>{selectedData.description}</motion.p>
-                  </motion.div>
-
-                  <motion.button onClick={() => setSelectedData(null)}>
-                    <RiCloseFill className="w-[30px] h-[30px] p-1 rounded-[25px] absolute right-6 top-6" />
-                  </motion.button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <Modal
+              isOpen={isOpen}
+              onClose={() => {
+                onClose(), setSelectedData(null);
+              }}
+              size={"5xl"}
+              isCentered
+            >
+              <ModalOverlay backdropFilter="blur(3px)" />
+              <ModalContent className="">
+                <ModalHeader className="text-[#0f342d]">
+                  receta news
+                </ModalHeader>
+                <ModalCloseButton onClick={onClose} />
+                <ModalBody className="mb-5">
+                  {selectedData && (
+                    <motion.div>
+                      <Image
+                        src={selectedData.image_url}
+                        alt={`${selectedData.name} image`}
+                        width={1000}
+                        height={1000}
+                        className="object-cover w-[100%] max-h-[500px]"
+                      />
+                      <motion.div>
+                        <motion.h3 className="text-[24px] font-bold selected-title">
+                          {selectedData.name}
+                        </motion.h3>
+                        <motion.p className="selected-desc">
+                          {selectedData.description}
+                        </motion.p>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </ModalBody>
+              </ModalContent>
+            </Modal>
           </div>
         </Section>
       </div>
