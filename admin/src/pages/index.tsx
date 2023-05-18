@@ -8,8 +8,8 @@ import {
   ToolsType,
   UsersType,
 } from "../util/Types";
-// import RecipeColGraphic from "../components/recipe/functions/RecipeColGraphic";
-// import AllData from "../components/recipe/functions/AllData";
+// import RecipeColGraphic from "../components/dashboard/RecipeColGraphic";
+// import AllData from "../components/dashboard/AllData";
 
 interface RecipePropType {
   categoriesData: CategoryType[];
@@ -29,8 +29,8 @@ export default function Dashboard({}: // categoriesData,
 RecipePropType): JSX.Element {
   return (
     <Layout>
-      <div className="w-full flex flex-col gap-5">
-        dash
+      <div className="w-full flex flex-col items-center gap-5">
+        dashboard
         {/* <AllData
           recipes={recipes}
           categoriesData={categoriesData}
@@ -38,7 +38,7 @@ RecipePropType): JSX.Element {
           toolsData={toolsData}
           usersData={users}
           newsData={news}
-        /> */}
+        />  */}
         {/* <RecipeColGraphic recipes={recipes} /> */}
       </div>
     </Layout>
@@ -72,12 +72,12 @@ RecipePropType): JSX.Element {
 
 //   return {
 //     props: {
-//       // recipes,
-//       // users,
-//       // news,
-//       // categoriesData,
-//       // collections,
-//       // toolsData,
+//       recipes,
+//       users,
+//       news,
+//       categoriesData,
+//       collections,
+//       toolsData,
 //     },
 //   };
 // }
