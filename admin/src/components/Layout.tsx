@@ -1,4 +1,5 @@
 import { useUser } from "../context/UserContext";
+import Login from "../pages/login";
 import Navbar from "./Navbar";
 import SideBar from "./SideBar";
 
@@ -25,6 +26,6 @@ export default function Layout({ children }: { children: JSX.Element }) {
       </div>
     );
   } else {
-    return <div>not pound</div>;
+    return <Login />;
   }
 }
