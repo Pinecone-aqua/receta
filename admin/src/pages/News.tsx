@@ -50,7 +50,6 @@ export default function News({
                     <Td>{newsData.name}</Td>
                     <Td>{newsData.category}</Td>
                     <Td>
-                      {/* <img className="h-[80px]" src={newsData.image_url} /> */}
                       <Image
                         className="rounded-md h-[50px] w-[50px]"
                         src={newsData.image_url}

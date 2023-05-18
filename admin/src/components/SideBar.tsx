@@ -70,28 +70,28 @@ export const pages: PageType[] = [
     icon: <BiHomeAlt2 />,
   },
   {
-    url: "../Recipe",
+    url: "../recipe",
     name: "Recipe",
     icon: <TbBrandShopee />,
   },
   {
-    url: "../News",
+    url: "../news",
     name: "News",
     icon: <SiApplenews />,
   },
 
   {
-    url: "../User",
+    url: "../user",
     name: "User",
     icon: <BsFillPeopleFill />,
   },
   {
-    url: "../Order",
+    url: "../order",
     name: "Order",
     icon: <MdBookmarkBorder />,
   },
   {
-    url: "../Settings",
+    url: "../settings",
     name: "Settings",
     icon: <RiSettings3Fill />,
   },
