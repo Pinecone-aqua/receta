@@ -13,6 +13,7 @@ import { getGoogleUserInfo } from "./getGoogleUserInfo";
 import { UserService } from "../users/users.service";
 import { User } from "../users/user.schema";
 import { JwtService } from "@nestjs/jwt";
+import { strict } from "assert";
 
 @Controller()
 export class GoogleLoginController {
@@ -77,6 +78,8 @@ export class GoogleLoginController {
       .status(200)
       .cookie("token", token, {
         domain: "https://receta-bizbqthdy-leo-s-team.vercel.app",
+        secure: true,
+        sameSite: "strict",
         path: "/",
       })
       .redirect(`${process.env.CLIENT_PORT}`);
