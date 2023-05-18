@@ -79,7 +79,7 @@ export class GoogleLoginController {
       .cookie("token", token, {
         domain: "https://receta-bizbqthdy-leo-s-team.vercel.app",
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
         path: "/",
       })
       .redirect(`${process.env.CLIENT_PORT}`);
