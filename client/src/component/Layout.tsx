@@ -15,8 +15,7 @@ export default function Layout({
   useEffect(() => {
     if (router.query.token) {
       Cookies.set("token", `${router.query.token}`);
-      router.push("../");
-      router.reload();
+      router.replace("/");
     }
   }, [router]);
 
