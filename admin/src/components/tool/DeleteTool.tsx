@@ -39,7 +39,7 @@ export default function DeleteAlert({
         },
       }
     );
-    if (result && result.data.deletedCount == 1) {
+    if (result.data.deletedCount == 1) {
       setTools(filterData);
       successToast();
     }

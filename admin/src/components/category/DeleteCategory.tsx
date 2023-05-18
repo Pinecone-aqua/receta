@@ -34,7 +34,7 @@ export default function DeleteAlert({ category }: { category: CategoryType }) {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (result && result.data.deletedCount == 1) {
+    if (result.data.deletedCount == 1) {
       setCategories(filterData);
       successToast();
     }

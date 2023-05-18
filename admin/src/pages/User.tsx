@@ -14,7 +14,7 @@ export default function User({
 }): JSX.Element {
   const { setUsers, users } = useUser();
   useEffect(() => {
-    setUsers(usersData && usersData);
+    setUsers(usersData);
   }, []);
 
   return (
@@ -38,21 +38,14 @@ export default function User({
               <th scope="col" className="px-6 py-4 font-medium text-gray-900">
                 Role
               </th>
-              <th
-                scope="col"
-                className="px-6 py-4 font-medium text-gray-900"
-              ></th>
-              <th
-                scope="col"
-                className="px-6 py-4 font-medium text-gray-900"
-              ></th>
+              <th scope="col" className="px-6 py-4 font-medium text-gray-900" />
+              <th scope="col" className="px-6 py-4 font-medium text-gray-900" />
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {users &&
-              users.map((user: any, index: number) => {
-                return <UsersRow key={user._id} user={user} index={index} />;
-              })}
+            {users.map((user: UsersType, index: number) => (
+              <UsersRow key={user._id} user={user} index={index} />
+            ))}
           </tbody>
         </table>
       </div>

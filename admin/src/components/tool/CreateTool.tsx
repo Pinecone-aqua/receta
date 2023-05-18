@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useOthers } from "@/src/context/OthersContext";
 import { Button } from "@chakra-ui/button";
 import { FormLabel } from "@chakra-ui/form-control";
