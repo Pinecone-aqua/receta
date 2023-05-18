@@ -18,6 +18,11 @@ export class ToolsService {
     return this.ToolModel.findOne({ _id: id });
   }
 
+  async length() {
+    const data = await this.ToolModel.find();
+    return data.length;
+  }
+
   getIds() {
     return this.ToolModel.find().select({ _id: 1 });
   }

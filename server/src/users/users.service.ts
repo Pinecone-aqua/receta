@@ -26,6 +26,11 @@ export class UserService {
     });
   }
 
+  async length() {
+    const data = await this.userModel.find();
+    return data.length;
+  }
+
   async loginUser(user: any) {
     try {
       const findAdmin = await this.userModel.findOne({

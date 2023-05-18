@@ -23,6 +23,11 @@ export class CollectionController {
     return this.collectionService.allCollection();
   }
 
+  @Get("length")
+  async length() {
+    return this.collectionService.length();
+  }
+
   @Post("create")
   @CheckRole("MODERATOR", "ADMIN")
   @UseInterceptors(FileInterceptor("file"))

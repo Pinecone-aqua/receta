@@ -22,6 +22,11 @@ export class ToolsController {
     return this.toolService.all();
   }
 
+  @Get("length")
+  length() {
+    return this.toolService.length();
+  }
+
   @Get("find")
   findTool(@Query("id") id: string) {
     return this.toolService.findId(id);

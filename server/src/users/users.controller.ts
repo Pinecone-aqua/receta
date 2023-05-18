@@ -21,6 +21,11 @@ export class UserController {
     return this.userService.allUser();
   }
 
+  @Get("length")
+  length() {
+    return this.userService.length();
+  }
+
   @Patch(":id")
   @UseGuards(CheckRoleGuard)
   @CheckRole("MODERATOR", "ADMIN")

@@ -26,6 +26,11 @@ export class RecipesService {
     }
   }
 
+  async length() {
+    const data = await this.recipeModel.find();
+    return data.length;
+  }
+
   async findRecipe(id: string) {
     try {
       return await this.recipeModel.findOne({ _id: id });

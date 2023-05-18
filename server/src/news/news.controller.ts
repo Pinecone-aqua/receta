@@ -13,16 +13,20 @@ import { CheckRole } from "../role/role.decorator";
 import { NewsService } from "./news.service";
 @Controller("news")
 export class NewsController {
-  constructor(private readonly toolService: NewsService) {}
+  constructor(private readonly newsService: NewsService) {}
 
   @Get("all")
   find() {
-    return this.toolService.all();
+    return this.newsService.all();
   }
 
+  @Get("length")
+  length() {
+    return this.newsService.length();
+  }
   @Get("find")
   findTool(@Query("id") id: string) {
-    return this.toolService.findId(id);
+    return this.newsService.findId(id);
   }
 
   @Post("create")
@@ -31,12 +35,12 @@ export class NewsController {
     const data = {
       ...JSON.parse(body.newData),
     };
-    return this.toolService.create(data, file);
+    return this.newsService.create(data, file);
   }
 
   @Delete("delete")
   @CheckRole("MODERATOR", "ADMIN")
   delete(@Query() id: string) {
-    return this.toolService.delete(id);
+    return this.newsService.delete(id);
   }
 }
