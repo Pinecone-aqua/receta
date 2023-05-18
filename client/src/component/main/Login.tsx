@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -16,7 +16,7 @@ import { FaCocktail } from "react-icons/fa";
 
 export default function Login() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const router = useRouter();
+  // const router = useRouter();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
