@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from "./Header";
 import Footer from "./Footer";
 import Head from "next/head";
@@ -16,7 +17,7 @@ export default function Layout({
       Cookies.set("token", `${router.query.token}`);
       router.push("../");
     }
-  }, []);
+  }, [router.query.token]);
 
   return (
     <>
