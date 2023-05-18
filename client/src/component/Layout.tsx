@@ -13,12 +13,10 @@ export default function Layout({
 }): JSX.Element {
   const router = useRouter();
   useEffect(() => {
-    console.log("router: ", router);
-
     if (router.query.token) {
-      console.log("router token: ", router.query.token);
       Cookies.set("token", `${router.query.token}`);
       router.push("../");
+      router.reload();
     }
   }, [router]);
 
