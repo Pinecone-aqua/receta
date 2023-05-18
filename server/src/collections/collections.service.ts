@@ -13,6 +13,10 @@ export class CollectionService {
   allCollection() {
     return this.collectionModel.find();
   }
+  async length() {
+    const data = await this.collectionModel.find();
+    return data.length;
+  }
 
   createCollection(collection: CreateCollectionsDto) {
     return this.collectionModel.create(collection);

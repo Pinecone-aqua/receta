@@ -23,6 +23,10 @@ export class RecipesController {
     private readonly cloudinary: CloudinaryService
   ) {}
 
+  @Get("length")
+  length() {
+    return this.recipesService.length();
+  }
   @Get("all")
   find() {
     return this.recipesService.allRecipe();
