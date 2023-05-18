@@ -1,6 +1,6 @@
 import { PropType, UserContextType, UsersType } from "../util/Types";
 import React, { createContext, useContext, useEffect, useState } from "react";
-// import jwtDecide from "jwt-decode";
+import jwtDecide from "jwt-decode";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
@@ -14,8 +14,7 @@ export default function UserProvider({ children }: PropType) {
 
   useEffect(() => {
     const token = Cookies.get("token");
-    // token ? setUser(jwtDecide(token)) : router.push("../login");
-    console.log(token);
+    token ? setUser(jwtDecide(token)) : router.push("../login");
   }, [router]);
 
   return (
