@@ -16,10 +16,6 @@ export default function SideBar(): JSX.Element {
   const { setUser } = useUser();
   const router = useRouter();
 
-  useEffect(() => {
-    const savedPage = localStorage.getItem("page");
-    setActivePage(savedPage || "Dashboard");
-  }, []);
   return (
     <div className="h-[100vh] sidebar ps-[40px] bg-white">
       <div className="fixed">
