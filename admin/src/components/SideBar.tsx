@@ -52,10 +52,11 @@ export default function SideBar(): JSX.Element {
         <div
           className="flex gap-[6px] cursor-pointer mt-[30vh]"
           onClick={() => {
-            setUser(null), Cookies.remove("token"), router.push("../Login");
+            setUser(null), Cookies.remove("token"), router.push("../Login"), 
+              localStorage.clear();
           }}
         >
-          <CiLogout className="text-[#FF543E] mt-[2px] w-[20px] h-[20px] ms-[6px]" />{" "}
+          <CiLogout className="text-[#FF543E] absolute top-[650px] w-[20px] h-[20px] ms-[6px]" />{" "}
           <p>Log out</p>
         </div>
       </div>
