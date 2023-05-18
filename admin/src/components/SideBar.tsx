@@ -7,7 +7,6 @@ import { MdBookmarkBorder } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { useOthers } from "../context/OthersContext";
 import { SiApplenews } from "react-icons/si";
-import { useEffect } from "react";
 import { useUser } from "../context/UserContext";
 import Cookies from "js-cookie";
 
