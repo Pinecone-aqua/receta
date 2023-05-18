@@ -1,13 +1,23 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 export default function Layout({
   children,
 }: {
   children: JSX.Element;
 }): JSX.Element {
+  const router = useRouter();
+  useEffect(() => {
+    if (router.query.token) {
+      Cookies.set("token", `${router.query.token}`);
+      router.push("../");
+    }
+  }, []);
+
   return (
     <>
       <Head>
