@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -38,14 +38,17 @@ export default function AllData({
 }: AllDataPropType) {
   const [chartData, setChartData] = useState<any>();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const counted = {
-    recipes: recipes,
-    categories: categories,
-    collections: collections,
-    tools: tools,
-    users: users,
-    news: news,
-  };
+  const counted = useMemo(
+    () => ({
+      recipes: recipes,
+      categories: categories,
+      collections: collections,
+      tools: tools,
+      users: users,
+      news: news,
+    }),
+    [recipes, categories, collections, tools, users, news]
+  );
 
   useEffect(() => {
     const colNames = Object.keys(counted);

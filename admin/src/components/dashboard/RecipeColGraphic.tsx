@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CocktailType } from "@/src/util/Types";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -17,17 +17,18 @@ ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 export default function RecipeColGraphic({ recipes }: GraphicPropType) {
   const [chartData, setChartData] = useState<any>();
 
-  const countedByCol: Record<string, number> = recipes.reduce(
-    (count: Record<string, number>, recipe) => {
-      const { collection_id } = recipe;
-      if (count[collection_id]) {
-        count[collection_id]++;
-      } else {
-        count[collection_id] = 1;
-      }
-      return count;
-    },
-    {}
+  const countedByCol = useMemo(
+    () =>
+      recipes.reduce((count: Record<string, number>, recipe) => {
+        const { collection_id } = recipe;
+        if (count[collection_id]) {
+          count[collection_id]++;
+        } else {
+          count[collection_id] = 1;
+        }
+        return count;
+      }, {}),
+    [recipes]
   );
 
   useEffect(() => {
