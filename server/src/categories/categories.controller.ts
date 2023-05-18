@@ -19,6 +19,11 @@ export class CategoriesController {
     return this.categoriesService.all();
   }
 
+  @Get("length")
+  length() {
+    return this.categoriesService.length();
+  }
+
   @Get("filter")
   filterRecipe(@Query("name") name: string) {
     return this.categoriesService.filterCategory(name);

@@ -19,6 +19,15 @@ export class CategoriesService {
     }
   }
 
+  async length() {
+    try {
+      const data = await this.categoriesModel.find();
+      return data.length;
+    } catch (err) {
+      return err;
+    }
+  }
+
   async filterCategory(name: string) {
     try {
       return await this.categoriesModel.find({
