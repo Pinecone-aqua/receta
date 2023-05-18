@@ -19,6 +19,11 @@ export class NewsService {
     return this.NewsModel.findOne({ _id: id });
   }
 
+  async dataLength() {
+    const data = await this.NewsModel.find();
+    return data.length;
+  }
+
   async create(data: CreateNewsDto, file: any) {
     try {
       const { secure_url } = await this.cloudinary.uploadImage(file);
