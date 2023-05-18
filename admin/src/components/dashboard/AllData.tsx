@@ -1,12 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  CategoryType,
-  CocktailType,
-  CollectionType,
-  NewsType,
-  ToolsType,
-  UsersType,
-} from "@/src/util/Types";
 import { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
@@ -20,12 +12,12 @@ import {
 import { Bar } from "react-chartjs-2";
 
 interface AllDataPropType {
-  recipes: CocktailType[];
-  categoriesData: CategoryType[];
-  collectionsData: CollectionType[];
-  toolsData: ToolsType[];
-  usersData: UsersType[];
-  newsData: NewsType[];
+  categories: number;
+  collections: number;
+  recipes: number;
+  tools: number;
+  users: number;
+  news: number;
 }
 ChartJS.register(
   CategoryScale,
@@ -37,22 +29,22 @@ ChartJS.register(
 );
 
 export default function AllData({
+  categories,
+  collections,
   recipes,
-  categoriesData,
-  collectionsData,
-  toolsData,
-  usersData,
-  newsData,
+  tools,
+  users,
+  news,
 }: AllDataPropType) {
   const [chartData, setChartData] = useState<any>();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const counted = {
-    recipes: recipes.length,
-    categories: categoriesData.length,
-    collections: collectionsData.length,
-    tools: toolsData.length,
-    users: usersData.length,
-    news: newsData.length,
+    recipes: recipes,
+    categories: categories,
+    collections: collections,
+    tools: tools,
+    users: users,
+    news: news,
   };
 
   useEffect(() => {
@@ -90,7 +82,9 @@ export default function AllData({
   return (
     <div className="w-3/4 flex flex-col items-center">
       <div className="mb-[30px] text-[32px] text-[teal]">Data chart</div>
-      {chartData && <Bar data={chartData} style={{ width: "100%", height: "500px" }} />}
+      {chartData && (
+        <Bar data={chartData} style={{ width: "100%", height: "500px" }} />
+      )}
     </div>
   );
 }

@@ -1,83 +1,84 @@
-// import axios from "axios";
+import axios from "axios";
 import Layout from "../components/Layout";
-import {
-  CategoryType,
-  CocktailType,
-  CollectionType,
-  NewsType,
-  ToolsType,
-  UsersType,
-} from "../util/Types";
-// import RecipeColGraphic from "../components/dashboard/RecipeColGraphic";
-// import AllData from "../components/dashboard/AllData";
+import RecipeColGraphic from "../components/dashboard/RecipeColGraphic";
+import AllData from "../components/dashboard/AllData";
+import { CocktailType } from "../util/Types";
 
 interface RecipePropType {
-  categoriesData: CategoryType[];
-  collections: CollectionType[];
-  recipes: CocktailType[];
-  toolsData: ToolsType[];
-  users: UsersType[];
-  news: NewsType[];
+  categoriesLength: number;
+  collectionsLength: number;
+  recipesLength: number;
+  toolsLength: number;
+  usersLength: number;
+  newsLength: number;
+  recipesData: CocktailType[];
 }
 
-export default function Dashboard({}: // categoriesData,
-// recipes,
-// toolsData,
-// users,
-// news,
-// collections,
-RecipePropType): JSX.Element {
+export default function Dashboard({
+  categoriesLength,
+  collectionsLength,
+  recipesLength,
+  toolsLength,
+  usersLength,
+  newsLength,
+  recipesData,
+}: RecipePropType): JSX.Element {
   return (
     <Layout>
       <div className="w-full flex flex-col items-center gap-5">
         dashboard
-        {/* <AllData
-          recipes={recipes}
-          categoriesData={categoriesData}
-          collectionsData={collections}
-          toolsData={toolsData}
-          usersData={users}
-          newsData={news}
-        />  */}
-        {/* <RecipeColGraphic recipes={recipes} /> */}
+        <AllData
+          recipes={recipesLength}
+          categories={categoriesLength}
+          collections={collectionsLength}
+          tools={toolsLength}
+          users={usersLength}
+          news={newsLength}
+        />
+        <RecipeColGraphic recipes={recipesData} />
       </div>
     </Layout>
   );
 }
 
-// export async function getStaticProps() {
-// const users = await axios
-//   .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/all`)
-//   .then((res) => res.data);
+export async function getStaticProps() {
+  const usersLength = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/users/length`)
+    .then((res) => res.data);
 
-// const news = await axios
-//   .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/all`)
-//   .then((res) => res.data);
+  const newsLength = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/length`)
+    .then((res) => res.data);
 
-// const recipes = await axios
-//   .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/all`)
-//   .then((res) => res.data);
+  const recipesLength = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/length`)
+    .then((res) => res.data);
 
-// const categoriesData = await axios
-//   .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/get`)
-//   .then((res) => res.data);
+  const recipesData = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/all`)
+    .then((res) => res.data);
 
-// const collections = await axios
-//   .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/collections/get`)
-//   .then((res) => res.data);
+  const categoriesLength = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/categories/length`)
+    .then((res) => res.data);
 
-// const toolsData = await axios
-//   .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
-//   .then((res) => res.data);
+  const collectionsLength = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/collections/length`)
+    .then((res) => res.data);
 
-//   return {
-//     props: {
-//       recipes,
-//       users,
-//       news,
-//       categoriesData,
-//       collections,
-//       toolsData,
-//     },
-//   };
-// }
+  const toolsLength = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/length`)
+    .then((res) => res.data);
+
+  return {
+    props: {
+      toolsLength,
+      collectionsLength,
+      categoriesLength,
+      recipesLength,
+      newsLength,
+      usersLength,
+      recipesData,
+    },
+  };
+}
