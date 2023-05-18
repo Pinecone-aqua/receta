@@ -25,7 +25,7 @@ export default function News({
   const { news, setNews } = useOthers();
   useEffect(() => {
     setNews(newsData);
-  }, [newsData, setNews]);
+  }, []);
 
   return (
     <Layout>
