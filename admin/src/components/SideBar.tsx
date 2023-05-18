@@ -50,7 +50,7 @@ export default function SideBar(): JSX.Element {
             setUser(null), Cookies.remove("token"), router.push("../Login");
           }}
         >
-          <CiLogout className="text-[#FF543E] absolute top-[650px] w-[20px] h-[20px] ms-[6px]" />{" "}
+          <CiLogout className="text-[#FF543E] mt-[2px] w-[20px] h-[20px] ms-[6px]" />{" "}
           <p>Log out</p>
         </div>
       </div>
