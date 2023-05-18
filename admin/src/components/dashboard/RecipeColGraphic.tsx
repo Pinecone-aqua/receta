@@ -52,8 +52,8 @@ export default function RecipeColGraphic({ recipes }: GraphicPropType) {
   }, [recipes]);
 
   return (
-    <div className="w-1/2 flex flex-col items-center">
-      <div className="mb-[30px] text-[teal] text-[24px]">Recipe chart</div>
+    <div className="w-2/4 flex flex-col items-center">
+      <div className="mb-[30px] text-[teal] text-[32px]">Recipe chart</div>
       {chartData && (
         <PolarArea
           data={chartData}

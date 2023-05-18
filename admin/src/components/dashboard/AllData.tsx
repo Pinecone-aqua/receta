@@ -87,9 +87,9 @@ export default function AllData({
   }, []);
 
   return (
-    <div className="w-[90%] flex flex-col items-center">
+    <div className="w-3/4 flex flex-col items-center">
       <div className="mb-[30px] text-[32px] text-[teal]">Data chart</div>
-      {chartData && <Bar data={chartData} />}
+      {chartData && <Bar data={chartData} style={{ width: "100%", height: "500px" }} />}
     </div>
   );
 }
