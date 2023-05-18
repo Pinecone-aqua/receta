@@ -26,7 +26,6 @@ export default function Dashboard({
   return (
     <Layout>
       <div className="w-full flex flex-col items-center gap-5">
-        dashboard
         <AllData
           recipes={recipesLength}
           categories={categoriesLength}
