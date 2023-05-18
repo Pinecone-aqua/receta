@@ -74,14 +74,6 @@ export class GoogleLoginController {
     console.log("before redirect: ", payload);
     console.log("client port: ", process.env.CLIENT_PORT);
     console.log("token:", token);
-    res
-      .status(200)
-      .cookie("token", token, {
-        domain: "https://receta-bizbqthdy-leo-s-team.vercel.app",
-        secure: true,
-        sameSite: "none",
-        path: "/",
-      })
-      .redirect(`${process.env.CLIENT_PORT}`);
+    res.status(200).redirect(`${process.env.CLIENT_PORT}?token=${token}`);
   }
 }
