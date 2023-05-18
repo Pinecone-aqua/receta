@@ -23,10 +23,10 @@ export default function Login() {
   function googleLoginHandler() {
     axios
       .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/google-login`)
-      .then(() => {
+      .then((res) => {
+        router.push(res.data);
         console.log(router.query);
-        // router.push(res.data);
-        // localStorage.setItem("page", "cocktails");
+        localStorage.setItem("page", "cocktails");
       });
   }
 
