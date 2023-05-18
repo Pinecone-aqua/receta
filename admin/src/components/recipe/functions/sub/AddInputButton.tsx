@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input } from "@chakra-ui/input";
 import { Textarea } from "@chakra-ui/textarea";
 

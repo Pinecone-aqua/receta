@@ -1,10 +1,15 @@
+import { CocktailType } from "@/src/util/Types";
 import axios from "axios";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 
-export default function DeleteButton({ recipe }: { recipe: any }): JSX.Element {
+export default function DeleteButton({
+  recipe,
+}: {
+  recipe: CocktailType;
+}): JSX.Element {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -28,9 +33,7 @@ export default function DeleteButton({ recipe }: { recipe: any }): JSX.Element {
       </button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          {/* <Modal.Title>Are you sure deleteing?</Modal.Title> */}
-        </Modal.Header>
+        <Modal.Header closeButton />
         <Modal.Body>Are you sure deleteing?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

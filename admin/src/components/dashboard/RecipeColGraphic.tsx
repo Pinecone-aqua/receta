@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CocktailType } from "@/src/util/Types";
 import { useEffect, useState } from "react";
 import {
@@ -49,7 +50,7 @@ export default function RecipeColGraphic({ recipes }: GraphicPropType) {
         },
       ],
     });
-  }, [recipes]);
+  }, [countedByCol, recipes]);
 
   return (
     <div className="w-2/4 flex flex-col items-center">

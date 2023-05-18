@@ -20,19 +20,11 @@ const RemoveButton: React.FC<IngredientProps> = ({
   return (
     <Input
       value="Remove"
-      // className="px-[10px] bg-red-500"
       onClick={() => {
         removeInputHandler(index);
       }}
       type="button"
     />
-    // <input
-    // value="Remove"
-    // className="px-[10px] bg-red-500"
-    // onClick={() => {
-    //   removeInputHandler(index);
-    // }}
-    // type="button"
   );
 };
 

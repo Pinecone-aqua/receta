@@ -10,7 +10,11 @@ import {
 import DeleteAlert from "@/src/components/category/DeleteCategory";
 import { CategoryType } from "@/src/util/Types";
 
-export default function CategoriesTable({ sortedData }: any) {
+export default function CategoriesTable({
+  sortedData,
+}: {
+  sortedData: CategoryType[];
+}) {
   return (
     <>
       <TableContainer className="mt-[20px]">

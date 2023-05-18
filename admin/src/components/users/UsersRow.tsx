@@ -3,9 +3,10 @@ import EditUserModal from "./EditUserModal";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useUser } from "@/src/context/UserContext";
+import { UsersType } from "@/src/util/Types";
 
 interface TableRowType {
-  user: any;
+  user: UsersType;
   index: number;
 }
 
@@ -27,7 +28,7 @@ export default function UsersRow({ user, index }: TableRowType) {
         .then((res) => {
           console.log("res", res);
 
-          if (res && res.data.deletedCount == 1) {
+          if (res.data.deletedCount == 1) {
             setUsers(filterData);
             toast.info("Амжилттай устгагдлаа");
           } else {

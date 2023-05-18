@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CollectionType } from "../../util/Types";
 import axios from "axios";
 import { useState } from "react";

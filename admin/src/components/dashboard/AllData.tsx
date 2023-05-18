@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CategoryType,
   CocktailType,
@@ -84,7 +85,7 @@ export default function AllData({
         },
       ],
     });
-  }, []);
+  }, [counted]);
 
   return (
     <div className="w-3/4 flex flex-col items-center">

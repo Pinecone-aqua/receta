@@ -15,7 +15,7 @@ export default function User({
   const { setUsers, users } = useUser();
   useEffect(() => {
     setUsers(usersData);
-  }, []);
+  }, [setUsers, usersData]);
 
   return (
     <Layout>

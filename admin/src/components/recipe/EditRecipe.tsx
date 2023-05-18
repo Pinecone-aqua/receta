@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   CollectionType,
   CreateCategoryType,
@@ -40,10 +41,10 @@ export default function CanvasEditButton({
     recipe.collection_id
   );
   const [how, setHow] = useState<string[]>(recipe.how_to);
-  const [check, setCheck] = useState<boolean>(recipe.alcohol); // isAcholed
-  const [file, setFile] = useState<any | null>(recipe.image_url); //image
+  const [check, setCheck] = useState<boolean>(recipe.alcohol);
+  const [file, setFile] = useState<any | null>(recipe.image_url);
   const idOfTools = recipe.tools_id.map((one: { _id: string }) => one._id);
-  const [selectTools, setSelectTools] = useState<string[]>(idOfTools); //selectedTools
+  const [selectTools, setSelectTools] = useState<string[]>(idOfTools);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [spinner, setSpinner] = useState<string>("");
   const tempRef: MutableRefObject<string> = useRef("");
