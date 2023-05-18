@@ -25,7 +25,7 @@ export default function News({
   const { news, setNews } = useOthers();
   useEffect(() => {
     setNews(newsData);
-  }, [newsData, setNews]);
+  }, []);
 
   return (
     <Layout>
@@ -76,9 +76,14 @@ interface Props {
   newsData: NewsType[];
 }
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const newsData = await axios
-    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/all`)
-    .then((res) => res.data);
+  let newsData = [];
+  try {
+    newsData = await axios
+      .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/all`)
+      .then((res) => res.data);
+  } catch (error) {
+    throw Error(error as string);
+  }
 
   return {
     props: {
