@@ -22,7 +22,7 @@ export class NewsController {
 
   @Get("length")
   length() {
-    return this.newsService.length();
+    return this.newsService.dataLength();
   }
   @Get("find")
   findTool(@Query("id") id: string) {
