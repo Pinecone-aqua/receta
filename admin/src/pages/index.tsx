@@ -1,21 +1,8 @@
-// import axios from "axios";
+import axios from "axios";
 import Layout from "../components/Layout";
-<<<<<<< HEAD
 import RecipeColGraphic from "../components/dashboard/RecipeColGraphic";
 import AllData from "../components/dashboard/AllData";
 import { CocktailType } from "../util/Types";
-=======
-import {
-  CategoryType,
-  CocktailType,
-  CollectionType,
-  NewsType,
-  ToolsType,
-  UsersType,
-} from "../util/Types";
-// import RecipeColGraphic from "../components/recipe/functions/RecipeColGraphic";
-// import AllData from "../components/recipe/functions/AllData";
->>>>>>> 58bd7c8 (b)
 
 interface RecipePropType {
   categoriesLength: number;
@@ -38,7 +25,6 @@ export default function Dashboard({
 }: RecipePropType): JSX.Element {
   return (
     <Layout>
-<<<<<<< HEAD
       <div className="w-full flex flex-col items-center gap-5">
         <AllData
           recipes={recipesLength}
@@ -49,19 +35,6 @@ export default function Dashboard({
           news={newsLength}
         />
         <RecipeColGraphic recipes={recipesData} />
-=======
-      <div className="w-full flex flex-col gap-5">
-        dash
-        {/* <AllData
-          recipes={recipes}
-          categoriesData={categoriesData}
-          collectionsData={collections}
-          toolsData={toolsData}
-          usersData={users}
-          newsData={news}
-        /> */}
-        {/* <RecipeColGraphic recipes={recipes} /> */}
->>>>>>> 58bd7c8 (b)
       </div>
     </Layout>
   );
