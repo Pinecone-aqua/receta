@@ -11,7 +11,11 @@ import Delete from "../../../tool/DeleteTool";
 import { ToolsType } from "@/src/util/Types";
 import Image from "next/image";
 
-export default function ToolsTable({ sortedData }: any) {
+export default function ToolsTable({
+  sortedData,
+}: {
+  sortedData: ToolsType[];
+}) {
   return (
     <>
       <TableContainer className="mt-[20px]">

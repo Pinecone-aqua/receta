@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUser } from "@/src/context/UserContext";
 import {
   Button,
