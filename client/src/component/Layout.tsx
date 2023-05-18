@@ -16,6 +16,7 @@ export default function Layout({
     if (router.query.token) {
       Cookies.set("token", `${router.query.token}`);
       router.replace("/");
+      router.reload();
     }
   }, [router]);
 
