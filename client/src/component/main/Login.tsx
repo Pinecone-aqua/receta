@@ -22,7 +22,9 @@ export default function Login() {
 
   function googleLoginHandler() {
     axios
-      .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/google-login`)
+      .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/google-login`, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log("res", res);
 
