@@ -132,6 +132,28 @@ export class RecipesService {
     }
   }
 
+  // async remove(recipe: any) {
+  //   const regex = /\/v\d+\/([^/]+)\.\w{3,4}$/;
+
+  //   const getPublicIdFromUrl = (url: string) => {
+  //     const match = url.match(regex);
+  //     return match ? match[1] : null;
+  //   };
+
+  //   try {
+  //     const { image_url } = await this.findRecipe(recipe.id);
+  //     const publicId = getPublicIdFromUrl(image_url);
+  //     const destroiedImage = await this.cloudinary.deleteImage(publicId);
+
+  //     return (
+  //       destroiedImage.result == "ok" &&
+  //       (await this.recipeModel.deleteOne({ _id: recipe.id }))
+  //     );
+  //   } catch (err) {
+  //     return err;
+  //   }
+  // }
+
   async remove(recipe: any) {
     const regex = /\/v\d+\/([^/]+)\.\w{3,4}$/;
 
@@ -143,10 +165,10 @@ export class RecipesService {
     try {
       const { image_url } = await this.findRecipe(recipe.id);
       const publicId = getPublicIdFromUrl(image_url);
-      const destroiedImage = await this.cloudinary.deleteImage(publicId);
+      const destroyedImage = await this.cloudinary.deleteImage(publicId);
 
       return (
-        destroiedImage.result == "ok" &&
+        destroyedImage.result === "ok" &&
         (await this.recipeModel.deleteOne({ _id: recipe.id }))
       );
     } catch (err) {
