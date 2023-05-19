@@ -27,6 +27,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import Cookies from "js-cookie";
 export default function CanvasEditButton({
   recipe,
   collections,
@@ -92,6 +93,7 @@ export default function CanvasEditButton({
   function updateRecipe(e: any) {
     e.preventDefault();
     setSpinner("loading");
+    const token = Cookies.get("token");
 
     const data = {
       name: e.target.name.value,
@@ -115,9 +117,17 @@ export default function CanvasEditButton({
     axios
       .patch(
         `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/update?id=${recipe._id}`,
-        formData
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       )
-      .then((res) => console.log(res.data));
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
