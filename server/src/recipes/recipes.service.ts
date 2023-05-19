@@ -113,7 +113,7 @@ export class RecipesService {
         })
         .select({ name: 1, image_url: 1 });
 
-      return this.recipeModel.create({
+      const result = await this.recipeModel.create({
         name: recipe.name,
         description: recipe.description,
         collection_id: collection.name,
@@ -125,6 +125,8 @@ export class RecipesService {
         image_url: recipe.image_url,
         video_url: recipe.video_url,
       });
+
+      return result;
     } catch (err) {
       return err;
     }

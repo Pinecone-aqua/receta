@@ -98,8 +98,6 @@ export class RecipesController {
     @Query("id") id: string,
     @Body() body: any
   ) {
-    console.log(id);
-
     if (body.img) {
       const data = {
         image_url: body.img,
