@@ -1,7 +1,7 @@
 import { useOthers } from "../../context/OthersContext";
 import { CollectionType } from "../../util/Types";
 import React, { useEffect, useState } from "react";
-import { BsArrowDownShort } from "react-icons/bs";
+import { RxDoubleArrowDown } from "react-icons/rx";
 
 export default function Collection({
   collections,
@@ -56,7 +56,7 @@ export default function Collection({
             </div>
           </div>
           <div className="Collection-arrow absolute rounded-[50%] bottom-[-26px] right-[-26px] bg-white">
-            <BsArrowDownShort className="text-black mx-auto p-[12px] w-[48px] h-[48px] border-[0.5px] border-black rounded-[50%]" />
+            <RxDoubleArrowDown className="text-black mx-auto p-[12px] w-[52px] h-[52px] rounded-[50%]" />
           </div>
         </div>
 
