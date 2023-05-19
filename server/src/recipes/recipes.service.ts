@@ -163,25 +163,37 @@ export class RecipesService {
   }
 
   async updateRecipe(data: any) {
+    console.log(data);
     const tool = await this.toolsModel
       .find({
         _id: data.body.tools,
       })
       .select({ name: 1, image_url: 1 });
 
+    const collection = await this.collectionsModel
+      .findOne({
+        name: data.body.collection,
+      })
+      .select({ name: 1 });
+
+    const category = await this.categoriesModel
+      .find({
+        name: data.body.categories,
+      })
+      .select({ name: 1 });
     return await this.recipeModel.updateOne(
       { _id: data.id },
       {
         $set: {
           name: data.body.name,
           description: data.body.description,
-          collection_id: data.body.collection,
-          categories_id: data.body.categories,
+          collection_id: collection.name,
+          categories_id: category,
           tools_id: tool,
           how_to: data.body.how_to,
           ingredients: data.body.ingredients,
           alcohol: data.body.alcohol,
-          image_url: data.image_url,
+          image_url: data.body.image_url,
           video_url: data.body.video_url,
         },
       }

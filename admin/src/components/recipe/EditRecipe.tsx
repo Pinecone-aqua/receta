@@ -28,6 +28,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 export default function CanvasEditButton({
   recipe,
   collections,
@@ -52,6 +53,7 @@ export default function CanvasEditButton({
   const tempRefHow: MutableRefObject<string> = useRef("");
   const inputRefIng = useRef<HTMLInputElement>(null);
   const inputRefIns = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const addInputHandler = () => {
     tempRef.current && setIngredient([...ingredient, tempRef.current]);
@@ -86,6 +88,14 @@ export default function CanvasEditButton({
     }
   }
 
+  useEffect(() => {
+    const result = categories.filter(
+      (category: any) => category.collection_name === currentCollection
+    );
+
+    setFilteredCategory(result);
+  }, [categories, currentCollection]);
+
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
   };
@@ -112,8 +122,6 @@ export default function CanvasEditButton({
       ? formData.append("file", file)
       : formData.append("img", file);
     formData.append("data", JSON.stringify(data));
-    console.log(data);
-    console.log(file);
     axios
       .patch(
         `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/update?id=${recipe._id}`,
@@ -124,19 +132,14 @@ export default function CanvasEditButton({
       )
       .then((res) => {
         console.log(res.data);
+        setSpinner("run");
+        onClose();
+        router.replace(router.asPath);
       })
       .catch((error) => {
         console.log(error);
       });
   }
-
-  useEffect(() => {
-    const result = categories.filter(
-      (category: any) => category.collection_name === currentCollection
-    );
-
-    setFilteredCategory(result);
-  }, [categories, currentCollection]);
 
   return (
     <>
@@ -364,7 +367,7 @@ export default function CanvasEditButton({
                 <Box>
                   <FormLabel className="block">Tutorial video</FormLabel>
                   <Input
-                    defaultValue={recipe.how_to}
+                    defaultValue={recipe.video_url}
                     type="text"
                     name="videoUrl"
                   />

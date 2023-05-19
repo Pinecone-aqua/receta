@@ -30,6 +30,7 @@ import {
 import AddToolHandler from "./functions/AddToolHandler";
 import InputMappingInCreate from "./functions/mapping/InputMappingInCreate";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function CreateRecipe(props: {
   collections: CollectionType[];
@@ -44,6 +45,7 @@ export default function CreateRecipe(props: {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [spinner, setSpinner] = useState<string>("");
   const { setRecipes, recipes } = useCocktail();
+  const router = useRouter();
 
   const [inputIng, setInputIng] = useState<string>("");
   const [inputIns, setInputIns] = useState<string>("");
@@ -99,6 +101,7 @@ export default function CreateRecipe(props: {
       setSpinner("run");
       onClose();
       setSelectTools([]);
+      router.replace(router.asPath);
     }
   }
 

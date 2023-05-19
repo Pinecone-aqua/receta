@@ -14,7 +14,6 @@ export default function UserProvider({ children }: PropType) {
 
   useEffect(() => {
     const token = Cookies.get("token");
-    console.log(token);
     token && setUser(jwtDecide(token));
     // : router.push("../login");
   }, [router]);
