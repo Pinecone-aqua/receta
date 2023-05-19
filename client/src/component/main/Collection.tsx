@@ -56,7 +56,7 @@ export default function Collection({
             </div>
           </div>
           <div className="Collection-arrow absolute rounded-[50%] bottom-[-26px] right-[-26px] bg-white">
-            <RxDoubleArrowDown className="text-black mx-auto p-[12px] w-[52px] h-[52px] rounded-[50%]" />
+            <RxDoubleArrowDown className="text-black animate-pulse mx-auto p-[12px] w-[48px] h-[48px] rounded-[50%]" />
           </div>
         </div>
 
