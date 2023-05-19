@@ -163,9 +163,28 @@ export class RecipesService {
   }
 
   async updateRecipe(data: any) {
-    return this.recipeModel.updateOne(
+    const tool = await this.toolsModel
+      .find({
+        _id: data.body.tools,
+      })
+      .select({ name: 1, image_url: 1 });
+
+    return await this.recipeModel.updateOne(
       { _id: data.id },
-      { $set: { ...data.body, ...data.image_url } }
+      {
+        $set: {
+          name: data.body.name,
+          description: data.body.description,
+          collection_id: data.body.collection,
+          categories_id: data.body.categories,
+          tools_id: tool,
+          how_to: data.body.how_to,
+          ingredients: data.body.ingredients,
+          alcohol: data.body.alcohol,
+          image_url: data.image_url,
+          video_url: data.body.video_url,
+        },
+      }
     );
   }
 }
