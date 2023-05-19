@@ -163,7 +163,6 @@ export class RecipesService {
   }
 
   async updateRecipe(data: any) {
-    console.log(data);
     const tool = await this.toolsModel
       .find({
         _id: data.body.tools,
