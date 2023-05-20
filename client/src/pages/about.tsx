@@ -1,5 +1,5 @@
 import Layout from "@/component/Layout";
-import { Section } from "@/component/main/motionScroll/MotionScroll";
+import { Section } from "@/component/motionScroll/MotionScroll";
 
 export default function about(): JSX.Element {
   return (

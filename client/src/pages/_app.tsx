@@ -8,6 +8,7 @@ import UserProvider from "../context/UserContext";
 import CocktailProvider from "../context/CocktailContext";
 import React from "react";
 import Loader from "@/component/Loader";
+
 export default function App({
   Component,
   pageProps: { ...pageProps },

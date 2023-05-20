@@ -4,9 +4,9 @@ import { useUser } from "../context/UserContext";
 import { Menu, MenuButton, MenuList, Tooltip } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import { Pages } from "../util/constVariables";
-import Login from "./main/Login";
+import Login from "./Login";
 import { useOthers } from "../context/OthersContext";
-import { Example } from "./main/menu/MotionMenu";
+import { Example } from "./menu/MotionMenu";
 import React from "react";
 import { TbLogout } from "react-icons/tb";
 

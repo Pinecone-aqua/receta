@@ -62,7 +62,7 @@ export default function Store({
   );
 
   return (
-    <div className="bg-[#171717]">
+    <div className="">
       <div className="Container border-s-[0.5px] border-[#424242] pb-[90px] pt-[80px]">
         <h1 className="font-semibold Store-title text-[72px] leading-[86px] pb-[50px] ps-[40px] text-[#FFFFFF]">
           Store

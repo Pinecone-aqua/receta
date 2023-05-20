@@ -35,7 +35,7 @@ export default function OurStory(): JSX.Element {
     },
   ];
   return (
-    <div className="bg-black text-white ourstory">
+    <div className="text-white ourstory">
       <div className="Container border-s-[0.5px] border-[#424242]">
         <h1 className="text-[72px] ourstory-title font-semibold px-10 py-[6rem]">
           <span className="border-b pb-3">Our</span> story

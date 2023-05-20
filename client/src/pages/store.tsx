@@ -6,7 +6,7 @@ import axios from "axios";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Section } from "@/component/main/motionScroll/MotionScroll";
+import { Section } from "@/component/motionScroll/MotionScroll";
 
 export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");

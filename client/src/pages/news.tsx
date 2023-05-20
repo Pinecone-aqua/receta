@@ -1,7 +1,7 @@
 import Header from "@/component/Header";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Section } from "@/component/main/motionScroll/MotionScroll";
+import { Section } from "@/component/motionScroll/MotionScroll";
 import { NewsType } from "@/util/Types";
 import { GetStaticProps } from "next";
 import axios from "axios";

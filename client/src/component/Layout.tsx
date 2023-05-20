@@ -26,7 +26,7 @@ export default function Layout({
   return (
     <>
       <Head>
-        <title key="title">RECETA.</title>
+        <title key="title">Receta</title>
       </Head>
       <div className="bg-[#ffffff] text-black">
         <Header />

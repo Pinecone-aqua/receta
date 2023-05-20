@@ -9,9 +9,10 @@ import axios from "axios";
 import Store from "../component/main/Store";
 import ParallaxText from "../component/main/ParalloxText";
 import Layout from "../component/Layout";
-import { Section } from "../component/main/motionScroll/MotionScroll";
+import { Section } from "../component/motionScroll/MotionScroll";
 import OurStory from "@/component/main/OurStory";
 import HowToUse from "@/component/main/HowToUse";
+// import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 
 export default function Home({
   collections,
@@ -25,13 +26,12 @@ export default function Home({
 }): JSX.Element {
   return (
     <Layout>
-      <>
+      <div className="bg">
         <Section>
           <div className="border-b-[0.5px] border-[#dadada]">
             <Collection collections={collections} />
           </div>
         </Section>
-
         <Categories />
         <div className="relative">
           <Recipes />
@@ -39,19 +39,18 @@ export default function Home({
         </div>
         <Section>
           <Recommend recommend={recommend} />
-        </Section>
-
-        <Section>
-          <OurStory />
-        </Section>
-
-        <Section>
-          <HowToUse />
-        </Section>
-
-        <Section>
-          <Store snowBank={snowBank} />
-        </Section>
+        </Section>{" "}
+        <div className="app-bg">
+          <Section>
+            <OurStory />
+          </Section>
+          <Section>
+            <HowToUse />
+          </Section>{" "}
+          <Section>
+            <Store snowBank={snowBank} />
+          </Section>
+        </div>
         <Section>
           <div className="bg-gradient-to-r from-[#343434] to-[#444444] py-[25px]">
             <ParallaxText baseVelocity={-1.5}>
@@ -66,7 +65,7 @@ export default function Home({
             </ParallaxText>
           </div>
         </Section>
-      </>
+      </div>
     </Layout>
   );
 }

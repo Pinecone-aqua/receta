@@ -73,7 +73,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
               </picture>
               <div className="overlay" />
             </div>
-            <div className="text-white text-[52px] absolute bottom-[10%] w-full text-center font-semibold tracking-wider">
+            <div className="text-white text-[52px] absolute bottom-[10%] w-full text-center font-semibold tracking-wider cocktail-title">
               {recipe.name}
             </div>
             <div className="text-white text-xl absolute bottom-[6%] w-full text-center font-light">
@@ -103,7 +103,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="px-8 py-5 md:text-[24px] text:[16px]">
+                <span className="px-8 py-5 md:text-[24px] text:[16px] cocktail-text">
                   Ingredients
                 </span>
               </Tab>
@@ -113,7 +113,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="md:text-[24px] px-8 py-5 text:[16px]">
+                <span className="md:text-[24px] px-8 py-5 text:[16px] cocktail-text">
                   Step by step
                 </span>
               </Tab>
@@ -126,7 +126,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                     (ingredient: string, index: number) => (
                       <div key={index}>
                         {index + 1}.{" "}
-                        <span className="ps-2 md:text-[22px] sm:text-[16px]">
+                        <span className="ps-2 md:text-[22px] sm:text-[16px] cocktail-text">
                           {ingredient}
                         </span>
                       </div>
@@ -140,7 +140,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                     {recipe.how_to.map((single: any, index: number) => (
                       <div
                         key={index}
-                        className="leading-8 mb-[3rem] font-medium"
+                        className="leading-8 mb-[3rem] font-medium cocktail-text"
                       >
                         <p className="mb-1 md:text-[22px] sm:text-[16px]">
                           Step {index + 1}.
