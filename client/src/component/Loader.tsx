@@ -55,35 +55,33 @@ const dotVariants = {
   },
 };
 
-const Loaderr = ({ count = 5 }) => {
-  return (
-    <motion.div
-      variants={containerVariants}
-      initial="initial"
-      animate="animate"
-      style={{
-        display: "flex",
-        gap: 2,
-        height: 20,
-        alignItems: "center",
-      }}
-    >
-      {Array(count)
-        .fill(null)
-        .map((_, index) => {
-          return (
-            <motion.div
-              key={index}
-              variants={dotVariants}
-              style={{
-                height: 20,
-                width: 10,
-                backgroundColor: colors[index % colors.length],
-                borderRadius: 20,
-              }}
-            />
-          );
-        })}
-    </motion.div>
-  );
-};
+const Loaderr = ({ count = 5 }) => (
+  <motion.div
+    variants={containerVariants}
+    initial="initial"
+    animate="animate"
+    style={{
+      display: "flex",
+      gap: 2,
+      height: 20,
+      alignItems: "center",
+    }}
+  >
+    {Array(count)
+      .fill(null)
+      .map((_, index) => {
+        return (
+          <motion.div
+            key={index}
+            variants={dotVariants}
+            style={{
+              height: 20,
+              width: 10,
+              backgroundColor: colors[index % colors.length],
+              borderRadius: 20,
+            }}
+          />
+        );
+      })}
+  </motion.div>
+);

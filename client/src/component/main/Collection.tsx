@@ -1,7 +1,6 @@
 import { useOthers } from "../../context/OthersContext";
 import { CollectionType } from "../../util/Types";
 import React, { useEffect, useState } from "react";
-import { RxDoubleArrowDown } from "react-icons/rx";
 
 export default function Collection({
   collections,
@@ -10,6 +9,7 @@ export default function Collection({
 }): JSX.Element {
   const { setActiveCollectionBtn, activeCollectionBtn } = useOthers();
   const [silder, setSlider] = useState(1);
+
   useEffect(() => {
     localStorage.getItem("currentCollection")
       ? setActiveCollectionBtn(localStorage.getItem("currentCollection"))
@@ -55,7 +55,6 @@ export default function Collection({
               ))}
             </div>
           </div>
-
           <div className="Collection-arrow absolute rounded-[50%] bottom-[56px] right-[-26px]">
             <div className="container ">
               <div className="chevron" />
@@ -73,6 +72,7 @@ export default function Collection({
                   key={index}
                   className="Col-right-image"
                   src={collection.image_url}
+                  alt="col"
                 />
               )
           )}
