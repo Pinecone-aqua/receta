@@ -31,7 +31,7 @@ export default function Collection({
               of a cocktail as an alcoholic beverage appeared three years later
               in The Balance and Columbian Repository May 13, 1806
             </p>
-            <div className={`gap-[12px] flex flex-wrap `}>
+            <div className={`gap-[12px] flex flex-wrap left-buttons`}>
               {collections.map((collection, index) => (
                 <button
                   key={index}
@@ -55,11 +55,16 @@ export default function Collection({
               ))}
             </div>
           </div>
-          <div className="Collection-arrow absolute rounded-[50%] bottom-[-26px] right-[-26px] bg-white">
-            <RxDoubleArrowDown className="text-black animate-pulse mx-auto p-[12px] w-[48px] h-[48px] rounded-[50%]" />
+
+          <div className="Collection-arrow absolute rounded-[50%] bottom-[56px] right-[-26px]">
+            <div className="container ">
+              <div className="chevron" />
+              <div className="chevron" />
+              <div className="chevron" />
+              <span className="text">Scroll down</span>
+            </div>
           </div>
         </div>
-
         <div className="w-[50%] Col-section-right">
           {collections.map(
             (collection, index) =>

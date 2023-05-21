@@ -55,3 +55,8 @@
 .recommend .p-carousel-prev {
   border: 1px solid gray !important;
 }
+@media screen and (max-width: 1000px) {
+  .recommend-title {
+    font-size: 44px;
+  }
+}

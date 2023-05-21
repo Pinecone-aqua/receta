@@ -36,15 +36,15 @@ export default function OurStory(): JSX.Element {
   ];
   return (
     <div className="text-white ourstory">
-      <div className="Container border-s-[0.5px] border-[#424242]">
-        <h1 className="text-[72px] ourstory-title font-semibold px-10 py-[6rem]">
+      <div className="Container border-s-[0.5px] border-[#424242] oustory-cont">
+        <h1 className="text-[72px] ourstory-title font-semibold px-10 py-[50px]">
           <span className="border-b pb-3">Our</span> story
         </h1>
         <div className="flex pb-[6rem] ourstory-cont">
-          <img src="./OurStory.png" className="ourstory-img" alt="image" />
+          <img src="./OurStory.webp" className="ourstory-img" alt="image" />
           <div className="ps-10 ourstory-right flex flex-col justify-between">
             <div>
-              <h1 className="text-4xl font-semibold">Receta team</h1>
+              <h1 className="text-4xl font-semibold">receta </h1>
               <div className="mt-5">
                 <Carousel
                   prevIcon={<SlArrowLeft />}
@@ -60,7 +60,7 @@ export default function OurStory(): JSX.Element {
               </div>
             </div>
             <button
-              className="py-2 px-[6rem] border me-auto"
+              className="py-2 ourstory-button px-[6rem] border me-auto"
               onClick={() => {
                 localStorage.setItem("page", "about");
                 setActivePage("about");

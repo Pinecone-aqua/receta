@@ -18,7 +18,7 @@ export default function Recipe(props: {
 
   return (
     <Layout>
-      <div className="">
+      <div>
         <div className="flex bg-white Container store-single relative">
           <div
             className="absolute top-[5%] left-[5%] cursor-pointer"

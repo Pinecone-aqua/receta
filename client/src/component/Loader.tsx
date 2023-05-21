@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
-import ReactLoading from "react-loading";
-
+import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -25,9 +24,7 @@ const Loader = ({ children }: { children: ReactNode }) => {
 
   return loading ? (
     <div className="loader-container w-screen h-screen flex justify-center items-center">
-      <div className="loader">
-        <ReactLoading color="black" height={50} width={50} type="bars" />
-      </div>
+      <Loaderr />
     </div>
   ) : (
     <>{children}</>
@@ -35,3 +32,58 @@ const Loader = ({ children }: { children: ReactNode }) => {
 };
 
 export default Loader;
+
+const colors = ["#22238f", "#6b45fa", "#ca3286", "#fe2b49", "#fe652d"];
+
+const containerVariants = {
+  initial: {},
+  animate: {
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const dotVariants = {
+  initial: {},
+  animate: {
+    height: [20, 40, 20],
+    transition: {
+      repeat: Infinity,
+    },
+  },
+};
+
+const Loaderr = ({ count = 5 }) => {
+  return (
+    <motion.div
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      style={{
+        display: "flex",
+        gap: 2,
+        height: 20,
+        alignItems: "center",
+      }}
+    >
+      {Array(count)
+        .fill(null)
+        .map((_, index) => {
+          return (
+            <motion.div
+              key={index}
+              variants={dotVariants}
+              style={{
+                height: 20,
+                width: 10,
+                backgroundColor: colors[index % colors.length],
+                borderRadius: 20,
+              }}
+            />
+          );
+        })}
+    </motion.div>
+  );
+};

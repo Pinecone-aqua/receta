@@ -12,8 +12,8 @@ export default function about(): JSX.Element {
           <picture>
             <img
               className="object-cover w-full h-[672px]"
-              src="../aboutBgg.jpg"
-              alt=""
+              src="../aboutBgg.webp"
+              alt="about"
             />
           </picture>
           <div className="about-div-cont">
@@ -25,15 +25,15 @@ export default function about(): JSX.Element {
               </div>
               <img
                 className="w-[50%] about-div-img"
-                src="../aboutBg3.jpg"
-                alt=""
+                src="../aboutBg3.webp"
+                alt="about"
               />
             </div>
             <div className="flex about-div">
               <img
                 className="w-[50%] about-div-img"
-                src="../aboutBg1.jpg"
-                alt=""
+                src="../aboutBg1.webp"
+                alt="about"
               />
               <div className="about-div-text right">
                 In the late 19th and early 20th century, bars went from being
@@ -46,8 +46,8 @@ export default function about(): JSX.Element {
             <picture>
               <img
                 className="w-[100%] object-cover h-[50vh]"
-                src="../aboutBg2.jpg"
-                alt=""
+                src="../aboutBg2.webp"
+                alt="about"
               />
             </picture>
             <div className="absolute top-1/2 lg:px-[300px] text-center">
@@ -65,7 +65,7 @@ export default function about(): JSX.Element {
               <p className="absolute w-full h-[0.5px] border-b-[0.5px] bottom-6 border-[#424242]" />
             </div>
             <picture>
-              <img src="../aboutBg4.jpg" alt="bg" />
+              <img src="../aboutBg4.webp" alt="bg" />
             </picture>
           </div>{" "}
           <div className="about-last-text">

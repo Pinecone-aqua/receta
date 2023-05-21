@@ -30,7 +30,7 @@ export default function Store({
     },
     {
       breakpoint: "767px",
-      numVisible: 1,
+      numVisible: 2,
       numScroll: 1,
     },
   ];
@@ -86,16 +86,15 @@ export default function Store({
               className={`${shopIcon} Store-image-icon text-[#A0A0A0] border-[#A0A0A0] absolute bottom-[40px] right-[40px] hover:border-white hover:text-white`}
             />
           </div>
-          <div className="ps-[65px] w-[57%] Store-shop-slider h-full flex flex-col justify-start">
-            <h2 className="font-semibold text-[48px] leading-[72px] text-[#FFFFFF] ms-[20px]">
+          <div className="ps-[45px] w-[57%] Store-shop-slider h-full flex flex-col justify-start">
+            <h2 className="font-semibold text-[48px] py-[30px] Store-shop-title leading-[72px] text-[#FFFFFF] ms-[20px]">
               Snowbank
             </h2>
-            <div className="flex flex-col gap-[74px] pt-[50px] h-[40%]">
+            <div className="flex flex-col gap-[45px] pt-[20px] h-[40%]">
               <div>
-                <h3 className="font-semibold text-[28px] leading-[24px] text-[#FFFFFF] pb-[40px] ps-[20px]">
+                <h3 className="font-semibold text-[28px] leading-[24px] text-[#FFFFFF] pb-[20px] ps-[20px]">
                   Tools
                 </h3>
-
                 <div>
                   <Carousel
                     nextIcon={<SlArrowRight />}

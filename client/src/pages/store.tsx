@@ -29,7 +29,7 @@ export default function Shop({ tools }: { tools: ToolType[] }): JSX.Element {
       <Section>
         <div className="w-screen flex flex-col justify-center">
           <div className="w-full h-auto relative flex flex-col items-center justify-center">
-            <img src="/Rectangle.png" className="w-full relative store-img" />
+            <img src="/Rectangle.webp" className="w-full relative store-img" />
             <div className="w-full flex flex-col justify-center items-center absolute">
               <h5 className="font-bold text-white text-8xl font-poppins">
                 STORE

@@ -12,7 +12,7 @@ import Layout from "../component/Layout";
 import { Section } from "../component/motionScroll/MotionScroll";
 import OurStory from "@/component/main/OurStory";
 import HowToUse from "@/component/main/HowToUse";
-// import { Parallax, ParallaxProvider } from "react-scroll-parallax";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 
 export default function Home({
   collections,
@@ -26,7 +26,7 @@ export default function Home({
 }): JSX.Element {
   return (
     <Layout>
-      <div className="bg">
+      <ParallaxProvider>
         <Section>
           <div className="border-b-[0.5px] border-[#dadada]">
             <Collection collections={collections} />
@@ -39,17 +39,13 @@ export default function Home({
         </div>
         <Section>
           <Recommend recommend={recommend} />
-        </Section>{" "}
+        </Section>
         <div className="app-bg">
-          <Section>
-            <OurStory />
-          </Section>
-          <Section>
+          <OurStory />
+          <Parallax speed={-10}>
             <HowToUse />
-          </Section>{" "}
-          <Section>
-            <Store snowBank={snowBank} />
-          </Section>
+          </Parallax>{" "}
+          <Store snowBank={snowBank} />
         </div>
         <Section>
           <div className="bg-gradient-to-r from-[#343434] to-[#444444] py-[25px]">
@@ -65,7 +61,7 @@ export default function Home({
             </ParallaxText>
           </div>
         </Section>
-      </div>
+      </ParallaxProvider>
     </Layout>
   );
 }
