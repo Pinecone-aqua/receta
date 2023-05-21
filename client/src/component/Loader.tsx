@@ -1,7 +1,6 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 const Loader = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -14,6 +13,12 @@ const Loader = ({ children }: { children: ReactNode }) => {
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);
     router.events.on("routeChangeError", handleComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+      router.events.off("routeChangeError", handleComplete);
+    };
   }, [router]);
 
   return loading ? (
@@ -49,7 +54,7 @@ const dotVariants = {
   },
 };
 
-const Loaderr = ({ count = 5 }) => (
+export const Loaderr = ({ count = 5 }) => (
   <motion.div
     variants={containerVariants}
     initial="initial"
@@ -63,19 +68,17 @@ const Loaderr = ({ count = 5 }) => (
   >
     {Array(count)
       .fill(null)
-      .map((_, index) => {
-        return (
-          <motion.div
-            key={index}
-            variants={dotVariants}
-            style={{
-              height: 20,
-              width: 10,
-              backgroundColor: colors[index % colors.length],
-              borderRadius: 20,
-            }}
-          />
-        );
-      })}
+      .map((_, index) => (
+        <motion.div
+          key={index}
+          variants={dotVariants}
+          style={{
+            height: 20,
+            width: 10,
+            backgroundColor: colors[index % colors.length],
+            borderRadius: 20,
+          }}
+        />
+      ))}
   </motion.div>
 );
