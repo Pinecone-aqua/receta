@@ -32,6 +32,8 @@ export default function DeleteAlert({ recipe }: { recipe: CocktailType }) {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    console.log("res", result);
+
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (result && result.data.deletedCount == 1) {
       setRecipes(filterData);

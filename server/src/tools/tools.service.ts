@@ -48,7 +48,7 @@ export class ToolsService {
       const destroiedImage = await this.cloudinary.deleteImage(publicId);
       return (
         destroiedImage.result == "ok" &&
-        this.ToolModel.deleteOne({ _id: tool.id })
+        (await this.ToolModel.deleteOne({ _id: tool.id }))
       );
     } catch (err) {
       return err;

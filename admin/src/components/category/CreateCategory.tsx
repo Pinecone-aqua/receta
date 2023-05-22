@@ -48,7 +48,8 @@ export default function CreateCategory(props: {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (result.statusText === "Created") {
+
+    if (result.data.name === category.name) {
       setCategories([...categories, result.data]);
       setSpinner("run");
       onClose();
