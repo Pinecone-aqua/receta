@@ -28,6 +28,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 export default function CanvasEditButton({
   recipe,
   collections,
@@ -52,6 +53,7 @@ export default function CanvasEditButton({
   const tempRefHow: MutableRefObject<string> = useRef("");
   const inputRefIng = useRef<HTMLInputElement>(null);
   const inputRefIns = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const addInputHandler = () => {
     tempRef.current && setIngredient([...ingredient, tempRef.current]);
@@ -90,7 +92,7 @@ export default function CanvasEditButton({
     setFile(e.target.files[0]);
   };
 
-  function updateRecipe(e: any) {
+  async function updateRecipe(e: any) {
     e.preventDefault();
     setSpinner("loading");
     const token = Cookies.get("token");
@@ -112,22 +114,18 @@ export default function CanvasEditButton({
       ? formData.append("file", file)
       : formData.append("img", file);
     formData.append("data", JSON.stringify(data));
-    console.log(data);
-    console.log(file);
-    axios
-      .patch(
-        `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/update?id=${recipe._id}`,
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const result = await axios.patch(
+      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/update?id=${recipe._id}`,
+      formData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (result.data.modifiedCount > 0) {
+      setSpinner("run");
+      onClose();
+      router.reload();
+    }
   }
 
   useEffect(() => {

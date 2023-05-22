@@ -48,7 +48,6 @@ export default function Recipe({
           <TabPanels className="border rounded-md ps-[20px]">
             <RecipeMain
               collections={collections}
-              recipes={recipes}
               categories={categoriesData}
               tools={tools}
             />

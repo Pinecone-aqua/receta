@@ -1,11 +1,6 @@
 import { useState } from "react";
 import RecipeTable from "../tables/RecipeTable";
-import {
-  CategoryType,
-  CocktailType,
-  CollectionType,
-  ToolsType,
-} from "@/src/util/Types";
+import { CategoryType, CollectionType, ToolsType } from "@/src/util/Types";
 import CreateRecipe from "../../CreateRecipe";
 import {
   Input,
@@ -14,21 +9,21 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { RiSearch2Line } from "react-icons/ri";
+import { useCocktail } from "@/src/context/CocktailContext";
 
 interface CategoriesPropType {
   categories: CategoryType[];
-  recipes: CocktailType[];
   tools: ToolsType[];
   collections: CollectionType[];
 }
 
 export default function RecipeMain({
   collections,
-  recipes,
   categories,
   tools,
 }: CategoriesPropType): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
+  const { recipes } = useCocktail();
 
   function handleSort(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(e.target.value);

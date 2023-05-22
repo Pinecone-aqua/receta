@@ -94,8 +94,6 @@ export default function CreateRecipe(props: {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    console.log("recipe res", result);
-
     if (result.data.name === cocktailData.name) {
       setRecipes([...recipes, result.data]);
       setSpinner("run");
