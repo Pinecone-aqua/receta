@@ -31,9 +31,7 @@ export default function RecipeCard(props: {
 
       <div className="mt-3">
         {" "}
-        <p className="recipeCard-title">
-          {recipe.categories_id.map((cate: any) => cate.name)}
-        </p>
+        <p className="recipeCard-title">{recipe.categories_id[0]?.name}</p>
         <p className="recipeCard-text">{recipe.name}</p>
       </div>
     </div>

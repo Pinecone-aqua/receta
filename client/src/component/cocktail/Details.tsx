@@ -77,7 +77,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
               {recipe.name}
             </div>
             <div className="text-white text-xl absolute bottom-[6%] w-full text-center font-light">
-              {recipe.categories_id[0].name}
+              {recipe.categories_id[0]?.name}
             </div>
             <div
               className="absolute top-[5%] left-[5%] cursor-pointer"
