@@ -45,7 +45,11 @@ export default function RecipeMain({
           <InputLeftElement pointerEvents="none">
             <RiSearch2Line className="w-[20px] h-[20px] text-gray-300" />
           </InputLeftElement>
-          <Input type="tel" placeholder="Search" onChange={handleSort} />
+          <Input
+            type="tel"
+            placeholder="Search by name"
+            onChange={handleSort}
+          />
         </InputGroup>
       </div>
       <RecipeTable
