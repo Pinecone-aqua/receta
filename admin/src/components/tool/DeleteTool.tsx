@@ -39,6 +39,9 @@ export default function DeleteAlert({
         },
       }
     );
+
+    console.log("tools res", result);
+
     if (result.data.deletedCount == 1) {
       setTools(filterData);
       successToast();

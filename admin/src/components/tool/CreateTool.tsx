@@ -41,11 +41,11 @@ export default function CreateTools() {
       `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/create`,
       data,
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
+    console.log("tool res", result);
+
     if (result.data.name === tool.name) {
       setTools([...tools, result.data]);
       setSpinner("run");

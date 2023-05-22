@@ -100,19 +100,19 @@ export class RecipesService {
           name: recipe.collection,
         })
         .select({ name: 1 });
-
+      console.log("collection: ", collection);
       const category = await this.categoriesModel
         .find({
           name: recipe.categories,
         })
         .select({ name: 1 });
-
+      console.log("category: ", category);
       const tool = await this.toolsModel
         .find({
           _id: recipe.tools,
         })
         .select({ name: 1, image_url: 1 });
-
+      console.log("tool: ", tool);
       const result = await this.recipeModel.create({
         name: recipe.name,
         description: recipe.description,
@@ -125,7 +125,7 @@ export class RecipesService {
         image_url: recipe.image_url,
         video_url: recipe.video_url,
       });
-
+      console.log("result: ", result);
       return result;
     } catch (err) {
       return err;
