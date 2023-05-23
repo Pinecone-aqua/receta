@@ -9,6 +9,10 @@ import {
   ToolsType,
 } from "../../../../util/Types";
 import DeleteAlert from "../../DeleteRecipe";
+import HowToPopover from "./recipePopups/HowToPopover";
+import IngPopover from "./recipePopups/IngPopover";
+import ToolsPopover from "./recipePopups/ToolsPopover";
+import DescPopover from "./recipePopups/DescPopover";
 
 interface RecipeTableRowPropType {
   categories: CategoryType[];
@@ -28,6 +32,7 @@ export default function RecipeTableRow({
       <Tr>
         <Td>{recipe.name}</Td>
         <Td>{recipe.collection_id}</Td>
+        <Td>{recipe.categories_id[0].name}</Td>
         <Td className="">
           <Image
             width={70}
@@ -39,6 +44,18 @@ export default function RecipeTableRow({
         </Td>
         <Td>
           {recipe.alcohol ? <div>alcoholic</div> : <div>non alcoholic</div>}
+        </Td>
+        <Td>
+          <HowToPopover recipe={recipe} />
+        </Td>
+        <Td>
+          <IngPopover recipe={recipe} />
+        </Td>
+        <Td>
+          <ToolsPopover recipe={recipe} />
+        </Td>
+        <Td>
+          <DescPopover recipe={recipe} />
         </Td>
         <Td>
           <ConfirmPopup />

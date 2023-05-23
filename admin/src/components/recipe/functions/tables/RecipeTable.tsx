@@ -27,8 +27,13 @@ export default function RecipeTable({
           <Tr>
             <Th className="">Name</Th>
             <Th className="">Collection</Th>
+            <Th className="">Category</Th>
             <Th className="">Image</Th>
             <Th className="">Alcoholic</Th>
+            <Th className="">Instructions</Th>
+            <Th className="">Recipes</Th>
+            <Th className="">Tools</Th>
+            <Th className="">Description</Th>
             <Th className="">Options</Th>
           </Tr>
         </Thead>
