@@ -17,7 +17,7 @@ export default function Collection({
   }, []);
 
   return (
-    <div className={`slider${silder}`}>
+    <div className={`slider${silder} `}>
       <div className="Collection Container relative">
         <div className="w-[50%] relative Col-section-left h-full">
           <div className="Collection-div">

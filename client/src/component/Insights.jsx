@@ -6,7 +6,7 @@ import InsightCard from "./InsightCard";
 
 const Insights = ({ recommend }) => {
   return (
-    <section className={`${styles.paddings} relative z-10 bg-black h-full`}>
+    <section className={`${styles.paddings} relative z-10  h-full`}>
       <motion.div
         variants={staggerContainer}
         initial="hidden"
