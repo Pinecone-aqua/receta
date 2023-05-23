@@ -37,9 +37,11 @@ export default function RecipeTableRow({
           <Image
             width={70}
             height={200}
+            style={{ width: "70px", height: "auto" }}
             className="drop-shadow-2xl"
             src={recipe.image_url}
             alt="recipe image"
+            priority={true}
           />
         </Td>
         <Td>

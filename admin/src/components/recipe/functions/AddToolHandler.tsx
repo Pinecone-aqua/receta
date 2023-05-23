@@ -36,12 +36,13 @@ const AddToolHandler: React.FC<ToolProps> = ({
               : "w-[170px] py-[10px] border-[0.5px] border-[#dadada] flex flex-col cursor-pointer items-center"
           }
           key={index}
-          onClick={() => addToolHandler(tool._id)}
-        >
+          onClick={() => addToolHandler(tool._id)}>
           <p className="">{tool.name}</p>
           <Image
+            className="drop-shadow-2xl"
+            priority={true}
+            alt="tool image"
             src={tool.image_url}
-            alt="Landscape picture"
             height={80}
             width={80}
             style={{ width: "auto", height: "auto" }}
