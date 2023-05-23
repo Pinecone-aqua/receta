@@ -13,7 +13,6 @@ import { getGoogleUserInfo } from "./getGoogleUserInfo";
 import { UserService } from "../users/users.service";
 import { User } from "../users/user.schema";
 import { JwtService } from "@nestjs/jwt";
-import { strict } from "assert";
 
 @Controller()
 export class GoogleLoginController {
@@ -41,20 +40,14 @@ export class GoogleLoginController {
   @Get("google/callback")
   async verifyGoogle(@Req() req: Request, @Res() res: Response) {
     const { code } = req.query;
-    console.log(code);
-
     if (!code) throw new HttpException("Bad Request", HttpStatus.BAD_REQUEST);
-
     const accessToken = await getAccessTokenFromCode(code);
 
     if (!accessToken)
       throw new HttpException("Bad Request", HttpStatus.BAD_REQUEST);
-
-    console.log("access token taken");
     const profile: any = await getGoogleUserInfo(accessToken);
-    console.log("profile taken");
-    let user = await this.userService.findByEmail(profile.email);
 
+    let user = await this.userService.findByEmail(profile.email);
     if (!user) {
       const userInput: User = {
         email: profile.email,
@@ -71,9 +64,6 @@ export class GoogleLoginController {
       picture: user.picture,
     };
     const token = this.jwtService.sign(payload);
-    console.log("before redirect: ", payload);
-    console.log("client port: ", process.env.CLIENT_PORT);
-    console.log("token:", token);
     res.status(200).redirect(`${process.env.CLIENT_PORT}?token=${token}`);
   }
 }
