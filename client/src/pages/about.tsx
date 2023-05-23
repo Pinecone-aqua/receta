@@ -1,13 +1,23 @@
-import Layout from "@/component/Layout";
-import { Section } from "@/component/motionScroll/MotionScroll";
+import GetStartted from "../component/GetStarted";
+import Layout from "../component/Layout";
+import { Section } from "../component/motionScroll/MotionScroll";
+import { RecipesType } from "../util/Types";
+import axios from "axios";
+import { GetStaticProps } from "next";
+import About2 from "../component/About";
+import Insights from "../component/Insights";
 
-export default function about(): JSX.Element {
+export default function about({
+  recommend,
+}: {
+  recommend: RecipesType[];
+}): JSX.Element {
   return (
     <Layout>
       <Section>
         <section className="about relative bg-[#121212]">
           <h1 className="about-title absolute top-[300px] text-center w-full">
-            OUR STORY
+            About us
           </h1>
           <picture>
             <img
@@ -17,6 +27,9 @@ export default function about(): JSX.Element {
             />
           </picture>
           <div className="about-div-cont">
+            <About2 />
+            <GetStartted />
+            <Insights recommend={recommend} />
             <div className="flex about-div first">
               <div className="about-div-text left">
                 In the late 19th and early 20th century, bars went from being
@@ -89,3 +102,19 @@ export default function about(): JSX.Element {
     </Layout>
   );
 }
+
+interface Props {
+  recommend: RecipesType[];
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const recommend = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/recommend`)
+    .then((res) => res.data);
+
+  return {
+    props: {
+      recommend,
+    },
+  };
+};

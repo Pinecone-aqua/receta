@@ -37,6 +37,7 @@ export default function Home({
           <Recipes />
           <div className="Container absolute bottom-[-88px] w-full h-[88px] border-x-[0.5px] border-[#dadada] left-1/2 transform -translate-x-2/4 -translate-y-1/1" />
         </div>
+
         <Section>
           <Recommend recommend={recommend} />
         </Section>
