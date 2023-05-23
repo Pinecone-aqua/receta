@@ -69,7 +69,7 @@ export class RecipesService {
           description: 1,
           image_url: 1,
         })
-        .limit(3);
+        .limit(6);
     } catch (err) {
       return err;
     }
