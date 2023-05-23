@@ -362,7 +362,7 @@ export default function CanvasEditButton({
                 <Box>
                   <FormLabel className="block">Tutorial video</FormLabel>
                   <Input
-                    defaultValue={recipe.how_to}
+                    defaultValue={recipe.video_url}
                     type="text"
                     name="videoUrl"
                   />
