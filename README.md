@@ -1,6 +1,6 @@
 <h2 align="left">🌟 About the Project</h2>
 
-<p>Welcome to the Cocktail Recipe Website repository! This website is designed to provide users with a wide variety of cocktail recipes, allowing them to explore and create delicious drinks at home. </p>
+<p>Welcome to the Cocktail Recipe Website repository! This website is designed to provide users with a wide variety of cocktail recipes, allowing them to explore and create delicious drinks at home </p>
 
 <h2><p><a href="https://receta-opal.vercel.app/" target="_blank">LIVE DEMO 💥</a></p></h2>
 
