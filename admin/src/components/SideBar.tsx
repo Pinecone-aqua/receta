@@ -34,8 +34,7 @@ export default function SideBar(): JSX.Element {
                 router.push(`/${page.url}`);
                 setActivePage(page.name);
                 localStorage.setItem("page", page.name);
-              }}
-            >
+              }}>
               <span className="mt-[3px] w-[20px] h-[20px] mb-[2px]">
                 {page.icon}
               </span>
@@ -46,10 +45,12 @@ export default function SideBar(): JSX.Element {
 
         <div
           className="flex gap-[6px] cursor-pointer mt-[30vh]"
-          onClick={() => {
-            setUser(null), Cookies.remove("token"), router.push("../login");
-          }}
-        >
+          onClick={async () => {
+            setUser(null),
+              Cookies.remove("token"),
+              localStorage.removeItem("page"),
+              await router.push("../login");
+          }}>
           <CiLogout className="text-[#FF543E] mt-[2px] w-[20px] h-[20px] ms-[6px]" />{" "}
           <p>Log out</p>
         </div>
