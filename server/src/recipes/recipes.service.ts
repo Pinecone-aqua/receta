@@ -62,8 +62,14 @@ export class RecipesService {
     try {
       return this.recipeModel
         .find({ collection_id: "Difficulty" })
-        .select({ _id: 1, name: 1, categories_id: 1, image_url: 1 })
-        .limit(6);
+        .select({
+          _id: 1,
+          name: 1,
+          categories_id: 1,
+          description: 1,
+          image_url: 1,
+        })
+        .limit(3);
     } catch (err) {
       return err;
     }
@@ -100,19 +106,16 @@ export class RecipesService {
           name: recipe.collection,
         })
         .select({ name: 1 });
-      console.log("collection: ", collection);
       const category = await this.categoriesModel
         .find({
           name: recipe.categories,
         })
         .select({ name: 1 });
-      console.log("category: ", category);
       const tool = await this.toolsModel
         .find({
           _id: recipe.tools,
         })
         .select({ name: 1, image_url: 1 });
-      console.log("tool: ", tool);
       const result = await this.recipeModel.create({
         name: recipe.name,
         description: recipe.description,
@@ -125,7 +128,6 @@ export class RecipesService {
         image_url: recipe.image_url,
         video_url: recipe.video_url,
       });
-      console.log("result: ", result);
       return result;
     } catch (err) {
       return err;

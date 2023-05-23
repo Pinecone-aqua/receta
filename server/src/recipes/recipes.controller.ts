@@ -125,22 +125,6 @@ export class RecipesController {
       return this.recipesService.updateRecipe(data);
     }
   }
-  //   if (body.img) {
-  //     const data = {
-  //       image_url: body.img,
-  //       body: JSON.parse(body.data),
-  //       id: id,
-  //     };
-  //     return this.recipesService.updateRecipe(data);
-  //   } else {
-  //     const response = await this.cloudinary.uploadImage(file);
-  //     return this.recipesService.updateRecipe({
-  //       image_url: response?.secure_url,
-  //       body: JSON.parse(body.data),
-  //       id: id,
-  //     });
-  //   }
-  // }
 
   @Delete("delete")
   @UseGuards(CheckRoleGuard)
