@@ -6,12 +6,15 @@ import {
 } from "../../../../util/Types";
 import { TableContainer, Tbody, Th, Thead, Tr, Table } from "@chakra-ui/react";
 import RecipeTableRow from "./RecipeTableRow";
+import { useState } from "react";
+import Pagination from "./Pagination";
 
 interface RecipeTablePropType {
   categories: CategoryType[];
   collections: CollectionType[];
   tools: ToolsType[];
   sortedData: CocktailType[];
+  searchTerm: string;
 }
 
 export default function RecipeTable({
@@ -19,7 +22,21 @@ export default function RecipeTable({
   collections,
   tools,
   sortedData,
+  searchTerm,
 }: RecipeTablePropType) {
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalItems = sortedData.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <TableContainer className="mt-[20px]">
       <Table size="sm">
@@ -38,7 +55,7 @@ export default function RecipeTable({
           </Tr>
         </Thead>
         <Tbody>
-          {sortedData.map((recipe: CocktailType) => (
+          {currentItems.map((recipe: CocktailType) => (
             <RecipeTableRow
               categories={categories}
               tools={tools}
@@ -49,6 +66,12 @@ export default function RecipeTable({
           ))}
         </Tbody>
       </Table>
+      <Pagination
+        searchTerm={searchTerm}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </TableContainer>
   );
 }
