@@ -5,7 +5,7 @@ import { fadeIn, staggerContainer } from "../util/motion";
 
 const About2 = () => (
   <section
-    className={`${styles.paddings} relative z-10 bg-black text-white h-[100vh]`}
+    className={`${styles.paddings} relative z-10  text-white h-[80vh] flex flex-col justify-center mb-[20vh]`}
   >
     <div className="gradient-02 z-0" />
     <motion.div
@@ -19,18 +19,20 @@ const About2 = () => (
 
       <motion.p
         variants={fadeIn("up", "tween", 0.2, 1)}
-        className="mt-[8px] font-normal sm:text-[32px] text-[20px] text-center text-secondary-white"
+        className="mt-[8px] font-light sm:text-[32px] text-[16px] text-center text-gray-300 "
       >
-        <span className="font-extrabold text-white">Welcome</span> to the
+        <span className="font-extrabold text-white">{`"`}Welcome</span> to the
         Receta. Are you ready to elevate your drinking experience and indulge in
         exquisite cocktail creations? Look no further!{` `}
-        <span className="font-extrabold text-white">Why Receta</span> Discover a
-        world of flavors, where classic recipes meet innovative twists. Our team
-        of expert mixologists has curated an extensive menu that caters to both
-        seasoned cocktail enthusiasts and newcomers alike. Whether you're
-        hosting a party, planning a romantic date night, or simply looking to
-        unwind after a long day, our cocktails are designed to impress and
-        delight.
+        <span className="font-extrabold text-white">
+          Why Receta? Discover a world of flavors, where classic recipes meet
+          innovative twists.
+        </span>{" "}
+        Our team of expert mixologists has curated an extensive menu that caters
+        to both seasoned cocktail enthusiasts and newcomers alike. Whether
+        you`re hosting a party, planning a romantic date night, or simply
+        looking to unwind after a long day, our cocktails are designed to
+        impress and delight.{`"`}
       </motion.p>
 
       <motion.img

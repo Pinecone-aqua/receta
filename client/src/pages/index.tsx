@@ -13,6 +13,9 @@ import { Section } from "../component/motionScroll/MotionScroll";
 import OurStory from "@/component/main/OurStory";
 import HowToUse from "@/component/main/HowToUse";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
+import About2 from "@/component/About";
+import GetStartted from "@/component/GetStarted";
+import Insights from "@/component/Insights";
 
 export default function Home({
   collections,
@@ -28,17 +31,23 @@ export default function Home({
     <Layout>
       <ParallaxProvider>
         <Section>
-          <div className="border-b-[0.5px] border-[#dadada]">
+          <div className="border-b-[0.5px] border-[#dadada] ">
             <Collection collections={collections} />
           </div>
         </Section>
         <Categories />
-        <div className="relative">
+        <div className="relative ">
           <Recipes />
           <div className="Container absolute bottom-[-88px] w-full h-[88px] border-x-[0.5px] border-[#dadada] left-1/2 transform -translate-x-2/4 -translate-y-1/1" />
         </div>
 
-        <Section>
+        <div className="bg-[#000]">
+          {" "}
+          <About2 />
+          <GetStartted />
+          <Insights recommend={recommend} />
+        </div>
+        {/* <Section>
           <Recommend recommend={recommend} />
         </Section>
         <div className="app-bg">
@@ -47,16 +56,16 @@ export default function Home({
             <HowToUse />
           </Parallax>{" "}
           <Store snowBank={snowBank} />
-        </div>
+        </div> */}
         <Section>
-          <div className="bg-gradient-to-r from-[#343434] to-[#444444] py-[25px]">
+          <div className="bg-[#5d5d5d] py-[25px]">
             <ParallaxText baseVelocity={-1.5}>
-              <h2 className="pb-[20px] text-[72px] font-bold text-[#f4f4f4] me-[20px] cocktail-parallox-text">
+              <h2 className="pb-[20px] text-[62px] font-bold text-[#f4f4f4] me-[20px] cocktail-parallox-text">
                 receta. receta. receta.
               </h2>
             </ParallaxText>
             <ParallaxText baseVelocity={1}>
-              <h2 className="text-[#051210] text-[52px] uppercase me-[50px] cocktail-parallox-text-sub">
+              <h2 className="text-gray-300 text-[42px] uppercase me-[50px] cocktail-parallox-text-sub">
                 you try these drinks goodluck
               </h2>
             </ParallaxText>
