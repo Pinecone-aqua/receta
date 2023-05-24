@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styles from "../styles";
 import { StartSteps, TitleText, TypingText } from "./CustomTexts";
-import { staggerContainer, fadeIn, planetVariants } from "../util/motion";
+import { staggerContainer, fadeIn } from "../util/motion";
 
 export const startingFeatures = [
   "Gather Your Ingredients and Tools",
@@ -12,7 +12,7 @@ export const startingFeatures = [
 function GetStartted() {
   return (
     <section
-      className={`${styles.paddings} relative z-10 text-white  h-[100vh]`}
+      className={`${styles.paddings} relative z-10 text-white  min-h-[100vh]`}
     >
       <motion.div
         variants={staggerContainer}
@@ -22,7 +22,6 @@ function GetStartted() {
         className={`${styles.innerWidth} mx-auto flex lg:flex-row flex-col gap-8`}
       >
         <motion.div
-          // variants={planetVariants("left")}
           variants={fadeIn("right", "tween", 0.3)}
           className={`flex-1 ${styles.flexCenter}`}
         >

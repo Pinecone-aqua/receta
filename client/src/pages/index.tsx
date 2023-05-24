@@ -2,34 +2,34 @@ import React from "react";
 import Collection from "../component/main/Collection";
 import Categories from "../component/cocktails/Categories";
 import Recipes from "../component/cocktails/Recipes";
-import Recommend from "../component/main/Recommend";
+// import Recommend from "../component/main/Recommend";
 import { GetStaticProps } from "next";
-import { CollectionType, RecipesType, ToolType } from "../util/Types";
+import { CollectionType, NewsType, RecipesType } from "../util/Types";
 import axios from "axios";
-import Store from "../component/main/Store";
+// import Store from "../component/main/Store";
 import ParallaxText from "../component/main/ParalloxText";
 import Layout from "../component/Layout";
 import { Section } from "../component/motionScroll/MotionScroll";
-import OurStory from "@/component/main/OurStory";
-import HowToUse from "@/component/main/HowToUse";
-import { Parallax, ParallaxProvider } from "react-scroll-parallax";
-import About2 from "@/component/About";
-import GetStartted from "@/component/GetStarted";
-import Insights from "@/component/Insights";
+// import OurStory from "@/component/main/OurStory";
+// import HowToUse from "@/component/main/HowToUse";
+// import { Parallax, ParallaxProvider } from "react-scroll-parallax";
+import About2 from "../component/About";
+import GetStartted from "../component/GetStarted";
+import Recommend from "../component/Recommend";
+import News from "../component/News";
 
 export default function Home({
   collections,
   recommend,
-  snowBank,
+  news,
 }: {
   collections: CollectionType[];
   recommend: RecipesType[];
-  tools: ToolType[];
-  snowBank: RecipesType;
+  news: NewsType[];
 }): JSX.Element {
   return (
     <Layout>
-      <ParallaxProvider>
+      <div className="overflow-hidden">
         <Section>
           <div className="border-b-[0.5px] border-[#dadada] ">
             <Collection collections={collections} />
@@ -45,7 +45,8 @@ export default function Home({
           {" "}
           <About2 />
           <GetStartted />
-          <Insights recommend={recommend} />
+          <News news={news} />
+          <Recommend recommend={recommend} />
         </div>
         {/* <Section>
           <Recommend recommend={recommend} />
@@ -71,7 +72,7 @@ export default function Home({
             </ParallaxText>
           </div>
         </Section>
-      </ParallaxProvider>
+      </div>
     </Layout>
   );
 }
@@ -79,7 +80,7 @@ export default function Home({
 interface Props {
   collections: RecipesType[];
   recommend: RecipesType[];
-  tools: ToolType[];
+  news: NewsType[];
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
@@ -91,22 +92,15 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/recommend`)
     .then((res) => res.data);
 
-  const tools = await axios
-    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/tools/get`)
-    .then((res) => res.data);
-
-  const snowBank = await axios
-    .get(
-      `${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/recipes/get?id=645db1cc3eb2920376b90458`
-    )
+  const news = await axios
+    .get(`${process.env.NEXT_PUBLIC_PUBLIC_SERVER}/news/all`)
     .then((res) => res.data);
 
   return {
     props: {
       collections,
       recommend,
-      tools,
-      snowBank,
+      news,
     },
   };
 };
