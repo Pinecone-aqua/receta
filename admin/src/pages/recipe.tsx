@@ -34,7 +34,15 @@ export default function Recipe({
     setRecipes(recipeReversed);
     setTools(toolsData);
     setCategories(categoriesData);
-  }, [categoriesData, recipeReversed, recipes, setCategories, setRecipes, setTools, toolsData]);
+  }, [
+    categoriesData,
+    recipeReversed,
+    recipes,
+    setCategories,
+    setRecipes,
+    setTools,
+    toolsData,
+  ]);
   return (
     <Layout>
       <div className="mt-[40px]">

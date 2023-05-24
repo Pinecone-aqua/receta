@@ -35,7 +35,6 @@ export default function ToolsTable({
                   <Td>{tool.name}</Td>
                   <Td>
                     <Image
-                      style={{ width: "80px", height: "auto" }}
                       className="drop-shadow-2xl"
                       priority={true}
                       width={80}

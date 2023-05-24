@@ -154,7 +154,8 @@ export default function CanvasEditButton({
             <form
               onSubmit={(e) => {
                 updateRecipe(e);
-              }}>
+              }}
+            >
               <Stack spacing={"24px"} paddingBottom={"24px"}>
                 <Box>
                   <FormLabel>Cocktail name</FormLabel>
@@ -180,7 +181,8 @@ export default function CanvasEditButton({
                     defaultValue={recipe.collection_id}
                     className="border"
                     name="collection"
-                    onChange={(e) => setCurrentCollection(e.target.value)}>
+                    onChange={(e) => setCurrentCollection(e.target.value)}
+                  >
                     {collections.map(
                       (collection: CollectionType, index: number) => (
                         <option key={index}>{collection.name}</option>
@@ -193,7 +195,8 @@ export default function CanvasEditButton({
                   <FormLabel className="block">Category</FormLabel>
                   <Select
                     defaultValue={recipe.categories_id[0]?.name}
-                    name="category">
+                    name="category"
+                  >
                     {filteredCategory.map((category: any, index: number) => (
                       <option key={index}>{category.name}</option>
                     ))}
@@ -211,7 +214,8 @@ export default function CanvasEditButton({
                             : "w-[170px] py-[10px] border-[0.5px] border-[#dadada] flex flex-col cursor-pointer items-center"
                         }
                         key={index}
-                        onClick={() => addToolHandler(tool._id)}>
+                        onClick={() => addToolHandler(tool._id)}
+                      >
                         <p className="">{tool.name}</p>
                         <Image
                           className="drop-shadow-2xl"
@@ -220,7 +224,6 @@ export default function CanvasEditButton({
                           src={tool.image_url}
                           height={80}
                           width={80}
-                          style={{ width: "auto", height: "auto" }}
                         />
                       </div>
                     ))}
@@ -233,7 +236,8 @@ export default function CanvasEditButton({
                       {ingredient.map((inex, index) => (
                         <Box
                           key={`input-container-${index}`}
-                          className="h-full  items-center">
+                          className="h-full  items-center"
+                        >
                           <Textarea
                             disabled={true}
                             value={inex}
@@ -289,7 +293,8 @@ export default function CanvasEditButton({
                       {how.map((inex, index) => (
                         <Box
                           key={`input-container-${index}`}
-                          className="h-full  items-center">
+                          className="h-full  items-center"
+                        >
                           <Textarea
                             disabled={true}
                             value={inex}
@@ -394,7 +399,8 @@ export default function CanvasEditButton({
                   colorScheme="teal"
                   leftIcon={
                     spinner == "loading" ? <Spinner size="xs" /> : <></>
-                  }>
+                  }
+                >
                   Save changes
                 </Button>
               </DrawerFooter>
