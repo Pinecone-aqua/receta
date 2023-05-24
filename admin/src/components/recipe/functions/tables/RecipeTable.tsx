@@ -14,7 +14,6 @@ interface RecipeTablePropType {
   collections: CollectionType[];
   tools: ToolsType[];
   sortedData: CocktailType[];
-  searchTerm: string;
 }
 
 export default function RecipeTable({
@@ -22,7 +21,6 @@ export default function RecipeTable({
   collections,
   tools,
   sortedData,
-  searchTerm,
 }: RecipeTablePropType) {
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,7 +65,6 @@ export default function RecipeTable({
         </Tbody>
       </Table>
       <Pagination
-        searchTerm={searchTerm}
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}

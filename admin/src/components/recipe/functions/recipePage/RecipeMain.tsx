@@ -54,7 +54,6 @@ export default function RecipeMain({
         </InputGroup>
       </div>
       <RecipeTable
-        searchTerm={searchTerm}
         sortedData={sortedData}
         categories={categories}
         collections={collections}

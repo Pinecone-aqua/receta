@@ -4,14 +4,12 @@ interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (pageNumber: number) => void;
-  searchTerm: string;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,
-  searchTerm,
 }) => {
   const handlePageClick = (pageNumber: number) => {
     onPageChange(pageNumber);
@@ -27,7 +25,8 @@ const Pagination: React.FC<PaginationProps> = ({
           className={`cursor-pointer pagination-item w-[30px] h-[40px] bg-gray-200 pointer-events-auto flex justify-center items-center ${
             i === currentPage ? "bg-teal-600" : ""
           }`}
-          onClick={() => handlePageClick(i)}>
+          onClick={() => handlePageClick(i)}
+        >
           {i}
         </li>
       );
@@ -43,7 +42,8 @@ const Pagination: React.FC<PaginationProps> = ({
           className={`w-[50px] h-[40px] flex justify-center items-center rounded-l-lg cursor-pointer pagination-item bg-gray-200 mr-[2px] ${
             currentPage === 1 ? "opacity-50 pointer-events-none" : ""
           }`}
-          onClick={() => handlePageClick(currentPage - 1)}>
+          onClick={() => handlePageClick(currentPage - 1)}
+        >
           prev
         </li>
         {renderPageNumbers()}
@@ -51,7 +51,8 @@ const Pagination: React.FC<PaginationProps> = ({
           className={`w-[50px] h-[40px] flex justify-center items-center rounded-r-lg cursor-pointer pagination-item bg-gray-200 ml-[2px] ${
             currentPage === totalPages ? "opacity-50 pointer-events-none" : ""
           }`}
-          onClick={() => handlePageClick(currentPage + 1)}>
+          onClick={() => handlePageClick(currentPage + 1)}
+        >
           next
         </li>
       </ul>
