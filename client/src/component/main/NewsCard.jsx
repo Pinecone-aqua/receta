@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
+
 import { motion } from "framer-motion";
-import { fadeIn } from "../util/motion";
+import { fadeIn } from "../../util/motion";
 
 const NewsCard = ({
   _id,

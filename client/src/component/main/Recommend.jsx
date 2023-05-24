@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import styles from "../styles";
+import styles from "../../styles";
 import { TitleText, TypingText } from "./CustomTexts";
-import { staggerContainer } from "../util/motion";
+import { staggerContainer } from "../../util/motion";
 import RecommendCard from "./RecommendCard";
 
 const Recommend = ({ recommend }) => {

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import styles from "../styles";
+import styles from "../../styles";
 import { StartSteps, TitleText, TypingText } from "./CustomTexts";
-import { staggerContainer, fadeIn } from "../util/motion";
+import { staggerContainer, fadeIn } from "../../util/motion";
 
 export const startingFeatures = [
   "Gather Your Ingredients and Tools",
@@ -12,7 +12,7 @@ export const startingFeatures = [
 function GetStartted() {
   return (
     <section
-      className={`${styles.paddings} relative z-10 text-white  min-h-[100vh]`}
+      className={`${styles.paddings} relative z-10 text-white  min-h-[80vh]`}
     >
       <motion.div
         variants={staggerContainer}

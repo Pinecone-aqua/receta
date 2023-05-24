@@ -11,6 +11,7 @@
   opacity: 0;
   transform: scale3d(0.5, 0.5, 0.5);
   animation: move 3s ease-out infinite;
+  color: #6d6c6c;
 }
 
 .chevron:first-child {
@@ -28,7 +29,7 @@
   top: 0;
   height: 100%;
   width: 51%;
-  background: #fff;
+  background: #777676;
 }
 
 .chevron:before {
@@ -66,7 +67,7 @@
   margin-left: -30px;
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   font-size: 12px;
-  color: #fff;
+  color: #000000;
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0.25;

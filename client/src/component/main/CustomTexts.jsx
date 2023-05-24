@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { textContainer, textVariant2 } from "../util/motion";
+import { textContainer, textVariant2 } from "../../util/motion";
 
 export const TypingText = ({ title, textStyles }) => (
   <motion.p
@@ -25,7 +25,7 @@ export const TitleText = ({ title, textStyles }) => (
   </motion.h2>
 );
 
-import styles from "../styles";
+import styles from "../../styles";
 
 export const StartSteps = ({ number, text }) => (
   <div className={`${styles.flexCenter} flex-row`}>

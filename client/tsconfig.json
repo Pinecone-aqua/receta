@@ -26,8 +26,8 @@
     "./tailwind.config.js",
     "src/hooks/useBoundingRect.js",
     "../admin/src/pages/Search.tsx",
-    "src/component/GetStarted.jsx",
-    "src/component/GetStarted.jsx"
+    "src/component/main/GetStarted.jsx",
+    "src/component/main/GetStarted.jsx"
   ],
   "exclude": ["node_modules"]
 }

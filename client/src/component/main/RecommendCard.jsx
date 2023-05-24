@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { motion } from "framer-motion";
-import { fadeIn } from "../util/motion";
+import { fadeIn } from "../../util/motion";
 import { BsArrowUpRight } from "react-icons/bs";
 import Image from "next/image";
 import { useRouter } from "next/router";

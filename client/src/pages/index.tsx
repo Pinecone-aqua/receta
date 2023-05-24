@@ -2,21 +2,16 @@ import React from "react";
 import Collection from "../component/main/Collection";
 import Categories from "../component/cocktails/Categories";
 import Recipes from "../component/cocktails/Recipes";
-// import Recommend from "../component/main/Recommend";
 import { GetStaticProps } from "next";
 import { CollectionType, NewsType, RecipesType } from "../util/Types";
 import axios from "axios";
-// import Store from "../component/main/Store";
 import ParallaxText from "../component/main/ParalloxText";
 import Layout from "../component/Layout";
 import { Section } from "../component/motionScroll/MotionScroll";
-// import OurStory from "@/component/main/OurStory";
-// import HowToUse from "@/component/main/HowToUse";
-// import { Parallax, ParallaxProvider } from "react-scroll-parallax";
-import About2 from "../component/About";
-import GetStartted from "../component/GetStarted";
-import Recommend from "../component/Recommend";
-import News from "../component/News";
+import About2 from "../component/main/About";
+import GetStartted from "../component/main/GetStarted";
+import Recommend from "../component/main/Recommend";
+import News from "../component/main/News";
 
 export default function Home({
   collections,
@@ -42,22 +37,12 @@ export default function Home({
         </div>
 
         <div className="bg-[#000]">
-          {" "}
           <About2 />
           <GetStartted />
           <News news={news} />
           <Recommend recommend={recommend} />
         </div>
-        {/* <Section>
-          <Recommend recommend={recommend} />
-        </Section>
-        <div className="app-bg">
-          <OurStory />
-          <Parallax speed={-10}>
-            <HowToUse />
-          </Parallax>{" "}
-          <Store snowBank={snowBank} />
-        </div> */}
+
         <Section>
           <div className="bg-[#5d5d5d] py-[25px]">
             <ParallaxText baseVelocity={-1.5}>

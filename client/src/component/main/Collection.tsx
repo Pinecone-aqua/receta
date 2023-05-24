@@ -1,6 +1,8 @@
 import { useOthers } from "../../context/OthersContext";
 import { CollectionType } from "../../util/Types";
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/util/motion";
 
 export default function Collection({
   collections,
@@ -8,7 +10,7 @@ export default function Collection({
   collections: CollectionType[];
 }): JSX.Element {
   const { setActiveCollectionBtn, activeCollectionBtn } = useOthers();
-  const [silder, setSlider] = useState(1);
+  const [test, setTest] = useState(false);
 
   useEffect(() => {
     localStorage.getItem("currentCollection")
@@ -17,65 +19,81 @@ export default function Collection({
   }, []);
 
   return (
-    <div className={`slider${silder} `}>
+    <div className={`bg-white `}>
       <div className="Collection Container relative">
         <div className="w-[50%] relative Col-section-left h-full">
-          <div className="Collection-div">
-            <h1 className="text-[48px] text-[#fff] font-medium Collection-title">
-              {activeCollectionBtn && activeCollectionBtn}
-            </h1>
-            <p className="text-[#fff] Collection-text">
-              The origins of the word `cocktail` have been debated . The first
-              written mention of `cocktail` as a beverage appeared in The
-              Farmers Cabinet, 1803 in the United States. The first definition
-              of a cocktail as an alcoholic beverage appeared three years later
-              in The Balance and Columbian Repository May 13, 1806
-            </p>
-            <div className={`gap-[12px] flex flex-wrap left-buttons`}>
-              {collections.map((collection, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setActiveCollectionBtn(collection.name),
-                      localStorage.setItem(
-                        "currentCollection",
-                        collection.name
-                      );
-                    setSlider(index + 1);
-                    localStorage.removeItem("category");
-                  }}
-                  className={
-                    activeCollectionBtn === collection.name
-                      ? `py-[6px] px-[16px] text-[#1e1e1e] bg-[#fff] border-[1px] border-[#fff] rounded-[50px] duration-300 z-10`
-                      : `py-[6px] px-[16px] text-[#fff] border-[1px] border-[#fff] rounded-[50px] z-10`
-                  }
-                >
-                  {collection.name}
-                </button>
-              ))}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.25 }}
+            variants={fadeIn("down", "tween", 0.2)}
+          >
+            {" "}
+            <div className="Collection-div">
+              <h1 className="text-[48px] text-[#000] font-medium Collection-title">
+                {activeCollectionBtn && activeCollectionBtn}
+              </h1>
+              <p className="text-[#000] Collection-text">
+                The origins of the word `cocktail` have been debated . The first
+                written mention of `cocktail` as a beverage appeared in The
+                Farmers Cabinet, 1803 in the United States. The first definition
+                of a cocktail as an alcoholic beverage appeared three years
+                later in The Balance and Columbian Repository May 13, 1806
+              </p>
+              <div className={`gap-[12px] flex flex-wrap left-buttons`}>
+                {collections.map((collection, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setActiveCollectionBtn(collection.name),
+                        localStorage.setItem(
+                          "currentCollection",
+                          collection.name
+                        );
+                      localStorage.removeItem("category");
+                      setTest(!test);
+                    }}
+                    className={
+                      activeCollectionBtn === collection.name
+                        ? `py-[6px] px-[16px] text-[#fff] bg-[#000] border-[1px] border-[#fff] rounded-[50px] duration-300 z-10`
+                        : `py-[6px] px-[16px] text-[#000] border-[1px] border-[#000] rounded-[50px] z-10`
+                    }
+                  >
+                    {collection.name}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="Collection-arrow absolute rounded-[50%] bottom-[56px] right-[-26px]">
+          </motion.div>
+
+          <div className="Collection-arrow absolute text-black rounded-[50%] bottom-[56px] right-[-26px]">
             <div className="container ">
               <div className="chevron" />
               <div className="chevron" />
               <div className="chevron" />
-              <span className="text">Scroll down</span>
+              <span className="text text-black">Scroll down</span>
             </div>
           </div>
-        </div>
+        </div>{" "}
         <div className="w-[50%] Col-section-right">
-          {collections.map(
-            (collection, index) =>
-              activeCollectionBtn === collection.name && (
-                <img
-                  key={index}
-                  className="Col-right-image"
-                  src={collection.image_url}
-                  alt="col"
-                />
-              )
-          )}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.25 }}
+            variants={fadeIn("down", "tween", 0.2)}
+          >
+            {collections.map(
+              (collection, index) =>
+                activeCollectionBtn === collection.name && (
+                  <img
+                    key={index}
+                    className="Col-right-image"
+                    src={collection.image_url}
+                    alt="col"
+                  />
+                )
+            )}
+          </motion.div>
         </div>
       </div>
     </div>

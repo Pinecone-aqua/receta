@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { TypingText } from "./CustomTexts";
-import styles from "../styles";
-import { fadeIn, staggerContainer } from "../util/motion";
+import styles from "../../styles";
+import { fadeIn, staggerContainer } from "../../util/motion";
 
 const About2 = () => (
   <section

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import styles from "../styles";
-import { staggerContainer } from "../util/motion";
+import styles from "../../styles";
+import { staggerContainer } from "../../util/motion";
 import { TitleText, TypingText } from "./CustomTexts";
 import NewsCard from "./NewsCard";
 // import { HiArrowNarrowRight } from "react-icons/hi";
@@ -19,10 +19,6 @@ const News = (...data) => {
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >
         <TypingText title="| The News" textStyles="text-center" />
-        <TypingText
-          title={`all news `}
-          textStyles="text-right text-[16px] cursor-pointer hover:text-green-400"
-        />
 
         <TitleText title={<>Topic News</>} textStyles="text-center" />
         <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">

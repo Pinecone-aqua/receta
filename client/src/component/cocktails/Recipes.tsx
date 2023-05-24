@@ -4,6 +4,8 @@ import { useOthers } from "../../context/OthersContext";
 import axios from "axios";
 import { useCocktail } from "../../context/CocktailContext";
 import React from "react";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/util/motion";
 
 export default function Recipes(): JSX.Element {
   const { activeCollectionBtn, activeCategoryBtn } = useOthers();
@@ -39,12 +41,20 @@ export default function Recipes(): JSX.Element {
 
   return (
     <div className="relative mb-[88px]">
-      <div className="flex flex-wrap  border-x-[0.5px] border-[#dadada] Container gap-[16px] pb-[48px] place-content-center mx-auto">
-        {recipes.map((recipe, index) => (
-          <RecipeCard recipe={recipe} key={index} />
-        ))}
-      </div>
-
+      {" "}
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
+        variants={fadeIn("down", "tween", 0.2)}
+      >
+        <div className="flex flex-wrap  border-x-[0.5px] border-[#dadada] Container gap-[16px] pb-[48px] place-content-center mx-auto">
+          {" "}
+          {recipes.map((recipe, index) => (
+            <RecipeCard recipe={recipe} key={index} />
+          ))}
+        </div>
+      </motion.div>
       <div
         className="place-content-center cursor-pointer flex my-10 border-b-[0.5px] border-[#dadada] Container"
         onClick={ReadMore}
