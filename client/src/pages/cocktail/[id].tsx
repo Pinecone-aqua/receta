@@ -64,7 +64,7 @@ export default function Recipe({
     },
     {
       breakpoint: "520px",
-      numVisible: 1,
+      numVisible: 2,
       numScroll: 1,
     },
   ];
@@ -75,12 +75,12 @@ export default function Recipe({
         <div className="bg-[#FFFBF1] border-b border-[#dadada]">
           <div className="text-[#1e1e1e] text-[20px] max-w-[1300px] pt-[10vh] pb-20 mx-auto border-x border-[#dadada]">
             <div className="px-20 singleProd-sub-div">
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <p className="text-3xl font-bold">{recipe.name}</p>
                 <div>
                   <Rating value={5} disabled cancel={false} />
                 </div>
-              </div>
+              </div> */}
               <p className="w-[65%] mt-8 singleProd-description">
                 {recipe.description}
               </p>
@@ -91,7 +91,7 @@ export default function Recipe({
           <div className="max-w-[1300px] mx-auto border-x border-[#dadada]">
             <div className="flex gap-5 px-20 py-10 singleProd-review">
               <Comment comments={comments} recipe_id={recipe._id} />
-              <RatingComp />
+              {/* <RatingComp /> */}
             </div>
           </div>
         </div>

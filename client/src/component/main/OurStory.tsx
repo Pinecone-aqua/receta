@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import { Carousel } from "primereact/carousel";
 import React from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import { TitleText, TypingText } from "./CustomTexts";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/util/motion";
 
 export default function OurStory(): JSX.Element {
   const { setActivePage } = useOthers();
@@ -35,42 +38,47 @@ export default function OurStory(): JSX.Element {
     },
   ];
   return (
-    <div className="text-white ourstory">
-      <div className="Container border-s-[0.5px] border-[#424242] oustory-cont">
-        <h1 className="text-[72px] ourstory-title font-semibold px-10 py-[50px]">
-          <span className="border-b pb-3">Our</span> story
-        </h1>
-        <div className="flex pb-[6rem] ourstory-cont">
-          <img src="./OurStory.webp" className="ourstory-img" alt="image" />
-          <div className="ps-10 ourstory-right flex flex-col justify-between">
-            <div>
-              <h1 className="text-4xl font-semibold">receta </h1>
-              <div className="mt-5">
-                <Carousel
-                  prevIcon={<SlArrowLeft />}
-                  nextIcon={<SlArrowRight />}
-                  value={ourStoryValue}
-                  circular={true}
-                  numVisible={1}
-                  numScroll={1}
-                  responsiveOptions={responsiveOptions}
-                  itemTemplate={ourStoryTemplate}
-                  indicatorsContentClassName={"flex justify-center gap-0"}
-                />
+    <div className="text-white ourstory flex flex-col justify-center min-h-[80vh]">
+      <div className="Container oustory-cont">
+        <motion.div
+          variants={fadeIn("up", "spring", 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.25 }}
+        >
+          <TypingText title="| Our story" textStyles="text-left" />{" "}
+          <div className="flex ourstory-cont gap-20">
+            <div className=" ourstory-right flex flex-col justify-between">
+              <div>
+                <TitleText title={<>Our story</>} textStyles="text-left" />
+                <div className="mb-5">
+                  <Carousel
+                    prevIcon={<SlArrowLeft />}
+                    nextIcon={<SlArrowRight />}
+                    value={ourStoryValue}
+                    circular={true}
+                    numVisible={1}
+                    numScroll={1}
+                    responsiveOptions={responsiveOptions}
+                    itemTemplate={ourStoryTemplate}
+                    indicatorsContentClassName={"flex justify-center"}
+                  />
+                </div>
               </div>
-            </div>
-            <button
-              className="py-2 ourstory-button px-[6rem] border me-auto"
-              onClick={() => {
-                localStorage.setItem("page", "about");
-                setActivePage("about");
-                router.push("../about");
-              }}
-            >
-              read more
-            </button>
+              <button
+                className="py-2 ourstory-button px-[6rem] border me-auto"
+                onClick={() => {
+                  localStorage.setItem("page", "about");
+                  setActivePage("about");
+                  router.push("../about");
+                }}
+              >
+                read more
+              </button>
+            </div>{" "}
+            <img src="./OurStory.webp" className="ourstory-img" alt="image" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

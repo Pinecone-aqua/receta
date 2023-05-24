@@ -103,7 +103,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="px-8 py-5 md:text-[24px] text:[16px] cocktail-text">
+                <span className="md:px-8 py-5 md:text-[24px] text:[16px] cocktail-text">
                   Ingredients
                 </span>
               </Tab>
@@ -113,7 +113,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                   borderBottom: "1px solid white",
                 }}
               >
-                <span className="md:text-[24px] px-8 py-5 text:[16px] cocktail-text">
+                <span className="md:text-[24px] md:px-8 py-5 text:[16px] cocktail-text">
                   Step by step
                 </span>
               </Tab>
@@ -121,7 +121,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
 
             <TabPanels>
               <TabPanel>
-                <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] flex flex-col flex-wrap mt-20 px-[76px] gap-10 overflow-y-auto text-xl">
+                <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] flex flex-col flex-wrap md:mt-20 px-5 mt-5 md:px-[76px] gap-10 overflow-y-auto text-xl">
                   {recipe.ingredients.map(
                     (ingredient: string, index: number) => (
                       <div key={index}>
@@ -135,7 +135,7 @@ export default function Details({ recipe, tools }: DetailsType): JSX.Element {
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] px-[74px] mt-20 overflow-y-auto">
+                <div className="h-[40vh] min-[1000px]:h-[35vh] min-[1200px]:h-[50vh] md:px-[74px] px-5 md:mt-20 mt-5 overflow-y-auto">
                   <div className="text-[20px]">
                     {recipe.how_to.map((single: any, index: number) => (
                       <div

@@ -21,15 +21,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&family=Oswald:wght@200;300&family=Smokum&display=swap");
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(7, 6, 6);
-}
-
-.app-bg {
-  background: url("../../public/bg.webp");
-  background-position: center;
-  background-size: cover;
-  background-repeat: repeat;
-  background-attachment: fixed;
+  display: none;
 }
 
 html {
