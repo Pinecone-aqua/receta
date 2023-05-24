@@ -12,7 +12,6 @@ import About2 from "../component/main/About";
 import GetStartted from "../component/main/GetStarted";
 import Recommend from "../component/main/Recommend";
 import News from "../component/main/News";
-import OurStory from "@/component/main/OurStory";
 
 export default function Home({
   collections,
