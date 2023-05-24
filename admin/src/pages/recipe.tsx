@@ -29,12 +29,12 @@ export default function Recipe({
 }: RecipePropType): JSX.Element {
   const { setRecipes } = useCocktail();
   const { setTools, tools, setCategories, categories } = useOthers();
-
+  const recipeReversed = recipes.reverse();
   useEffect(() => {
-    setRecipes(recipes);
+    setRecipes(recipeReversed);
     setTools(toolsData);
     setCategories(categoriesData);
-  }, [categoriesData, recipes, setCategories, setRecipes, setTools, toolsData]);
+  }, [categoriesData, recipeReversed, recipes, setCategories, setRecipes, setTools, toolsData]);
   return (
     <Layout>
       <div className="mt-[40px]">

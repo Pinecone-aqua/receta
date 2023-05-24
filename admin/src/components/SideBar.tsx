@@ -45,6 +45,7 @@ export default function SideBar(): JSX.Element {
 
         <div
           className="flex gap-[6px] cursor-pointer mt-[30vh]"
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={async () => {
             setUser(null),
               Cookies.remove("token"),
