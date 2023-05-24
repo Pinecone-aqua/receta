@@ -40,11 +40,12 @@ const AddToolHandler: React.FC<ToolProps> = ({
         >
           <p className="">{tool.name}</p>
           <Image
+            className="drop-shadow-2xl"
+            priority={true}
+            alt="tool image"
             src={tool.image_url}
-            alt="Landscape picture"
             height={80}
             width={80}
-            style={{ width: "auto", height: "auto" }}
           />
         </div>
       ))}

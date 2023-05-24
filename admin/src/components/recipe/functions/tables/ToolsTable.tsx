@@ -35,9 +35,10 @@ export default function ToolsTable({
                   <Td>{tool.name}</Td>
                   <Td>
                     <Image
+                      className="drop-shadow-2xl"
+                      priority={true}
                       width={80}
                       height={200}
-                      className="drop-shadow-2xl"
                       src={tool.image_url}
                       alt="tool image"
                     />

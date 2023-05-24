@@ -27,6 +27,7 @@ export default function RecipeMain({
 
   function handleSort(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(e.target.value);
+    console.log(searchTerm);
   }
 
   const filteredData = recipes.filter((one: { name: string }) =>
@@ -53,6 +54,7 @@ export default function RecipeMain({
         </InputGroup>
       </div>
       <RecipeTable
+        searchTerm={searchTerm}
         sortedData={sortedData}
         categories={categories}
         collections={collections}

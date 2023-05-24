@@ -40,6 +40,7 @@ export default function RecipeTableRow({
             className="drop-shadow-2xl"
             src={recipe.image_url}
             alt="recipe image"
+            priority={true}
           />
         </Td>
         <Td>

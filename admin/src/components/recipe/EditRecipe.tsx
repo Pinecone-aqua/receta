@@ -217,7 +217,14 @@ export default function CanvasEditButton({
                         onClick={() => addToolHandler(tool._id)}
                       >
                         <p className="">{tool.name}</p>
-                        <img className="w-[80px]" src={tool.image_url} />
+                        <Image
+                          className="drop-shadow-2xl"
+                          priority={true}
+                          alt="tool image"
+                          src={tool.image_url}
+                          height={80}
+                          width={80}
+                        />
                       </div>
                     ))}
                   </div>
