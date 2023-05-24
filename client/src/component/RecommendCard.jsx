@@ -30,7 +30,7 @@ const InsightCard = ({ image_url, name, description, index, _id }) => {
           </p>
         </div>
         <div
-          className="lg:flex hidden items-center justify-center w-[100px] h-[100px] p-[35px] hover:p-5 rounded-full duration-500 cursor-pointer bg-transparent border-[1px] border-white"
+          className="lg:flex hidden items-center justify-center w-[100px] h-[100px] p-[35px] hover:p-7 rounded-full duration-500 cursor-pointer bg-transparent border-[1px] border-white hover:rotate-[45deg]"
           onClick={() => router.push(`../cocktail/${_id}`)}
         >
           <BsArrowUpRight className="text-white w-[50px] h-[50px] " />

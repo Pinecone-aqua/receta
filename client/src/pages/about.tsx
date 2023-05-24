@@ -5,7 +5,7 @@ import { RecipesType } from "../util/Types";
 import axios from "axios";
 import { GetStaticProps } from "next";
 import About2 from "../component/About";
-import Insights from "../component/Insights";
+import Insights from "../component/Recommend";
 
 export default function about({
   recommend,

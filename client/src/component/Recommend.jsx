@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import styles from "../styles";
 import { TitleText, TypingText } from "./CustomTexts";
 import { staggerContainer } from "../util/motion";
-import InsightCard from "./InsightCard";
+import RecommendCard from "./RecommendCard";
 
-const Insights = ({ recommend }) => {
+const Recommend = ({ recommend }) => {
   return (
     <section className={`${styles.paddings} relative z-10  h-full`}>
       <motion.div
@@ -15,12 +15,13 @@ const Insights = ({ recommend }) => {
         className={`${styles.innerWidth} mx-auto flex flex-col`}
       >
         <TypingText title="| Recommend" textStyles="text-center text-white" />
+
         <TitleText title="We are recommend you" textStyles="text-center" />
         <div className="mt-[50px] flex flex-col gap-[30px]">
-          {recommend.slice(0, 3).map((insight, index) => (
-            <InsightCard
+          {recommend.slice(0, 3).map((recipe, index) => (
+            <RecommendCard
               key={`insight-${index}`}
-              {...insight}
+              {...recipe}
               index={index + 1}
             />
           ))}
@@ -30,4 +31,4 @@ const Insights = ({ recommend }) => {
   );
 };
 
-export default Insights;
+export default Recommend;
