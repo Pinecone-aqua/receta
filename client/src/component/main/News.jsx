@@ -22,15 +22,18 @@ const News = (...data) => {
 
         <TitleText title={<>Topic News</>} textStyles="text-center" />
         <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
-          {data[0].news.slice(2, 7).map((world, index) => (
-            <NewsCard
-              key={world._id}
-              {...world}
-              index={index}
-              active={active}
-              handleClick={setActive}
-            />
-          ))}
+          {data[0].news
+            .reverse()
+            .slice(0, 5)
+            .map((world, index) => (
+              <NewsCard
+                key={world._id}
+                {...world}
+                index={index}
+                active={active}
+                handleClick={setActive}
+              />
+            ))}
         </div>
       </motion.div>
     </section>
