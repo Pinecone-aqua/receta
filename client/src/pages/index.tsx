@@ -39,21 +39,21 @@ export default function Home({
         <div className="bg-[#000]">
           <About2 />
           <GetStartted />
-          {/* <OurStory /> */}
           <News news={news} />
           <Recommend recommend={recommend} />
         </div>
 
         <Section>
-          <div className="bg-[#5d5d5d] py-[25px]">
+          <div className="bg-[#000] py-[20px] border-t-[0.3px] border-[#424242]">
             <ParallaxText baseVelocity={-1.5}>
-              <h2 className="pb-[20px] text-[62px] font-bold text-[#f4f4f4] me-[20px] cocktail-parallox-text">
-                receta. receta. receta.
+              <h2 className="pb-[20px] text-[62px] font-bold text-[#fff] me-[20px] cocktail-parallox-text">
+                receta receta receta receta
               </h2>
             </ParallaxText>
             <ParallaxText baseVelocity={1}>
-              <h2 className="text-gray-300 text-[42px] uppercase me-[50px] cocktail-parallox-text-sub">
-                you try these drinks goodluck
+              <h2 className="text-gray-400 text-[42px] uppercase me-[50px] cocktail-parallox-text-sub">
+                Why Receta? Discover a world of flavors, where classic recipes
+                meet innovative twists.
               </h2>
             </ParallaxText>
           </div>

@@ -30,11 +30,11 @@ import styles from "../../styles";
 export const StartSteps = ({ number, text }) => (
   <div className={`${styles.flexCenter} flex-row`}>
     <div
-      className={`${styles.flexCenter} w-[70px] h-[70px] rounded-[24px] bg-gray-800`}
+      className={`${styles.flexCenter} w-[70px] h-[70px] border-[0.3px] rounded-[0.1px]`}
     >
-      <p className="font-bold text-[20px] text-white">0{number}</p>
+      <p className="font-bold text-[20px] text-white ">{number}</p>
     </div>
-    <p className="flex-1 ml-[30px] font-normal text-[18px] text-[#b0b0b0] leading-[32px]">
+    <p className="flex-1 ml-[30px] font-normal text-[18px] leading-[32px]">
       {text}
     </p>
   </div>

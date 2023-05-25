@@ -18,7 +18,7 @@ const Recommend = ({ recommend }) => {
 
         <TitleText title="We are recommend you" textStyles="text-center" />
         <div className="mt-[50px] flex flex-col gap-[30px]">
-          {recommend.slice(0, 3).map((recipe, index) => (
+          {recommend.slice(3, 6).map((recipe, index) => (
             <RecommendCard
               key={`insight-${index}`}
               {...recipe}

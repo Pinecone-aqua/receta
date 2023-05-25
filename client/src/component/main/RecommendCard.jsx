@@ -17,7 +17,7 @@ const InsightCard = ({ image_url, name, description, index, _id }) => {
         width={300}
         height={300}
         alt={"image"}
-        className="md:w-[270px] w-full h-[250px] rounded-[16px] object-cover cursor-pointer md:hover:h-[270px] duration-500"
+        className="md:w-[270px] w-full h-[250px]  object-cover cursor-pointer md:hover:h-[270px] duration-500"
         onClick={() => router.push(`../cocktail/${_id}`)}
       />
       <div className="w-full flex justify-between items-center">
