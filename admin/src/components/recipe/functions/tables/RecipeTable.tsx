@@ -36,7 +36,7 @@ export default function RecipeTable({
   const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <TableContainer className="mt-[20px]">
+    <TableContainer className="mt-[20px] pl-[40px">
       <Table size="sm">
         <Thead>
           <Tr>
