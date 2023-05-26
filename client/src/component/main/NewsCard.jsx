@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-
 import { motion } from "framer-motion";
 import { fadeIn } from "../../util/motion";
 
@@ -16,10 +15,10 @@ const NewsCard = ({
     variants={fadeIn("right", "spring", index * 0.8, 0.75)}
     className={`relative ${
       active === _id
-        ? "lg:flex-[3.5] flex-[10]"
+        ? "lg:flex-[2.5] flex-[10]"
         : "lg:flex-[1.5] flex-[2] filter grayscale contrast-100"
     } flex items-center justify-center min-w-[150px] max-h-[600px] transition-[flex] duration-[0.4s] ease-in-out`}
-    onClick={() => handleClick(_id)}
+    onHoverStart={() => handleClick(_id)}
   >
     <img
       src={image_url}
