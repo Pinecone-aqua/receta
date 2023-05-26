@@ -12,7 +12,7 @@ import DeleteAlert from "../../DeleteRecipe";
 import HowToPopover from "./recipePopups/HowToPopover";
 import IngPopover from "./recipePopups/IngPopover";
 import ToolsPopover from "./recipePopups/ToolsPopover";
-import DescPopover from "./recipePopups/DescPopover";
+// import DescPopover from "./recipePopups/DescPopover";
 
 interface RecipeTableRowPropType {
   categories: CategoryType[];
@@ -55,9 +55,9 @@ export default function RecipeTableRow({
         <Td>
           <ToolsPopover recipe={recipe} />
         </Td>
-        <Td>
+        {/* <Td>
           <DescPopover recipe={recipe} />
-        </Td>
+        </Td> */}
         <Td>
           <ConfirmPopup />
           <div className="flex gap-3">
