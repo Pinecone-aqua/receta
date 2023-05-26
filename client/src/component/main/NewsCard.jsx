@@ -17,7 +17,7 @@ const NewsCard = ({
       active === _id
         ? "lg:flex-[2.5] flex-[10]"
         : "lg:flex-[1.5] flex-[2] filter grayscale contrast-100"
-    } flex items-center justify-center min-w-[150px] max-h-[600px] transition-[flex] duration-[0.4s] ease-in-out`}
+    } flex items-center justify-center min-w-[150px] max-h-[600px] transition-[flex] duration-[0.4s] ease-in-out opacity-1`}
     onHoverStart={() => handleClick(_id)}
   >
     <img
