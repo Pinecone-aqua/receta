@@ -23,7 +23,7 @@ const NewsCard = ({
     <img
       src={image_url}
       alt="planet-04"
-      className="absolute w-full h-full object-cover  opacity-[0.6]"
+      className="absolute w-full h-full object-cover opacity-[0.6]"
     />
     {active !== _id ? (
       <h3 className="font-semibold sm:text-[26px] text-[18px] text-white absolute z-0 lg:bottom-20 lg:rotate-[-90deg] lg:origin-[0,0] ">
