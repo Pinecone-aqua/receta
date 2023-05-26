@@ -13,13 +13,13 @@ const NewsCard = ({
   subTitle,
 }) => (
   <motion.div
-    variants={fadeIn("right", "spring", index * 0.5, 0.75)}
+    variants={fadeIn("right", "spring", index * 0.8, 0.75)}
     className={`relative ${
       active === _id
         ? "lg:flex-[3.5] flex-[10]"
         : "lg:flex-[1.5] flex-[2] filter grayscale contrast-100"
     } flex items-center justify-center min-w-[150px] max-h-[600px] transition-[flex] duration-[0.4s] ease-in-out`}
-    onHoverStart={() => handleClick(_id)}
+    onClick={() => handleClick(_id)}
   >
     <img
       src={image_url}
